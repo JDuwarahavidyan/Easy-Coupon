@@ -1,0 +1,1 @@
+export 'package:easy_coupon/exception/auth_exception.dart';
