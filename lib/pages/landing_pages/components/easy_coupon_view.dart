@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:easy_coupon/widgets/widgets.dart';
 
 class SplashView extends StatefulWidget {
   final AnimationController animationController;
@@ -73,13 +74,13 @@ class _SplashViewState extends State<SplashView> {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(38.0),
-                      color: const Color.fromARGB(255, 221, 125, 14),
+                      color: AppColors.secondaryColor,
                     ),
                     child: const Text(
                       "Let's begin",
                       style: TextStyle(
                         fontSize: 18,
-                        color: Colors.white,
+                        color: AppColors.primaryColor,
                       ),
                     ),
                   ),

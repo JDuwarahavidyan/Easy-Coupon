@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:easy_coupon/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:easy_coupon/widgets/widgets.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -48,8 +49,8 @@ class _SplashScreenState extends State<SplashScreen>
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              Color.fromARGB(255, 248, 248, 247),
-              Color.fromARGB(255, 255, 152, 34),
+              AppColors.primaryColor,
+              AppColors.splashColor,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -71,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen>
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: const Color(0xFFDAE1E7)
+                              color:  AppColors.shadowColor
                                   .withOpacity(1 - _animation.value),
                               blurRadius: 1000 * _animation.value,
                               spreadRadius: 500 * _animation.value,
@@ -98,7 +99,7 @@ class _SplashScreenState extends State<SplashScreen>
                 'A Project By DEIE 22nd Batch',
                 style: GoogleFonts.merriweather(
                   // Apply the serif font style here
-                  color: Colors.black,
+                  color: AppColors.textColor,
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),

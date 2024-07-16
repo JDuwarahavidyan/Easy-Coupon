@@ -7,6 +7,7 @@ import 'package:easy_coupon/pages/landing_pages/components/top_back_skip_view.da
 import 'package:easy_coupon/pages/landing_pages/components/welcome_view.dart';
 import 'package:easy_coupon/routes/routes.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_coupon/widgets/widgets.dart';
 
 class IntroductionAnimationScreen extends StatefulWidget {
   const IntroductionAnimationScreen({super.key});
@@ -37,7 +38,7 @@ class _IntroductionAnimationScreenState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor:  AppColors.primaryColor,
       body: ClipRect(
         child: Stack(
           children: [
