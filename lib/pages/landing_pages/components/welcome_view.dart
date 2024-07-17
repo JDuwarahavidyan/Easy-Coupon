@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:easy_coupon/widgets/widgets.dart';
 
 class WelcomeView extends StatelessWidget {
   final AnimationController animationController;
