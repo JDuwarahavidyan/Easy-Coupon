@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Timer(const Duration(seconds: 7), () {
+    Timer(const Duration(seconds:1), () {
       Navigator.pushReplacementNamed(context, RouteNames.introductionAnimation);
     });
   }
