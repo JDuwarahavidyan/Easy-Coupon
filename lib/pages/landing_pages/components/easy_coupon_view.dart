@@ -36,7 +36,7 @@ class _SplashViewState extends State<SplashView> {
               SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: Lottie.asset(
-                  'assets/images/landing/initialqr.json',
+                  'assets/images/landing/qr_mob.json',
                   // fit: BoxFit.contain,
                 ),
               ),
