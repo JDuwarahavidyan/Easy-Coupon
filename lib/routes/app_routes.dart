@@ -15,6 +15,14 @@ class AppRoutes {
         return MaterialPageRoute(
             builder: (_) => const SignInThree());
 
+      case RouteNames.pw_reset:
+        return MaterialPageRoute(
+            builder: (_) => const PwReset());
+
+      case RouteNames.home:
+        return MaterialPageRoute(
+            builder: (_) =>  Student_home());
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
