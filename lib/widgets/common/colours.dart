@@ -6,7 +6,7 @@ class AppColors {
   static const Color textColor = Color(0xFF000000);
   static const Color splashColor = Color(0xFFFF9822);
   static const Color shadowColor = Color.fromARGB(255, 228, 236, 242);
-  static const Color buttonColor = Color(0xff132137);
+  static const Color buttonColor = Color(0xFF294B29);
   static const Color landColor = Color(0xff183661);
   static const Color skyColor = Color(0xff51ADCF);
   static const Color hlColor = Color(0xFF6B8DBA);

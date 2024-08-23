@@ -21,7 +21,7 @@ class AppRoutes {
 
       case RouteNames.home:
         return MaterialPageRoute(
-            builder: (_) =>  Student_home());
+            builder: (_) =>   Student_home());
 
       default:
         return MaterialPageRoute(

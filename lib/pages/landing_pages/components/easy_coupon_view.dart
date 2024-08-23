@@ -74,7 +74,7 @@ class _SplashViewState extends State<SplashView> {
                     ),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(38.0),
-                      color: AppColors.secondaryColor,
+                      color: AppColors.buttonColor,
                     ),
                     child: const Text(
                       "Let's begin",
