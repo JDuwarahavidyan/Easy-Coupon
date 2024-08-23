@@ -1,3 +1,4 @@
+import 'package:easy_coupon/pages/login_pages/fg_pw.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/routes/route_names.dart';
@@ -15,9 +16,9 @@ class AppRoutes {
         return MaterialPageRoute(
             builder: (_) =>  SignInThree());
 
-      case RouteNames.pw_reset:
+      case RouteNames.forgetp:
         return MaterialPageRoute(
-            builder: (_) =>  PwReset());
+            builder: (_) =>  Forget());
 
       case RouteNames.home:
         return MaterialPageRoute(
