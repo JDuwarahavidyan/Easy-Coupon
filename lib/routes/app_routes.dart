@@ -13,11 +13,11 @@ class AppRoutes {
 
       case RouteNames.login:
         return MaterialPageRoute(
-            builder: (_) => const SignInThree());
+            builder: (_) =>  SignInThree());
 
       case RouteNames.pw_reset:
         return MaterialPageRoute(
-            builder: (_) => const PwReset());
+            builder: (_) =>  PwReset());
 
       case RouteNames.home:
         return MaterialPageRoute(

@@ -68,9 +68,9 @@ class MyApp extends StatelessWidget {
               debugShowCheckedModeBanner: false,
               title: 'Easy Coupon',
               theme: themeProvider.themeData.copyWith(
-                scaffoldBackgroundColor: const Color(0xFFFF8A00),
+                scaffoldBackgroundColor: const Color(0xFFFFFFFF),
               ),
-              initialRoute: RouteNames.introductionAnimation,
+              initialRoute: RouteNames.login,
               onGenerateRoute: AppRoutes.generateRoute,
             );
           },
