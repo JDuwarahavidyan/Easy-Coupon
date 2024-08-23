@@ -12,16 +12,16 @@ class AppRoutes {
             builder: (_) => const IntroductionAnimationScreen());
 
       case RouteNames.login:
-        return MaterialPageRoute(
-            builder: (_) => const SignInThree());
+        return MaterialPageRoute(builder: (_) => const SignInThree());
 
       case RouteNames.pw_reset:
-        return MaterialPageRoute(
-            builder: (_) => const PwReset());
+        return MaterialPageRoute(builder: (_) => const PwReset());
 
       case RouteNames.home:
-        return MaterialPageRoute(
-            builder: (_) =>  Student_home());
+        return MaterialPageRoute(builder: (_) => Student_home());
+
+      case RouteNames.report:
+        return MaterialPageRoute(builder: (_) => Student_report());
 
       default:
         return MaterialPageRoute(

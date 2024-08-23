@@ -44,7 +44,7 @@ class _BottomBarViewState extends State<BottomBarView>
             return Transform(
               transform: Matrix4.translationValues(0.0, 0.0, 0.0),
               child: PhysicalShape(
-                color:StudentTheme.white,
+                color: StudentTheme.white,
                 elevation: 16.0,
                 clipper: TabClipper(
                     radius: Tween<double>(begin: 0.0, end: 1.0)
@@ -97,7 +97,7 @@ class _BottomBarViewState extends State<BottomBarView>
                                     widget.changeIndex!(2);
                                   }),
                             ),
-                             Expanded(
+                            Expanded(
                               child: TabIcons(
                                   tabIconData: widget.tabIconsList?[3],
                                   removeAllSelect: () {
@@ -153,8 +153,8 @@ class _BottomBarViewState extends State<BottomBarView>
                         shape: BoxShape.circle,
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                              color: StudentTheme.nearlyDarkBlue
-                                  .withOpacity(0.4),
+                              color:
+                                  StudentTheme.nearlyDarkBlue.withOpacity(0.4),
                               offset: const Offset(8.0, 16.0),
                               blurRadius: 16.0),
                         ],
@@ -168,7 +168,7 @@ class _BottomBarViewState extends State<BottomBarView>
                           onTap: widget.addClick,
                           child: Icon(
                             Icons.add,
-                            color:StudentTheme.white,
+                            color: StudentTheme.white,
                             size: 32,
                           ),
                         ),
@@ -272,17 +272,12 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       width: 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color:StudentTheme.nearlyDarkBlue,
+                        color: StudentTheme.nearlyDarkBlue,
                         shape: BoxShape.circle,
                       ),
                     ),
                   ),
                 ),
-                
-
-
-
-
                 Positioned(
                   top: 0,
                   left: 6,
@@ -298,7 +293,7 @@ class _TabIconsState extends State<TabIcons> with TickerProviderStateMixin {
                       width: 4,
                       height: 4,
                       decoration: BoxDecoration(
-                        color:StudentTheme.nearlyDarkBlue,
+                        color: StudentTheme.nearlyDarkBlue,
                         shape: BoxShape.circle,
                       ),
                     ),
