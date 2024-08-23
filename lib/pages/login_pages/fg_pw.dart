@@ -1,6 +1,6 @@
+import 'package:flutter/cupertino.dart'; // Import Cupertino icons
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
-import 'package:easy_coupon/pages/login_pages/login_page.dart';
 
 class Forget extends StatelessWidget {
   @override
@@ -9,8 +9,22 @@ class Forget extends StatelessWidget {
 
     return Scaffold(
       body: Background(
-        child: Stack(  // Use Stack to overlay widgets
+        child: Stack(
           children: <Widget>[
+            Positioned(
+              top: size.height * 0.05,  // Adjusted as necessary
+              left: 20,  // Adjusted as necessary
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context); // Navigate back to the previous screen
+                },
+                child: Icon(
+                  CupertinoIcons.back, // Cupertino back icon
+                  size: 30, // Adjust size as needed
+                  color: Color(0xFF294B29), // Adjust color as needed
+                ),
+              ),
+            ),
             Positioned(
               top: size.height * 0.1,    // Move the image slightly below the top
               right: -20,   // Move the image further to the right
@@ -49,18 +63,6 @@ class Forget extends StatelessWidget {
                       labelText: "Enter the Email",  // Corrected typo
                     ),
                   ),
-                  // SizedBox(height: size.height * 0.03),
-                  // TextField(
-                  //   decoration: InputDecoration(
-                  //     labelText: "New Password",
-                  //   ),
-                  // ),
-                  // SizedBox(height: size.height * 0.03),
-                  // TextField(
-                  //   decoration: InputDecoration(
-                  //     labelText: "Confirm Password",
-                  //   ),
-                  // ),
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
                     onPressed: () {},
@@ -107,14 +109,3 @@ class Forget extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
