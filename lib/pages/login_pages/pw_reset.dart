@@ -357,11 +357,12 @@ class PwReset extends StatelessWidget {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Text(
-                "REGISTER",
+                "RESET YOUR PASSWORD",
+               
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF2661FA),
-                  fontSize: 36,
+                  color: Color(0xFF294B29),
+                  fontSize: 25,
                 ),
                 textAlign: TextAlign.left,
               ),
@@ -374,7 +375,7 @@ class PwReset extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 decoration: InputDecoration(
-                  labelText: "Name",
+                  labelText: "Current Passwoard",
                 ),
               ),
             ),
@@ -386,7 +387,7 @@ class PwReset extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 decoration: InputDecoration(
-                  labelText: "Mobile Number",
+                  labelText: "New Password",
                 ),
               ),
             ),
@@ -398,23 +399,23 @@ class PwReset extends StatelessWidget {
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextField(
                 decoration: InputDecoration(
-                  labelText: "Username",
+                  labelText: "Confirm Password",
                 ),
               ),
             ),
 
             SizedBox(height: size.height * 0.03),
 
-            Container(
-              alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
-              child: TextField(
-                decoration: InputDecoration(
-                  labelText: "Password",
-                ),
-                obscureText: true,
-              ),
-            ),
+            // Container(
+            //   alignment: Alignment.center,
+            //   margin: EdgeInsets.symmetric(horizontal: 40),
+            //   child: TextField(
+            //     decoration: InputDecoration(
+            //       labelText: "Password",
+            //     ),
+            //     obscureText: true,
+            //   ),
+            // ),
 
             SizedBox(height: size.height * 0.05),
 
@@ -441,16 +442,17 @@ class PwReset extends StatelessWidget {
                     borderRadius: BorderRadius.circular(80.0),
                     gradient: LinearGradient(
                       colors: [
-                        Color.fromARGB(255, 255, 136, 34),
-                        Color.fromARGB(255, 255, 177, 41),
+                        Color(0xFF294B29),
+                        Color(0xFF50623A),
                       ],
                     ),
                   ),
                   padding: const EdgeInsets.all(0),
                   child: Text(
-                    "SIGN UP",
+                    "RESET PASSWORD",
                     textAlign: TextAlign.center,
                     style: TextStyle(
+                        color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
