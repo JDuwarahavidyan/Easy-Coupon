@@ -381,3 +381,109 @@ class TabClipper extends CustomClipper<Path> {
     return redian;
   }
 }
+
+
+
+
+// import 'package:flutter/material.dart';
+// import 'package:animated_notch_bottom_bar/animated_notch_bottom_bar/animated_notch_bottom_bar.dart';
+// import 'package:lottie/lottie.dart';
+// import 'package:flutter_svg/flutter_svg.dart'
+
+// class StudentHome extends StatefulWidget {
+//   @override
+//   _StudentHomeState createState() => _StudentHomeState();
+// }
+
+// class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin {
+//   AnimationController? animationController;
+//   int currentIndex = 0;
+
+//   final List<Widget> _pages = [
+//     HomePage(), // Your home page widget
+//     ReportPage(), // Replace with your report page widget
+//     SettingsPage(), // Replace with your settings page widget
+//   ];
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     animationController = AnimationController(
+//       duration: const Duration(milliseconds: 600),
+//       vsync: this,
+//     );
+//   }
+
+//   @override
+//   void dispose() {
+//     animationController?.dispose();
+//     super.dispose();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.white,
+//       body: Stack(
+//         children: [
+//           SizedBox(
+//             width: MediaQuery.of(context).size.width,
+//             child: Lottie.asset(
+//               'assets/images/landing/qr_mob.json',
+//             ),
+//           ),
+//           _pages[currentIndex],
+//         ],
+//       ),
+//       bottomNavigationBar: AnimatedNotchBottomBar(
+//         selectedIndex: currentIndex,
+//         items: [
+//           BottomBarItem(
+//             icon: Icon(Icons.home),
+//             label: 'Home',
+//           ),
+//           BottomBarItem(
+//             icon: Icon(Icons.bar_chart),
+//             label: 'Reports',
+//           ),
+//           BottomBarItem(
+//             icon: Icon(Icons.settings),
+//             label: 'Settings',
+//           ),
+//         ],
+//         onTap: (index) {
+//           setState(() {
+//             currentIndex = index;
+//           });
+//         },
+//       ),
+//     );
+//   }
+// }
+
+// class HomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Text('Home Page Content'),
+//     );
+//   }
+// }
+
+// class ReportPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Text('Report Page Content'),
+//     );
+//   }
+// }
+
+// class SettingsPage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Center(
+//       child: Text('Settings Page Content'),
+//     );
+//   }
+// }

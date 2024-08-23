@@ -211,8 +211,8 @@ class RelaxView extends StatelessWidget {
                 child: Container(
                   // Adjust or remove constraints to see the effect
                   constraints: const BoxConstraints(maxWidth: 350, maxHeight: 350),
-                  child: Lottie.asset(
-                    'assets/images/landing/initialqr.json',
+                  child: Image.asset(
+                    'assets/images/landing/food.jpg',
                     fit: BoxFit.contain, // Experiment with BoxFit values
                   ),
                 ),
