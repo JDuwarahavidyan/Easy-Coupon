@@ -59,8 +59,8 @@ class MyApp extends StatelessWidget {
       child: ChangeNotifierProvider(
         create: (_) => ThemeProvider(
           ThemeData.light().copyWith(
-            // scaffoldBackgroundColor: const Color(0xFFF9E6BD),
-          ),
+              // scaffoldBackgroundColor: const Color(0xFFF9E6BD),
+              ),
         ),
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, child) {
@@ -70,7 +70,7 @@ class MyApp extends StatelessWidget {
               theme: themeProvider.themeData.copyWith(
                 scaffoldBackgroundColor: const Color(0xFFFFFFFF),
               ),
-              initialRoute: RouteNames.home,
+              initialRoute: RouteNames.report,
               onGenerateRoute: AppRoutes.generateRoute,
             );
           },
@@ -79,6 +79,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class HexColor extends Color {
   HexColor(final String hexColor) : super(_getColorFromHex(hexColor));
 

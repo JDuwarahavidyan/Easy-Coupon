@@ -2,6 +2,7 @@ import 'package:easy_coupon/pages/login_pages/fg_pw.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/routes/route_names.dart';
+import 'package:easy_coupon/pages/student_pages/report.dart';
 
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -13,16 +14,16 @@ class AppRoutes {
             builder: (_) => const IntroductionAnimationScreen());
 
       case RouteNames.login:
-        return MaterialPageRoute(
-            builder: (_) =>  SignInThree());
+        return MaterialPageRoute(builder: (_) => SignInThree());
 
       case RouteNames.forgetp:
-        return MaterialPageRoute(
-            builder: (_) =>  Forget());
+        return MaterialPageRoute(builder: (_) => Forget());
 
       case RouteNames.home:
-        return MaterialPageRoute(
-            builder: (_) =>   StudentHome());
+        return MaterialPageRoute(builder: (_) => StudentHome());
+
+      case RouteNames.report:
+        return MaterialPageRoute(builder: (_) => Student_report());
 
       default:
         return MaterialPageRoute(
