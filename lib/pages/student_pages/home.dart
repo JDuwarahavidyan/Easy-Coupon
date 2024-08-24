@@ -66,12 +66,12 @@ class _StudentHomeState extends State<StudentHome>
             } else {
               return Stack(
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Lottie.asset(
-                      'assets/images/landing/qr_mob.json',
-                    ),
-                  ),
+                  // SizedBox(
+                  //   width: MediaQuery.of(context).size.width,
+                  //   child: Lottie.asset(
+                  //     'assets/images/landing/qr_mob.json',
+                  //   ),
+                  // ),
                   tabBody,
                   bottomBar(),
                 ],
