@@ -70,13 +70,6 @@ class _Student_reportState extends State<Student_report>
             } else {
               return Stack(
                 children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    child: Lottie.asset(
-                      'assets/images/landing/qr_mob.json',
-                    ),
-                  ),
-                  tabBody,
                   Positioned(
                     top: 100, // Adjust position as needed
                     left: 20, // Adjust position as needed
