@@ -229,13 +229,11 @@ class _MediterranesnDietViewState extends State<MediterranesnDietView>
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                   ),
-                                  SegmentedCircularIndicator(
+                                  DonutChart(
                                     animation: _animation,
-                                    colors: [
-                                      Colors.blue,
-                                      Colors.green,
-                                      Colors.red,
-                                    ],
+                                    // colors: [
+                                     
+                                    // ],
                                   ),
                                 ],
                               ),
