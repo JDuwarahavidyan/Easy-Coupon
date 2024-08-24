@@ -53,7 +53,7 @@ dependencies:
   animated_notch_bottom_bar: ^1.0.3
   bottom_bar: ^2.0.3
   calendar_date_picker2: ^1.1.5
-
+  expandable_datatable: ^0.0.7
 dev_dependencies:
   flutter_test:
     sdk: flutter
