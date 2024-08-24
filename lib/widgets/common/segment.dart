@@ -192,11 +192,18 @@ class GradientCircularPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final rect = Rect.fromLTWH(0.0, 0.0, size.width, size.width);
+
+    // Create a list of stops based on the number of colors and the percentage
+    List<double> stops = [];
+    for (int i = 0; i < colors.length; i++) {
+      stops.add(i / (colors.length - 1));
+    }
+
     final gradient = SweepGradient(
       startAngle: 0.0,
       endAngle: math.pi * 2,
       colors: colors,
-      stops: [0.0, percentage, percentage, 1.0],
+      stops: stops,
     );
 
     final paint = Paint()

@@ -71,7 +71,6 @@ class MyApp extends StatelessWidget {
                 scaffoldBackgroundColor: const Color(0xFFFFFFFF),
               ),
               initialRoute: RouteNames.home,
-              initialRoute: RouteNames.forgetp,
               onGenerateRoute: AppRoutes.generateRoute,
             );
           },
