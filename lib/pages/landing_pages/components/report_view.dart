@@ -87,8 +87,8 @@ class CareView extends StatelessWidget {
                   position: _imageSecondHalfAnimation,
                   child: Container(
                     constraints:const BoxConstraints(maxWidth: 400, maxHeight: 400),
-                    child: Lottie.asset(
-                      'assets/images/landing/report.json',
+                    child: Image.asset(
+                      'assets/images/landing/report.jpg',
                       fit: BoxFit.contain,
                     ),
                   ),

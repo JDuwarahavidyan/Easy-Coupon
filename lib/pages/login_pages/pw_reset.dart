@@ -1,16 +1,17 @@
 // import 'package:flutter/material.dart';
-// import 'package:flutter_svg/svg.dart';
+// import 'package:flutter/cupertino.dart';
 // import 'package:google_fonts/google_fonts.dart';
 // import 'package:easy_coupon/widgets/widgets.dart';
+// import 'package:flutter_svg/svg.dart';
 
-// class SignInThree extends StatefulWidget {
-//   const SignInThree({Key? key}) : super(key: key);
+// class PwReset extends StatefulWidget {
+//   const PwReset({Key? key}) : super(key: key);
 
 //   @override
-//   State<SignInThree> createState() => _SignInThreeState();
+//   State<PwReset> createState() => _PwResetState();
 // }
 
-// class _SignInThreeState extends State<SignInThree> {
+// class _PwResetState extends State<PwReset> {
 //   TextEditingController emailController = TextEditingController();
 //   TextEditingController passController = TextEditingController();
 
@@ -19,15 +20,24 @@
 //     final size = MediaQuery.of(context).size;
 //     return Scaffold(
 //       backgroundColor: AppColors.landColor,
-//       resizeToAvoidBottomInset: false,
+//       // appBar: AppBar(
+//       //   backgroundColor: Colors.transparent, // Transparent background
+//       //   elevation: 0, // No shadow
+//       //   leading: CupertinoNavigationBarBackButton( // Cupertino back button
+//       //     onPressed: () {
+//       //       Navigator.pushReplacementNamed(context, '/login');
+//       //     },
+//       //   ),
+//       // ),
 //       body: SafeArea(
 //         child: SizedBox(
 //           height: size.height,
 //           child: Stack(
 //             alignment: Alignment.center,
 //             children: <Widget>[
-         
-//               Positioned(
+//               // Background SVGs positioned here
+
+//                           Positioned(
 //                 left: -26,
 //                 top: 51.0,
 //                 child: SvgPicture.string(
@@ -100,12 +110,37 @@
 //                   ],
 //                 ),
 //               ),
+
+//               Positioned(
+//                 bottom: 20.0,
+//                 child: Column(
+//                   children: <Widget>[
+//                     buildCard(size),
+//                     buildFooter(size),
+//                   ],
+//                 ),
+//               ),
+
+//                Positioned(
+//             top: 20,
+//             left: 20,
+//             child: IconButton(
+//               icon: const Icon(Icons.arrow_back, color: Colors.black),
+//               onPressed: () {
+//                 Navigator.pushNamed(context, '/login');
+//               },
+//             ),
+//           ),
+
+
 //             ],
 //           ),
 //         ),
 //       ),
 //     );
 //   }
+
+//   // Your existing methods for building card and footer widgets
 
 //   Widget buildCard(Size size) {
 //     return Container(
@@ -119,33 +154,14 @@
 //       child: Column(
 //         mainAxisAlignment: MainAxisAlignment.center,
 //         children: [
-//           //logo & text
 //           logo(size.height / 8, size.height / 8),
-//           SizedBox(
-//             height: size.height * 0.03,
-//           ),
+//           SizedBox(height: size.height * 0.03),
 //           richText(24),
-//           SizedBox(
-//             height: size.height * 0.05,
-//           ),
-
-//           //email & password textField
+//           SizedBox(height: size.height * 0.05),
 //           emailTextField(size),
-//           SizedBox(
-//             height: size.height * 0.02,
-//           ),
-//           passwordTextField(size),
-//           SizedBox(
-//             height: size.height * 0.03,
-//           ),
-
-//           //remember & forget text
+//           SizedBox(height: size.height * 0.02),
 //           buildRememberForgetSection(),
-//           SizedBox(
-//             height: size.height * 0.04,
-//           ),
-
-//           //sign in button
+//           SizedBox(height: size.height * 0.04),
 //           signInButton(size),
 //         ],
 //       ),
@@ -156,24 +172,15 @@
 //     return Column(
 //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //       children: <Widget>[
-//         SizedBox(
-//           height: size.height * 0.04,
-//         ),
-//         SizedBox(
-//           width: size.width * 0.6,
-//           height: 44.0,
-          
-//         ),
-//         SizedBox(
-//           height: size.height * 0.02,
-//         ),
+//         SizedBox(height: size.height * 0.04),
+//         SizedBox(width: size.width * 0.6, height: 44.0),
+//         SizedBox(height: size.height * 0.02),
 //         Text.rich(
 //           TextSpan(
 //             style: GoogleFonts.inter(
 //               fontSize: 12.0,
 //               color: Colors.white,
 //             ),
-            
 //           ),
 //           textAlign: TextAlign.center,
 //         ),
@@ -199,16 +206,15 @@
 //         ),
 //         children: const [
 //           TextSpan(
-//             text: 'LOG',
+//             text: 'PASSWORD ',
 //             style: TextStyle(
-//               color:  AppColors.secondaryColor,
 //               fontWeight: FontWeight.w800,
 //             ),
 //           ),
 //           TextSpan(
-//             text: 'IN',
+//             text: 'RESET',
 //             style: TextStyle(
-//               color:  AppColors.skyColor,
+//               color: AppColors.skyColor,
 //               fontWeight: FontWeight.w800,
 //             ),
 //           ),
@@ -241,24 +247,25 @@
 //             fillColor: emailController.text.isEmpty
 //                 ? AppColors.shadowColor
 //                 : AppColors.textColor,
-//             //contentPadding: const EdgeInsets.only(left: 30.0, top: 20.0),
 //             enabledBorder: OutlineInputBorder(
-//                 borderRadius: BorderRadius.circular(40),
-//                 borderSide: BorderSide(
-//                   color: emailController.text.isEmpty
-//                       ? Color.fromARGB(0, 246, 245, 245)
-//                       : AppColors.landColor,
-//                 )),
+//               borderRadius: BorderRadius.circular(40),
+//               borderSide: BorderSide(
+//                 color: emailController.text.isEmpty
+//                     ? Color.fromARGB(0, 0, 0, 0)
+//                     : AppColors.landColor,
+//               ),
+//             ),
 //             focusedBorder: OutlineInputBorder(
-//                 borderRadius: BorderRadius.circular(40),
-//                 borderSide: const BorderSide(
-//                   color: AppColors.landColor,
-//                 )),
+//               borderRadius: BorderRadius.circular(40),
+//               borderSide: const BorderSide(
+//                 color: AppColors.landColor,
+//               ),
+//             ),
 //             prefixIcon: Icon(
 //               Icons.mail_outline_rounded,
 //               color: emailController.text.isEmpty
 //                   ? const Color(0xFF151624).withOpacity(0.5)
-//                   :AppColors.landColor,
+//                   : AppColors.landColor,
 //               size: 16,
 //             ),
 //             suffix: Container(
@@ -267,7 +274,7 @@
 //               height: 24.0,
 //               decoration: BoxDecoration(
 //                 borderRadius: BorderRadius.circular(100.0),
-//                 color:AppColors.landColor,
+//                 color: AppColors.landColor,
 //               ),
 //               child: emailController.text.isEmpty
 //                   ? const Center()
@@ -283,132 +290,47 @@
 //     );
 //   }
 
-// Widget passwordTextField(Size size) {
-//   return Padding(
-//     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//     child: SizedBox(
+//   Widget signInButton(Size size) {
+//     return Container(
+//       width: size.width - 32.0,
 //       height: size.height / 12,
-//       child: TextField(
-//         controller: passController,
-//         style: GoogleFonts.inter(
-//           fontSize: 16.0,
-//           color: Color(0xFF151624),
+//       padding: const EdgeInsets.symmetric(horizontal: 16.0),
+//       child: TextButton(
+//         style: TextButton.styleFrom(
+//           padding: EdgeInsets.zero,
+//           backgroundColor: AppColors.landColor,
+//           shape: RoundedRectangleBorder(
+//             borderRadius: BorderRadius.circular(40.0),
+//           ),
+//           shadowColor: const Color(0xFF4C2E84).withOpacity(0.2),
+//           elevation: 5.0,
 //         ),
-//         cursorColor: const Color(0xFF151624),
-//         obscureText: true,
-//         keyboardType: TextInputType.visiblePassword,
-//         decoration: InputDecoration(
-//           labelText: 'Enter your password',
-//           labelStyle: GoogleFonts.inter(
-//             fontSize: 16.0,
-//             color: const Color(0xFF151624).withOpacity(0.5),
-//           ),
-//           filled: true,
-//           fillColor: passController.text.isEmpty
-//               ?AppColors.shadowColor
-//               : Colors.transparent,
-//           //contentPadding: const EdgeInsets.only(left: 25.0, top: 20.0), // Adjust left and top padding here
-//           enabledBorder: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(40),
-//             borderSide: BorderSide(
-//               color: passController.text.isEmpty
-//                   ? Colors.transparent
-//                   : AppColors.landColor,
+//         onPressed: () {
+//           // Add your onPressed logic here
+//         },
+//         child: Center(
+//           child: Text(
+//             'SEND EMAIL',
+//             style: GoogleFonts.inter(
+//               fontSize: 18.0,
+//               color: AppColors.primaryColor,
+//               fontWeight: FontWeight.w600,
+//               height: 1.5,
 //             ),
-//           ),
-//           focusedBorder: OutlineInputBorder(
-//             borderRadius: BorderRadius.circular(40),
-//             borderSide: const BorderSide(
-//               color: AppColors.landColor,
-//             ),
-//           ),
-//           prefixIcon: Icon(
-//             Icons.lock_outline_rounded,
-//             color: passController.text.isEmpty
-//                 ? const Color(0xFF151624).withOpacity(0.5)
-//                 : AppColors.landColor,
-//             size: 16,
-//           ),
-//           suffix: Container(
-//             alignment: Alignment.center,
-//             width: 24.0,
-//             height: 24.0,
-//             decoration: BoxDecoration(
-//               borderRadius: BorderRadius.circular(100.0),
-//               color: AppColors.landColor,
-//             ),
-//             child: passController.text.isEmpty
-//                 ? const Center()
-//                 : const Icon(
-//                     Icons.check,
-//                     color: AppColors.primaryColor,
-//                     size: 13,
-//                   ),
+//             textAlign: TextAlign.center,
 //           ),
 //         ),
 //       ),
-//     ),
-//   );
-// }
-
-
-
-// Widget signInButton(Size size) {
-//   return TextButton(
-//     style: TextButton.styleFrom(
-//       padding: EdgeInsets.symmetric(vertical: size.height / 26, horizontal: size.width * 0.35),
-//       backgroundColor: AppColors.landColor,
-//       shape: RoundedRectangleBorder(
-//         borderRadius: BorderRadius.circular(50.0),
-//       ),
-//       shadowColor: AppColors.hlColor.withOpacity(0.2),
-//       elevation: 5.0,
-//     ),
-//     onPressed: () {
-//       Navigator.pushReplacementNamed(context, '/home');
-//       // Add your onPressed logic here
-//     },
-//     child: Text(
-//       'Sign in',
-//       style: GoogleFonts.inter(
-//         fontSize: 16.0,
-//         color: AppColors.primaryColor,
-//         fontWeight: FontWeight.w600,
-//         height: 1.5,
-//       ),
-//       textAlign: TextAlign.center,
-//     ),
-//   );
-// }
-
+//     );
+//   }
 
 //   Widget buildRememberForgetSection() {
-//     return Padding(
-//       padding: const EdgeInsets.symmetric(horizontal: 20.0),
+//     return const Padding(
+//       padding: EdgeInsets.symmetric(horizontal: 20.0),
 //       child: Row(
-//         children: [
-        
-//           const SizedBox(
-//             width: 8,
-//           ),
-         
-//           const Spacer(),
-//        TextButton(
-//   onPressed: () {
-//     // Add your onPressed code here!
-//     Navigator.pushReplacementNamed(context, '/pw_reset');
-//   },
-//   child: Text(
-//     'Forgot password',
-//     style: GoogleFonts.inter(
-//       fontSize: 13.0,
-//       color: AppColors.landColor,
-//       fontWeight: FontWeight.w500,
-//     ),
-//     textAlign: TextAlign.right,
-//   ),
-// )
-
+//         children: [  
+//           SizedBox(width: 8),
+//           Spacer(),
 //         ],
 //       ),
 //     );
@@ -417,16 +339,171 @@
 
 
 
+// import 'package:flutter/material.dart';
+// import 'package:easy_coupon/widgets/widgets.dart';
+// import 'package:easy_coupon/pages/login_pages/login_page.dart';
+
+// class PwReset extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     Size size = MediaQuery.of(context).size;
+
+//     return Scaffold(
+//       body: Background(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: <Widget>[
+//             Positioned(
+//             top: size.height * 1,    // Position slightly below the top
+//             right: 0,
+//             child: Container(
+//               width: size.width * 0.6, // Adjust width as needed
+//               child: Image.asset(
+//                 "assets/images/landing/pw.png",
+//                 fit: BoxFit.contain, // Maintain aspect ratio
+//               ),
+//             ),
+//           ),
+//             Container(
+//               alignment: Alignment.centerLeft,
+//               padding: EdgeInsets.symmetric(horizontal: 40),
+//               child: Text(
+//                 "RESET YOUR\nPASSWORD",
+               
+//                 style: TextStyle(
+//                   fontWeight: FontWeight.bold,
+//                   color: Color(0xFF294B29),
+//                   fontSize: 25,
+//                 ),
+//                 textAlign: TextAlign.left,
+//               ),
+//             ),
+
+//             SizedBox(height: size.height * 0.03),
+
+//             Container(
+//               alignment: Alignment.center,
+//               margin: EdgeInsets.symmetric(horizontal: 40),
+//               child: TextField(
+//                 decoration: InputDecoration(
+//                   labelText: "Current Passwoard",
+//                 ),
+//               ),
+//             ),
+
+//             SizedBox(height: size.height * 0.03),
+
+//             Container(
+//               alignment: Alignment.center,
+//               margin: EdgeInsets.symmetric(horizontal: 40),
+//               child: TextField(
+//                 decoration: InputDecoration(
+//                   labelText: "New Password",
+//                 ),
+//               ),
+//             ),
+
+//             SizedBox(height: size.height * 0.03),
+
+//             Container(
+//               alignment: Alignment.center,
+//               margin: EdgeInsets.symmetric(horizontal: 40),
+//               child: TextField(
+//                 decoration: InputDecoration(
+//                   labelText: "Confirm Password",
+//                 ),
+//               ),
+//             ),
+
+//             SizedBox(height: size.height * 0.03),
+
+//             // Container(
+//             //   alignment: Alignment.center,
+//             //   margin: EdgeInsets.symmetric(horizontal: 40),
+//             //   child: TextField(
+//             //     decoration: InputDecoration(
+//             //       labelText: "Password",
+//             //     ),
+//             //     obscureText: true,
+//             //   ),
+//             // ),
+
+//             SizedBox(height: size.height * 0.05),
+
+//             Container(
+//               alignment: Alignment.centerRight,
+//               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+//               child: ElevatedButton(
+//                 onPressed: () {},
+//                 style: ElevatedButton.styleFrom(
+//                   shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(80.0),
+//                   ),
+//                   padding: EdgeInsets.zero,
+//                   textStyle: TextStyle(
+//                     color: Colors.white,
+//                     fontWeight: FontWeight.bold,
+//                   ),
+//                 ),
+//                 child: Container(
+//                   alignment: Alignment.center,
+//                   height: 50.0,
+//                   width: size.width * 0.5,
+//                   decoration: BoxDecoration(
+//                     borderRadius: BorderRadius.circular(80.0),
+//                     gradient: LinearGradient(
+//                       colors: [
+//                         Color(0xFF294B29),
+//                         Color(0xFF50623A),
+//                       ],
+//                     ),
+//                   ),
+//                   padding: const EdgeInsets.all(0),
+//                   child: Text(
+//                     "RESET PASSWORD",
+//                     textAlign: TextAlign.center,
+//                     style: TextStyle(
+//                         color: Colors.white,
+//                       fontWeight: FontWeight.bold,
+//                     ),
+//                   ),
+//                 ),
+//               ),
+//             ),
+
+//             Container(
+//               alignment: Alignment.centerRight,
+//               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+//               // child: GestureDetector(
+//               //   onTap: () => {
+//               //     Navigator.push(
+//               //       context,
+//               //       MaterialPageRoute(builder: (context) => SignInThree()),
+//               //     )
+//               //   },
+//               //   child: Text(
+//               //     "Already Have an Account? Sign in",
+//               //     style: TextStyle(
+//               //       fontSize: 12,
+//               //       fontWeight: FontWeight.bold,
+//               //       color: Color(0xFF2661FA),
+//               //     ),
+//               //   ),
+//               // ),
+//             )
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 
-
-
-import 'package:easy_coupon/pages/login_pages/fg_pw.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
-import 'package:easy_coupon/pages/login_pages/pw_reset.dart';
+import 'package:easy_coupon/pages/login_pages/login_page.dart';
 
-class SignInThree extends StatelessWidget {
+class PwReset extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -436,49 +513,54 @@ class SignInThree extends StatelessWidget {
         child: Stack(  // Use Stack to overlay widgets
           children: <Widget>[
             Positioned(
-              top: size.height * 0.06,  // Position slightly below the top
-              right: -40,  // Move the image further to the right
+              top: size.height * 0.1,    // Move the image slightly below the top
+              right: -20,   // Move the image further to the right
               child: Container(
                 width: size.width * 0.6, // Adjust width as needed
                 child: Image.asset(
-                  "assets/images/landing/main.png",
+                  "assets/images/landing/pw.png",
                   fit: BoxFit.contain, // Maintain aspect ratio
                 ),
               ),
             ),
             Positioned(
-              top: size.height * 0.25,   // Move the text upwards
+              top: size.height * 0.2,   // Move the text upwards
               left: 40,  // Align text to the left
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "LOGIN",
+                  "RESET YOUR\nPASSWORD",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF294B29),
-                    fontSize: 36,
+                    fontSize: 25,
                   ),
                   textAlign: TextAlign.left,
                 ),
               ),
             ),
             Positioned(
-              top: size.height * 0.32,  // Adjust position to place below the title
+              top: size.height * 0.4,  // Adjust position to place below the title
               left: 40,
               right: 40,
               child: Column(
                 children: <Widget>[
                   TextField(
                     decoration: InputDecoration(
-                      labelText: "Username",
+                      labelText: "Current Password",  // Corrected typo
                     ),
                   ),
                   SizedBox(height: size.height * 0.03),
                   TextField(
                     decoration: InputDecoration(
-                      labelText: "Password",
+                      labelText: "New Password",
                     ),
-                    obscureText: true,
+                  ),
+                  SizedBox(height: size.height * 0.03),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Confirm Password",
+                    ),
                   ),
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
@@ -508,29 +590,12 @@ class SignInThree extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.all(0),
                       child: Text(
-                        "LOGIN",
+                        "RESET PASSWORD",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: size.height * 0.03),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => Forget()),
-                      );
-                    },
-                    child: Text(
-                      "Forgot your password?",
-                      style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF294B29),
                       ),
                     ),
                   ),
@@ -543,3 +608,14 @@ class SignInThree extends StatelessWidget {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
