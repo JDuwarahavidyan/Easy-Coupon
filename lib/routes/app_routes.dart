@@ -3,6 +3,7 @@ import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 
+
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -23,6 +24,16 @@ class AppRoutes {
       case RouteNames.home:
         return MaterialPageRoute(
             builder: (_) =>   StudentHome());
+      case RouteNames.confirm:
+        return MaterialPageRoute(
+            builder: (_) =>   ConfirmationPage(
+                                    val: 3,
+                      role: 'canteena',
+                      canteenUserId: '',
+                      scannedTime: DateTime.now(),
+            ));
+     
+
 
       default:
         return MaterialPageRoute(
