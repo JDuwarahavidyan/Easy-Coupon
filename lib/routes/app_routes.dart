@@ -24,8 +24,13 @@ class AppRoutes {
         return MaterialPageRoute(
             builder: (_) =>   StudentHome());
 
+      case RouteNames.qr:
+        return MaterialPageRoute(
+            builder: (_) =>   QrPage());
+
      
-case RouteNames.confirm:
+     
+      case RouteNames.confirm:
         return MaterialPageRoute(
             builder: (_) =>  ConfirmationPage(
                   val: 3,
