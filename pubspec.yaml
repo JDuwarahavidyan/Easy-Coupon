@@ -54,6 +54,9 @@ dependencies:
   bottom_bar: ^2.0.3
   calendar_date_picker2: ^1.1.5
   expandable_datatable: ^0.0.7
+  line_awesome_flutter: ^2.0.0
+  
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
