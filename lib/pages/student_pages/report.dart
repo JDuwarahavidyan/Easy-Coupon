@@ -161,7 +161,16 @@ class _Student_reportState extends State<Student_report>
                         SizedBox(height: 20),
                         ElevatedButton(
                           onPressed: _fetchData,
-                          child: Text("Fetch"),
+                          child: Text(
+                            "Fetch",
+                            style: TextStyle(
+                              color: Colors.white, // Text color
+                              fontWeight: FontWeight.bold, // Bold text
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF789461), // Button color
+                          ),
                         ),
                       ],
                     ),
