@@ -5,6 +5,7 @@ import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:expandable_datatable/expandable_datatable.dart';
+import 'package:easy_coupon/widgets/components/background.dart';
 
 class TabIconData {
   final IconData icon;
@@ -36,47 +37,19 @@ class _Student_reportState extends State<Student_report>
   List<DateTime?> _dates = [DateTime.now()];
   bool _showTable = false;
 
-  // Dummy data for the table
+  // Updated dummy data for the table
   List<Map<String, dynamic>> dummyData = [
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
-    {"Date": "2024-08-01", "Number of Coupons": 120},
-    {"Date": "2024-08-02", "Number of Coupons": 90},
-    {"Date": "2024-08-03", "Number of Coupons": 110},
+    {
+      "Date and Time": "2024-08-01 12:00",
+      "Canteen": "Canteen A",
+      "Coupons Used": 120
+    },
+    {
+      "Date and Time": "2024-08-02 14:00",
+      "Canteen": "Canteen B",
+      "Coupons Used": 90
+    },
+    // Add more dummy data as needed
   ];
 
   late List<DataColumn> headers;
@@ -100,19 +73,35 @@ class _Student_reportState extends State<Student_report>
     // Initialize headers for the table
     headers = [
       DataColumn(
-          label: Text(
-        "Date",
-        style: TextStyle(
-            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
-      )),
+        label: Center(
+          child: Text(
+            "Date and Time",
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ),
+      ),
       DataColumn(
-          label: Text(
-        "Coupons Used",
-        style: TextStyle(
-            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
-      )),
+        label: Center(
+          child: Text(
+            "Canteen",
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ),
+      ),
+      DataColumn(
+        label: Center(
+          child: Text(
+            "Coupons Used",
+            style: TextStyle(
+                fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
+          ),
+        ),
+      ),
     ];
-    // Initialize rows for the table with dummy data (Styled Rows)
+
+    // Initialize rows for the table with dummy data
     rows = dummyData.map<DataRow>((data) {
       bool isEven = dummyData.indexOf(data) % 2 == 0;
       return DataRow(
@@ -121,20 +110,41 @@ class _Student_reportState extends State<Student_report>
           return isEven ? Color(0xFFDBE7C9) : Color(0xFFDBE7C9); // Row colors
         }),
         cells: [
-          DataCell(Text(
-            data["Date"],
-            style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                color: Colors.black),
-          )),
-          DataCell(Text(
-            data["Number of Coupons"].toString(),
-            style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                color: Colors.black),
-          )),
+          DataCell(
+            Center(
+              child: Text(
+                data["Date and Time"],
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black),
+                maxLines: 2, // Limit to 2 lines
+                overflow: TextOverflow.ellipsis, // Handle overflow
+              ),
+            ),
+          ),
+          DataCell(
+            Center(
+              child: Text(
+                data["Canteen"],
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black),
+              ),
+            ),
+          ),
+          DataCell(
+            Center(
+              child: Text(
+                data["Coupons Used"].toString(),
+                style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                    color: Colors.black),
+              ),
+            ),
+          ),
         ],
       );
     }).toList();
@@ -160,12 +170,12 @@ class _Student_reportState extends State<Student_report>
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
+    return Background(
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: Stack(
           children: [
+            // Background content
             FutureBuilder<bool>(
               future: getData(),
               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
@@ -181,7 +191,6 @@ class _Student_reportState extends State<Student_report>
                         CalendarDatePicker2(
                           config: CalendarDatePicker2Config(
                             calendarType: CalendarDatePicker2Type.range,
-                            // Color customization for the date picker
                             selectedDayHighlightColor: Color(0xFF789461),
                             dayTextStyle: TextStyle(color: Colors.blue),
                             selectedDayTextStyle:
@@ -216,18 +225,20 @@ class _Student_reportState extends State<Student_report>
             ),
             if (_showTable) ...[
               // Blurred background
-              BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                child: Container(
-                  color: Colors.black.withOpacity(0.5),
+              Positioned.fill(
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                  child: Container(
+                    color: Colors.black.withOpacity(0.5),
+                  ),
                 ),
               ),
               // Table popup
               Positioned(
-                top: 50,
+                top: 150, // Adjust this value to position above the navbar
                 left: 20,
                 right: 20,
-                bottom: 50,
+                bottom: 60, // Leave space for the bottom bar
                 child: Container(
                   padding: EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
@@ -256,8 +267,8 @@ class _Student_reportState extends State<Student_report>
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
                           child: DataTable(
-                            columns:
-                                headers, // Changed from ExpandableDataTable to DataTable
+                            columnSpacing: 12, // Reduce column spacing
+                            columns: headers,
                             rows: rows,
                           ),
                         ),
@@ -309,7 +320,6 @@ class _Student_reportState extends State<Student_report>
                 if (!mounted) {
                   return;
                 }
-                // Set the tab body to your Report screen when the Report tab is clicked.
                 tabBody =
                     Student_report(); // Switch to the report screen itself
               });
