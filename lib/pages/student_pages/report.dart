@@ -43,8 +43,8 @@ class _Student_reportState extends State<Student_report>
     {"Date": "2024-08-03", "Number of Coupons": 110},
   ];
 
-  late List<ExpandableColumn<dynamic>> headers;
-  late List<ExpandableRow> rows;
+  late List<DataColumn> headers;
+  late List<DataRow> rows;
 
   @override
   void initState() {
@@ -63,17 +63,44 @@ class _Student_reportState extends State<Student_report>
 
     // Initialize headers for the table
     headers = [
-      ExpandableColumn<String>(columnTitle: "Date", columnFlex: 2),
-      ExpandableColumn<int>(columnTitle: "Number of Coupons", columnFlex: 2),
+      DataColumn(
+          label: Text(
+        "Date",
+        style: TextStyle(
+            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+      )),
+      DataColumn(
+          label: Text(
+        "Number of Coupons",
+        style: TextStyle(
+            fontSize: 16, fontWeight: FontWeight.bold, color: Colors.black),
+      )),
     ];
-
-    // Initialize rows for the table with dummy data
-    rows = dummyData.map<ExpandableRow>((data) {
-      return ExpandableRow(cells: [
-        ExpandableCell<String>(columnTitle: "Date", value: data["Date"]),
-        ExpandableCell<int>(
-            columnTitle: "Number of Coupons", value: data["Number of Coupons"]),
-      ]);
+    // Initialize rows for the table with dummy data (Styled Rows)
+    rows = dummyData.map<DataRow>((data) {
+      bool isEven = dummyData.indexOf(data) % 2 == 0;
+      return DataRow(
+        color: MaterialStateProperty.resolveWith<Color?>(
+            (Set<MaterialState> states) {
+          return isEven ? Color(0xFFDBE7C9) : Color(0xFFDBE7C9); // Row colors
+        }),
+        cells: [
+          DataCell(Text(
+            data["Date"],
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.black),
+          )),
+          DataCell(Text(
+            data["Number of Coupons"].toString(),
+            style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.normal,
+                color: Colors.black),
+          )),
+        ],
+      );
     }).toList();
   }
 
@@ -118,6 +145,11 @@ class _Student_reportState extends State<Student_report>
                         CalendarDatePicker2(
                           config: CalendarDatePicker2Config(
                             calendarType: CalendarDatePicker2Type.range,
+                            // Color customization for the date picker
+                            selectedDayHighlightColor: Color(0xFF789461),
+                            dayTextStyle: TextStyle(color: Colors.blue),
+                            selectedDayTextStyle:
+                                TextStyle(color: Colors.white),
                           ),
                           value: _dates,
                           onValueChanged: (dates) {
@@ -176,37 +208,12 @@ class _Student_reportState extends State<Student_report>
                         ],
                       ),
                       Expanded(
-                        child: ExpandableTheme(
-                          data: ExpandableThemeData(
-                            context,
-                            contentPadding: const EdgeInsets.all(20),
-                            expandedBorderColor: Colors.transparent,
-                            paginationSize: 48,
-                            headerHeight: 56,
-                            headerColor: Colors.amber[400],
-                            headerBorder: const BorderSide(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                            evenRowColor: const Color(0xFFFFFFFF),
-                            oddRowColor: Colors.amber[200],
-                            rowBorder: const BorderSide(
-                              color: Colors.black,
-                              width: 0.3,
-                            ),
-                            rowColor: Colors.green,
-                            headerTextMaxLines: 4,
-                            headerSortIconColor: const Color(0xFF6c59cf),
-                            paginationSelectedFillColor:
-                                const Color(0xFF6c59cf),
-                            paginationSelectedTextColor: Colors.white,
-                          ),
-                          child: ExpandableDataTable(
-                            headers: headers,
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.vertical,
+                          child: DataTable(
+                            columns:
+                                headers, // Changed from ExpandableDataTable to DataTable
                             rows: rows,
-                            multipleExpansion: false,
-                            isEditable: false,
-                            visibleColumnCount: 2,
                           ),
                         ),
                       ),
