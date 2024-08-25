@@ -16,6 +16,7 @@ class ProfileScreen extends StatelessWidget {
     return Background(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFFDBE7C9),
           leading: IconButton(
               onPressed: () => Get.back(),
               icon: const Icon(LineAwesomeIcons.angle_left)),

@@ -12,6 +12,7 @@ class UpdateProfileScreen extends StatelessWidget {
     return Background(
       child: Scaffold(
         appBar: AppBar(
+          backgroundColor: Color(0xFFDBE7C9),
           leading: IconButton(
               onPressed: () => Get.back(),
               icon: const Icon(LineAwesomeIcons.angle_left)),
@@ -51,24 +52,23 @@ class UpdateProfileScreen extends StatelessWidget {
                 Form(
                   child: Column(
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            label: Text(tFullName),
-                            prefixIcon: Icon(LineAwesomeIcons.user)),
+                      // Display username instead of input
+                      ListTile(
+                        leading: const Icon(LineAwesomeIcons.user),
+                        title: const Text(tFullName),
+                        subtitle:
+                            Text('John Doe'), // Replace with actual username
                       ),
                       const SizedBox(height: tFormHeight - 20),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            label: Text(tEmail),
-                            prefixIcon: Icon(LineAwesomeIcons.envelope_1)),
+                      // Display email instead of input
+                      ListTile(
+                        leading: const Icon(LineAwesomeIcons.envelope_1),
+                        title: const Text(tEmail),
+                        subtitle: Text(
+                            'johndoe@example.com'), // Replace with actual email
                       ),
                       const SizedBox(height: tFormHeight - 20),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            label: Text(tPhoneNo),
-                            prefixIcon: Icon(LineAwesomeIcons.phone)),
-                      ),
-                      const SizedBox(height: tFormHeight - 20),
+                      // Password input remains
                       TextFormField(
                         obscureText: true,
                         decoration: InputDecoration(
@@ -98,19 +98,6 @@ class UpdateProfileScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text.rich(
-                            TextSpan(
-                              text: tJoined,
-                              style: TextStyle(fontSize: 12),
-                              children: [
-                                TextSpan(
-                                    text: tJoinedAt,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12))
-                              ],
-                            ),
-                          ),
                           ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
