@@ -25,6 +25,22 @@ class AppRoutes {
       case RouteNames.report:
         return MaterialPageRoute(builder: (_) => Student_report());
 
+      case RouteNames.qr:
+        return MaterialPageRoute(
+            builder: (_) =>   QrPage());
+
+     
+     
+      case RouteNames.confirm:
+        return MaterialPageRoute(
+            builder: (_) =>  ConfirmationPage(
+                  val: 3,
+                  role: 'canteena',
+                  canteenUserId: '',
+                      scannedTime: DateTime.now(),
+                ));
+
+
       default:
         return MaterialPageRoute(
           builder: (_) => Scaffold(
