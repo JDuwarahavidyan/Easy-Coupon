@@ -1,6 +1,7 @@
 import 'package:easy_coupon/pages/login_pages/fg_pw.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
+import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/pages/student_pages/report.dart';
@@ -31,6 +32,9 @@ class AppRoutes {
 
       case RouteNames.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());
+
+      case RouteNames.updtprofile:
+        return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
 
       case RouteNames.confirm:
         return MaterialPageRoute(

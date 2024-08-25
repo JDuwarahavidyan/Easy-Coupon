@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 // Make sure you have a constants file for strings and colors
-import '../authentication/authentication_repository.dart';
+import 'dummy_authentication.dart';
 import 'profile_update_screen.dart';
 import 'profile_menu.dart';
 import 'constants.dart'; // Import the constants file
@@ -18,7 +18,8 @@ class ProfileScreen extends StatelessWidget {
         leading: IconButton(
             onPressed: () => Get.back(),
             icon: const Icon(LineAwesomeIcons.angle_left)),
-        title: Text(tProfile, style: Theme.of(context).textTheme.headline4),
+        title:
+            Text(tProfile, style: Theme.of(context).textTheme.headlineMedium),
 //  adds an icon button to toggle between light and dark mode.
         actions: [
           IconButton(
@@ -123,8 +124,10 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       confirm: Expanded(
                         child: ElevatedButton(
-                          onPressed: () =>
-                              AuthenticationRepository.instance.logout(),
+                          onPressed: () {
+                            // Use the mock logout function
+                            AuthenticationRepository.logout();
+                          },
                           style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.redAccent,
                               side: BorderSide.none),
