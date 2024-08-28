@@ -131,12 +131,9 @@ class _StudentHomeState extends State<StudentHome>
               });
             }
           },
+          tabIconsList: [],
         ),
       ],
     );
   }
 }
-
-
-
-
