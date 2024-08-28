@@ -1,11 +1,9 @@
+import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
+import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
-import 'constants.dart'; // Import the constants file
-import 'dummy_authentication.dart';
-import 'profile_update_screen.dart';
-import 'profile_menu.dart';
 import 'package:easy_coupon/widgets/components/background.dart'; // Import the Background widget
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart'; // Import the BottomNavigationBar widget
 
@@ -15,12 +13,22 @@ class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    Size size = MediaQuery.of(context).size;
+
     return Background(
       child: Scaffold(
+        backgroundColor:
+            Colors.transparent, // Ensure transparency to see the background
         appBar: AppBar(
           backgroundColor: Color(0xFFDBE7C9),
-          title:
-              Text(tProfile, style: Theme.of(context).textTheme.headlineMedium),
+          title: Text(
+            "Settings",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF294B29),
+              fontSize: 25,
+            ),
+          ),
           actions: [
             IconButton(
               onPressed: () {},
@@ -33,7 +41,7 @@ class ProfileScreen extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(tDefaultSize),
+                  padding: EdgeInsets.all(16.0), // tDefaultSize
                   child: Column(
                     children: [
                       Stack(
@@ -43,8 +51,9 @@ class ProfileScreen extends StatelessWidget {
                             height: 120,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
-                              child:
-                                  const Image(image: AssetImage(tProfileImage)),
+                              child: const Image(
+                                  image:
+                                      AssetImage("assets/images/profile.png")),
                             ),
                           ),
                           Positioned(
@@ -55,7 +64,7 @@ class ProfileScreen extends StatelessWidget {
                               height: 35,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
-                                color: tPrimaryColor,
+                                color: Color(0xFF789461),
                               ),
                               child: const Icon(
                                 LineAwesomeIcons.alternate_pencil,
@@ -67,10 +76,21 @@ class ProfileScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 10),
-                      Text(tProfileHeading,
-                          style: Theme.of(context).textTheme.headlineMedium),
-                      Text(tProfileSubHeading,
-                          style: Theme.of(context).textTheme.bodyMedium),
+                      Text(
+                        "Your Name",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF294B29),
+                          fontSize: 25,
+                        ),
+                      ),
+                      Text(
+                        "Your Role/Title",
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 0, 0, 0),
+                          fontSize: 18,
+                        ),
+                      ),
                       const SizedBox(height: 20),
                       SizedBox(
                         width: 200,
@@ -78,12 +98,40 @@ class ProfileScreen extends StatelessWidget {
                           onPressed: () =>
                               Get.to(() => const UpdateProfileScreen()),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: tPrimaryColor,
-                            side: BorderSide.none,
-                            shape: const StadiumBorder(),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0),
+                            ),
+                            padding: EdgeInsets.zero,
+                            textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            backgroundColor:
+                                Color(0xFF294B29), // Gradient color for button
                           ),
-                          child: const Text(tEditProfile,
-                              style: TextStyle(color: tDarkColor)),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.0,
+                            width: size.width * 0.5,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(80.0),
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color(0xFF294B29),
+                                  Color(0xFF50623A),
+                                ],
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(0),
+                            child: const Text(
+                              "MY PROFILE",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 30),
@@ -102,14 +150,15 @@ class ProfileScreen extends StatelessWidget {
                         onPress: () {
                           Get.defaultDialog(
                             title: "LOGOUT",
-                            titleStyle: const TextStyle(fontSize: 20),
+                            titleStyle: TextStyle(
+                                fontSize: 20, color: Color(0xFF294B29)),
                             content: const Padding(
                               padding: EdgeInsets.symmetric(vertical: 15.0),
                               child: Text("Are you sure, you want to Logout?"),
                             ),
                             confirm: ElevatedButton(
                               onPressed: () {
-                                AuthenticationRepository.logout();
+                                // Call the logout function
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.redAccent,
@@ -150,7 +199,7 @@ class ProfileScreen extends StatelessWidget {
 Widget bottomBar(int selectedIndex) {
   return BottomNavigationBar(
     currentIndex: selectedIndex,
-    selectedItemColor: tPrimaryColor,
+    selectedItemColor: Color(0xFF789461),
     unselectedItemColor: Colors.grey,
     items: const [
       BottomNavigationBarItem(
