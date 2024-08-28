@@ -1,3 +1,4 @@
+import 'package:easy_coupon/pages/student_pages/report.dart';
 import 'package:flutter/material.dart';
 import 'package:bottom_bar/bottom_bar.dart';
 
@@ -8,6 +9,7 @@ class BottomBarView extends StatelessWidget {
   BottomBarView({
     required this.currentIndex,
     required this.onTabSelected,
+    required List<TabIconData> tabIconsList,
   });
 
   @override

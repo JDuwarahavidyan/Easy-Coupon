@@ -15,18 +15,23 @@ class TabIconData {
 
   static List<TabIconData> get tabIconsList {
     return [
-      TabIconData(Icons.home, true),
-      TabIconData(Icons.report, false),
+      TabIconData(Icons.home, false),
+      TabIconData(Icons.report, true),
       TabIconData(Icons.settings, false),
     ];
   }
 }
 
+// ignore: camel_case_types
 class Student_report extends StatefulWidget {
+  const Student_report({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _Student_reportState createState() => _Student_reportState();
 }
 
+// ignore: camel_case_types
 class _Student_reportState extends State<Student_report>
     with TickerProviderStateMixin {
   AnimationController? animationController;
@@ -43,6 +48,36 @@ class _Student_reportState extends State<Student_report>
       "Date and Time": "2024-08-01 12:00",
       "Canteen": "Canteen A",
       "Coupons Used": 120
+    },
+    {
+      "Date and Time": "2024-08-02 14:00",
+      "Canteen": "Canteen B",
+      "Coupons Used": 90
+    },
+    {
+      "Date and Time": "2024-08-02 14:00",
+      "Canteen": "Canteen B",
+      "Coupons Used": 90
+    },
+    {
+      "Date and Time": "2024-08-02 14:00",
+      "Canteen": "Canteen B",
+      "Coupons Used": 90
+    },
+    {
+      "Date and Time": "2024-08-02 14:00",
+      "Canteen": "Canteen B",
+      "Coupons Used": 90
+    },
+    {
+      "Date and Time": "2024-08-02 14:00",
+      "Canteen": "Canteen B",
+      "Coupons Used": 90
+    },
+    {
+      "Date and Time": "2024-08-02 14:00",
+      "Canteen": "Canteen B",
+      "Coupons Used": 90
     },
     {
       "Date and Time": "2024-08-02 14:00",
@@ -72,7 +107,7 @@ class _Student_reportState extends State<Student_report>
 
     // Initialize headers for the table
     headers = [
-      DataColumn(
+      const DataColumn(
         label: Center(
           child: Text(
             "Date and Time",
@@ -81,7 +116,7 @@ class _Student_reportState extends State<Student_report>
           ),
         ),
       ),
-      DataColumn(
+      const DataColumn(
         label: Center(
           child: Text(
             "Canteen",
@@ -90,7 +125,7 @@ class _Student_reportState extends State<Student_report>
           ),
         ),
       ),
-      DataColumn(
+      const DataColumn(
         label: Center(
           child: Text(
             "Coupons Used",
@@ -105,17 +140,19 @@ class _Student_reportState extends State<Student_report>
     rows = dummyData.map<DataRow>((data) {
       bool isEven = dummyData.indexOf(data) % 2 == 0;
       return DataRow(
-        color: MaterialStateProperty.resolveWith<Color?>(
-            (Set<MaterialState> states) {
-          return isEven ? Color(0xFFDBE7C9) : Color(0xFFDBE7C9); // Row colors
+        color:
+            WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+          return isEven
+              ? const Color(0xFFDBE7C9)
+              : const Color(0xFFDBE7C9); // Row colors
         }),
         cells: [
           DataCell(
             Center(
               child: Text(
                 data["Date and Time"],
-                style: TextStyle(
-                    fontSize: 12,
+                style: const TextStyle(
+                    fontSize: 11,
                     fontWeight: FontWeight.normal,
                     color: Colors.black),
                 maxLines: 2, // Limit to 2 lines
@@ -127,8 +164,8 @@ class _Student_reportState extends State<Student_report>
             Center(
               child: Text(
                 data["Canteen"],
-                style: TextStyle(
-                    fontSize: 12,
+                style: const TextStyle(
+                    fontSize: 11,
                     fontWeight: FontWeight.normal,
                     color: Colors.black),
               ),
@@ -138,8 +175,8 @@ class _Student_reportState extends State<Student_report>
             Center(
               child: Text(
                 data["Coupons Used"].toString(),
-                style: TextStyle(
-                    fontSize: 12,
+                style: const TextStyle(
+                    fontSize: 11,
                     fontWeight: FontWeight.normal,
                     color: Colors.black),
               ),
@@ -183,18 +220,64 @@ class _Student_reportState extends State<Student_report>
                   return const SizedBox();
                 } else {
                   return Positioned(
-                    top: 100,
+                    top: 50,
                     left: 20,
                     right: 20,
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                          'Report Page',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.all(8.0),
+                          decoration: BoxDecoration(
+                            color: Color(0xFF789461).withOpacity(0.1),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Expanded(
+                                child: Text(
+                                  'Select the Range of Dates and Click on "Get Report" to see your Coupon Usage in those Days',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(width: 10),
+                              Transform.scale(
+                                scale:
+                                    1.5, // Adjust the scale factor to increase the size of the Lottie animation
+                                child: SizedBox(
+                                  width: 50, // Original size
+                                  height: 50, // Original size
+                                  child: Lottie.asset(
+                                    'assets/images/landing/fetch.json',
+                                    fit: BoxFit.contain,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(height: 20),
                         CalendarDatePicker2(
                           config: CalendarDatePicker2Config(
                             calendarType: CalendarDatePicker2Type.range,
                             selectedDayHighlightColor: Color(0xFF789461),
-                            dayTextStyle: TextStyle(color: Colors.blue),
+                            dayTextStyle: const TextStyle(color: Colors.blue),
                             selectedDayTextStyle:
-                                TextStyle(color: Colors.white),
+                                const TextStyle(color: Colors.white),
                           ),
                           value: _dates,
                           onValueChanged: (dates) {
@@ -203,18 +286,23 @@ class _Student_reportState extends State<Student_report>
                             });
                           },
                         ),
-                        SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: _fetchData,
-                          child: Text(
-                            "Fetch",
-                            style: TextStyle(
-                              color: Colors.white, // Text color
-                              fontWeight: FontWeight.bold, // Bold text
+                        const SizedBox(
+                            height:
+                                10), // Adjust this value to move the button closer
+                        Center(
+                          child: ElevatedButton(
+                            onPressed: _fetchData,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor:
+                                  Color(0xFF789461), // Button color
                             ),
-                          ),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF789461), // Button color
+                            child: const Text(
+                              "Get Report",
+                              style: TextStyle(
+                                color: Colors.white, // Text color
+                                fontWeight: FontWeight.bold, // Bold text
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -333,6 +421,7 @@ class _Student_reportState extends State<Student_report>
               });
             }
           },
+          tabIconsList: [],
         ),
       ],
     );
