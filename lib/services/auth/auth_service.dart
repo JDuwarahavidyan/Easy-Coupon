@@ -45,7 +45,7 @@ class FirebaseAuthService {
           role: role,
           studentCount: 30,
           canteenCount: 0,
-          profilePic: 'assets/nouser.png',
+          profilePic: "https://www.pngkey.com/png/full/114-1149878_setting-user-avatar-in-specific-size-without-breaking.png",
         );
         await _firebaseFirestore.collection('users').doc(user.uid).set(
               userModel.toJson(),

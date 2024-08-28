@@ -5,4 +5,5 @@ export 'login_pages/pw_reset.dart';
 export 'student_pages/home.dart';
 export 'student_pages/confirmation_page.dart';
 export 'student_pages/qr_scanning.dart';
+export 'login_pages/register.dart';
 // export 'student_pages/report.dart';

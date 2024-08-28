@@ -31,9 +31,12 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => QrPage());
 
       case RouteNames.profile:
-        return MaterialPageRoute(builder: (_) => ProfileScreen());
+        return MaterialPageRoute(builder: (_) => ProfileScreen()); 
 
-      case RouteNames.updtprofile:
+      case RouteNames.register:
+        return MaterialPageRoute(builder: (_) => RegisterScreen());
+
+       case RouteNames.updtprofile:
         return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
 
       case RouteNames.confirm:
