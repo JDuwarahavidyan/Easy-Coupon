@@ -10,11 +10,12 @@ class SignInThree extends StatelessWidget {
 
     return Scaffold(
       body: Background(
-        child: Stack(  // Use Stack to overlay widgets
+        child: Stack(
+          // Use Stack to overlay widgets
           children: <Widget>[
             Positioned(
-              top: size.height * 0.06,  // Position slightly below the top
-              right: -40,  // Move the image further to the right
+              top: size.height * 0.06, // Position slightly below the top
+              right: -40, // Move the image further to the right
               child: Container(
                 width: size.width * 0.6, // Adjust width as needed
                 child: Image.asset(
@@ -24,8 +25,8 @@ class SignInThree extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: size.height * 0.25,   // Move the text upwards
-              left: 40,  // Align text to the left
+              top: size.height * 0.25, // Move the text upwards
+              left: 40, // Align text to the left
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -40,7 +41,8 @@ class SignInThree extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: size.height * 0.32,  // Adjust position to place below the title
+              top: size.height *
+                  0.32, // Adjust position to place below the title
               left: 40,
               right: 40,
               child: Column(
@@ -102,7 +104,7 @@ class SignInThree extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Forget()),
                       );
                     },
-                    child: Text(
+                    child: const Text(
                       "Forgot your password?",
                       style: TextStyle(
                         fontSize: 12,
