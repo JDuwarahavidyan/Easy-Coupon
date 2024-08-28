@@ -1,26 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'constants.dart'; // Import the constants file
-import 'package:easy_coupon/widgets/components/background.dart'; // Import the Background widget
+import 'package:easy_coupon/widgets/components/background.dart';
+import 'package:easy_coupon/pages/login_pages/fg_pw.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Background(
       child: Scaffold(
+        backgroundColor:
+            Colors.transparent, // Ensure transparency to see the background
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
           leading: IconButton(
-              onPressed: () => Get.back(),
-              icon: const Icon(LineAwesomeIcons.angle_left)),
-          title: Text(tEditProfile,
-              style: Theme.of(context).textTheme.headlineMedium),
+            onPressed: () => Get.back(),
+            icon: const Icon(LineAwesomeIcons.angle_left),
+          ),
+          title: const Text(
+            "Edit Profile",
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF294B29),
+              fontSize: 20,
+            ),
+          ),
         ),
         body: SingleChildScrollView(
           child: Container(
-            padding: const EdgeInsets.all(tDefaultSize),
+            padding: EdgeInsets.all(20.0),
             child: Column(
               children: [
                 Stack(
@@ -29,8 +41,12 @@ class UpdateProfileScreen extends StatelessWidget {
                       width: 120,
                       height: 120,
                       child: ClipRRect(
-                          borderRadius: BorderRadius.circular(100),
-                          child: const Image(image: AssetImage(tProfileImage))),
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.asset(
+                          "assets/images/landing/images/userImage.png",
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ),
                     Positioned(
                       bottom: 0,
@@ -39,10 +55,14 @@ class UpdateProfileScreen extends StatelessWidget {
                         width: 35,
                         height: 35,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(100),
-                            color: tPrimaryColor),
-                        child: const Icon(LineAwesomeIcons.camera,
-                            color: Colors.black, size: 20),
+                          borderRadius: BorderRadius.circular(100),
+                          color: Color(0xFF294B29),
+                        ),
+                        child: const Icon(
+                          LineAwesomeIcons.camera,
+                          color: Colors.black,
+                          size: 20,
+                        ),
                       ),
                     ),
                   ],
@@ -51,76 +71,78 @@ class UpdateProfileScreen extends StatelessWidget {
                 Form(
                   child: Column(
                     children: [
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            label: Text(tFullName),
-                            prefixIcon: Icon(LineAwesomeIcons.user)),
+                      const ListTile(
+                        leading: Icon(LineAwesomeIcons.user),
+                        title: Text("Full Name"),
+                        subtitle: Text('John Doe'),
                       ),
-                      const SizedBox(height: tFormHeight - 20),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            label: Text(tEmail),
-                            prefixIcon: Icon(LineAwesomeIcons.envelope_1)),
+                      const SizedBox(height: 20),
+                      const ListTile(
+                        leading: Icon(LineAwesomeIcons.envelope_1),
+                        title: Text("Email"),
+                        subtitle: Text('johndoe@example.com'),
                       ),
-                      const SizedBox(height: tFormHeight - 20),
-                      TextFormField(
-                        decoration: const InputDecoration(
-                            label: Text(tPhoneNo),
-                            prefixIcon: Icon(LineAwesomeIcons.phone)),
-                      ),
-                      const SizedBox(height: tFormHeight - 20),
-                      TextFormField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                          label: const Text(tPassword),
-                          prefixIcon: const Icon(Icons.fingerprint),
-                          suffixIcon: IconButton(
-                            icon: const Icon(LineAwesomeIcons.eye_slash),
-                            onPressed: () {},
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: tFormHeight),
+                      const SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () =>
-                              Get.to(() => const UpdateProfileScreen()),
+                          onPressed: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Forget()),
+                          ),
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: tPrimaryColor,
-                              side: BorderSide.none,
-                              shape: const StadiumBorder()),
-                          child: const Text(tEditProfile,
-                              style: TextStyle(color: tDarkColor)),
-                        ),
-                      ),
-                      const SizedBox(height: tFormHeight),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text.rich(
-                            TextSpan(
-                              text: tJoined,
-                              style: TextStyle(fontSize: 12),
-                              children: [
-                                TextSpan(
-                                    text: tJoinedAt,
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12))
-                              ],
+                            backgroundColor: Color(0xFF50623A),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(80.0),
+                            ),
+                            padding: EdgeInsets.zero,
+                          ),
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: 50.0,
+                            width: size.width,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(80.0),
+                              gradient: const LinearGradient(
+                                colors: [
+                                  Color(0xFF294B29),
+                                  Color(0xFF50623A),
+                                ],
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(0),
+                            child: const Text(
+                              "CHANGE PASSWORD",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
                           ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    Colors.redAccent.withOpacity(0.1),
-                                elevation: 0,
-                                foregroundColor: Colors.red,
-                                shape: const StadiumBorder(),
-                                side: BorderSide.none),
-                            child: const Text(tDelete),
+                              backgroundColor:
+                                  Colors.redAccent.withOpacity(0.1),
+                              elevation: 0,
+                              foregroundColor: Colors.red,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(80.0),
+                              ),
+                              side: BorderSide.none,
+                            ),
+                            child: const Text(
+                              "DELETE ACCOUNT",
+                              style: TextStyle(color: Colors.red),
+                            ),
                           ),
                         ],
                       ),
