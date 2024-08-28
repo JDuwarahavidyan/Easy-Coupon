@@ -258,7 +258,7 @@ class _Student_reportState extends State<Student_report>
                                 width: 50,
                                 height: 50,
                                 child: Lottie.asset(
-                                  'assets/images/landing/fast_easy.json',
+                                  'assets/images/landing/salad.json',
                                   fit: BoxFit.contain,
                                 ),
                               ),
