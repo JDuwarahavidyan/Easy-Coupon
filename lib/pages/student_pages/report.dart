@@ -257,8 +257,8 @@ class _Student_reportState extends State<Student_report>
                               SizedBox(
                                 width: 50,
                                 height: 50,
-                                child: Image.asset(
-                                  'assets/images/landing/report.jpg',
+                                child: Lottie.asset(
+                                  'assets/images/landing/fast_easy.json',
                                   fit: BoxFit.contain,
                                 ),
                               ),
