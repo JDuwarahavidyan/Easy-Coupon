@@ -25,7 +25,7 @@ class Background extends StatelessWidget {
            top: 0,
             right: 0,
             child: Image.asset(
-              "assets/images/landing/top1.png",
+              "assets/images/landing/top2.png",
               width: size.width,
             ),
           ),

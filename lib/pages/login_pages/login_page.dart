@@ -1,7 +1,6 @@
 import 'package:easy_coupon/pages/login_pages/fg_pw.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
-//import 'package:easy_coupon/pages/login_pages/pw_reset.dart';
 
 class SignInThree extends StatelessWidget {
   @override
@@ -10,22 +9,22 @@ class SignInThree extends StatelessWidget {
 
     return Scaffold(
       body: Background(
-        child: Stack(  // Use Stack to overlay widgets
+        child: Stack(
           children: <Widget>[
             Positioned(
-              top: size.height * 0.06,  // Position slightly below the top
-              right: -40,  // Move the image further to the right
+              top: size.height * 0.06,
+              right: -40,
               child: Container(
-                width: size.width * 0.6, // Adjust width as needed
+                width: size.width * 0.6,
                 child: Image.asset(
                   "assets/images/landing/main.png",
-                  fit: BoxFit.contain, // Maintain aspect ratio
+                  fit: BoxFit.contain,
                 ),
               ),
             ),
             Positioned(
-              top: size.height * 0.25,   // Move the text upwards
-              left: 40,  // Align text to the left
+              top: size.height * 0.3,
+              left: 40,
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -40,7 +39,7 @@ class SignInThree extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: size.height * 0.32,  // Adjust position to place below the title
+              top: size.height * 0.37,
               left: 40,
               right: 40,
               child: Column(
@@ -59,7 +58,12 @@ class SignInThree extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        '/home',
+                      );
+                    },
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0),

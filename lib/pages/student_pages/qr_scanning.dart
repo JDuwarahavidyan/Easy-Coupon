@@ -49,7 +49,10 @@ class _QrPageState extends State<QrPage> {
             child: IconButton(
               icon: const Icon(Icons.close, color: Colors.white, size: 30),
               onPressed: () {
-                Navigator.pop(context);
+               Navigator.pushReplacementNamed(
+                        context,
+                        '/home',
+                      );
               },
             ),
           ),
