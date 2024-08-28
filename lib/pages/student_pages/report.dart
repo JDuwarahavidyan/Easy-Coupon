@@ -246,7 +246,7 @@ class _Student_reportState extends State<Student_report>
                             children: [
                               const Expanded(
                                 child: Text(
-                                  'Select the Range of Dates and Click on Get Report to see your coupon usage in those days',
+                                  'Select the Range of Dates and Click on "Get Report" to see your Coupon Usage in those Days',
                                   style: TextStyle(
                                     fontSize: 14,
                                     color: Colors.black87,
@@ -254,17 +254,22 @@ class _Student_reportState extends State<Student_report>
                                 ),
                               ),
                               const SizedBox(width: 10),
-                              SizedBox(
-                                width: 50,
-                                height: 50,
-                                child: Lottie.asset(
-                                  'assets/images/landing/salad.json',
-                                  fit: BoxFit.contain,
+                              Transform.scale(
+                                scale:
+                                    1.5, // Adjust the scale factor to increase the size of the Lottie animation
+                                child: SizedBox(
+                                  width: 50, // Original size
+                                  height: 50, // Original size
+                                  child: Lottie.asset(
+                                    'assets/images/landing/fetch.json',
+                                    fit: BoxFit.contain,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
+
                         const SizedBox(height: 20),
                         CalendarDatePicker2(
                           config: CalendarDatePicker2Config(
