@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 // Colors
 const Color tPrimaryColor = Color(0xFF789461);
-const Color tDarkColor = Color(0xFF000000);
+const Color tDarkColor = Color.fromARGB(255, 255, 255, 255);
 
 // Strings
 const String tProfile = "Settings";
@@ -23,5 +23,5 @@ const tPhoneNo = "Phone Number";
 const tPassword = "Password";
 const tJoined = "Joined: ";
 const tJoinedAt = "January 2024";
-const tDelete = "Delete";
+const tDelete = "Delete Account";
 const tAccentColor = Color.fromARGB(255, 222, 248, 191);

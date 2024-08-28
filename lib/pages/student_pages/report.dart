@@ -229,9 +229,9 @@ class _Student_reportState extends State<Student_report>
                         Text(
                           'Report Page',
                           style: TextStyle(
-                            fontSize: 24,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Color(0xFF294B29),
+                            fontSize: 25,
                           ),
                         ),
                         SizedBox(height: 10),
@@ -293,14 +293,38 @@ class _Student_reportState extends State<Student_report>
                           child: ElevatedButton(
                             onPressed: _fetchData,
                             style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(80.0),
+                              ),
+                              padding: EdgeInsets.zero,
+                              textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
                               backgroundColor:
-                                  Color(0xFF789461), // Button color
+                                  Color(0xFF294B29), // Button color
                             ),
-                            child: const Text(
-                              "Get Report",
-                              style: TextStyle(
-                                color: Colors.white, // Text color
-                                fontWeight: FontWeight.bold, // Bold text
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: 50.0,
+                              // width: size.width,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(80.0),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color(0xFF294B29),
+                                    Color(0xFF50623A),
+                                  ],
+                                ),
+                              ),
+                              padding: const EdgeInsets.all(0),
+                              child: const Text(
+                                "GET REPORT",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
