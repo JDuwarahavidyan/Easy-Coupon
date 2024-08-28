@@ -61,7 +61,10 @@ class SignInThree extends StatelessWidget {
                   ),
                   SizedBox(height: size.height * 0.05),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () { Navigator.pushReplacementNamed(
+                        context,
+                        '/home',
+                      );},
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(80.0),
