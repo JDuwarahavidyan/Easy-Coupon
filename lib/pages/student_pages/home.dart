@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'my_diary/my_diary_screen.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
-import 'package:easy_coupon/pages/student_pages/models/tablecon_data.dart';
 import 'package:lottie/lottie.dart';
 
 class TabIconData {
@@ -137,3 +136,8 @@ class _StudentHomeState extends State<StudentHome>
     );
   }
 }
+
+
+
+
+

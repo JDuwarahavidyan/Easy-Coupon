@@ -29,18 +29,22 @@ class Background extends StatelessWidget {
               width: size.width,
             ),
           ),
-
-          // Positioned(
-          //   top: size.height * 0.07,    // Position slightly below the top
-          //   right: -30,
-          //   child: Container(
-          //     width: size.width * 0.6, // Adjust width as needed
-          //     child: Image.asset(
-          //       "assets/images/landing/main.png",
-          //       fit: BoxFit.contain, // Maintain aspect ratio
-          //     ),
-          //   ),
-          // ),
+            Positioned(
+           top: 0,
+            right: 0,
+            child: Image.asset(
+              "assets/images/landing/top2.png",
+              width: size.width,
+            ),
+          ),
+          Positioned(
+           top: 0,
+            right: 0,
+            child: Image.asset(
+              "assets/images/landing/bottom2.png",
+              width: size.width,
+            ),
+          ),
           Positioned(
             bottom: 0,
             right: 0,

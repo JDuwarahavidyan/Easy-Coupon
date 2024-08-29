@@ -28,28 +28,28 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
             curve: Interval(0, 0.5, curve: Curves.fastOutSlowIn)));
     addAllListData();
 
-    scrollController.addListener(() {
-      if (scrollController.offset >= 24) {
-        if (topBarOpacity != 1.0) {
-          setState(() {
-            topBarOpacity = 1.0;
-          });
-        }
-      } else if (scrollController.offset <= 24 &&
-          scrollController.offset >= 0) {
-        if (topBarOpacity != scrollController.offset / 24) {
-          setState(() {
-            topBarOpacity = scrollController.offset / 24;
-          });
-        }
-      } else if (scrollController.offset <= 0) {
-        if (topBarOpacity != 0.0) {
-          setState(() {
-            topBarOpacity = 0.0;
-          });
-        }
-      }
-    });
+    // scrollController.addListener(() {
+    //   if (scrollController.offset >= 24) {
+    //     if (topBarOpacity != 1.0) {
+    //       setState(() {
+    //         topBarOpacity = 1.0;
+    //       });
+    //     }
+    //   } else if (scrollController.offset <= 24 &&
+    //       scrollController.offset >= 0) {
+    //     if (topBarOpacity != scrollController.offset / 24) {
+    //       setState(() {
+    //         topBarOpacity = scrollController.offset / 24;
+    //       });
+    //     }
+    //   } else if (scrollController.offset <= 0) {
+    //     if (topBarOpacity != 0.0) {
+    //       setState(() {
+    //         topBarOpacity = 0.0;
+    //       });
+    //     }
+    //   }
+    // });
     super.initState();
   }
 
@@ -163,7 +163,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  'My Diary',
+                                  'Hi, Welcome Back!',
                                   textAlign: TextAlign.left,
                                   style: TextStyle(
                                     fontFamily: StudentTheme.fontName,
@@ -175,67 +175,7 @@ class _MyDiaryScreenState extends State<MyDiaryScreen>
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              height: 38,
-                              width: 38,
-                              child: InkWell(
-                                highlightColor: Colors.transparent,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(32.0)),
-                                onTap: () {},
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.keyboard_arrow_left,
-                                    color:StudentTheme.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.only(
-                                left: 8,
-                                right: 8,
-                              ),
-                              child: Row(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.only(right: 8),
-                                    child: Icon(
-                                      Icons.calendar_today,
-                                      color: StudentTheme.grey,
-                                      size: 18,
-                                    ),
-                                  ),
-                                  Text(
-                                    '15 May',
-                                    textAlign: TextAlign.left,
-                                    style: TextStyle(
-                                      fontFamily: StudentTheme.fontName,
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 18,
-                                      letterSpacing: -0.2,
-                                      color: StudentTheme.darkerText,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                            SizedBox(
-                              height: 38,
-                              width: 38,
-                              child: InkWell(
-                                highlightColor: Colors.transparent,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(32.0)),
-                                onTap: () {},
-                                child: const Center(
-                                  child: Icon(
-                                    Icons.keyboard_arrow_right,
-                                    color: StudentTheme.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
+                           
                           ],
                         ),
                       )

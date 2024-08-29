@@ -275,7 +275,7 @@ class _Student_reportState extends State<Student_report>
                           config: CalendarDatePicker2Config(
                             calendarType: CalendarDatePicker2Type.range,
                             selectedDayHighlightColor: Color(0xFF789461),
-                            dayTextStyle: const TextStyle(color: Colors.blue),
+                            dayTextStyle: const TextStyle(color: Color.fromARGB(255, 40, 53, 52)),
                             selectedDayTextStyle:
                                 const TextStyle(color: Colors.white),
                           ),

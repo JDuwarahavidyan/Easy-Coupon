@@ -43,7 +43,7 @@ class UpdateProfileScreen extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(100),
                         child: Image.asset(
-                          "assets/images/landing/images/userImage.png",
+                          "assets/images/landing/userImage.png",
                           fit: BoxFit.contain,
                         ),
                       ),
