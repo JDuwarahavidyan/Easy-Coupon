@@ -281,7 +281,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
   void _navigateToStudentHomeScreen(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => StudentHome(),
+        pageBuilder: (context, animation, secondaryAnimation) => StudentHomeScreen(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;

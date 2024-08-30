@@ -1,4 +1,4 @@
-import 'package:easy_coupon/pages/login_pages/fg_pw.dart';
+import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
@@ -16,13 +16,13 @@ class AppRoutes {
             builder: (_) => const IntroductionAnimationScreen());
 
       case RouteNames.login:
-        return MaterialPageRoute(builder: (_) => SignInThree());
+        return MaterialPageRoute(builder: (_) => LoginPage());
 
-      case RouteNames.forgetp:
-        return MaterialPageRoute(builder: (_) => Forget());
+      case RouteNames.resetPWEmail:
+        return MaterialPageRoute(builder: (_) => PasswordEmailResetPage ());
 
       case RouteNames.home:
-        return MaterialPageRoute(builder: (_) => StudentHome());
+        return MaterialPageRoute(builder: (_) => StudentHomeScreen());
 
       case RouteNames.report:
         return MaterialPageRoute(builder: (_) => Student_report());

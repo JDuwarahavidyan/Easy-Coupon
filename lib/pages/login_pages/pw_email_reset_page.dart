@@ -1,16 +1,31 @@
+import 'package:flutter/cupertino.dart'; // Import Cupertino icons
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
-import 'package:easy_coupon/pages/login_pages/login_page.dart';
 
-class PwReset extends StatelessWidget {
+class PasswordEmailResetPage extends StatelessWidget {
+    const PasswordEmailResetPage({super.key});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
       body: Background(
-        child: Stack(  // Use Stack to overlay widgets
+        child: Stack(
           children: <Widget>[
+            Positioned(
+              top: size.height * 0.05,  // Adjusted as necessary
+              left: 20,  // Adjusted as necessary
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pop(context); // Navigate back to the previous screen
+                },
+                child: Icon(
+                  CupertinoIcons.back, // Cupertino back icon
+                  size: 30, // Adjust size as needed
+                  color: Color(0xFF294B29), // Adjust color as needed
+                ),
+              ),
+            ),
             Positioned(
               top: size.height * 0.1,    // Move the image slightly below the top
               right: -20,   // Move the image further to the right
@@ -23,12 +38,12 @@ class PwReset extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: size.height * 0.2,   // Move the text upwards
+              top: size.height * 0.40,   // Move the text upwards
               left: 40,  // Align text to the left
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "RESET YOUR\nPASSWORD",
+                  "ENTER YOUR EMAIL TO\nRESET YOUR PASSWORD",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF294B29),
@@ -39,26 +54,14 @@ class PwReset extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: size.height * 0.4,  // Adjust position to place below the title
+              top: size.height * 0.5,  // Adjust position to place below the title
               left: 40,
               right: 40,
               child: Column(
                 children: <Widget>[
                   TextField(
                     decoration: InputDecoration(
-                      labelText: "Current Password",  // Corrected typo
-                    ),
-                  ),
-                  SizedBox(height: size.height * 0.03),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "New Password",
-                    ),
-                  ),
-                  SizedBox(height: size.height * 0.03),
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "Confirm Password",
+                      labelText: "Enter the Email",  // Corrected typo
                     ),
                   ),
                   SizedBox(height: size.height * 0.05),
@@ -89,7 +92,7 @@ class PwReset extends StatelessWidget {
                       ),
                       padding: const EdgeInsets.all(0),
                       child: Text(
-                        "RESET PASSWORD",
+                        "SEND EMAIL",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
@@ -107,14 +110,3 @@ class PwReset extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-
-
