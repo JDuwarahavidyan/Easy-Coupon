@@ -1,2 +1,2 @@
 export 'user/user_model.dart';
-export 'student.dart';
+export 'qr/qr_model.dart';

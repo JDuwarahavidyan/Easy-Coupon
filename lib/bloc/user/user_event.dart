@@ -47,5 +47,64 @@ final class UserReadAllEvent extends UserEvent {
   const UserReadAllEvent();
 }
 
+class UpdateCountEvent extends UserEvent {
+  final int val;
+  final String userId;
+
+  const UpdateCountEvent(this.val, this.userId);
+
+  @override
+  List<Object> get props => [val, userId];
+}
+
+class ScannedDataEvent extends UserEvent {
+  final Barcode result;
+  final int val;
+  final String userId;
+
+  const ScannedDataEvent(this.result, this.val, this.userId);
+
+  @override
+  List<Object> get props => [result, val, userId];
+}
+
+class UserGenerateQREvent extends UserEvent {
+  final String canteenUserId;
+
+  const UserGenerateQREvent(this.canteenUserId);
+
+  @override
+  List<Object> get props => [canteenUserId];
+}
+
+
+class FetchUserRoleEvent extends UserEvent {
+  final String userId;
+
+  const FetchUserRoleEvent(this.userId);
+
+  @override
+  List<Object> get props => [userId];
+}
+
+class UpdateCanteenCountEvent extends UserEvent {
+  final int val;
+  final String canteenUserId;
+
+  const UpdateCanteenCountEvent(this.val, this.canteenUserId);
+
+  @override
+  List<Object> get props => [val, canteenUserId];
+}
+
+class FetchCanteenUserNameEvent extends UserEvent {
+  final String canteenUserId;
+
+  const FetchCanteenUserNameEvent(this.canteenUserId);
+
+  @override
+  List<Object> get props => [canteenUserId];
+
+}
 
 

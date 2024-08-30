@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import 'firebase_options.dart';
 import 'routes/routes.dart';
 
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
@@ -55,6 +56,20 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CanteenBloc(FirebaseFirestore.instance),
         ),
+
+        BlocProvider<UserBloc>(
+          create: (context) => UserBloc(UserRepository(UserService()))..add(UserReadEvent(),
+        )),
+             BlocProvider<QrCodeBloc>(
+          create: (context) => QrCodeBloc(QrCodeRepository(QrCodeService()))..add(QrCodeReadEvent(),
+        )),
+
+        BlocProvider<QrCodeBloc>(
+          create: (context) => QrCodeBloc(QrCodeRepository(QrCodeService()))..add(QrCodeReadEvent(),
+        )),
+
+
+         
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeProvider(
@@ -70,7 +85,7 @@ class MyApp extends StatelessWidget {
               theme: themeProvider.themeData.copyWith(
                 scaffoldBackgroundColor: const Color(0xFFFFFFFF),
               ),
-              initialRoute: RouteNames.profile,
+              initialRoute: RouteNames.splash,
               onGenerateRoute: AppRoutes.generateRoute,
             );
           },
