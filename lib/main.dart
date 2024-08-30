@@ -56,26 +56,20 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CanteenBloc(FirebaseFirestore.instance),
         ),
-
         BlocProvider<UserBloc>(
-          create: (context) => UserBloc(UserRepository(UserService()))..add(UserReadEvent(),
-        )),
-             BlocProvider<QrCodeBloc>(
-          create: (context) => QrCodeBloc(QrCodeRepository(QrCodeService()))..add(QrCodeReadEvent(),
-        )),
-
+          create: (context) =>
+              UserBloc(UserRepository(UserService()))..add(UserReadEvent()),
+        ),
         BlocProvider<QrCodeBloc>(
-          create: (context) => QrCodeBloc(QrCodeRepository(QrCodeService()))..add(QrCodeReadEvent(),
-        )),
-
-
-         
+          create: (context) =>
+              QrCodeBloc(QrCodeRepository(QrCodeService()))..add(QrCodeReadEvent()),
+        ),
       ],
       child: ChangeNotifierProvider(
         create: (_) => ThemeProvider(
           ThemeData.light().copyWith(
-              // scaffoldBackgroundColor: const Color(0xFFF9E6BD),
-              ),
+            scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+          ),
         ),
         child: Consumer<ThemeProvider>(
           builder: (context, themeProvider, child) {
@@ -87,6 +81,11 @@ class MyApp extends StatelessWidget {
               ),
               initialRoute: RouteNames.splash,
               onGenerateRoute: AppRoutes.generateRoute,
+              builder: (context, child) {
+                return SafeArea(
+                  child: child ?? const SizedBox.shrink(),
+                );
+              },
             );
           },
         ),

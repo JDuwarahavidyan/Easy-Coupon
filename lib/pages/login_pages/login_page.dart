@@ -5,15 +5,15 @@ import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  // Controllers for username and password text fields
+  final TextEditingController userNameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
-    // Controllers for username and password text fields
-    final TextEditingController userNameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
 
     void navigateWithAnimation(BuildContext context, String routeName) {
       Navigator.of(context).pushReplacement(
@@ -23,13 +23,13 @@ class LoginPage extends StatelessWidget {
               case RouteNames.resetPW:
                 return const NewUserPwResetPage();
               case RouteNames.student:
-                return  StudentHomeScreen();
+                return StudentHomeScreen();
               // case RouteNames.canteenA:
               //   return const CanteenAHomeScreen();
               // case RouteNames.canteenB:
               //   return const CanteenBHomeScreen();
               default:
-                return const LoginPage();
+                return LoginPage();
             }
           },
           transitionsBuilder: (context, animation, secondaryAnimation, child) {
@@ -104,9 +104,8 @@ class LoginPage extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
-                  if (state is AuthStateLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+                  bool isLoading = state is AuthStateLoading;
+
                   return Column(
                     children: <Widget>[
                       TextField(
@@ -125,26 +124,30 @@ class LoginPage extends StatelessWidget {
                       ),
                       SizedBox(height: size.height * 0.05),
                       ElevatedButton(
-                        onPressed: () {
-                          final userName =
-                              userNameController.text.toLowerCase();
-                          final password = passwordController.text;
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                FocusScope.of(context).unfocus(); // Close the keyboard
 
-                          if (userName.isEmpty || password.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('All fields are required')),
-                            );
-                            return;
-                          }
+                                final userName =
+                                    userNameController.text.toLowerCase();
+                                final password = passwordController.text;
 
-                          context.read<AuthBloc>().add(
-                                LoggedInEvent(
-                                  username: userName,
-                                  password: password,
-                                ),
-                              );
-                        },
+                                if (userName.isEmpty || password.isEmpty) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text('All fields are required')),
+                                  );
+                                  return;
+                                }
+
+                                context.read<AuthBloc>().add(
+                                      LoggedInEvent(
+                                        username: userName,
+                                        password: password,
+                                      ),
+                                    );
+                              },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0),
@@ -169,20 +172,30 @@ class LoginPage extends StatelessWidget {
                             ),
                           ),
                           padding: const EdgeInsets.all(0),
-                          child: const Text(
-                            "LOGIN",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white),
+                                  ),
+                                )
+                              : const Text(
+                                  "LOGIN",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                       ),
                       SizedBox(height: size.height * 0.03),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, RouteNames.resetPWEmail);
+                          Navigator.pushReplacementNamed(
+                              context, RouteNames.resetPWEmail);
                         },
                         child: const Text(
                           "Forgot your password?",
