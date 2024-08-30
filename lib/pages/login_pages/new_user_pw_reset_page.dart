@@ -1,8 +1,9 @@
 import 'package:easy_coupon/bloc/blocs.dart';
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/routes/routes.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:floating_snackbar/floating_snackbar.dart';
 
 class NewUserPwResetPage extends StatefulWidget {
   const NewUserPwResetPage({super.key});
@@ -27,7 +28,7 @@ class _NewUserPwResetPageState extends State<NewUserPwResetPage> {
             Positioned(
               top: size.height * 0.1,
               right: -20,
-              child: Container(
+              child: SizedBox(
                 width: size.width * 0.6,
                 child: Image.asset(
                   "assets/images/landing/pw.png",
@@ -58,16 +59,36 @@ class _NewUserPwResetPageState extends State<NewUserPwResetPage> {
               child: BlocConsumer<AuthBloc, AuthState>(
                 listener: (context, state) {
                   if (state is PasswordUpdated) {
-                    Navigator.pushReplacementNamed(context, RouteNames.login);
+                    Navigator.of(context).pushReplacement(
+                      PageRouteBuilder(
+                        transitionDuration: const Duration(seconds: 1),
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            LoginPage(), // Replace with your actual target page
+                        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                          const begin = Offset(1.0, 0.0);
+                          const end = Offset.zero;
+                          const curve = Curves.easeInOut;
+
+                          var tween = Tween(begin: begin, end: end).chain(
+                            CurveTween(curve: curve),
+                          );
+
+                          return SlideTransition(
+                            position: animation.drive(tween),
+                            child: child,
+                          );
+                        },
+                      ),
+                    );
                   } else if (state is AuthStateError) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text(state.error)));
+                    floatingSnackBar(
+                      context: context,
+                      message: state.error,
+                      backgroundColor: Colors.redAccent,
+                    );
                   }
                 },
                 builder: (context, state) {
-                  if (state is AuthStateLoading) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
                   return Column(
                     children: <Widget>[
                       TextField(
@@ -95,43 +116,47 @@ class _NewUserPwResetPageState extends State<NewUserPwResetPage> {
                       ),
                       SizedBox(height: size.height * 0.05),
                       ElevatedButton(
-                        onPressed: () {
-                          if (currentPasswordController.text.isEmpty ||
-                              newPasswordController.text.isEmpty ||
-                              confirmPasswordController.text.isEmpty) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text('All fields are required'),
-                              ),
-                            );
-                            return;
-                          }
-                          if (currentPasswordController.text ==
-                              newPasswordController.text) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                    'New password cannot be the same as the current password'),
-                              ),
-                            );
-                            return;
-                          }
-                          if (newPasswordController.text ==
-                              confirmPasswordController.text) {
-                            context.read<AuthBloc>().add(
-                                  UpdatePasswordEvent(
-                                    currentPassword:
-                                        currentPasswordController.text,
-                                    newPassword: newPasswordController.text,
-                                  ),
-                                );
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                  content: Text('New passwords do not match')),
-                            );
-                          }
-                        },
+                        onPressed: state is AuthStateLoading
+                            ? null
+                            : () {
+                                if (currentPasswordController.text.isEmpty ||
+                                    newPasswordController.text.isEmpty ||
+                                    confirmPasswordController.text.isEmpty) {
+                                  floatingSnackBar(
+                                    context: context,
+                                    message: 'All fields are required',
+                                    backgroundColor: Colors.redAccent,
+                                  );
+                                  return;
+                                }
+                                if (currentPasswordController.text ==
+                                    newPasswordController.text) {
+                                  floatingSnackBar(
+                                    context: context,
+                                    message:
+                                        'New password cannot be the same as the current password',
+                                    backgroundColor: Colors.redAccent,
+                                  );
+                                  return;
+                                }
+                                if (newPasswordController.text ==
+                                    confirmPasswordController.text) {
+                                  context.read<AuthBloc>().add(
+                                        UpdatePasswordEvent(
+                                          currentPassword:
+                                              currentPasswordController.text,
+                                          newPassword:
+                                              newPasswordController.text,
+                                        ),
+                                      );
+                                } else {
+                                  floatingSnackBar(
+                                    context: context,
+                                    message: 'New passwords do not match',
+                                    backgroundColor: Colors.redAccent,
+                                  );
+                                }
+                              },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0),
@@ -155,15 +180,24 @@ class _NewUserPwResetPageState extends State<NewUserPwResetPage> {
                               ],
                             ),
                           ),
-                          padding: const EdgeInsets.all(0),
-                          child: const Text(
-                            "RESET PASSWORD",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          padding: const EdgeInsets.all(1),
+                          child: state is AuthStateLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    valueColor:
+                                        AlwaysStoppedAnimation<Color>(Colors.white),
+                                  ),
+                                )
+                              : const Text(
+                                  "RESET PASSWORD",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                       ),
                     ],

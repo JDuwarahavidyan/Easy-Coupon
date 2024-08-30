@@ -2,7 +2,8 @@ import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
-import 'package:easy_coupon/routes/route_names.dart';
+import 'package:easy_coupon/routes/routes.dart';
+import 'package:floating_snackbar/floating_snackbar.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -60,7 +61,7 @@ class LoginPage extends StatelessWidget {
             Positioned(
               top: size.height * 0.06,
               right: -40,
-              child: Container(
+              child: SizedBox(
                 width: size.width * 0.6,
                 child: Image.asset(
                   "assets/images/landing/main.png",
@@ -99,8 +100,11 @@ class LoginPage extends StatelessWidget {
                   // } else if (state is CanteenBAuthenticated) {
                   //   navigateWithAnimation(context, RouteNames.canteenB);
                   } else if (state is AuthStateError) {
-                    ScaffoldMessenger.of(context)
-                        .showSnackBar(SnackBar(content: Text(state.error)));
+                    floatingSnackBar(
+                      context:context,
+                      message: state.error,
+                      backgroundColor: Colors.redAccent,
+                    );
                   }
                 },
                 builder: (context, state) {
@@ -134,9 +138,10 @@ class LoginPage extends StatelessWidget {
                                 final password = passwordController.text;
 
                                 if (userName.isEmpty || password.isEmpty) {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(
-                                        content: Text('All fields are required')),
+                                  floatingSnackBar(
+                                    context: context,
+                                    message: 'All fields are required',
+                                    backgroundColor: Colors.redAccent,
                                   );
                                   return;
                                 }
