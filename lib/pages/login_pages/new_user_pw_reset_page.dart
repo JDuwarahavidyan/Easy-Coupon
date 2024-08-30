@@ -1,6 +1,5 @@
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/routes/routes.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:floating_snackbar/floating_snackbar.dart';
@@ -63,7 +62,7 @@ class _NewUserPwResetPageState extends State<NewUserPwResetPage> {
                       PageRouteBuilder(
                         transitionDuration: const Duration(seconds: 1),
                         pageBuilder: (context, animation, secondaryAnimation) =>
-                            LoginPage(), // Replace with your actual target page
+                            LoginPage(),
                         transitionsBuilder: (context, animation, secondaryAnimation, child) {
                           const begin = Offset(1.0, 0.0);
                           const end = Offset.zero;
