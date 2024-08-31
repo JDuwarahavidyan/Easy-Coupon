@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart'; // Import Cupertino icons
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 
-class Forget extends StatelessWidget {
-  const Forget({super.key});
+class PasswordEmailResetPage extends StatelessWidget {
+    const PasswordEmailResetPage({super.key});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

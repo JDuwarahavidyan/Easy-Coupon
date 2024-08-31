@@ -19,13 +19,12 @@ class TabIconData {
   }
 }
 
-class StudentHome extends StatefulWidget {
-  const StudentHome({super.key});
+class StudentHomeScreen extends StatefulWidget {
   @override
   _StudentHomeState createState() => _StudentHomeState();
 }
 
-class _StudentHomeState extends State<StudentHome>
+class _StudentHomeState extends State<StudentHomeScreen>
     with TickerProviderStateMixin {
   AnimationController? animationController;
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
