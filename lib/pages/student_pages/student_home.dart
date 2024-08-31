@@ -233,7 +233,7 @@ class _StudentHomeState extends State<StudentHome>
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 20), // Add spacing before the Lottie animation
+                                    SizedBox(height: 10), // Add spacing before the Lottie animation
                                     SizedBox(
                                       width: 250, // Set width for Lottie animation
                                       height: 250, // Set height for Lottie animation
