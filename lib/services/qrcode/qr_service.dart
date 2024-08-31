@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_coupon/exception/expceptions.dart';
 import 'package:easy_coupon/models/qr/qr_model.dart';
-
-import '../../exception/expceptions.dart';
 
 class QrCodeService {
   final CollectionReference _qrCodeCollection =
@@ -22,7 +21,7 @@ class QrCodeService {
       );
       await _qrCodeCollection.doc(id).set(newQrCode.toJson());
     } catch (e) {
-      throw CustomAuthException('Error creating qrcode: $e');
+      throw CustomException('Error creating qrcode: $e');
     }
   }
 
@@ -40,7 +39,7 @@ class QrCodeService {
       }
       return null;
     } catch (e) {
-      throw CustomAuthException('Error getting qrcode: $e');
+      throw CustomException('Error getting qrcode: $e');
     }
   }
 
@@ -48,7 +47,7 @@ class QrCodeService {
     try {
       await _qrCodeCollection.doc(qrCodeId).delete();
     } catch (e) {
-      throw CustomAuthException('Error deleting qrcode: $e');
+      throw CustomException('Error deleting qrcode: $e');
     }
   }
 
@@ -73,7 +72,7 @@ class QrCodeService {
         querySnapshot =
             await _qrCodeCollection.where("studentId", isEqualTo: uid).get();
       } else {
-        throw CustomAuthException('Invalid report type: $reportType');
+        throw CustomException('Invalid report type: $reportType');
       }
 
       final qrCodes = querySnapshot.docs
@@ -93,7 +92,7 @@ class QrCodeService {
         return true;
       }).toList();
     } catch (e) {
-      throw CustomAuthException('Error getting QR codes with filter: $e');
+      throw CustomException('Error getting QR codes with filter: $e');
     }
   }
 }

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_coupon/exception/expceptions.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_coupon/models/user/user_model.dart';
 
@@ -25,7 +26,7 @@ class FirebaseAuthService {
           .where('name', isEqualTo: username)
           .get();
       if (query.docs.isNotEmpty) {
-        throw CustomAuthException('The Username is already taken.');
+        throw CustomException('The Username is already taken.');
       }
 
       final UserCredential userCredential =
@@ -39,13 +40,15 @@ class FirebaseAuthService {
         final userModel = UserModel(
           id: user.uid,
           userName: username,
+          fullName:username,
           email: email,
-          createdAt: DateTime.now().toIso8601String(),
+          createdAt: DateTime.now(),
+          updatedAt: DateTime.now(),
           isFirstTime: true,
           role: role,
           studentCount: 30,
           canteenCount: 0,
-          profilePic: 'assets/nouser.png',
+          profilePic: "",
         );
         await _firebaseFirestore.collection('users').doc(user.uid).set(
               userModel.toJson(),
@@ -53,9 +56,9 @@ class FirebaseAuthService {
       }
       return user;
     } on FirebaseAuthException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     } on FirebaseException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     }
   }
 
@@ -69,7 +72,7 @@ class FirebaseAuthService {
       );
       return userCredential.user;
     } on FirebaseAuthException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     }
   }
 
@@ -80,11 +83,11 @@ class FirebaseAuthService {
           .where('userName', isEqualTo: username)
           .get();
       if (query.docs.isEmpty) {
-        throw CustomAuthException('No user found with this username.');
+        throw CustomException('No user found with this username.');
       }
       return (query.docs.first.data() as Map<String, dynamic>)['email'];
     } on FirebaseException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     }
   }
 
@@ -98,7 +101,7 @@ Future<UserModel> getUserDetails(String userId) async {
           await _firebaseFirestore.collection('users').doc(userId).get();
       return UserModel.fromJson(doc.data() as Map<String, dynamic>);
     } on FirebaseException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     }
   }
 
@@ -113,7 +116,7 @@ Future<UserModel> getUserDetails(String userId) async {
             .update({'isFirstTime': false});
       }
     } on FirebaseAuthException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     }
   }
 
@@ -124,7 +127,7 @@ Future<UserModel> getUserDetails(String userId) async {
           await _firebaseFirestore.collection('users').doc(user.uid).get();
       return doc.exists && doc['isFirstTime'] == true;
     } on FirebaseException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     }
   }
 
@@ -141,7 +144,7 @@ Future<void> validateAndUpdatePassword(
         await updatePassword(newPassword);
       }
     } on FirebaseAuthException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     }
   }
 
@@ -154,13 +157,13 @@ Future<void> validateAndUpdatePassword(
           .get();
 
       if (query.docs.isEmpty) {
-        throw CustomAuthException('No user found with this email.');
+        throw CustomException('No user found with this email.');
       }
 
       // Send password reset email
       await _firebaseAuth.sendPasswordResetEmail(email: email);
     } on FirebaseAuthException catch (e) {
-      throw CustomAuthException(e.message!);
+      throw CustomException(e.message!);
     }
   }
 }

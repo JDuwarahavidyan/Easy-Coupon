@@ -1,28 +1,34 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_coupon/exception/expceptions.dart';
 import 'package:easy_coupon/models/user/user_model.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class UserService {
   final CollectionReference _userCollection = FirebaseFirestore.instance.collection('users');
 
-  // Stream of users' real-time updates
   Stream<List<UserModel>> getUsersStream() {
     return _userCollection.snapshots().map((snapshot) => snapshot.docs
         .map((doc) => UserModel.fromJson(doc.data() as Map<String, dynamic>))
         .toList());
   }
 
-  Future<List<UserModel>> getUsers() async {
-    final snapshot = await FirebaseFirestore.instance.collection('users').get();
-    return snapshot.docs
-        .map((doc) => UserModel.fromJson(doc.data()))
-        .toList();
+  Future<UserModel?> getUser(String userId) async {
+    try {
+      DocumentSnapshot doc = await _userCollection.doc(userId).get();
+      if (doc.exists) {
+        return UserModel.fromJson(doc.data() as Map<String, dynamic>);
+      }
+      return null;
+    } catch (e) {
+      throw CustomException('Error getting user: $e');
+    }
   }
 
   Future<void> updateUser(UserModel user) async {
     try {
       await _userCollection.doc(user.id).update(user.toJson());
     } catch (e) {
-      throw Exception('Error updating user: $e');
+      throw CustomException('Error updating user: $e');
     }
   }
 
@@ -30,28 +36,100 @@ class UserService {
     try {
       await _userCollection.doc(userId).delete();
     } catch (e) {
-      throw Exception('Error deleting user: $e');
+      throw CustomException('Error deleting user: $e');
     }
   }
 
   Future<void> updateCount(int val, String userId) async {
     final docRef = _userCollection.doc(userId);
-    // Get the document snapshot
-    final snapshot = await docRef.get();
 
-    if (snapshot.exists) {
-      final data = snapshot.data();
-      final currentCount = (data as Map<String, dynamic>)['studentCount'];
+    try {
+      final snapshot = await docRef.get();
 
-      // Check if currentCount is less than 30
-      if (currentCount != null && currentCount <= 30 && currentCount + val > 0) {
-        // Update the count field
-        await docRef.update({'studentCount': FieldValue.increment(-val)});
+      if (snapshot.exists) {
+        final data = snapshot.data() as Map<String, dynamic>;
+        final currentCount = data['studentCount'];
+
+        if (currentCount != null && currentCount <= 30 && currentCount + val > 0) {
+          await docRef.update({'studentCount': FieldValue.increment(-val)});
+        } else {
+          throw CustomException('Reached maximum token limit');
+        }
       } else {
-        throw Exception('Reached maximum token');
+        throw CustomException('Document does not exist');
       }
-    } else {
-      throw Exception('Document does not exist');
+    } catch (e) {
+      throw CustomException('Error updating count: $e');
+    }
+  }
+
+  Future<void> resetStudentCount(String userId) async {
+    try {
+      await _userCollection.doc(userId).update({'studentCount': 30});
+    } catch (e) {
+      throw CustomException('Error resetting student count: $e');
+    }
+  }
+
+  void scannedData(Barcode result, int val, String userId) {
+    try {
+      updateCount(val, userId);
+    } catch (e) {
+      throw CustomException('Error processing scanned data: $e');
+    }
+  }
+
+   Future<String> generateQRData(String userId) async {
+    try {
+      final userDoc = await _userCollection.doc(userId).get();
+      if (userDoc.exists) {
+        final userID = (userDoc.data() as Map<String, dynamic>)['id'] ?? 'unknown';
+        return userID;
+      } else {
+        throw CustomException('User not found');
+      }
+    } catch (e) {
+      throw CustomException('Failed to generate QR data: $e');
+    }
+  }
+
+  Future<String?> getUserRole(String userId) async {
+    try {
+      DocumentSnapshot doc = await _userCollection.doc(userId).get();
+      if (doc.exists) {
+        return (doc.data() as Map<String, dynamic>)['role'] as String?;
+      }
+      return null;
+    } catch (e) {
+      throw CustomException('Error getting user role: $e');
+    }
+  }
+
+   Future<void> updateCanteenCount(int val, String canteenUserId) async {
+    try {
+      final userDoc = _userCollection.doc(canteenUserId);
+      await userDoc.update({
+        'canteenCount': FieldValue.increment(val),
+      });
+    } catch (e) {
+      throw CustomException('Failed to update canteen count: $e');
+    }
+  }
+
+   Future<String?> fetchCanteenUserName(String userId) async {
+    try {
+      DocumentSnapshot doc = await _userCollection.doc(userId).get();
+      if (doc.exists) {
+        return (doc.data() as Map<String, dynamic>)['userName'] as String;
+      }
+      return null;
+    } catch (e) {
+      throw CustomException('Error getting user name: $e');
     }
   }
 }
+
+
+
+
+  
