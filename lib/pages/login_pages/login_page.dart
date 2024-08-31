@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
               case RouteNames.resetPW:
                 return const NewUserPwResetPage();
               case RouteNames.student:
-                return StudentHomeScreen();
+                return StudentHome();
               // case RouteNames.canteenA:
               //   return const CanteenAHomeScreen();
               // case RouteNames.canteenB:
