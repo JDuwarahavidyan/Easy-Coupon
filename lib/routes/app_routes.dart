@@ -1,10 +1,11 @@
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
+import 'package:easy_coupon/pages/login_pages/register.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/routes/route_names.dart';
-import 'package:easy_coupon/pages/student_pages/report.dart';
+import 'package:easy_coupon/pages/student_pages/student_report.dart';
 
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -22,7 +23,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => PasswordEmailResetPage ());
 
       case RouteNames.home:
-        return MaterialPageRoute(builder: (_) => StudentHomeScreen());
+        return MaterialPageRoute(builder: (_) => StudentHome());
 
       case RouteNames.report:
         return MaterialPageRoute(builder: (_) => Student_report());
