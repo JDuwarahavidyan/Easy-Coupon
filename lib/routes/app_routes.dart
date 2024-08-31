@@ -2,6 +2,7 @@ import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
+import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/pages/student_pages/report.dart';
@@ -19,7 +20,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => LoginPage());
 
       case RouteNames.resetPWEmail:
-        return MaterialPageRoute(builder: (_) => PasswordEmailResetPage ());
+        return MaterialPageRoute(builder: (_) => PasswordEmailResetPage());
 
       case RouteNames.home:
         return MaterialPageRoute(builder: (_) => StudentHomeScreen());
@@ -31,13 +32,16 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => QrPage());
 
       case RouteNames.profile:
-        return MaterialPageRoute(builder: (_) => ProfileScreen()); 
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
 
       case RouteNames.register:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
 
-       case RouteNames.updtprofile:
+      case RouteNames.updtprofile:
         return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
+
+      case RouteNames.abtus:
+        return MaterialPageRoute(builder: (_) => AboutUs());
 
       case RouteNames.confirm:
         return MaterialPageRoute(

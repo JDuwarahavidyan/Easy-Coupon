@@ -138,7 +138,7 @@ class ProfileScreen extends StatelessWidget {
                       const Divider(),
                       const SizedBox(height: 10),
                       ProfileMenuWidget(
-                        title: "Information",
+                        title: "About Us",
                         icon: LineAwesomeIcons.info,
                         onPress: () {},
                       ),
