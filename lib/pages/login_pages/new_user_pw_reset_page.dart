@@ -21,6 +21,7 @@ class _NewUserPwResetPageState extends State<NewUserPwResetPage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+        resizeToAvoidBottomInset: false,
       body: Background(
         child: Stack(
           children: <Widget>[
@@ -210,3 +211,15 @@ class _NewUserPwResetPageState extends State<NewUserPwResetPage> {
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+

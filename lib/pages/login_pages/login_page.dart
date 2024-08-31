@@ -24,7 +24,7 @@ class LoginPage extends StatelessWidget {
               case RouteNames.resetPW:
                 return const NewUserPwResetPage();
               case RouteNames.student:
-                return StudentHomeScreen();
+                return StudentHome();
               // case RouteNames.canteenA:
               //   return const CanteenAHomeScreen();
               // case RouteNames.canteenB:
@@ -55,6 +55,7 @@ class LoginPage extends StatelessWidget {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false, // Prevent layout from resizing when the keyboard appears
       body: Background(
         child: Stack(
           children: <Widget>[

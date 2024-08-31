@@ -25,12 +25,12 @@ void main() async {
   // Make the app full screen
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: AppColors.textColor,
+    statusBarColor: Color(0xFFFFFFFF),
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness:
         !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
-    systemNavigationBarColor: AppColors.textColor,
-    systemNavigationBarDividerColor: AppColors.textColor,
+    systemNavigationBarColor: Color(0xFFFFFFFF),
+    systemNavigationBarDividerColor: Color(0xFFFFFFFF),
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
 
