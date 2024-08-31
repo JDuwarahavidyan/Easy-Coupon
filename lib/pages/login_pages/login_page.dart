@@ -55,6 +55,7 @@ class LoginPage extends StatelessWidget {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false, // Prevent layout from resizing when the keyboard appears
       body: Background(
         child: Stack(
           children: <Widget>[
