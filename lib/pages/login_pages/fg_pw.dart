@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 
 class Forget extends StatelessWidget {
+  const Forget({super.key});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -12,11 +13,12 @@ class Forget extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Positioned(
-              top: size.height * 0.05,  // Adjusted as necessary
-              left: 20,  // Adjusted as necessary
+              top: size.height * 0.05, // Adjusted as necessary
+              left: 20, // Adjusted as necessary
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context); // Navigate back to the previous screen
+                  Navigator.pop(
+                      context); // Navigate back to the previous screen
                 },
                 child: Icon(
                   CupertinoIcons.back, // Cupertino back icon
@@ -26,8 +28,8 @@ class Forget extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: size.height * 0.1,    // Move the image slightly below the top
-              right: -20,   // Move the image further to the right
+              top: size.height * 0.1, // Move the image slightly below the top
+              right: -20, // Move the image further to the right
               child: Container(
                 width: size.width * 0.6, // Adjust width as needed
                 child: Image.asset(
@@ -37,8 +39,8 @@ class Forget extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: size.height * 0.40,   // Move the text upwards
-              left: 40,  // Align text to the left
+              top: size.height * 0.40, // Move the text upwards
+              left: 40, // Align text to the left
               child: Container(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -53,14 +55,15 @@ class Forget extends StatelessWidget {
               ),
             ),
             Positioned(
-              top: size.height * 0.5,  // Adjust position to place below the title
+              top:
+                  size.height * 0.5, // Adjust position to place below the title
               left: 40,
               right: 40,
               child: Column(
                 children: <Widget>[
                   TextField(
                     decoration: InputDecoration(
-                      labelText: "Enter the Email",  // Corrected typo
+                      labelText: "Enter the Email", // Corrected typo
                     ),
                   ),
                   SizedBox(height: size.height * 0.05),

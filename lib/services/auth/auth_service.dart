@@ -73,12 +73,13 @@ class FirebaseAuthService {
     }
   }
 
-   Future<String> getEmailFromUsername(String username) async {
+  Future<String> getEmailFromUsername(String username) async {
     try {
       final QuerySnapshot query = await _firebaseFirestore
           .collection('users')
           .where('userName', isEqualTo: username)
           .get();
+
       if (query.docs.isEmpty) {
         throw CustomAuthException('No user found with this username.');
       }
@@ -92,7 +93,7 @@ class FirebaseAuthService {
     await _firebaseAuth.signOut();
   }
 
-Future<UserModel> getUserDetails(String userId) async {
+  Future<UserModel> getUserDetails(String userId) async {
     try {
       final DocumentSnapshot doc =
           await _firebaseFirestore.collection('users').doc(userId).get();
@@ -102,7 +103,7 @@ Future<UserModel> getUserDetails(String userId) async {
     }
   }
 
-   Future<void> updatePassword(String newPassword) async {
+  Future<void> updatePassword(String newPassword) async {
     try {
       final currentUser = _firebaseAuth.currentUser;
       if (currentUser != null) {
@@ -117,7 +118,6 @@ Future<UserModel> getUserDetails(String userId) async {
     }
   }
 
-
   Future<bool> isFirstTimeLogin(User user) async {
     try {
       final doc =
@@ -128,7 +128,7 @@ Future<UserModel> getUserDetails(String userId) async {
     }
   }
 
-Future<void> validateAndUpdatePassword(
+  Future<void> validateAndUpdatePassword(
       String currentPassword, String newPassword) async {
     try {
       final user = _firebaseAuth.currentUser;
@@ -145,7 +145,7 @@ Future<void> validateAndUpdatePassword(
     }
   }
 
- Future<void> sendPasswordResetEmail(String email) async {
+  Future<void> sendPasswordResetEmail(String email) async {
     try {
       // Check if the email exists in Firestore
       final QuerySnapshot query = await _firebaseFirestore

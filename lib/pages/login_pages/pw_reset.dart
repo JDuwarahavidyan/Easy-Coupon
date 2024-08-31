@@ -3,6 +3,7 @@ import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:easy_coupon/pages/login_pages/login_page.dart';
 
 class PwReset extends StatelessWidget {
+  const PwReset({super.key});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

@@ -20,6 +20,7 @@ class TabIconData {
 }
 
 class StudentHome extends StatefulWidget {
+  const StudentHome({super.key});
   @override
   _StudentHomeState createState() => _StudentHomeState();
 }

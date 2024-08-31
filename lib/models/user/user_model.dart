@@ -34,7 +34,7 @@ class UserModel extends Equatable {
       role: json['role'] as String,
       studentCount: json['studentCount'] ?? 30,
       canteenCount: json['canteenCount'] ?? 0,
-      profilePic: json['profilePic'] ?? '',
+      profilePic: json['profilePic'] as String?,
     );
   }
 

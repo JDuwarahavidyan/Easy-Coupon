@@ -36,6 +36,17 @@ class AppRoutes {
       case RouteNames.updtprofile:
         return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
 
+      case RouteNames.pwreset:
+        return MaterialPageRoute(builder: (_) => PwReset());
+      
+      case RouteNames.home:
+        return MaterialPageRoute(builder: (_) => StudentHome());
+
+      case RouteNames.canteen:
+        return MaterialPageRoute(builder: (_) => StudentHome());//need to change
+
+      
+
       case RouteNames.confirm:
         return MaterialPageRoute(
             builder: (_) => ConfirmationPage(

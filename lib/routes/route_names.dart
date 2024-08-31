@@ -9,4 +9,6 @@ class RouteNames {
   static const String qr = '/qr';
   static const String profile = '/profile';
   static const String updtprofile = '/updtprofile';
+  static const String pwreset = '/pwreset';
+  static const String canteen = '/canteen';
 }
