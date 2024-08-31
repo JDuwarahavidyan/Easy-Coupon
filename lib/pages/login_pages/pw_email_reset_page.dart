@@ -118,7 +118,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 
-class Forget extends StatelessWidget {
+class PasswordEmailResetPage extends StatelessWidget {
+    const PasswordEmailResetPage({super.key});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

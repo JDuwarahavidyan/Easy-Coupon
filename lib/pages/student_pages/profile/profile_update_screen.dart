@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:easy_coupon/widgets/components/background.dart';
-import 'package:easy_coupon/pages/login_pages/fg_pw.dart';
+import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
@@ -89,7 +89,7 @@ class UpdateProfileScreen extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => Forget()),
+                            MaterialPageRoute(builder: (context) => PasswordEmailResetPage ()),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF50623A),

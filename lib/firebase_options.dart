@@ -41,48 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyD7P5lsM1llRHBGnpnGys9HntDBZHzffyk',
-    appId: '1:126557220646:web:25e57abe9350d66a0d5be7',
-    messagingSenderId: '126557220646',
-    projectId: 'easycoupon-38a26',
-    authDomain: 'easycoupon-38a26.firebaseapp.com',
-    storageBucket: 'easycoupon-38a26.appspot.com',
-    measurementId: 'G-XYML26SB64',
+    apiKey: 'AIzaSyDIgRNkXVzxQ21bRV-QDtykA_uzJ8mXBho',
+    appId: '1:812573739976:web:21822ab17b3446d983cefd',
+    messagingSenderId: '812573739976',
+    projectId: 'easy-coupon-bfc60',
+    authDomain: 'easy-coupon-bfc60.firebaseapp.com',
+    storageBucket: 'easy-coupon-bfc60.appspot.com',
+    measurementId: 'G-X81RHZYC7J',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyC4bCv4tFqknt3oG2mjijTERNEZtsEfXpA',
-    appId: '1:126557220646:android:cf6b337e22cdfe6a0d5be7',
-    messagingSenderId: '126557220646',
-    projectId: 'easycoupon-38a26',
-    storageBucket: 'easycoupon-38a26.appspot.com',
+    apiKey: 'AIzaSyCs-HlQlpdRQdJHK-AU3VxHjLS3Ewd-4OI',
+    appId: '1:812573739976:android:fa2d140a908c179983cefd',
+    messagingSenderId: '812573739976',
+    projectId: 'easy-coupon-bfc60',
+    storageBucket: 'easy-coupon-bfc60.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBJcEIUl_8brujQcHyao89KlhBfyEmulyc',
-    appId: '1:126557220646:ios:811e561fb10a29a20d5be7',
-    messagingSenderId: '126557220646',
-    projectId: 'easycoupon-38a26',
-    storageBucket: 'easycoupon-38a26.appspot.com',
+    apiKey: 'AIzaSyDJGAh2txqFUTH6HnEvGJy2SiqJDTheWvs',
+    appId: '1:812573739976:ios:fb5832de5a1c3ede83cefd',
+    messagingSenderId: '812573739976',
+    projectId: 'easy-coupon-bfc60',
+    storageBucket: 'easy-coupon-bfc60.appspot.com',
     iosBundleId: 'com.example.easyCoupon',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBJcEIUl_8brujQcHyao89KlhBfyEmulyc',
-    appId: '1:126557220646:ios:811e561fb10a29a20d5be7',
-    messagingSenderId: '126557220646',
-    projectId: 'easycoupon-38a26',
-    storageBucket: 'easycoupon-38a26.appspot.com',
+    apiKey: 'AIzaSyDJGAh2txqFUTH6HnEvGJy2SiqJDTheWvs',
+    appId: '1:812573739976:ios:fb5832de5a1c3ede83cefd',
+    messagingSenderId: '812573739976',
+    projectId: 'easy-coupon-bfc60',
+    storageBucket: 'easy-coupon-bfc60.appspot.com',
     iosBundleId: 'com.example.easyCoupon',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyD7P5lsM1llRHBGnpnGys9HntDBZHzffyk',
-    appId: '1:126557220646:web:68f424aa579f6eed0d5be7',
-    messagingSenderId: '126557220646',
-    projectId: 'easycoupon-38a26',
-    authDomain: 'easycoupon-38a26.firebaseapp.com',
-    storageBucket: 'easycoupon-38a26.appspot.com',
-    measurementId: 'G-VFVFFHYPFW',
+    apiKey: 'AIzaSyDIgRNkXVzxQ21bRV-QDtykA_uzJ8mXBho',
+    appId: '1:812573739976:web:0289f056c1138f9a83cefd',
+    messagingSenderId: '812573739976',
+    projectId: 'easy-coupon-bfc60',
+    authDomain: 'easy-coupon-bfc60.firebaseapp.com',
+    storageBucket: 'easy-coupon-bfc60.appspot.com',
+    measurementId: 'G-RNXL1MQGL0',
   );
+
 }

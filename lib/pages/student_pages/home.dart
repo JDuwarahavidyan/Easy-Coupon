@@ -21,17 +21,17 @@ class TabIconData {
   }
 }
 
+
 // ignore: camel_case_types
-class StudentHome extends StatefulWidget {
-  const StudentHome({super.key, AnimationController? animationController});
+class StudentHomeScreen extends StatefulWidget {
+  const StudentHomeScreen({super.key, AnimationController? animationController});
 
   @override
   // ignore: library_private_types_in_public_api
   _StudentHomeState createState() => _StudentHomeState();
 }
 
-// ignore: camel_case_types
-class _StudentHomeState extends State<StudentHome>
+class _StudentHomeState extends State<StudentHomeScreen>
     with TickerProviderStateMixin {
   AnimationController? animationController;
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -271,7 +271,7 @@ class _StudentHomeState extends State<StudentHome>
                 }
                 setState(() {
                   tabBody =
-                      StudentHome(animationController: animationController);
+                      StudentHomeScreen(animationController: animationController);
                 });
               });
             } else if (index == 1) {

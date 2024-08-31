@@ -103,7 +103,7 @@ class _Student_reportState extends State<Student_report>
         duration: const Duration(milliseconds: 600), vsync: this);
 
     // Initial tab body for the report page
-    tabBody = StudentHome(animationController: animationController);
+    tabBody = StudentHomeScreen(animationController: animationController);
 
     // Initialize headers for the table
     headers = [
@@ -424,7 +424,7 @@ class _Student_reportState extends State<Student_report>
                 }
                 setState(() {
                   tabBody =
-                      StudentHome(animationController: animationController);
+                      StudentHomeScreen(animationController: animationController);
                 });
               });
             } else if (index == 1) {
