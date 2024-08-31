@@ -464,7 +464,7 @@ import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:expandable_datatable/expandable_datatable.dart';
-import 'package:easy_coupon/widgets/components/background.dart';
+import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 
 class TabIconData {

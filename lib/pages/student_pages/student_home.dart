@@ -1,8 +1,9 @@
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_coupon/widgets/components/background.dart';
+import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/widgets/common/segment.dart'; // Import your DonutChart widget
 import 'package:flutter/cupertino.dart'; // Import Cupertino icons
 
@@ -23,15 +24,15 @@ class TabIconData {
 
 
 // ignore: camel_case_types
-class StudentHomeScreen extends StatefulWidget {
-  const StudentHomeScreen({super.key, AnimationController? animationController});
+class StudentHome extends StatefulWidget {
+  const StudentHome({super.key, AnimationController? animationController});
 
   @override
   // ignore: library_private_types_in_public_api
   _StudentHomeState createState() => _StudentHomeState();
 }
 
-class _StudentHomeState extends State<StudentHomeScreen>
+class _StudentHomeState extends State<StudentHome>
     with TickerProviderStateMixin {
   AnimationController? animationController;
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -271,7 +272,7 @@ class _StudentHomeState extends State<StudentHomeScreen>
                 }
                 setState(() {
                   tabBody =
-                      StudentHomeScreen(animationController: animationController);
+                      StudentHome(animationController: animationController);
                 });
               });
             } else if (index == 1) {

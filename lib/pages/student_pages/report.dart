@@ -1,11 +1,12 @@
 import 'dart:ui'; // Import for BackdropFilter
-import 'package:easy_coupon/pages/student_pages/home.dart';
+import 'package:easy_coupon/pages/pages.dart';
+import 'package:easy_coupon/pages/student_pages/student_home.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:expandable_datatable/expandable_datatable.dart';
-import 'package:easy_coupon/widgets/components/background.dart';
+import 'package:easy_coupon/widgets/common/background.dart';
 
 class TabIconData {
   final IconData icon;
@@ -103,7 +104,7 @@ class _Student_reportState extends State<Student_report>
         duration: const Duration(milliseconds: 600), vsync: this);
 
     // Initial tab body for the report page
-    tabBody = StudentHomeScreen(animationController: animationController);
+    tabBody = StudentHome(animationController: animationController);
 
     // Initialize headers for the table
     headers = [
@@ -424,7 +425,7 @@ class _Student_reportState extends State<Student_report>
                 }
                 setState(() {
                   tabBody =
-                      StudentHomeScreen(animationController: animationController);
+                      StudentHome(animationController: animationController);
                 });
               });
             } else if (index == 1) {

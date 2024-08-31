@@ -70,7 +70,7 @@ class _DonutChartState extends State<DonutChart> {
                   Text(
                     '${30 - currentValue}',  // Display remaining coupons
                     style: const TextStyle(
-                      fontSize: 30,
+                      fontSize: 90,
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF50623A),
                     ),

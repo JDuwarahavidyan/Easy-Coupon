@@ -1,4 +1,7 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class Background extends StatelessWidget {
   final Widget child;
@@ -19,7 +22,7 @@ class Background extends StatelessWidget {
         alignment: Alignment.center,
         children: <Widget>[
           Positioned(
-            top: 0,
+           top: 0,
             right: 0,
             child: Image.asset(
               "assets/images/landing/top1.png",
@@ -43,10 +46,10 @@ class Background extends StatelessWidget {
             ),
           ),
           Positioned(
-           bottom: 0,
+            bottom: 0,
             right: 0,
             child: Image.asset(
-              "assets/images/landing/bottom2.png",
+              "assets/images/landing/bottom1.png",
               width: size.width,
             ),
           ),
@@ -54,7 +57,7 @@ class Background extends StatelessWidget {
             bottom: 0,
             right: 0,
             child: Image.asset(
-              "assets/images/landing/bottom1.png",
+              "assets/images/landing/bottom_2.png",
               width: size.width,
             ),
           ),
