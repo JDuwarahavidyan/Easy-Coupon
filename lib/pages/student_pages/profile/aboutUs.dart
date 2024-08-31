@@ -1,7 +1,4 @@
-import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
-import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/components/background.dart'; // Import the Background widget

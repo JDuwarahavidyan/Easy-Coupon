@@ -19,25 +19,46 @@ class ProfileScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor:
             Colors.transparent, // Ensure transparency to see the background
-        appBar: AppBar(
-          backgroundColor: Color(0xFFDBE7C9),
-          title: Text(
-            "Settings",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF294B29),
-              fontSize: 25,
-            ),
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(isDark ? LineAwesomeIcons.sun : LineAwesomeIcons.moon),
-            ),
-          ],
-        ),
+
         body: Column(
           children: [
+            Container(
+              padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top), // For status bar
+              decoration: BoxDecoration(
+                color: Color(0xFFDBE7C9),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    offset: Offset(0, 2),
+                    blurRadius: 4,
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0, vertical: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Text(
+                      "Settings",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF294B29),
+                        fontSize: 25,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(isDark
+                          ? LineAwesomeIcons.sun
+                          : LineAwesomeIcons.moon),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
