@@ -1,7 +1,7 @@
+import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_coupon/widgets/components/background.dart'; // Import the Background widget
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart'; // Import the BottomNavigationBar widget
 
 class AboutUs extends StatelessWidget {
@@ -37,7 +37,7 @@ class AboutUs extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       "About Us",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class AboutUs extends StatelessWidget {
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: EdgeInsets.all(16.0), // tDefaultSize
+                  padding: const EdgeInsets.all(16.0), // tDefaultSize
                   child: Column(
                     children: [
                       Stack(
