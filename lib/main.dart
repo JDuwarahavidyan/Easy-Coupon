@@ -26,12 +26,12 @@ void main() async {
   // Make the app full screen
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-    statusBarColor: AppColors.textColor,
+    statusBarColor: Color.fromARGB(255, 255, 255, 255),
     statusBarIconBrightness: Brightness.dark,
     statusBarBrightness:
         !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
-    systemNavigationBarColor: AppColors.textColor,
-    systemNavigationBarDividerColor: AppColors.textColor,
+    systemNavigationBarColor: const Color.fromARGB(255, 255, 255, 255),
+    systemNavigationBarDividerColor: const Color.fromARGB(255, 255, 255, 255),
     systemNavigationBarIconBrightness: Brightness.dark,
   ));
 
@@ -79,7 +79,7 @@ class MyApp extends StatelessWidget {
               theme: themeProvider.themeData.copyWith(
                 scaffoldBackgroundColor: const Color(0xFFFFFFFF),
               ),
-              initialRoute: RouteNames.home,
+              initialRoute: RouteNames.splash,
               onGenerateRoute: AppRoutes.generateRoute,
               builder: (context, child) {
                 return SafeArea(

@@ -255,7 +255,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     Size size = MediaQuery.of(context).size;
 
     return Background(
@@ -273,10 +273,10 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           actions: [
-            IconButton(
-              onPressed: () {},
-              icon: Icon(isDark ? LineAwesomeIcons.sun : LineAwesomeIcons.moon),
-            ),
+            // IconButton(
+            //   onPressed: () {},
+            //   icon: Icon(isDark ? LineAwesomeIcons.sun : LineAwesomeIcons.moon),
+            // ),
           ],
         ),
         body: Column(
