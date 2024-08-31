@@ -1,6 +1,6 @@
 import 'dart:ui'; // Import for BackdropFilter
+import 'package:easy_coupon/pages/student_pages/home.dart';
 import 'package:flutter/material.dart';
-import 'my_diary/my_diary_screen.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
@@ -103,7 +103,7 @@ class _Student_reportState extends State<Student_report>
         duration: const Duration(milliseconds: 600), vsync: this);
 
     // Initial tab body for the report page
-    tabBody = MyDiaryScreen(animationController: animationController);
+    tabBody = StudentHome(animationController: animationController);
 
     // Initialize headers for the table
     headers = [
@@ -424,7 +424,7 @@ class _Student_reportState extends State<Student_report>
                 }
                 setState(() {
                   tabBody =
-                      MyDiaryScreen(animationController: animationController);
+                      StudentHome(animationController: animationController);
                 });
               });
             } else if (index == 1) {

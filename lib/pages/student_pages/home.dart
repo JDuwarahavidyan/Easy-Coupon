@@ -1,5 +1,5 @@
+import 'package:easy_coupon/pages/student_pages/report.dart';
 import 'package:flutter/material.dart';
-import 'my_diary/my_diary_screen.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/components/background.dart';
@@ -23,7 +23,7 @@ class TabIconData {
 
 // ignore: camel_case_types
 class StudentHome extends StatefulWidget {
-  const StudentHome({super.key});
+  const StudentHome({super.key, AnimationController? animationController});
 
   @override
   // ignore: library_private_types_in_public_api
@@ -55,7 +55,7 @@ class _StudentHomeState extends State<StudentHome>
         duration: const Duration(milliseconds: 600), vsync: this);
 
     // Initial tab body for the report page
-    tabBody = MyDiaryScreen(animationController: animationController);
+    // tabBody = MyDiaryScreen(animationController: animationController);
   }
 
   @override
@@ -271,7 +271,7 @@ class _StudentHomeState extends State<StudentHome>
                 }
                 setState(() {
                   tabBody =
-                      MyDiaryScreen(animationController: animationController);
+                      StudentHome(animationController: animationController);
                 });
               });
             } else if (index == 1) {
@@ -280,7 +280,7 @@ class _StudentHomeState extends State<StudentHome>
                   return;
                 }
                 tabBody =
-                    StudentHome(); // Switch to the report screen itself
+                    Student_report(); // Switch to the report screen itself
               });
             } else if (index == 2) {
               animationController?.reverse().then<dynamic>((data) {
@@ -303,3 +303,11 @@ class _StudentHomeState extends State<StudentHome>
     return true;
   }
 }
+
+
+
+
+
+
+
+
