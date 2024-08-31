@@ -4,7 +4,7 @@ import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/routes/route_names.dart';
-import 'package:easy_coupon/pages/student_pages/report.dart';
+import 'package:easy_coupon/pages/student_pages/student_report.dart';
 
 class AppRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {

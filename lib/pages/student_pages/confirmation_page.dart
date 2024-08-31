@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:easy_coupon/pages/student_pages/home.dart';
+import 'package:easy_coupon/pages/student_pages/student_home.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
