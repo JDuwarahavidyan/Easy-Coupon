@@ -71,10 +71,10 @@ class AuthRepository {
 
   Future<User> signInWithUsernameAndPassword(
       String username, String password) async {
-    //final email = await _firebaseAuthService.getEmailFromUsername(username);
+    final email = await _firebaseAuthService.getEmailFromUsername(username);
 
-    await _firebaseAuthService.signInWithEmailAndPassword(username, password);
-    print('login');
+    await _firebaseAuthService.signInWithEmailAndPassword(email, password);
+
     final user = _firebaseAuthService.getCurrentUser();
     await _saveSession(user!);
     return user;
