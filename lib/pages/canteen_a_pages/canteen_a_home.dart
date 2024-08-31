@@ -8,20 +8,20 @@ import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/widgets/common/segment_c.dart'; // Import your DonutChart widget
 import 'package:flutter/cupertino.dart'; // Import Cupertino icons
 
-class TabIconData {
-  final IconData icon;
-  bool isSelected;
+// class TabIconData {
+//   final IconData icon;
+//   bool isSelected;
 
-  TabIconData(this.icon, this.isSelected);
+//   TabIconData(this.icon, this.isSelected);
 
-  static List<TabIconData> get tabIconsList {
-    return [
-      TabIconData(Icons.home, true),
-      TabIconData(Icons.report, false),
-      TabIconData(Icons.settings, false),
-    ];
-  }
-}
+//   static List<TabIconData> get tabIconsList {
+//     return [
+//       TabIconData(Icons.home, true),
+//       TabIconData(Icons.report, false),
+//       TabIconData(Icons.settings, false),
+//     ];
+//   }
+// }
 
 
 // ignore: camel_case_types
@@ -36,22 +36,20 @@ class CanteenAHome extends StatefulWidget {
 class _CanteenAHomeState extends State<CanteenAHome>
     with TickerProviderStateMixin {
   AnimationController? animationController;
-  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
+  //List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   Widget tabBody = Container(
     color: Colors.white,
   );
-  List<DateTime?> _dates = [DateTime.now()];
-  bool _showTable = false;
-  int _selectedCoupons = 1; // Variable to track the selected number of coupons
+  // List<DateTime?> _dates = [DateTime.now()];
+  // bool _showTable = false;
+  // int _selectedCoupons = 1; // Variable to track the selected number of coupons
 
   @override
   void initState() {
     super.initState();
 
-    tabIconsList.forEach((TabIconData tab) {
-      tab.isSelected = false;
-    });
-    tabIconsList[0].isSelected = true;
+    
+    //tabIconsList[0].isSelected = true;
 
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
@@ -140,64 +138,7 @@ class _CanteenAHomeState extends State<CanteenAHome>
                                     ),
                                     SizedBox(height: 20), // Add spacing before the spinbox
                                     Center(
-                                      // child: Container(
-                                      //   width: constraints.maxWidth, // Set the width to match the text container
-                                      //   decoration: BoxDecoration(
-                                      //     color: Color(0xFF789461), // Green background color
-                                      //     borderRadius: BorderRadius.circular(15.0),
-                                      //   ),
-                                      //   padding: EdgeInsets.all(8.0), // Reduced padding to decrease height
-                                      //   // child: Column(
-                                      //     // children: [
-                                      //     //   Text(
-                                      //     //     'Select number of coupons',
-                                      //     //     style: TextStyle(
-                                      //     //       fontSize: 16,
-                                      //     //       fontWeight: FontWeight.bold,
-                                      //     //       color: Colors.black, // Text color is black
-                                      //     //     ),
-                                      //     //   ),
-                                      //     //   SizedBox(height: 5), // Reduced height between the text and spinbox
-                                      //     //   Row(
-                                      //     //     mainAxisAlignment: MainAxisAlignment.center,
-                                      //     //     children: [
-                                      //     //       IconButton(
-                                      //     //         iconSize: 30, // Decreased icon size to reduce overall height
-                                      //     //         icon: Icon(Icons.remove, color: Colors.white), // White icons for better visibility
-                                      //     //         onPressed: () {
-                                      //     //           setState(() {
-                                      //     //             if (_selectedCoupons > 1) {
-                                      //     //               _selectedCoupons--;
-                                      //     //             }
-                                      //     //           });
-                                      //     //         },
-                                      //     //       ),
-                                      //     //       SizedBox(width: 15), // Reduced width between the icon and number
-                                      //     //       Text(
-                                      //     //         '$_selectedCoupons',
-                                      //     //         style: TextStyle(
-                                      //     //           fontSize: 24,
-                                      //     //           fontWeight: FontWeight.bold,
-                                      //     //           color: Colors.white, // Text color is white for contrast
-                                      //     //         ),
-                                      //     //       ),
-                                      //     //       SizedBox(width: 15), // Reduced width between the number and icon
-                                      //     //       IconButton(
-                                      //     //         iconSize: 30, // Decreased icon size to reduce overall height
-                                      //     //         icon: Icon(Icons.add, color: Colors.white), // White icons for better visibility
-                                      //     //         onPressed: () {
-                                      //     //           setState(() {
-                                      //     //             if (_selectedCoupons < 3) {
-                                      //     //               _selectedCoupons++;
-                                      //     //             }
-                                      //     //           });
-                                      //     //         },
-                                      //     //       ),
-                                      //     //     ],
-                                      //     //   ),
-                                      //     // ],
-                                      //   // ),
-                                      // ),
+                                      
                                     ),
                                     SizedBox(height: 20), // Add spacing before the "SCAN ME" button
                                     Center(
@@ -259,45 +200,7 @@ class _CanteenAHomeState extends State<CanteenAHome>
             ),
           ],
         ),
-        bottomNavigationBar: BottomBarView(
-          currentIndex: tabIconsList.indexWhere((tab) => tab.isSelected),
-          onTabSelected: (int index) {
-            setState(() {
-              for (int i = 0; i < tabIconsList.length; i++) {
-                tabIconsList[i].isSelected = i == index;
-              }
-            });
-
-            if (index == 0) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody =
-                      StudentHome(animationController: animationController);
-                });
-              });
-            } else if (index == 1) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                tabBody =
-                    Student_report(); // Switch to the report screen itself
-              });
-            } else if (index == 2) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                // Set the tab body to your Settings screen when the Settings tab is clicked.
-                // tabBody = SettingsScreen(); // Replace with your Settings screen
-              });
-            }
-          },
-          tabIconsList: [],
-        ),
+        
       ),
     );
   }

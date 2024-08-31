@@ -12,5 +12,6 @@ class RouteNames {
   static const String register = '/register';
   static const String student = '/student';
   static const String resetPW = '//reset-password';
-  static const String cahome='/';
+  static const String cahome='/cahome';
+  static const String qr_g='/';
 }
