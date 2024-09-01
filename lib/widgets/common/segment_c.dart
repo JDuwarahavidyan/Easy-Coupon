@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class DonutChart extends StatefulWidget {
+class Donut_c_Chart extends StatefulWidget {
   final Animation<double> animation;
 
-  const DonutChart({
+  const Donut_c_Chart({
     Key? key,
     required this.animation,
   }) : super(key: key);
 
   @override
-  _DonutChartState createState() => _DonutChartState();
+  _Donut_c_ChartState createState() => _Donut_c_ChartState();
 }
 
-class _DonutChartState extends State<DonutChart> {
-  int currentValue = 0;
+class _Donut_c_ChartState extends State<Donut_c_Chart> {
+  int currentValue = 10;
 
   @override
   void initState() {
@@ -46,29 +46,29 @@ class _DonutChartState extends State<DonutChart> {
       animation: widget.animation,
       builder: (context, child) {
         return CustomPaint(
-          painter: DonutChartPainter(
+          painter: Donut_c_ChartPainter(
             remainingPercentage: remainingPercentage,
             animationValue: widget.animation.value,
             remainingColor: const Color(0xFF50623A),
             usedColor: Colors.grey.shade300,
           ),
           child: SizedBox(
-            width: 300,
-            height: 150,
+            width: 200,
+            height: 200,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // const Text(
-                  //   'Remaining Coupons',
-                  //   style: TextStyle(
-                  //     fontSize: 16,
-                  //     fontWeight: FontWeight.w600,
-                  //     color: Colors.black54,
-                  //   ),
-                  // ),
+                  const Text(
+                    'Coupons Utilized Today',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black54,
+                    ),
+                  ),
                   Text(
-                    '${30 - currentValue}',  // Display remaining coupons
+                    '$currentValue',  // Display remaining coupons
                     style: const TextStyle(
                       fontSize: 90,
                       fontWeight: FontWeight.bold,
@@ -85,13 +85,14 @@ class _DonutChartState extends State<DonutChart> {
   }
 }
 
-class DonutChartPainter extends CustomPainter {
+// ignore: camel_case_types
+class Donut_c_ChartPainter extends CustomPainter {
   final double remainingPercentage;
   final double animationValue;
   final Color remainingColor;
   final Color usedColor;
 
-  DonutChartPainter({
+  Donut_c_ChartPainter({
     required this.remainingPercentage,
     required this.animationValue,
     required this.remainingColor,
