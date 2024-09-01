@@ -49,9 +49,6 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(authRepository: authRepository),
         ),
-        BlocProvider<ReportBloc>(
-          create: (context) => ReportBloc(ReportRepository()),
-        ),
         BlocProvider(
           create: (context) => CanteenBloc(FirebaseFirestore.instance),
         ),
@@ -78,7 +75,7 @@ class MyApp extends StatelessWidget {
               theme: themeProvider.themeData.copyWith(
                 scaffoldBackgroundColor: const Color(0xFFFFFFFF),
               ),
-              initialRoute: RouteNames.qr_g,
+              initialRoute: RouteNames.report,
               onGenerateRoute: AppRoutes.generateRoute,
               builder: (context, child) {
                 return SafeArea(
