@@ -459,6 +459,7 @@
 
 import 'dart:ui'; // Import for BackdropFilter
 import 'package:easy_coupon/pages/student_pages/student_home.dart';
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
@@ -915,7 +916,7 @@ class _Student_reportState extends State<Student_report>
                   return;
                 }
                 tabBody =
-                    Student_report(); // Switch to the report screen itself
+                    const Student_report(); // Switch to the report screen itself
               });
             } else if (index == 2) {
               animationController?.reverse().then<dynamic>((data) {
