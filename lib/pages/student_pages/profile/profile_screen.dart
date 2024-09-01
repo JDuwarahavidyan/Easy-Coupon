@@ -229,7 +229,6 @@
 //   );
 // }
 
-
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/material.dart';
@@ -249,14 +248,12 @@ class ProfileScreen extends StatelessWidget {
 
     return Background(
       child: Scaffold(
-        backgroundColor:
-            Colors.transparent, // Ensure transparency to see the background
+        backgroundColor: Colors.transparent, // Ensure transparency to see the background
 
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top), // For status bar
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top), // For status bar
               decoration: BoxDecoration(
                 color: Color(0xFFDBE7C9),
                 boxShadow: [
@@ -267,13 +264,12 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 10.0),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
+                    Text(
                       "Settings",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
@@ -284,168 +280,166 @@ class ProfileScreen extends StatelessWidget {
                     // IconButton(
                     //   onPressed: () {},
                     //   icon: Icon(isDark
-                          ? LineAwesomeIcons.sun
-                          : LineAwesomeIcons.moon),
+                    //       ? LineAwesomeIcons.sun
+                    //       : LineAwesomeIcons.moon),
                     // ),
                   ],
                 ),
               ),
             ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Container(
-                  padding: EdgeInsets.all(16.0), // tDefaultSize
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          SizedBox(
-                            width: 120,
-                            height: 120,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(100),
-                              child: Image.asset(
-                          "assets/images/landing/userImage.png",
-                          fit: BoxFit.contain,
-                        ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 0,
-                            right: 0,
-                            child: Container(
-                              width: 35,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Color(0xFF789461),
-                              ),
-                              child: const Icon(
-                                LineAwesomeIcons.alternate_pencil,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ),
-                          ),
+          ],
+        ),
+      ),
+    );
+    Expanded(
+      child: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(16.0), // tDefaultSize
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  SizedBox(
+                    width: 120,
+                    height: 120,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset(
+                        "assets/images/landing/userImage.png",
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Color(0xFF789461),
+                      ),
+                      child: const Icon(
+                        LineAwesomeIcons.alternate_pencil,
+                        color: Colors.black,
+                        size: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 10),
+              Text(
+                "Your Name",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF294B29),
+                  fontSize: 25,
+                ),
+              ),
+              Text(
+                "Your Role/Title",
+                style: TextStyle(
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  fontSize: 18,
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 200,
+                child: ElevatedButton(
+                  onPressed: () => Get.to(() => const UpdateProfileScreen()),
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(80.0),
+                    ),
+                    padding: EdgeInsets.zero,
+                    textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    backgroundColor: Color(0xFF294B29), // Gradient color for button
+                  ),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: 50.0,
+                    width: size.width * 0.5,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(80.0),
+                      gradient: const LinearGradient(
+                        colors: [
+                          Color(0xFF294B29),
+                          Color(0xFF50623A),
                         ],
                       ),
-                      const SizedBox(height: 10),
-                      Text(
-                        "Your Name",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF294B29),
-                          fontSize: 25,
-                        ),
+                    ),
+                    padding: const EdgeInsets.all(0),
+                    child: const Text(
+                      "MY PROFILE",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
                       ),
-                      Text(
-                        "Your Role/Title",
-                        style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
-                          fontSize: 18,
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        width: 200,
-                        child: ElevatedButton(
-                          onPressed: () =>
-                              Get.to(() => const UpdateProfileScreen()),
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(80.0),
-                            ),
-                            padding: EdgeInsets.zero,
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            backgroundColor:
-                                Color(0xFF294B29), // Gradient color for button
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 50.0,
-                            width: size.width * 0.5,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(80.0),
-                              gradient: const LinearGradient(
-                                colors: [
-                                  Color(0xFF294B29),
-                                  Color(0xFF50623A),
-                                ],
-                              ),
-                            ),
-                            padding: const EdgeInsets.all(0),
-                            child: const Text(
-                              "MY PROFILE",
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                      const Divider(),
-                      const SizedBox(height: 10),
-                      ProfileMenuWidget(
-                        title: "About Us",
-                        icon: LineAwesomeIcons.info,
-                        onPress: () {},
-                      ),
-                      ProfileMenuWidget(
-                        title: "Logout",
-                        icon: LineAwesomeIcons.alternate_sign_out,
-                        textColor: Colors.red,
-                        endIcon: false,
-                        onPress: () {
-                          Get.defaultDialog(
-                            title: "LOGOUT",
-                            titleStyle: TextStyle(
-                                fontSize: 20, color: Color(0xFF294B29)),
-                            content: const Padding(
-                              padding: EdgeInsets.symmetric(vertical: 15.0),
-                              child: Text("Are you sure, you want to Logout?"),
-                            ),
-                            confirm: ElevatedButton(
-                              onPressed: () {
-                                // Call the logout function
-                              },
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.redAccent,
-                                side: BorderSide.none,
-                              ),
-                              child: const Text("Yes"),
-                            ),
-                            cancel: OutlinedButton(
-                              onPressed: () => Get.back(),
-                              child: const Text("No"),
-                            ),
-                          );
-                        },
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
-            ),
-            Container(
-              alignment: Alignment.bottomRight,
-              child: Lottie.asset(
-                'assets/images/landing/settings.json',
-                width: 300,
-                height: 300,
-                fit: BoxFit.contain,
+              const SizedBox(height: 30),
+              const Divider(),
+              const SizedBox(height: 10),
+              ProfileMenuWidget(
+                title: "About Us",
+                icon: LineAwesomeIcons.info,
+                onPress: () {},
               ),
-            ),
-          ],
+              ProfileMenuWidget(
+                title: "Logout",
+                icon: LineAwesomeIcons.alternate_sign_out,
+                textColor: Colors.red,
+                endIcon: false,
+                onPress: () {
+                  Get.defaultDialog(
+                    title: "LOGOUT",
+                    titleStyle: TextStyle(fontSize: 20, color: Color(0xFF294B29)),
+                    content: const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 15.0),
+                      child: Text("Are you sure, you want to Logout?"),
+                    ),
+                    confirm: ElevatedButton(
+                      onPressed: () {
+                        // Call the logout function
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.redAccent,
+                        side: BorderSide.none,
+                      ),
+                      child: const Text("Yes"),
+                    ),
+                    cancel: OutlinedButton(
+                      onPressed: () => Get.back(),
+                      child: const Text("No"),
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
-        bottomNavigationBar: bottomBar(2),
       ),
     );
+    Container(
+      alignment: Alignment.bottomRight,
+      child: Lottie.asset(
+        'assets/images/landing/settings.json',
+        width: 300,
+        height: 300,
+        fit: BoxFit.contain,
+      ),
+    );
+    bottomNavigationBar:
+    bottomBar(2);
   }
 }
 
