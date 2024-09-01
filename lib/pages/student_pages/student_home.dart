@@ -316,27 +316,27 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
             ),
           ],
         ),
-        bottomNavigationBar: BottomBarView(
-          currentIndex: tabIconsList.indexWhere((tab) => tab.isSelected),
-          onTabSelected: (int index) {
-            setState(() {
-              for (int i = 0; i < tabIconsList.length; i++) {
-                tabIconsList[i].isSelected = i == index;
-              }
-            });
+        // bottomNavigationBar: BottomBarView(
+        //   currentIndex: tabIconsList.indexWhere((tab) => tab.isSelected),
+        //   onTabSelected: (int index) {
+        //     setState(() {
+        //       for (int i = 0; i < tabIconsList.length; i++) {
+        //         tabIconsList[i].isSelected = i == index;
+        //       }
+        //     });
 
-            if (index == 0) {
-              setState(() {
-                tabBody = const StudentHome(); // Update with the home page widget
-              });
-            } else if (index == 1) {
-              Navigator.pushNamed(context, RouteNames.report);
-            // } 
-            // else if (index == 2) {
-            //   Navigator.pushNamed(context, RouteNames.settings);
-            }
-          }, tabIconsList: [],
-        ),
+        //     if (index == 0) {
+        //       setState(() {
+        //         tabBody = const StudentHome(); // Update with the home page widget
+        //       });
+        //     } else if (index == 1) {
+        //       Navigator.pushNamed(context, RouteNames.report);
+        //     // } 
+        //     // else if (index == 2) {
+        //     //   Navigator.pushNamed(context, RouteNames.settings);
+        //     }
+        //   }, tabIconsList: [],
+        // ),
       ),
     );
   }

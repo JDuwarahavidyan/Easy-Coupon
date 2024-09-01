@@ -4,6 +4,7 @@ import 'package:easy_coupon/models/qr/qr_model.dart';
 
 import 'package:easy_coupon/pages/student_pages/confirmation_page.dart';
 import 'package:easy_coupon/pages/student_pages/student_home.dart';
+import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -168,7 +169,7 @@ class _QrPageState extends State<QrPage> {
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-            const StudentHome(),
+             StudentMainPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;
