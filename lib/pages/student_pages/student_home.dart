@@ -1,4 +1,3 @@
-import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
@@ -23,18 +22,15 @@ class TabIconData {
   }
 }
 
-
 // ignore: camel_case_types
 class StudentHome extends StatefulWidget {
   const StudentHome({super.key, AnimationController? animationController});
 
   @override
-  // ignore: library_private_types_in_public_api
   _StudentHomeState createState() => _StudentHomeState();
 }
 
-class _StudentHomeState extends State<StudentHome>
-    with TickerProviderStateMixin {
+class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin {
   AnimationController? animationController;
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   Widget tabBody = Container(
@@ -53,8 +49,7 @@ class _StudentHomeState extends State<StudentHome>
     });
     tabIconsList[0].isSelected = true;
 
-    animationController = AnimationController(
-        duration: const Duration(milliseconds: 600), vsync: this);
+    animationController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
 
     // Initial tab body for the report page
     // tabBody = MyDiaryScreen(animationController: animationController);
@@ -134,21 +129,23 @@ class _StudentHomeState extends State<StudentHome>
                                     ),
                                     SizedBox(height: 20),
                                     Center(
-                                      child:Text(
+                                      child: Text(
                                         'Remaining Coupons as per ${DateTime.now().toString().substring(0, 10)}',
                                         style: TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.black54,
                                         ),
-                                      ),),
+                                      ),
+                                    ),
                                     // SizedBox(height: 10), // Add spacing before the donut chart
                                     Center(
                                       child: DonutChart(
-                                        animation: animationController!, // Pass the animation controller
+                                        animation: animationController!,
+                                        couponCount: 10,
                                       ),
                                     ),
-                                    SizedBox(height: 15), // Add spacing before the spinbox
+                                    SizedBox(height: 20), // Add spacing before the spinbox
                                     Center(
                                       child: Container(
                                         width: constraints.maxWidth, // Set the width to match the text container
@@ -239,8 +236,7 @@ class _StudentHomeState extends State<StudentHome>
                                             ],
                                           ),
                                           onPressed: () {
-                                            Navigator.pushReplacementNamed(
-                              context, RouteNames.qr);
+                                            Navigator.pushReplacementNamed(context, RouteNames.qr);
                                             // Add your scan QR functionality here
                                           },
                                         ),
@@ -284,8 +280,7 @@ class _StudentHomeState extends State<StudentHome>
                   return;
                 }
                 setState(() {
-                  tabBody =
-                      StudentHome(animationController: animationController);
+                  tabBody = StudentHome(animationController: animationController);
                 });
               });
             } else if (index == 1) {
@@ -293,16 +288,13 @@ class _StudentHomeState extends State<StudentHome>
                 if (!mounted) {
                   return;
                 }
-                tabBody =
-                    Student_report(); // Switch to the report screen itself
+                tabBody = Student_report(); // Switch to the report screen itself
               });
             } else if (index == 2) {
               animationController?.reverse().then<dynamic>((data) {
                 if (!mounted) {
                   return;
                 }
-                // Set the tab body to your Settings screen when the Settings tab is clicked.
-                // tabBody = SettingsScreen(); // Replace with your Settings screen
               });
             }
           },
