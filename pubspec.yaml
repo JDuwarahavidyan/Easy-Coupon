@@ -58,6 +58,7 @@ dependencies:
   floating_snackbar: ^1.0.5
   curved_navigation_bar: ^1.0.6
   encrypt: ^5.0.3
+  loading_animation_widget: ^1.2.1
 
 dev_dependencies:
   flutter_test:
