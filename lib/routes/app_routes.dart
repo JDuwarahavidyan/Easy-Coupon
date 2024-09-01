@@ -4,6 +4,7 @@ import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_home.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
 
@@ -24,6 +25,9 @@ class AppRoutes {
 
       case RouteNames.home:
         return MaterialPageRoute(builder: (_) => StudentHome());
+
+      case RouteNames.cahome:
+        return MaterialPageRoute(builder: (_) => CanteenAHome());
 
       case RouteNames.report:
         return MaterialPageRoute(builder: (_) => Student_report());
