@@ -27,11 +27,10 @@ class _DonutChartState extends State<DonutChart> {
 
   @override
   Widget build(BuildContext context) {
-    double remainingPercentage = (30 - currentValue).clamp(0, 30) / 30.0; // Ensure it is between 0 and 1
+    double remainingPercentage = (currentValue).clamp(0, 30) / 30.0; // Ensure it is between 0 and 1
 
     // Obtain the UserBloc from the context
     final UserBloc userBloc = context.read<UserBloc>();
-    //final user = FirebaseAuth.instance.currentUser?.uid;
 
     return AnimatedBuilder(
       animation: widget.animation,
@@ -50,14 +49,14 @@ class _DonutChartState extends State<DonutChart> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Remaining Coupons',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black54,
-                    ),
-                  ),
+                  // const Text(
+                  //   'Remaining Coupons',
+                  //   style: TextStyle(
+                  //     fontSize: 16,
+                  //     fontWeight: FontWeight.w600,
+                  //     color: Colors.black54,
+                  //   ),
+                  // ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -75,7 +74,7 @@ class _DonutChartState extends State<DonutChart> {
                           );
                           currentValue = user.studentCount;
                           return Text(
-                            '${30 - currentValue}', // Display remaining coupons
+                            '${ currentValue}', // Display remaining coupons
                             style: const TextStyle(
                               fontSize: 70,
                               fontWeight: FontWeight.bold,
