@@ -1,11 +1,16 @@
 // import 'dart:ui'; // Import for BackdropFilter
 // import 'package:easy_coupon/pages/student_pages/student_home.dart';
+// import 'package:easy_coupon/pages/pages.dart';
 // import 'package:flutter/material.dart';
 // import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 // import 'package:lottie/lottie.dart';
 // import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-// import 'package:expandable_datatable/expandable_datatable.dart';
-// import 'package:easy_coupon/widgets/components/background.dart';
+// import 'package:easy_coupon/widgets/common/background.dart';
+// import 'package:intl/intl.dart';
+// import 'package:easy_coupon/bloc/qr/qr_bloc.dart';
+// import 'package:easy_coupon/bloc/user/user_bloc.dart';
+// import 'package:easy_coupon/models/qr/qr_model.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 
 // class TabIconData {
 //   final IconData icon;
@@ -22,16 +27,13 @@
 //   }
 // }
 
-// // ignore: camel_case_types
 // class Student_report extends StatefulWidget {
 //   const Student_report({super.key});
 
 //   @override
-//   // ignore: library_private_types_in_public_api
 //   _Student_reportState createState() => _Student_reportState();
 // }
 
-// // ignore: camel_case_types
 // class _Student_reportState extends State<Student_report>
 //     with TickerProviderStateMixin {
 //   AnimationController? animationController;
@@ -43,148 +45,69 @@
 //   bool _showTable = false;
 
 //   // Updated dummy data for the table
-//   List<Map<String, dynamic>> dummyData = [
-//     {
-//       "Date and Time": "2024-08-01 12:00",
-//       "Canteen": "Canteen A",
-//       "Coupons Used": 120
-//     },
-//     {
-//       "Date and Time": "2024-08-02 14:00",
-//       "Canteen": "Canteen B",
-//       "Coupons Used": 90
-//     },
-//     {
-//       "Date and Time": "2024-08-02 14:00",
-//       "Canteen": "Canteen B",
-//       "Coupons Used": 90
-//     },
-//     {
-//       "Date and Time": "2024-08-02 14:00",
-//       "Canteen": "Canteen B",
-//       "Coupons Used": 90
-//     },
-//     {
-//       "Date and Time": "2024-08-02 14:00",
-//       "Canteen": "Canteen B",
-//       "Coupons Used": 90
-//     },
-//     {
-//       "Date and Time": "2024-08-02 14:00",
-//       "Canteen": "Canteen B",
-//       "Coupons Used": 90
-//     },
-//     {
-//       "Date and Time": "2024-08-02 14:00",
-//       "Canteen": "Canteen B",
-//       "Coupons Used": 90
-//     },
-//     {
-//       "Date and Time": "2024-08-02 14:00",
-//       "Canteen": "Canteen B",
-//       "Coupons Used": 90
-//     },
-//     // Add more dummy data as needed
+//   final List<Map<String, dynamic>> dummyData = List.generate(
+//       10,
+//       (index) => {
+//             "Date and Time": "2024-08-02 14:00",
+//             "Canteen": "Canteen B",
+//             "Coupons Used": 90,
+//           });
+
+//   late final List<DataColumn> headers = [
+//     const DataColumn(
+//       label: Center(
+//         child: Text(
+//           "Date and Time",
+//           style: _headerStyle,
+//         ),
+//       ),
+//     ),
+//     const DataColumn(
+//       label: Center(
+//         child: Text(
+//           "Canteen",
+//           style: _headerStyle,
+//         ),
+//       ),
+//     ),
+//     const DataColumn(
+//       label: Center(
+//         child: Text(
+//           "Coupons Used",
+//           style: _headerStyle,
+//         ),
+//       ),
+//     ),
 //   ];
 
-//   late List<DataColumn> headers;
-//   late List<DataRow> rows;
+//   late final List<DataRow> rows = dummyData.map<DataRow>((data) {
+//     bool isEven = dummyData.indexOf(data) % 2 == 0;
+//     return DataRow(
+//       color: WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
+//         return isEven ? const Color(0xFFDBE7C9) : const Color(0xFFDBE7C9);
+//       }),
+//       cells: [
+//         DataCell(Center(child: Text(data["Date and Time"], style: _cellStyle))),
+//         DataCell(Center(child: Text(data["Canteen"], style: _cellStyle))),
+//         DataCell(Center(
+//             child: Text(data["Coupons Used"].toString(), style: _cellStyle))),
+//       ],
+//     );
+//   }).toList();
+
+//   static const TextStyle _headerStyle =
+//       TextStyle(fontSize: 11, fontWeight: FontWeight.bold, color: Colors.black);
+
+//   static const TextStyle _cellStyle = TextStyle(
+//       fontSize: 10, fontWeight: FontWeight.normal, color: Colors.black);
 
 //   @override
 //   void initState() {
 //     super.initState();
-
-//     tabIconsList.forEach((TabIconData tab) {
-//       tab.isSelected = false;
-//     });
 //     tabIconsList[1].isSelected = true;
-
 //     animationController = AnimationController(
 //         duration: const Duration(milliseconds: 600), vsync: this);
-
-//     // Initial tab body for the report page
 //     tabBody = StudentHome(animationController: animationController);
-
-//     // Initialize headers for the table
-//     headers = [
-//       const DataColumn(
-//         label: Center(
-//           child: Text(
-//             "Date and Time",
-//             style: TextStyle(
-//                 fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
-//           ),
-//         ),
-//       ),
-//       const DataColumn(
-//         label: Center(
-//           child: Text(
-//             "Canteen",
-//             style: TextStyle(
-//                 fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
-//           ),
-//         ),
-//       ),
-//       const DataColumn(
-//         label: Center(
-//           child: Text(
-//             "Coupons Used",
-//             style: TextStyle(
-//                 fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
-//           ),
-//         ),
-//       ),
-//     ];
-
-//     // Initialize rows for the table with dummy data
-//     rows = dummyData.map<DataRow>((data) {
-//       bool isEven = dummyData.indexOf(data) % 2 == 0;
-//       return DataRow(
-//         color:
-//             WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-//           return isEven
-//               ? const Color(0xFFDBE7C9)
-//               : const Color(0xFFDBE7C9); // Row colors
-//         }),
-//         cells: [
-//           DataCell(
-//             Center(
-//               child: Text(
-//                 data["Date and Time"],
-//                 style: const TextStyle(
-//                     fontSize: 11,
-//                     fontWeight: FontWeight.normal,
-//                     color: Colors.black),
-//                 maxLines: 2, // Limit to 2 lines
-//                 overflow: TextOverflow.ellipsis, // Handle overflow
-//               ),
-//             ),
-//           ),
-//           DataCell(
-//             Center(
-//               child: Text(
-//                 data["Canteen"],
-//                 style: const TextStyle(
-//                     fontSize: 11,
-//                     fontWeight: FontWeight.normal,
-//                     color: Colors.black),
-//               ),
-//             ),
-//           ),
-//           DataCell(
-//             Center(
-//               child: Text(
-//                 data["Coupons Used"].toString(),
-//                 style: const TextStyle(
-//                     fontSize: 11,
-//                     fontWeight: FontWeight.normal,
-//                     color: Colors.black),
-//               ),
-//             ),
-//           ),
-//         ],
-//       );
-//     }).toList();
 //   }
 
 //   @override
@@ -212,131 +135,139 @@
 //         backgroundColor: Colors.transparent,
 //         body: Stack(
 //           children: [
-//             // Background content
+//             Container(
+//               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+//               decoration: BoxDecoration(
+//                 color: Color(0xFFDBE7C9),
+//                 boxShadow: [
+//                   BoxShadow(
+//                     color: Colors.black.withOpacity(0.2),
+//                     offset: Offset(0, 2),
+//                     blurRadius: 4,
+//                   ),
+//                 ],
+//               ),
+//               child: const Padding(
+//                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+//                 child: Row(
+//                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                   children: [
+//                     Text(
+//                       "Report Page",
+//                       style: TextStyle(
+//                         fontWeight: FontWeight.bold,
+//                         color: Color(0xFF294B29),
+//                         fontSize: 25,
+//                       ),
+//                     ),
+//                   ],
+//                 ),
+//               ),
+//             ),
 //             FutureBuilder<bool>(
 //               future: getData(),
-//               builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-//                 if (!snapshot.hasData) {
-//                   return const SizedBox();
-//                 } else {
-//                   return Positioned(
-//                     top: 50,
-//                     left: 20,
-//                     right: 20,
-//                     child: Column(
-//                       crossAxisAlignment: CrossAxisAlignment.start,
-//                       children: [
-//                         Text(
-//                           'Report Page',
-//                           style: TextStyle(
-//                             fontWeight: FontWeight.bold,
-//                             color: Color(0xFF294B29),
-//                             fontSize: 25,
-//                           ),
+//               builder: (context, snapshot) {
+//                 if (!snapshot.hasData) return const SizedBox();
+//                 return Positioned(
+//                   top: 100,
+//                   left: 20,
+//                   right: 20,
+//                   child: Column(
+//                     crossAxisAlignment: CrossAxisAlignment.start,
+//                     children: [
+//                       SizedBox(height: 10),
+//                       Container(
+//                         padding: EdgeInsets.all(8.0),
+//                         decoration: BoxDecoration(
+//                           color: Color(0xFF789461).withOpacity(0.1),
+//                           borderRadius: BorderRadius.circular(8.0),
 //                         ),
-//                         SizedBox(height: 10),
-//                         Container(
-//                           padding: EdgeInsets.all(8.0),
-//                           decoration: BoxDecoration(
-//                             color: Color(0xFF789461).withOpacity(0.1),
-//                             borderRadius: BorderRadius.circular(8.0),
-//                           ),
-//                           child: Row(
-//                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                             children: [
-//                               const Expanded(
-//                                 child: Text(
-//                                   'Select the Range of Dates and Click on "Get Report" to see your Coupon Usage in those Days',
-//                                   style: TextStyle(
-//                                     fontSize: 14,
-//                                     color: Colors.black87,
-//                                   ),
+//                         child: Row(
+//                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//                           children: [
+//                             const Expanded(
+//                               child: Text(
+//                                 'Select the Range of Dates and Click on "Get Report" to see your Coupon Usage in those Days',
+//                                 style: TextStyle(
+//                                   fontSize: 14,
+//                                   color: Colors.black87,
 //                                 ),
 //                               ),
-//                               const SizedBox(width: 10),
-//                               Transform.scale(
-//                                 scale:
-//                                     1.5, // Adjust the scale factor to increase the size of the Lottie animation
-//                                 child: SizedBox(
-//                                   width: 50, // Original size
-//                                   height: 50, // Original size
-//                                   child: Lottie.asset(
-//                                     'assets/images/landing/fetch.json',
-//                                     fit: BoxFit.contain,
-//                                   ),
+//                             ),
+//                             const SizedBox(width: 10),
+//                             Transform.scale(
+//                               scale: 1.5,
+//                               child: SizedBox(
+//                                 width: 50,
+//                                 height: 50,
+//                                 child: Lottie.asset(
+//                                   'assets/images/landing/fetch.json',
+//                                   fit: BoxFit.contain,
 //                                 ),
 //                               ),
-//                             ],
-//                           ),
+//                             ),
+//                           ],
 //                         ),
-
-//                         const SizedBox(height: 20),
-//                         CalendarDatePicker2(
-//                           config: CalendarDatePicker2Config(
-//                             calendarType: CalendarDatePicker2Type.range,
-//                             selectedDayHighlightColor: Color(0xFF789461),
-//                             dayTextStyle: const TextStyle(color: Color.fromARGB(255, 40, 53, 52)),
-//                             selectedDayTextStyle:
-//                                 const TextStyle(color: Colors.white),
-//                           ),
-//                           value: _dates,
-//                           onValueChanged: (dates) {
-//                             setState(() {
-//                               _dates = dates;
-//                             });
-//                           },
+//                       ),
+//                       const SizedBox(height: 20),
+//                       CalendarDatePicker2(
+//                         config: CalendarDatePicker2Config(
+//                           calendarType: CalendarDatePicker2Type.range,
+//                           selectedDayHighlightColor: Color(0xFF789461),
+//                           dayTextStyle: const TextStyle(color: Colors.blue),
+//                           selectedDayTextStyle:
+//                               const TextStyle(color: Colors.white),
 //                         ),
-//                         const SizedBox(
-//                             height:
-//                                 10), // Adjust this value to move the button closer
-//                         Center(
-//                           child: ElevatedButton(
-//                             onPressed: _fetchData,
-//                             style: ElevatedButton.styleFrom(
-//                               shape: RoundedRectangleBorder(
-//                                 borderRadius: BorderRadius.circular(80.0),
+//                         value: _dates,
+//                         onValueChanged: (dates) => setState(() {
+//                           _dates = dates;
+//                         }),
+//                       ),
+//                       const SizedBox(height: 10),
+//                       Center(
+//                         child: ElevatedButton(
+//                           onPressed: _fetchData,
+//                           style: ElevatedButton.styleFrom(
+//                             shape: RoundedRectangleBorder(
+//                               borderRadius: BorderRadius.circular(80.0),
+//                             ),
+//                             padding: EdgeInsets.zero,
+//                             textStyle: const TextStyle(
+//                               color: Colors.white,
+//                               fontWeight: FontWeight.bold,
+//                             ),
+//                             backgroundColor: Color(0xFF294B29),
+//                           ),
+//                           child: Container(
+//                             alignment: Alignment.center,
+//                             height: 50.0,
+//                             decoration: BoxDecoration(
+//                               borderRadius: BorderRadius.circular(80.0),
+//                               gradient: const LinearGradient(
+//                                 colors: [
+//                                   Color(0xFF294B29),
+//                                   Color(0xFF50623A),
+//                                 ],
 //                               ),
-//                               padding: EdgeInsets.zero,
-//                               textStyle: const TextStyle(
+//                             ),
+//                             padding: const EdgeInsets.all(0),
+//                             child: const Text(
+//                               "GET REPORT",
+//                               textAlign: TextAlign.center,
+//                               style: TextStyle(
 //                                 color: Colors.white,
 //                                 fontWeight: FontWeight.bold,
 //                               ),
-//                               backgroundColor:
-//                                   Color(0xFF294B29), // Button color
-//                             ),
-//                             child: Container(
-//                               alignment: Alignment.center,
-//                               height: 50.0,
-//                               // width: size.width,
-//                               decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(80.0),
-//                                 gradient: const LinearGradient(
-//                                   colors: [
-//                                     Color(0xFF294B29),
-//                                     Color(0xFF50623A),
-//                                   ],
-//                                 ),
-//                               ),
-//                               padding: const EdgeInsets.all(0),
-//                               child: const Text(
-//                                 "GET REPORT",
-//                                 textAlign: TextAlign.center,
-//                                 style: TextStyle(
-//                                   color: Colors.white,
-//                                   fontWeight: FontWeight.bold,
-//                                 ),
-//                               ),
 //                             ),
 //                           ),
 //                         ),
-//                       ],
-//                     ),
-//                   );
-//                 }
+//                       ),
+//                     ],
+//                   ),
+//                 );
 //               },
 //             ),
 //             if (_showTable) ...[
-//               // Blurred background
 //               Positioned.fill(
 //                 child: BackdropFilter(
 //                   filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
@@ -345,12 +276,11 @@
 //                   ),
 //                 ),
 //               ),
-//               // Table popup
 //               Positioned(
-//                 top: 150, // Adjust this value to position above the navbar
+//                 top: 100,
 //                 left: 20,
 //                 right: 20,
-//                 bottom: 60, // Leave space for the bottom bar
+//                 bottom: 100,
 //                 child: Container(
 //                   padding: EdgeInsets.all(16.0),
 //                   decoration: BoxDecoration(
@@ -365,10 +295,8 @@
 //                       Row(
 //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
 //                         children: [
-//                           Text(
-//                             'Results',
-//                             style: Theme.of(context).textTheme.titleLarge,
-//                           ),
+//                           Text('Results',
+//                               style: Theme.of(context).textTheme.titleLarge),
 //                           IconButton(
 //                             icon: Icon(Icons.close),
 //                             onPressed: _closeTable,
@@ -379,7 +307,7 @@
 //                         child: SingleChildScrollView(
 //                           scrollDirection: Axis.vertical,
 //                           child: DataTable(
-//                             columnSpacing: 12, // Reduce column spacing
+//                             columnSpacing: 12,
 //                             columns: headers,
 //                             rows: rows,
 //                           ),
@@ -433,7 +361,7 @@
 //                   return;
 //                 }
 //                 tabBody =
-//                     Student_report(); // Switch to the report screen itself
+//                     const Student_report(); // Switch to the report screen itself
 //               });
 //             } else if (index == 2) {
 //               animationController?.reverse().then<dynamic>((data) {
@@ -452,21 +380,21 @@
 //   }
 // }
 
-
-
-
-
-
 import 'dart:ui'; // Import for BackdropFilter
+import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/pages/student_pages/student_home.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:expandable_datatable/expandable_datatable.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:easy_coupon/bloc/qr/qr_bloc.dart';
+import 'package:easy_coupon/bloc/user/user_bloc.dart';
+import 'package:easy_coupon/models/qr/qr_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TabIconData {
   final IconData icon;
@@ -483,16 +411,13 @@ class TabIconData {
   }
 }
 
-// ignore: camel_case_types
 class Student_report extends StatefulWidget {
-  const Student_report({super.key});
+  const Student_report({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _Student_reportState createState() => _Student_reportState();
 }
 
-// ignore: camel_case_types
 class _Student_reportState extends State<Student_report>
     with TickerProviderStateMixin {
   AnimationController? animationController;
@@ -503,149 +428,14 @@ class _Student_reportState extends State<Student_report>
   List<DateTime?> _dates = [DateTime.now()];
   bool _showTable = false;
 
-  // Updated dummy data for the table
-  List<Map<String, dynamic>> dummyData = [
-    {
-      "Date and Time": "2024-08-01 12:00",
-      "Canteen": "Canteen A",
-      "Coupons Used": 120
-    },
-    {
-      "Date and Time": "2024-08-02 14:00",
-      "Canteen": "Canteen B",
-      "Coupons Used": 90
-    },
-    {
-      "Date and Time": "2024-08-02 14:00",
-      "Canteen": "Canteen B",
-      "Coupons Used": 90
-    },
-    {
-      "Date and Time": "2024-08-02 14:00",
-      "Canteen": "Canteen B",
-      "Coupons Used": 90
-    },
-    {
-      "Date and Time": "2024-08-02 14:00",
-      "Canteen": "Canteen B",
-      "Coupons Used": 90
-    },
-    {
-      "Date and Time": "2024-08-02 14:00",
-      "Canteen": "Canteen B",
-      "Coupons Used": 90
-    },
-    {
-      "Date and Time": "2024-08-02 14:00",
-      "Canteen": "Canteen B",
-      "Coupons Used": 90
-    },
-    {
-      "Date and Time": "2024-08-02 14:00",
-      "Canteen": "Canteen B",
-      "Coupons Used": 90
-    },
-    // Add more dummy data as needed
-  ];
-
-  late List<DataColumn> headers;
-  late List<DataRow> rows;
-
   @override
   void initState() {
     super.initState();
-
-    tabIconsList.forEach((TabIconData tab) {
-      tab.isSelected = false;
-    });
-    tabIconsList[1].isSelected = true;
-
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 600), vsync: this);
-
-    // Initial tab body for the report page
-    tabBody = StudentHome(animationController: animationController);
-
-    // Initialize headers for the table
-    headers = [
-      const DataColumn(
-        label: Center(
-          child: Text(
-            "Date and Time",
-            style: TextStyle(
-                fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-        ),
-      ),
-      const DataColumn(
-        label: Center(
-          child: Text(
-            "Canteen",
-            style: TextStyle(
-                fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-        ),
-      ),
-      const DataColumn(
-        label: Center(
-          child: Text(
-            "Coupons Used",
-            style: TextStyle(
-                fontSize: 12, fontWeight: FontWeight.bold, color: Colors.black),
-          ),
-        ),
-      ),
-    ];
-
-    // Initialize rows for the table with dummy data
-    rows = dummyData.map<DataRow>((data) {
-      bool isEven = dummyData.indexOf(data) % 2 == 0;
-      return DataRow(
-        color:
-            WidgetStateProperty.resolveWith<Color?>((Set<WidgetState> states) {
-          return isEven
-              ? const Color(0xFFDBE7C9)
-              : const Color(0xFFDBE7C9); // Row colors
-        }),
-        cells: [
-          DataCell(
-            Center(
-              child: Text(
-                data["Date and Time"],
-                style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black),
-                maxLines: 2, // Limit to 2 lines
-                overflow: TextOverflow.ellipsis, // Handle overflow
-              ),
-            ),
-          ),
-          DataCell(
-            Center(
-              child: Text(
-                data["Canteen"],
-                style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black),
-              ),
-            ),
-          ),
-          DataCell(
-            Center(
-              child: Text(
-                data["Coupons Used"].toString(),
-                style: const TextStyle(
-                    fontSize: 11,
-                    fontWeight: FontWeight.normal,
-                    color: Colors.black),
-              ),
-            ),
-          ),
-        ],
-      );
-    }).toList();
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+    _fetchUserQrCodes();
   }
 
   @override
@@ -654,15 +444,33 @@ class _Student_reportState extends State<Student_report>
     super.dispose();
   }
 
+  void _fetchUserQrCodes({DateTime? startDate, DateTime? endDate}) {
+    // final currentUser = FirebaseAuth.instance.currentUser;
+    // if (currentUser != null) {
+    const String specificUserId = "00zkcjixZfY9QeX6";
+    print('Fetching QR codes for user: $specificUserId');
+    print('Start date: $startDate, End date: $endDate');
+    context.read<QrCodeBloc>().add(LoadQrCodesByUid(
+          // currentUser.uid,
+          specificUserId,
+          startDate: startDate,
+          endDate: endDate,
+          reportType: 'student_report',
+        ));
+  }
+
   void _fetchData() {
     setState(() {
-      _showTable = true; // Show the table when the Fetch button is pressed
+      _showTable = true;
     });
+    if (_dates.length >= 2 && _dates[0] != null && _dates[1] != null) {
+      _fetchUserQrCodes(startDate: _dates[0], endDate: _dates[1]);
+    }
   }
 
   void _closeTable() {
     setState(() {
-      _showTable = false; // Hide the table when the close button is pressed
+      _showTable = false;
     });
   }
 
@@ -674,8 +482,7 @@ class _Student_reportState extends State<Student_report>
         body: Stack(
           children: [
             Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top), // For status bar
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               decoration: BoxDecoration(
                 color: Color(0xFFDBE7C9),
                 boxShadow: [
@@ -703,137 +510,116 @@ class _Student_reportState extends State<Student_report>
                 ),
               ),
             ),
-            // Background content
-            FutureBuilder<bool>(
-              future: getData(),
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                if (!snapshot.hasData) {
-                  return const SizedBox();
-                } else {
-                  return Positioned(
-                    top: 100,
-                    left: 20,
-                    right: 20,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+            Positioned(
+              top: 100,
+              left: 20,
+              right: 20,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 10),
+                  Container(
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Color(0xFF789461).withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(height: 10),
-                        Container(
-                          padding: EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            color: Color(0xFF789461).withOpacity(0.1),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Expanded(
-                                child: Text(
-                                  'Select the Range of Dates and Click on "Get Report" to see your Coupon Usage in those Days',
-                                  style: TextStyle(
-                                    fontSize: 14,
-                                    color: Colors.black87,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(width: 10),
-                              Transform.scale(
-                                scale:
-                                    1.5, // Adjust the scale factor to increase the size of the Lottie animation
-                                child: SizedBox(
-                                  width: 50, // Original size
-                                  height: 50, // Original size
-                                  child: Lottie.asset(
-                                    'assets/images/landing/fetch.json',
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-
-                        const SizedBox(height: 20),
-                        CalendarDatePicker2(
-                          config: CalendarDatePicker2Config(
-                            calendarType: CalendarDatePicker2Type.range,
-                            selectedDayHighlightColor: Color(0xFF789461),
-                            dayTextStyle: const TextStyle(color: Colors.blue),
-                            selectedDayTextStyle:
-                                const TextStyle(color: Colors.white),
-                          ),
-                          value: _dates,
-                          onValueChanged: (dates) {
-                            setState(() {
-                              _dates = dates;
-                            });
-                          },
-                        ),
-                        const SizedBox(
-                            height:
-                                10), // Adjust this value to move the button closer
-                        Center(
-                          child: ElevatedButton(
-                            onPressed: _fetchData,
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(80.0),
-                              ),
-                              padding: EdgeInsets.zero,
-                              textStyle: const TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                              backgroundColor:
-                                  Color(0xFF294B29), // Button color
+                        const Expanded(
+                          child: Text(
+                            'Select the Range of Dates and Click on "Get Report" to see your Coupon Usage in those Days',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black87,
                             ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              height: 50.0,
-                              // width: size.width,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(80.0),
-                                gradient: const LinearGradient(
-                                  colors: [
-                                    Color(0xFF294B29),
-                                    Color(0xFF50623A),
-                                  ],
-                                ),
-                              ),
-                              padding: const EdgeInsets.all(0),
-                              child: const Text(
-                                "GET REPORT",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                          ),
+                        ),
+                        const SizedBox(width: 10),
+                        Transform.scale(
+                          scale: 1.5,
+                          child: SizedBox(
+                            width: 50,
+                            height: 50,
+                            child: Lottie.asset(
+                              'assets/images/landing/fetch.json',
+                              fit: BoxFit.contain,
                             ),
                           ),
                         ),
                       ],
                     ),
-                  );
-                }
-              },
+                  ),
+                  const SizedBox(height: 20),
+                  CalendarDatePicker2(
+                    config: CalendarDatePicker2Config(
+                      calendarType: CalendarDatePicker2Type.range,
+                      selectedDayHighlightColor: Color(0xFF789461),
+                      dayTextStyle: const TextStyle(color: Colors.blue),
+                      selectedDayTextStyle:
+                          const TextStyle(color: Colors.white),
+                    ),
+                    value: _dates,
+                    onValueChanged: (dates) => setState(() {
+                      _dates = dates;
+                    }),
+                  ),
+                  const SizedBox(height: 10),
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: _fetchData,
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(80.0),
+                        ),
+                        padding: EdgeInsets.zero,
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        backgroundColor: Color(0xFF294B29),
+                      ),
+                      child: Container(
+                        alignment: Alignment.center,
+                        height: 50.0,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(80.0),
+                          gradient: const LinearGradient(
+                            colors: [
+                              Color(0xFF294B29),
+                              Color(0xFF50623A),
+                            ],
+                          ),
+                        ),
+                        padding: const EdgeInsets.all(0),
+                        child: const Text(
+                          "GET REPORT",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
+
             if (_showTable) ...[
-              // Blurred background
               Positioned.fill(
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
-                  child: Container(
-                    color: Colors.black.withOpacity(0.5),
-                  ),
+                  child: Container(color: Colors.black.withOpacity(0.5)),
                 ),
               ),
-              // Table popup
               Positioned(
-                top: 150, // Adjust this value to position above the navbar
+                top: 100,
                 left: 20,
                 right: 20,
-                bottom: 60, // Leave space for the bottom bar
+                bottom: 100,
                 child: Container(
                   padding: EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
@@ -848,10 +634,8 @@ class _Student_reportState extends State<Student_report>
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'Results',
-                            style: Theme.of(context).textTheme.titleLarge,
-                          ),
+                          Text('Results',
+                              style: Theme.of(context).textTheme.titleLarge),
                           IconButton(
                             icon: Icon(Icons.close),
                             onPressed: _closeTable,
@@ -859,12 +643,95 @@ class _Student_reportState extends State<Student_report>
                         ],
                       ),
                       Expanded(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: DataTable(
-                            columnSpacing: 12, // Reduce column spacing
-                            columns: headers,
-                            rows: rows,
+                        child: BlocListener<QrCodeBloc, QrCodeState>(
+                          listener: (context, state) {
+                            if (state is QrCodeFailure) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                    content: Text('Error: ${state.message}')),
+                              );
+                            }
+                          },
+                          child: BlocBuilder<QrCodeBloc, QrCodeState>(
+                            builder: (context, state) {
+                              print('Current QrCodeBloc state: $state');
+                              if (state is QrCodeLoading) {
+                                return Center(
+                                    child: CircularProgressIndicator());
+                              } else if (state is QrCodeLoaded) {
+                                final filteredQrcodes = state.qrcodes
+                                    .where((item) {
+                                  final itemDate = item.scannedAt;
+                                  final startDate = _dates[0];
+                                  final endDate = _dates[1];
+
+                                  if (startDate != null && endDate != null) {
+                                    return itemDate.isAfter(startDate) &&
+                                        itemDate.isBefore(endDate
+                                            .add(const Duration(days: 1)));
+                                  } else if (startDate != null) {
+                                    return itemDate.isAfter(startDate);
+                                  } else if (endDate != null) {
+                                    return itemDate.isBefore(
+                                        endDate.add(const Duration(days: 1)));
+                                  }
+                                  return true;
+                                }).toList()
+                                  ..sort((a, b) =>
+                                      b.scannedAt.compareTo(a.scannedAt));
+                                print(
+                                    'Filtered QR codes: ${filteredQrcodes.length}');
+                                if (filteredQrcodes.isEmpty) {
+                                  return Center(
+                                      child: Text(
+                                          'No data available for the selected date range'));
+                                }
+                                return SingleChildScrollView(
+                                  scrollDirection: Axis.vertical,
+                                  child: DataTable(
+                                    columns: const [
+                                      DataColumn(label: Text('Date & Time')),
+                                      DataColumn(label: Text('Canteen Name')),
+                                      DataColumn(label: Text('Coupon Used')),
+                                    ],
+                                    rows: filteredQrcodes.map((QRModel item) {
+                                      return DataRow(cells: [
+                                        DataCell(
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(DateFormat('dd/MM/yyyy')
+                                                  .format(item.scannedAt)),
+                                              Text(
+                                                DateFormat('hh:mm a')
+                                                    .format(item.scannedAt),
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 12),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        DataCell(Text(
+                                            item.canteenName.toLowerCase() ==
+                                                    'canteena'
+                                                ? 'Kalderama'
+                                                : 'Hilton')),
+                                        DataCell(Text(item.count.toString())),
+                                      ]);
+                                    }).toList(),
+                                  ),
+                                );
+                              } else if (state is QrCodeFailure) {
+                                return Center(
+                                    child: Text('Error: ${state.message}'));
+                              } else {
+                                return Center(child: Text('No data'));
+                              }
+                            },
                           ),
                         ),
                       ),
@@ -873,6 +740,8 @@ class _Student_reportState extends State<Student_report>
                 ),
               ),
             ],
+
+            // Your bottom bar
             bottomBar(),
           ],
         ),
@@ -880,11 +749,7 @@ class _Student_reportState extends State<Student_report>
     );
   }
 
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    return true;
-  }
-
+  // Your existing bottomBar method
   Widget bottomBar() {
     return Column(
       children: <Widget>[
