@@ -1,5 +1,6 @@
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
+import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
@@ -228,6 +229,8 @@ class _StudentHomeState extends State<StudentHome>
                                             ],
                                           ),
                                           onPressed: () {
+                                            Navigator.pushReplacementNamed(
+                              context, RouteNames.qr);
                                             // Add your scan QR functionality here
                                           },
                                         ),

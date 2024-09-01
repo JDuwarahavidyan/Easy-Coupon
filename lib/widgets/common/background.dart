@@ -100,14 +100,14 @@ class Background extends StatelessWidget {
               width: size.width,
             ),
           ),
-          Positioned(
-            top: 0,
-            right: 0,
-            child: Image.asset(
-              "assets/images/landing/top2.png",
-              width: size.width,
-            ),
-          ),
+          // Positioned(
+          //   top: 0,
+          //   right: 0,
+          //   child: Image.asset(
+          //     "assets/images/landing/top2.png",
+          //     width: size.width,
+          //   ),
+          // ),
           Positioned(
             bottom: 0,
             right: 0,
@@ -124,14 +124,14 @@ class Background extends StatelessWidget {
               width: size.width,
             ),
           ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Image.asset(
-              "assets/images/landing/bottom_2.png",
-              width: size.width,
-            ),
-          ),
+          // Positioned(
+          //   bottom: 0,
+          //   right: 0,
+          //   child: Image.asset(
+          //     "assets/images/landing/bottom_2.png",
+          //     width: size.width,
+          //   ),
+          // ),
           child,
         ],
       ),
