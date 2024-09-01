@@ -7,6 +7,7 @@ import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.da
 import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_home.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/qr_generation.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
 
@@ -29,13 +30,16 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => StudentHome());
 
       case RouteNames.cahome:
-        return MaterialPageRoute(builder: (_) => CanteenAHome());
+        return MaterialPageRoute(builder: (_) => const CanteenAHome());
 
       case RouteNames.report:
         return MaterialPageRoute(builder: (_) => Student_report());
 
       case RouteNames.qr:
         return MaterialPageRoute(builder: (_) => QrPage());
+
+      case RouteNames.qr_g:
+        return MaterialPageRoute(builder: (_) => QrGen());
 
       case RouteNames.profile:
         return MaterialPageRoute(builder: (_) => ProfileScreen());

@@ -313,7 +313,6 @@ class _CanteenAReportState extends State<CanteenAReport>
                 ),
               ),
             ],
-            bottomBar(),
           ],
         ),
       ),
@@ -323,54 +322,5 @@ class _CanteenAReportState extends State<CanteenAReport>
   Future<bool> getData() async {
     await Future<dynamic>.delayed(const Duration(milliseconds: 200));
     return true;
-  }
-
-  Widget bottomBar() {
-    return Column(
-      children: <Widget>[
-        const Expanded(
-          child: SizedBox(),
-        ),
-        BottomBarView(
-          currentIndex: tabIconsList.indexWhere((tab) => tab.isSelected),
-          onTabSelected: (int index) {
-            setState(() {
-              for (int i = 0; i < tabIconsList.length; i++) {
-                tabIconsList[i].isSelected = i == index;
-              }
-            });
-
-            if (index == 0) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody =
-                      StudentHome(animationController: animationController);
-                });
-              });
-            } else if (index == 1) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                tabBody =
-                    const CanteenAReport(); // Switch to the report screen itself
-              });
-            } else if (index == 2) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                // Set the tab body to your Settings screen when the Settings tab is clicked.
-                // tabBody = SettingsScreen(); // Replace with your Settings screen
-              });
-            }
-          },
-          tabIconsList: [],
-        ),
-      ],
-    );
   }
 }

@@ -15,4 +15,5 @@ class RouteNames {
   static const String abtus = '/about-us';
   static const String cahome = '/cahome';
   static const String canreport = '/canreport';
+  static const String qr_g = '/';
 }
