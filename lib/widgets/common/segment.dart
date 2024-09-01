@@ -53,20 +53,20 @@ class _DonutChartState extends State<DonutChart> {
             usedColor: Colors.grey.shade300,
           ),
           child: SizedBox(
-            width: 200,
-            height: 200,
+            width: 300,
+            height: 150,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'Remaining Coupons',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black54,
-                    ),
-                  ),
+                  // const Text(
+                  //   'Remaining Coupons',
+                  //   style: TextStyle(
+                  //     fontSize: 16,
+                  //     fontWeight: FontWeight.w600,
+                  //     color: Colors.black54,
+                  //   ),
+                  // ),
                   Text(
                     '${30 - currentValue}',  // Display remaining coupons
                     style: const TextStyle(

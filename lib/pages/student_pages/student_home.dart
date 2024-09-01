@@ -132,13 +132,23 @@ class _StudentHomeState extends State<StudentHome>
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 20), // Add spacing before the donut chart
+                                    SizedBox(height: 20),
+                                    Center(
+                                      child:Text(
+                                        'Remaining Coupons as per ${DateTime.now().toString().substring(0, 10)}',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.black54,
+                                        ),
+                                      ),),
+                                    // SizedBox(height: 10), // Add spacing before the donut chart
                                     Center(
                                       child: DonutChart(
                                         animation: animationController!, // Pass the animation controller
                                       ),
                                     ),
-                                    SizedBox(height: 20), // Add spacing before the spinbox
+                                    SizedBox(height: 15), // Add spacing before the spinbox
                                     Center(
                                       child: Container(
                                         width: constraints.maxWidth, // Set the width to match the text container
@@ -236,7 +246,7 @@ class _StudentHomeState extends State<StudentHome>
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 10), // Add spacing before the Lottie animation
+                                    // SizedBox(height: 10), // Add spacing before the Lottie animation
                                     SizedBox(
                                       width: 250, // Set width for Lottie animation
                                       height: 250, // Set height for Lottie animation
