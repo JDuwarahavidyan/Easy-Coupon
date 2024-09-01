@@ -7,9 +7,8 @@ class UserService {
   final CollectionReference _userCollection = FirebaseFirestore.instance.collection('users');
 
   Stream<List<UserModel>> getUsersStream() {
-    return _userCollection.snapshots().map((snapshot) => snapshot.docs
-        .map((doc) => UserModel.fromJson(doc.data() as Map<String, dynamic>))
-        .toList());
+    
+    return _userCollection.snapshots().map((snapshot) => snapshot.docs.map((doc) => UserModel.fromJson(doc.data() as Map<String, dynamic>)).toList());
   }
 
   Future<UserModel?> getUser(String userId) async {
@@ -79,7 +78,7 @@ class UserService {
     }
   }
 
-   Future<String> generateQRData(String userId) async {
+  Future<String> generateQRData(String userId) async {
     try {
       final userDoc = await _userCollection.doc(userId).get();
       if (userDoc.exists) {
@@ -105,7 +104,7 @@ class UserService {
     }
   }
 
-   Future<void> updateCanteenCount(int val, String canteenUserId) async {
+  Future<void> updateCanteenCount(int val, String canteenUserId) async {
     try {
       final userDoc = _userCollection.doc(canteenUserId);
       await userDoc.update({
@@ -116,7 +115,7 @@ class UserService {
     }
   }
 
-   Future<String?> fetchCanteenUserName(String userId) async {
+  Future<String?> fetchCanteenUserName(String userId) async {
     try {
       DocumentSnapshot doc = await _userCollection.doc(userId).get();
       if (doc.exists) {
@@ -128,8 +127,3 @@ class UserService {
     }
   }
 }
-
-
-
-
-  
