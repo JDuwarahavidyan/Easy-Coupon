@@ -1,3 +1,4 @@
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_report.dart';
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/login_pages/register.dart';
 import 'package:easy_coupon/pages/pages.dart';
@@ -47,6 +48,9 @@ class AppRoutes {
 
       case RouteNames.abtus:
         return MaterialPageRoute(builder: (_) => AboutUs());
+
+      case RouteNames.canreport:
+        return MaterialPageRoute(builder: (_) => CanteenAReport());
 
       case RouteNames.confirm:
         return MaterialPageRoute(

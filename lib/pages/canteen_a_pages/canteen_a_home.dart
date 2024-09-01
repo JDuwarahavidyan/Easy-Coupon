@@ -1,3 +1,4 @@
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_report.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
 import 'package:easy_coupon/routes/route_names.dart';
@@ -22,7 +23,6 @@ class TabIconData {
     ];
   }
 }
-
 
 // ignore: camel_case_types
 class CanteenAHome extends StatefulWidget {
@@ -65,7 +65,8 @@ class _CanteenAHomeState extends State<CanteenAHome>
     return Background(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        extendBody: true, // Allow the body to extend behind the bottom navigation bar
+        extendBody:
+            true, // Allow the body to extend behind the bottom navigation bar
         body: Stack(
           children: [
             FutureBuilder<bool>(
@@ -75,7 +76,8 @@ class _CanteenAHomeState extends State<CanteenAHome>
                   return const SizedBox();
                 } else {
                   return Padding(
-                    padding: const EdgeInsets.only(bottom: 60), // Padding to avoid overlap
+                    padding: const EdgeInsets.only(
+                        bottom: 60), // Padding to avoid overlap
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -102,11 +104,14 @@ class _CanteenAHomeState extends State<CanteenAHome>
                                     Container(
                                       padding: EdgeInsets.all(8.0),
                                       decoration: BoxDecoration(
-                                        color: Color(0xFF789461).withOpacity(0.1),
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        color:
+                                            Color(0xFF789461).withOpacity(0.1),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Expanded(
                                             child: Text(
@@ -119,7 +124,8 @@ class _CanteenAHomeState extends State<CanteenAHome>
                                           ),
                                           const SizedBox(width: 10),
                                           Transform.scale(
-                                            scale: 1.7, // Adjust the scale factor to increase the size of the Lottie animation
+                                            scale:
+                                                1.7, // Adjust the scale factor to increase the size of the Lottie animation
                                             child: SizedBox(
                                               width: 40, // Original size
                                               height: 40, // Original size
@@ -132,97 +138,114 @@ class _CanteenAHomeState extends State<CanteenAHome>
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 20), // Add spacing before the donut chart
+                                    SizedBox(
+                                        height:
+                                            20), // Add spacing before the donut chart
                                     Center(
                                       child: Donut_c_Chart(
-                                        animation: animationController!, // Pass the animation controller
+                                        animation:
+                                            animationController!, // Pass the animation controller
                                       ),
                                     ),
-                                    SizedBox(height: 20), // Add spacing before the spinbox
+                                    SizedBox(
+                                        height:
+                                            20), // Add spacing before the spinbox
                                     Center(
-                                      // child: Container(
-                                      //   width: constraints.maxWidth, // Set the width to match the text container
-                                      //   decoration: BoxDecoration(
-                                      //     color: Color(0xFF789461), // Green background color
-                                      //     borderRadius: BorderRadius.circular(15.0),
-                                      //   ),
-                                      //   padding: EdgeInsets.all(8.0), // Reduced padding to decrease height
-                                      //   // child: Column(
-                                      //     // children: [
-                                      //     //   Text(
-                                      //     //     'Select number of coupons',
-                                      //     //     style: TextStyle(
-                                      //     //       fontSize: 16,
-                                      //     //       fontWeight: FontWeight.bold,
-                                      //     //       color: Colors.black, // Text color is black
-                                      //     //     ),
-                                      //     //   ),
-                                      //     //   SizedBox(height: 5), // Reduced height between the text and spinbox
-                                      //     //   Row(
-                                      //     //     mainAxisAlignment: MainAxisAlignment.center,
-                                      //     //     children: [
-                                      //     //       IconButton(
-                                      //     //         iconSize: 30, // Decreased icon size to reduce overall height
-                                      //     //         icon: Icon(Icons.remove, color: Colors.white), // White icons for better visibility
-                                      //     //         onPressed: () {
-                                      //     //           setState(() {
-                                      //     //             if (_selectedCoupons > 1) {
-                                      //     //               _selectedCoupons--;
-                                      //     //             }
-                                      //     //           });
-                                      //     //         },
-                                      //     //       ),
-                                      //     //       SizedBox(width: 15), // Reduced width between the icon and number
-                                      //     //       Text(
-                                      //     //         '$_selectedCoupons',
-                                      //     //         style: TextStyle(
-                                      //     //           fontSize: 24,
-                                      //     //           fontWeight: FontWeight.bold,
-                                      //     //           color: Colors.white, // Text color is white for contrast
-                                      //     //         ),
-                                      //     //       ),
-                                      //     //       SizedBox(width: 15), // Reduced width between the number and icon
-                                      //     //       IconButton(
-                                      //     //         iconSize: 30, // Decreased icon size to reduce overall height
-                                      //     //         icon: Icon(Icons.add, color: Colors.white), // White icons for better visibility
-                                      //     //         onPressed: () {
-                                      //     //           setState(() {
-                                      //     //             if (_selectedCoupons < 3) {
-                                      //     //               _selectedCoupons++;
-                                      //     //             }
-                                      //     //           });
-                                      //     //         },
-                                      //     //       ),
-                                      //     //     ],
-                                      //     //   ),
-                                      //     // ],
-                                      //   // ),
-                                      // ),
-                                    ),
-                                    SizedBox(height: 20), // Add spacing before the "SCAN ME" button
+                                        // child: Container(
+                                        //   width: constraints.maxWidth, // Set the width to match the text container
+                                        //   decoration: BoxDecoration(
+                                        //     color: Color(0xFF789461), // Green background color
+                                        //     borderRadius: BorderRadius.circular(15.0),
+                                        //   ),
+                                        //   padding: EdgeInsets.all(8.0), // Reduced padding to decrease height
+                                        //   // child: Column(
+                                        //     // children: [
+                                        //     //   Text(
+                                        //     //     'Select number of coupons',
+                                        //     //     style: TextStyle(
+                                        //     //       fontSize: 16,
+                                        //     //       fontWeight: FontWeight.bold,
+                                        //     //       color: Colors.black, // Text color is black
+                                        //     //     ),
+                                        //     //   ),
+                                        //     //   SizedBox(height: 5), // Reduced height between the text and spinbox
+                                        //     //   Row(
+                                        //     //     mainAxisAlignment: MainAxisAlignment.center,
+                                        //     //     children: [
+                                        //     //       IconButton(
+                                        //     //         iconSize: 30, // Decreased icon size to reduce overall height
+                                        //     //         icon: Icon(Icons.remove, color: Colors.white), // White icons for better visibility
+                                        //     //         onPressed: () {
+                                        //     //           setState(() {
+                                        //     //             if (_selectedCoupons > 1) {
+                                        //     //               _selectedCoupons--;
+                                        //     //             }
+                                        //     //           });
+                                        //     //         },
+                                        //     //       ),
+                                        //     //       SizedBox(width: 15), // Reduced width between the icon and number
+                                        //     //       Text(
+                                        //     //         '$_selectedCoupons',
+                                        //     //         style: TextStyle(
+                                        //     //           fontSize: 24,
+                                        //     //           fontWeight: FontWeight.bold,
+                                        //     //           color: Colors.white, // Text color is white for contrast
+                                        //     //         ),
+                                        //     //       ),
+                                        //     //       SizedBox(width: 15), // Reduced width between the number and icon
+                                        //     //       IconButton(
+                                        //     //         iconSize: 30, // Decreased icon size to reduce overall height
+                                        //     //         icon: Icon(Icons.add, color: Colors.white), // White icons for better visibility
+                                        //     //         onPressed: () {
+                                        //     //           setState(() {
+                                        //     //             if (_selectedCoupons < 3) {
+                                        //     //               _selectedCoupons++;
+                                        //     //             }
+                                        //     //           });
+                                        //     //         },
+                                        //     //       ),
+                                        //     //     ],
+                                        //     //   ),
+                                        //     // ],
+                                        //   // ),
+                                        // ),
+                                        ),
+                                    SizedBox(
+                                        height:
+                                            20), // Add spacing before the "SCAN ME" button
                                     Center(
                                       child: Container(
-                                        width: 250, // Increased width of the "SCAN ME" button
+                                        width:
+                                            250, // Increased width of the "SCAN ME" button
                                         decoration: BoxDecoration(
-                                          color: Colors.white, // White background color
-                                          borderRadius: BorderRadius.circular(15.0),
+                                          color: Colors
+                                              .white, // White background color
+                                          borderRadius:
+                                              BorderRadius.circular(15.0),
                                           border: Border.all(
-                                            color: Color(0xFF789461), // Green border color
+                                            color: Color(
+                                                0xFF789461), // Green border color
                                             width: 2.0,
                                           ),
                                         ),
                                         child: CupertinoButton(
-                                          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0), // Increased padding for larger button
-                                          color: Colors.transparent, // Make the button background transparent
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 20.0,
+                                              vertical:
+                                                  12.0), // Increased padding for larger button
+                                          color: Colors
+                                              .transparent, // Make the button background transparent
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Icon(CupertinoIcons.qrcode, color: Color(0xFF789461)),
+                                              Icon(CupertinoIcons.qrcode,
+                                                  color: Color(0xFF789461)),
                                               SizedBox(width: 10),
                                               Text(
                                                 'GENERATE QR',
                                                 style: TextStyle(
-                                                  color: Color(0xFF789461), // Green text color
+                                                  color: Color(
+                                                      0xFF789461), // Green text color
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
@@ -230,16 +253,20 @@ class _CanteenAHomeState extends State<CanteenAHome>
                                           ),
                                           onPressed: () {
                                             Navigator.pushReplacementNamed(
-                              context, RouteNames.qr);
+                                                context, RouteNames.qr);
                                             // Add your scan QR functionality here
                                           },
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 10), // Add spacing before the Lottie animation
                                     SizedBox(
-                                      width: 250, // Set width for Lottie animation
-                                      height: 250, // Set height for Lottie animation
+                                        height:
+                                            10), // Add spacing before the Lottie animation
+                                    SizedBox(
+                                      width:
+                                          250, // Set width for Lottie animation
+                                      height:
+                                          250, // Set height for Lottie animation
                                       child: Lottie.asset(
                                         'assets/images/landing/cook.json',
                                         fit: BoxFit.contain,
@@ -284,7 +311,7 @@ class _CanteenAHomeState extends State<CanteenAHome>
                   return;
                 }
                 tabBody =
-                    Student_report(); // Switch to the report screen itself
+                    CanteenAReport(); // Switch to the report screen itself
               });
             } else if (index == 2) {
               animationController?.reverse().then<dynamic>((data) {

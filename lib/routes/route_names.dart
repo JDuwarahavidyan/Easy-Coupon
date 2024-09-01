@@ -7,7 +7,7 @@ class RouteNames {
   static const String report = '/';
   static const String confirm = '/confirm';
   static const String qr = '/qr';
-  static const String profile = '/';
+  static const String profile = '/profile';
   static const String updtprofile = '/updtprofile';
   static const String register = '/register';
   static const String student = '/student';
