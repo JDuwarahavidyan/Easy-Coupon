@@ -10,7 +10,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final AuthRepository authRepository;
 
   AuthBloc({required this.authRepository}) : super(AuthStateInitial()) {
-  on<AppStartedEvent>((event, emit) async {
+    on<AppStartedEvent>((event, emit) async {
       emit(AuthStateLoading());
       try {
         final isSignedIn = await authRepository.isSignedIn();
@@ -31,9 +31,9 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                   emit(StudentAuthenticated(user));
                 } else if (userModel.role == 'canteena') {
                   emit(CanteenAAuthenticated(user));
-                }  else if (userModel.role == 'canteenb') {
+                } else if (userModel.role == 'canteenb') {
                   emit(CanteenBAuthenticated(user));
-                }else {
+                } else {
                   emit(Authenticated(user));
                 }
               }
@@ -53,6 +53,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         final user = await authRepository.signInWithUsernameAndPassword(
             event.username, event.password);
         final isFirstTime = await authRepository.isFirstTimeLogin(user);
+
         if (isFirstTime) {
           emit(FirstTimeLogin(user));
         } else {
@@ -61,7 +62,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             emit(StudentAuthenticated(user));
           } else if (userModel.role == 'canteena') {
             emit(CanteenAAuthenticated(user));
-          } else if((userModel.role == 'canteenb') ){
+          } else if ((userModel.role == 'canteenb')) {
             emit(CanteenBAuthenticated(user));
           }
         }

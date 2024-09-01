@@ -14,6 +14,7 @@ import 'routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -27,8 +28,7 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Color(0xFFFFFFFF),
     statusBarIconBrightness: Brightness.dark,
-    statusBarBrightness:
-        !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
+    statusBarBrightness: !kIsWeb && Platform.isAndroid ? Brightness.dark : Brightness.light,
     systemNavigationBarColor: Color(0xFFFFFFFF),
     systemNavigationBarDividerColor: Color(0xFFFFFFFF),
     systemNavigationBarIconBrightness: Brightness.dark,
@@ -53,12 +53,10 @@ class MyApp extends StatelessWidget {
           create: (context) => CanteenBloc(FirebaseFirestore.instance),
         ),
         BlocProvider<UserBloc>(
-          create: (context) =>
-              UserBloc(UserRepository(UserService()))..add(UserReadEvent()),
+          create: (context) => UserBloc(UserRepository(UserService()))..add(UserReadEvent()),
         ),
         BlocProvider<QrCodeBloc>(
-          create: (context) => QrCodeBloc(QrCodeRepository(QrCodeService()))
-            ..add(QrCodeReadEvent()),
+          create: (context) => QrCodeBloc(QrCodeRepository(QrCodeService()))..add(QrCodeReadEvent()),
         ),
       ],
       child: ChangeNotifierProvider(
@@ -75,7 +73,7 @@ class MyApp extends StatelessWidget {
               theme: themeProvider.themeData.copyWith(
                 scaffoldBackgroundColor: const Color(0xFFFFFFFF),
               ),
-              initialRoute: RouteNames.report,
+              initialRoute: RouteNames.cahome,
               onGenerateRoute: AppRoutes.generateRoute,
               builder: (context, child) {
                 return SafeArea(

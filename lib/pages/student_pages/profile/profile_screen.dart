@@ -230,17 +230,6 @@
 // }
 
 
-
-
-
-
-
-
-
-
-
-
-
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/material.dart';
@@ -255,7 +244,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
     Size size = MediaQuery.of(context).size;
 
     return Background(
@@ -292,12 +281,12 @@ class ProfileScreen extends StatelessWidget {
                         fontSize: 25,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(isDark
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: Icon(isDark
                           ? LineAwesomeIcons.sun
                           : LineAwesomeIcons.moon),
-                    ),
+                    // ),
                   ],
                 ),
               ),

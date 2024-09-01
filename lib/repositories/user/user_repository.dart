@@ -1,14 +1,13 @@
 import 'package:easy_coupon/models/user/user_model.dart';
 import 'package:easy_coupon/services/user/user_service.dart';
 
-
 class UserRepository {
   final UserService _userService;
-
 
   UserRepository(this._userService);
 
   Stream<List<UserModel>> getUsersStream() {
+   
     return _userService.getUsersStream();
   }
 
@@ -28,11 +27,11 @@ class UserRepository {
     return _userService.updateCount(val, userId);
   }
 
-   Future<String> generateQRData(String userId) async {
+  Future<String> generateQRData(String userId) async {
     return _userService.generateQRData(userId);
   }
 
-   Future<String?> getUserRole(String userId) async {
+  Future<String?> getUserRole(String userId) async {
     return _userService.getUserRole(userId);
   }
 
@@ -40,9 +39,7 @@ class UserRepository {
     return _userService.updateCanteenCount(val, canteenUserId);
   }
 
-   Future<String?> fetchCanteenUserName(String userId) async {
+  Future<String?> fetchCanteenUserName(String userId) async {
     return _userService.fetchCanteenUserName(userId);
   }
-  
-
 }

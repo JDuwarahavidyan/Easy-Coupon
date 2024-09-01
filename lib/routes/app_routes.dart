@@ -17,8 +17,7 @@ class AppRoutes {
       case RouteNames.splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case RouteNames.introductionAnimation:
-        return MaterialPageRoute(
-            builder: (_) => const IntroductionAnimationScreen());
+        return MaterialPageRoute(builder: (_) => const IntroductionAnimationScreen());
 
       case RouteNames.login:
         return MaterialPageRoute(builder: (_) => LoginPage());
@@ -55,6 +54,8 @@ class AppRoutes {
 
       case RouteNames.canreport:
         return MaterialPageRoute(builder: (_) => CanteenAReport());
+
+      //need to change
 
       case RouteNames.confirm:
         return MaterialPageRoute(
