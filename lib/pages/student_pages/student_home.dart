@@ -156,7 +156,7 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                           Center(
                                             child: DonutChart(
                                               animation: animationController!,
-                                              couponCount: user.studentCount, // Pass the user's coupon count
+                                              couponCount: _selectedCoupons, // Pass the user's coupon count
                                             ),
                                           ),
                                           const SizedBox(height: 20),
@@ -324,9 +324,10 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
               setState(() {
                 tabBody = const StudentHome(); // Update with the home page widget
               });
-            // } else if (index == 1) {
-            //   Navigator.pushNamed(context, RouteNames.reports);
-            // } else if (index == 2) {
+            } else if (index == 1) {
+              Navigator.pushNamed(context, RouteNames.report);
+            // } 
+            // else if (index == 2) {
             //   Navigator.pushNamed(context, RouteNames.settings);
             }
           }, tabIconsList: [],

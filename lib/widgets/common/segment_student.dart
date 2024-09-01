@@ -27,7 +27,7 @@ class _DonutChartState extends State<DonutChart> {
 
   @override
   Widget build(BuildContext context) {
-    double remainingPercentage = (currentValue).clamp(0, 30) / 30.0; // Ensure it is between 0 and 1
+    double remainingPercentage = (30 - currentValue) / 30.0; // Ensure it is between 0 and 1
 
     // Obtain the UserBloc from the context
     final UserBloc userBloc = context.read<UserBloc>();
@@ -43,53 +43,36 @@ class _DonutChartState extends State<DonutChart> {
             usedColor: Colors.grey.shade300,
           ),
           child: SizedBox(
-            width: 300,
-            height: 150,
+            width: 200, // Adjusted to a smaller size
+            height: 200, // Equal height to maintain circular shape
             child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // const Text(
-                  //   'Remaining Coupons',
-                  //   style: TextStyle(
-                  //     fontSize: 16,
-                  //     fontWeight: FontWeight.w600,
-                  //     color: Colors.black54,
-                  //   ),
-                  // ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  BlocBuilder<UserBloc, UserState>(
-                    bloc: userBloc,
-                    builder: (context, state) {
-                      if (state is UserLoading) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (state is UserLoaded) {
-                        //state.users;
-                        try {
-                          final user = state.users.firstWhere(
-                            (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
-                            orElse: () => throw Exception('User not found'),
-                          );
-                          currentValue = user.studentCount;
-                          return Text(
-                            '${ currentValue}', // Display remaining coupons
-                            style: const TextStyle(
-                              fontSize: 70,
-                              fontWeight: FontWeight.bold,
-                              color: Color(0xFF50623A),
-                            ),
-                          );
-                        } catch (e) {
-                          return const Center(child: Text('User data not found'));
-                        }
-                      } else {
-                        return const Center(child: Text('Failed to load user data'));
-                      }
-                    },
-                  ),
-                ],
+              child: BlocBuilder<UserBloc, UserState>(
+                bloc: userBloc,
+                builder: (context, state) {
+                  if (state is UserLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is UserLoaded) {
+                    try {
+                      final user = state.users.firstWhere(
+                        (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
+                        orElse: () => throw Exception('User not found'),
+                      );
+
+                      return Text(
+                        '${user.studentCount}', // Display remaining coupons
+                        style: const TextStyle(
+                          fontSize: 90, // Adjusted for better fit
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF50623A),
+                        ),
+                      );
+                    } catch (e) {
+                      return const Center(child: Text('User data not found'));
+                    }
+                  } else {
+                    return const Center(child: Text('Failed to load user data'));
+                  }
+                },
               ),
             ),
           ),
@@ -115,27 +98,29 @@ class DonutChartPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = Offset(size.width / 2, size.height / 2);
-    final radius = size.width / 2 - 6;
+    final radius = math.min(size.width, size.height) / 2 - 10; // Adjusted to fit within the container
 
     final remainingPaint = Paint()
       ..color = remainingColor
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 20
+      ..strokeWidth = 15
       ..strokeCap = StrokeCap.round;
 
     final usedPaint = Paint()
       ..color = usedColor
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 20;
+      ..strokeWidth = 15;
 
+    // Draw the background (used part) arc
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
       -math.pi / 2,
-      2 * math.pi * animationValue,
+      2 * math.pi,
       false,
       usedPaint,
     );
 
+    // Draw the remaining part of the arc
     canvas.drawArc(
       Rect.fromCircle(center: center, radius: radius),
       -math.pi / 2,
@@ -143,8 +128,6 @@ class DonutChartPainter extends CustomPainter {
       false,
       remainingPaint,
     );
-
-    print('remainingPercentage: $remainingPercentage, animationValue: $animationValue');
   }
 
   @override
