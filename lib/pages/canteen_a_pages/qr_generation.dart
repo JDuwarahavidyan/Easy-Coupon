@@ -1,42 +1,82 @@
-import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/pages/student_pages/student_report.dart';
-import 'package:easy_coupon/routes/route_names.dart';
-import 'package:flutter/material.dart';
-import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-import 'package:easy_coupon/widgets/common/segment_c.dart'; // Import your DonutChart widget
-import 'package:flutter/cupertino.dart'; // Import Cupertino icons
+import 'dart:io';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:share/share.dart';
 
-
-// ignore: camel_case_types
-class  QrGen extends StatefulWidget {
-  const  QrGen({super.key, AnimationController? animationController});
+class QrGen extends StatefulWidget {
+  const QrGen({super.key, AnimationController? animationController});
 
   @override
-  // ignore: library_private_types_in_public_api
   _QrGenState createState() => _QrGenState();
 }
 
-class _QrGenState extends State< QrGen>
-    with TickerProviderStateMixin {
+class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
   AnimationController? animationController;
-  //List<TabIconData> tabIconsList = TabIconData.tabIconsList;
-  Widget tabBody = Container(
-    color: Colors.white,
-  );
 
   @override
   void initState() {
     super.initState();
-
-    
-    //tabIconsList[0].isSelected = true;
-
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 600), vsync: this);
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+  }
 
-   
+  Future<void> _saveImageToDownloads() async {
+    try {
+      // Load the image from the assets
+      final ByteData imageData =
+          await rootBundle.load('assets/images/landing/qrcode.jpg');
+
+      // Get the external storage directory
+      final Directory? directory = await getExternalStorageDirectory();
+      final String path = directory!.path;
+
+      // Define the Downloads directory and create it if it doesn't exist
+      final String downloadDirPath = '$path/Download';
+      final Directory downloadDir = Directory(downloadDirPath);
+
+      if (!await downloadDir.exists()) {
+        await downloadDir.create(recursive: true);
+      }
+
+      // Create the file in the Downloads directory
+      final File imageFile = File('$downloadDirPath/qrcode.jpg');
+
+      // Write the image data to the file
+      await imageFile.writeAsBytes(imageData.buffer.asUint8List());
+
+      // Notify the user
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('QR Code saved to Downloads folder')),
+      );
+    } catch (e) {
+      print('Error saving image: $e');
+    }
+  }
+
+  Future<void> _shareImage() async {
+    try {
+      // Load the image from the assets
+      final ByteData imageData =
+          await rootBundle.load('assets/images/landing/qrcode.jpg');
+
+      // Get the directory to save the image temporarily
+      final Directory directory = await getTemporaryDirectory();
+      final String path = directory.path;
+      final File imageFile = File('$path/qrcode.jpg');
+
+      // Write the image data to the file
+      await imageFile.writeAsBytes(imageData.buffer.asUint8List());
+
+      // Share the image file
+      Share.shareFiles([imageFile.path], text: 'Check out this QR Code!');
+    } catch (e) {
+      print('Error sharing image: $e');
+    }
   }
 
   @override
@@ -44,9 +84,9 @@ class _QrGenState extends State< QrGen>
     return Background(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-          appBar: AppBar(
-          backgroundColor: Color(0xFFDBE7C9),
-          title: Text(
+        appBar: AppBar(
+          backgroundColor: const Color(0xFFDBE7C9),
+          title: const Text(
             "Generate the QR",
             style: TextStyle(
               fontWeight: FontWeight.bold,
@@ -55,112 +95,119 @@ class _QrGenState extends State< QrGen>
             ),
           ),
         ),
-        extendBody: false, 
+        extendBody: false,
         body: Stack(
           children: [
-           
-                   Padding(
-                    padding: const EdgeInsets.only(bottom: 60), // Padding to avoid overlap
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(height: 50),
-                          
-                          SizedBox(height: 10),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: LayoutBuilder(
-                              builder: (context, constraints) {
-                                return Column(
+            Padding(
+              padding: const EdgeInsets.only(bottom: 60),
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(height: 50),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          return Column(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  color:
+                                      const Color(0xFF789461).withOpacity(0.1),
+                                  borderRadius: BorderRadius.circular(8.0),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Container(
-                                      padding: EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                        color: Color(0xFF789461).withOpacity(0.1),
-                                        borderRadius: BorderRadius.circular(8.0),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Expanded(
-                                            child: Text(
-                                              'You can scan now',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black87,
-                                              ),
-                                            ),
-                                          ),
-                   
-                                          const SizedBox(width: 10),
-                                          Transform.scale(
-                                            scale: 1.7, // Adjust the scale factor to increase the size of the Lottie animation
-                                            child: SizedBox(
-                                              width: 40, // Original size
-                                              height: 40, // Original size
-                                              child: Lottie.asset(
-                                                'assets/images/landing/qr_h.json',
-                                                fit: BoxFit.contain,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                    const Expanded(
+                                      child: Text(
+                                        'You can scan now',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          color: Colors.black87,
+                                        ),
                                       ),
                                     ),
-                                                           SizedBox(height: 20), // Add space between text and image
-              Image.asset(
-                'assets/images/landing/qrcode.jpg',
-                height: 250, // Adjust as needed
-                width: 550, // Adjust as needed
-              ),
-              SizedBox(height: 20), // Add space between image and Lottie animation
-              Lottie.asset(
-                'assets/images/landing/qr_c.json',
-                height: 250, // Adjust as needed
-                width: 250, // Adjust as needed
-              ),
-               SizedBox(height: 20), // Add space between Lottie animation and button
-              MaterialButton(
-                onPressed: () {
-                  // Add your share functionality here
-                },
-                color: Color(0xFF50623A), // Green color for the button
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10), // Rounded edges
-                ),
-                child: Icon(
-                  Icons.share,
-                  color: Colors.white,
-                ),
-                minWidth: 50,
-                height: 50,
-              ),
-                                 
+                                    const SizedBox(width: 10),
+                                    Transform.scale(
+                                      scale: 1.7,
+                                      child: SizedBox(
+                                        width: 40,
+                                        height: 40,
+                                        child: Lottie.asset(
+                                          'assets/images/landing/qr_h.json',
+                                          fit: BoxFit.contain,
+                                        ),
+                                      ),
+                                    ),
                                   ],
-                                );
-                              },
-                            ),
-                          ),
-                        ],
+                                ),
+                              ),
+                              const SizedBox(height: 20),
+                              Image.asset(
+                                'assets/images/landing/qrcode.jpg',
+                                height: 250,
+                                width: 550,
+                              ),
+                              const SizedBox(height: 20),
+                              Lottie.asset(
+                                'assets/images/landing/qr_c.json',
+                                height: 250,
+                                width: 250,
+                              ),
+                              const SizedBox(height: 20),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  MaterialButton(
+                                    onPressed: _saveImageToDownloads,
+                                    color: const Color(0xFF50623A),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: const Text(
+                                      "Save to Device",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    minWidth: 150,
+                                    height: 50,
+                                  ),
+                                  MaterialButton(
+                                    onPressed: _shareImage,
+                                    color: const Color(0xFF50623A),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: const Icon(
+                                      Icons.share,
+                                      color: Colors.white,
+                                    ),
+                                    minWidth: 50,
+                                    height: 50,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        },
                       ),
                     ),
-                  ),
-                // }
-              // },
-            // ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
-        
       ),
     );
   }
-
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    return true;
-  }
 }
+
 
 // import 'package:flutter/material.dart';
 // import 'package:lottie/lottie.dart';

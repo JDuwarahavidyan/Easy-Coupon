@@ -2,7 +2,6 @@ import 'dart:ui'; // Import for BackdropFilter
 import 'package:easy_coupon/pages/student_pages/student_home.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
