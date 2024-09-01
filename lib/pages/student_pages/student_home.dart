@@ -1,5 +1,8 @@
+import 'package:easy_coupon/bloc/blocs.dart';
+import 'package:easy_coupon/pages/student_pages/qr_scanning.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
 import 'package:easy_coupon/routes/route_names.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
@@ -38,7 +41,8 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
   );
   List<DateTime?> _dates = [DateTime.now()];
   bool _showTable = false;
-  int _selectedCoupons = 1; // Variable to track the selected number of coupons
+  int selectedCoupons = 1;
+  int val = 1; // Variable to track the selected number of coupons
 
   @override
   void initState() {
@@ -173,15 +177,15 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                                   icon: Icon(Icons.remove, color: Colors.white), // White icons for better visibility
                                                   onPressed: () {
                                                     setState(() {
-                                                      if (_selectedCoupons > 1) {
-                                                        _selectedCoupons--;
+                                                      if (selectedCoupons > 1) {
+                                                        selectedCoupons--;
                                                       }
                                                     });
                                                   },
                                                 ),
                                                 SizedBox(width: 15), // Reduced width between the icon and number
                                                 Text(
-                                                  '$_selectedCoupons',
+                                                  '$selectedCoupons',
                                                   style: TextStyle(
                                                     fontSize: 24,
                                                     fontWeight: FontWeight.bold,
@@ -194,12 +198,13 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                                   icon: Icon(Icons.add, color: Colors.white), // White icons for better visibility
                                                   onPressed: () {
                                                     setState(() {
-                                                      if (_selectedCoupons < 3) {
-                                                        _selectedCoupons++;
+                                                      if (selectedCoupons < 3) {
+                                                        selectedCoupons++;
                                                       }
                                                     });
                                                   },
                                                 ),
+                                                //val = selectedCoupons;
                                               ],
                                             ),
                                           ],
@@ -218,26 +223,69 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                             width: 2.0,
                                           ),
                                         ),
-                                        child: CupertinoButton(
-                                          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0), // Increased padding for larger button
-                                          color: Colors.transparent, // Make the button background transparent
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Icon(CupertinoIcons.qrcode, color: Color(0xFF789461)),
-                                              SizedBox(width: 10),
-                                              Text(
-                                                'SCAN ME',
-                                                style: TextStyle(
-                                                  color: Color(0xFF789461), // Green text color
-                                                  fontWeight: FontWeight.bold,
+                                        child: BlocBuilder<UserBloc, UserState>(
+                                          builder: (context, state) {
+                                            if (state is UserLoading) {
+                                              return const Center(child: CircularProgressIndicator());
+                                            } else if (state is UserLoaded) {
+                                              final user = state.users.firstWhere(
+                                                (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
+                                              );
+                                              return CupertinoButton(
+                                                padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0), // Increased padding for larger button
+                                                color: Colors.transparent, // Make the button background transparent
+                                                child: Row(
+                                                  mainAxisSize: MainAxisSize.min,
+                                                  children: [
+                                                    Icon(CupertinoIcons.qrcode, color: Color(0xFF789461)),
+                                                    SizedBox(width: 10),
+                                                    Text(
+                                                      'SCAN ME',
+                                                      style: TextStyle(
+                                                        color: Color(0xFF789461), // Green text color
+                                                        fontWeight: FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              ),
-                                            ],
-                                          ),
-                                          onPressed: () {
-                                            Navigator.pushReplacementNamed(context, RouteNames.qr);
-                                            // Add your scan QR functionality here
+                                                onPressed: () {
+                                                  //Navigator.pushReplacementNamed(context, RouteNames.qr);
+                                                  // Add your scan QR functionality here
+
+                                                  if (user.studentCount - selectedCoupons >= 0) {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (context) => QrPage(
+                                                          val: selectedCoupons,
+                                                          studentUserId: user.id,
+                                                          studentUserName: user.userName,
+                                                        ),
+                                                      ),
+                                                    );
+                                                  } else {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (BuildContext context) {
+                                                        return CupertinoAlertDialog(
+                                                          title: const Text('No More Coupons'),
+                                                          content: const Text('Your coupons are over. Please contact the admin to get more coupons.'),
+                                                          actions: <Widget>[
+                                                            TextButton(
+                                                              child: const Text('OK'),
+                                                              onPressed: () {
+                                                                Navigator.of(context).pop();
+                                                              },
+                                                            ),
+                                                          ],
+                                                        );
+                                                      },
+                                                    );
+                                                  }
+                                                },
+                                              );
+                                            }
+                                            return const Center(child: Text('Failed to load user data'));
                                           },
                                         ),
                                       ),

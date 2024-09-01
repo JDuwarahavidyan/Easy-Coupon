@@ -14,14 +14,13 @@ class AppRoutes {
       case RouteNames.splash:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
       case RouteNames.introductionAnimation:
-        return MaterialPageRoute(
-            builder: (_) => const IntroductionAnimationScreen());
+        return MaterialPageRoute(builder: (_) => const IntroductionAnimationScreen());
 
       case RouteNames.login:
         return MaterialPageRoute(builder: (_) => LoginPage());
 
       case RouteNames.resetPWEmail:
-        return MaterialPageRoute(builder: (_) => PasswordEmailResetPage ());
+        return MaterialPageRoute(builder: (_) => PasswordEmailResetPage());
 
       case RouteNames.home:
         return MaterialPageRoute(builder: (_) => StudentHome());
@@ -33,20 +32,23 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => Student_report());
 
       case RouteNames.qr:
-        return MaterialPageRoute(builder: (_) => QrPage());
+        return MaterialPageRoute(
+            builder: (_) => const QrPage(
+                  val: 0,
+                  studentUserId: "",
+                  studentUserName: "",
+                ));
 
       case RouteNames.profile:
-        return MaterialPageRoute(builder: (_) => ProfileScreen()); 
+        return MaterialPageRoute(builder: (_) => ProfileScreen());
 
       case RouteNames.register:
         return MaterialPageRoute(builder: (_) => RegisterScreen());
 
-       case RouteNames.updtprofile:
+      case RouteNames.updtprofile:
         return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
 
-    //need to change
-
-      
+      //need to change
 
       case RouteNames.confirm:
         return MaterialPageRoute(
