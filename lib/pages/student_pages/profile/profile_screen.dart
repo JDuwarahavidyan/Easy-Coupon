@@ -180,7 +180,7 @@ class ProfileScreen extends StatelessWidget {
               ),
             ),
             Container(
-              alignment: Alignment.bottomRight,
+              // alignment: Alignment.bottomRight,
               child: Lottie.asset(
                 'assets/images/landing/settings.json',
                 width: 300,
