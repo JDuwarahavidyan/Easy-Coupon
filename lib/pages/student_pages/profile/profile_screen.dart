@@ -444,34 +444,3 @@ class ProfileScreen extends StatelessWidget {
 }
 
 // Define the bottomBar function similar to the Student_report page
-Widget bottomBar(int selectedIndex) {
-  return BottomNavigationBar(
-    currentIndex: selectedIndex,
-    selectedItemColor: Color(0xFF789461),
-    unselectedItemColor: Colors.grey,
-    items: const [
-      BottomNavigationBarItem(
-        icon: Icon(LineAwesomeIcons.home),
-        label: 'Home',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(LineAwesomeIcons.book),
-        label: 'Reports',
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(LineAwesomeIcons.user),
-        label: 'Profile',
-      ),
-    ],
-    onTap: (index) {
-      // Handle navigation logic based on index
-      if (index == 0) {
-        Get.toNamed('/home'); // Navigate to Home Page
-      } else if (index == 1) {
-        Get.toNamed('/reports'); // Navigate to Reports Page
-      } else if (index == 2) {
-        Get.toNamed('/profile'); // Navigate to Profile Page (current)
-      }
-    },
-  );
-}

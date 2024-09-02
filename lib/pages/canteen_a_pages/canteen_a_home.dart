@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-import 'package:easy_coupon/widgets/common/segment_c.dart'; // Import your DonutChart widget
+import 'package:easy_coupon/widgets/common/segment_canteen.dart'; // Import your DonutChart widget
 import 'package:flutter/cupertino.dart'; // Import Cupertino icons
 
 // class TabIconData {

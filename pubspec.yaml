@@ -57,10 +57,14 @@ dependencies:
   get: ^4.6.5
   floating_snackbar: ^1.0.5
   curved_navigation_bar: ^1.0.6
+  encrypt: ^5.0.3
+  loading_animation_widget: ^1.2.1
+
   share_plus: ^10.0.0
   path_provider: ^2.1.4
   share: ^2.0.4
  
+
 
 dev_dependencies:
   flutter_test:

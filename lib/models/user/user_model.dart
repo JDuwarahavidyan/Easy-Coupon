@@ -31,38 +31,18 @@ class UserModel extends Equatable {
   // Factory constructor for creating a User instance from JSON data
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      fullName: json['fullName'] as String? ?? '',
+      fullName: json['fullName'] as String,
       id: json['id'] as String,
       userName: json['userName'] as String,
       email: json['email'] as String,
       isFirstTime: json['isFirstTime'] ?? true,
-      createdAt: _parseDate(json['createdAt']),
-      updatedAt: _parseDate(json['updatedAt']),
+      createdAt: (json['createdAt'] as Timestamp).toDate(),
+      updatedAt: (json['updatedAt'] as Timestamp).toDate(),
       role: json['role'] as String,
       studentCount: json['studentCount'] ?? 30,
       canteenCount: json['canteenCount'] ?? 0,
       profilePic: json['profilePic'],
     );
-  }
-
-// Helper method to parse date
-  static DateTime _parseDate(dynamic date) {
-    if (date == null) {
-      // Handle null dates by assigning a default value or throwing an error
-      return DateTime.now(); // Or use another default date
-    }
-
-    if (date is Timestamp) {
-      return date.toDate();
-    } else if (date is String) {
-      try {
-        return DateTime.parse(date);
-      } catch (e) {
-        throw ArgumentError('Invalid date format: $date');
-      }
-    } else {
-      throw ArgumentError('Invalid date format: $date');
-    }
   }
 
   // Method for converting a User instance to JSON
