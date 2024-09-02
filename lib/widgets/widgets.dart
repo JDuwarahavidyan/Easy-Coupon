@@ -5,5 +5,5 @@ export 'common/student_bg.dart';
 export 'common/colours.dart';
 export 'common/background.dart';
 export 'common/bottom_navigation.dart';
-export 'common/segment.dart';
+export 'common/segment_student.dart';
 

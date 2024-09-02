@@ -35,7 +35,12 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => Student_report());
 
       case RouteNames.qr:
-        return MaterialPageRoute(builder: (_) => QrPage());
+        return MaterialPageRoute(builder: (_) => QrPage(
+              val: 0,
+              studentUserId: '',
+              studentUserName: '',
+
+        ));
 
       case RouteNames.qr_g:
         return MaterialPageRoute(builder: (_) => QrGen());
