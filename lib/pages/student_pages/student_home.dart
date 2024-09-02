@@ -159,7 +159,8 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                     Center(
                                       child: DonutChart(
                                         animation: animationController!,
-                                        couponCount: _selectedCoupons, // Pass the user's coupon count
+                                        couponCount: user.studentCount,
+                                         // Pass the user's coupon count
                                       ),
                                     ),
                                     const SizedBox(height: 20),
@@ -326,47 +327,47 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
 }
 
 
-// class DonutChart extends StatelessWidget {
-//   final AnimationController animation;
-//   final int couponCount;
+class DonutChart extends StatelessWidget {
+  final AnimationController animation;
+  final int couponCount;
 
-//   const DonutChart({required this.animation, required this.couponCount});
+  const DonutChart({required this.animation, required this.couponCount});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.all(1),
-//       child: AspectRatio(
-//         aspectRatio: 2, // Adjusted aspect ratio for a larger circular chart
-//         child: Center(
-//           child: Stack(
-//             alignment: Alignment.center, // Center the text and circular indicator
-//             children: <Widget>[
-//               SizedBox(
-//                 width: 180, // Increase the size of the donut chart
-//                 height: 180,
-//                 child: CircularProgressIndicator(
-//                   value: couponCount / 10,
-//                   strokeWidth: 20.0, // Increase stroke width for a thicker chart
-//                   valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF789461)),
-//                   backgroundColor: const Color(0xFF789461).withOpacity(0.2),
-//                 ),
-//               ),
-//               Center(
-//                 child: Text(
-//                   '$couponCount',
-//                   style: const TextStyle(
-//                     fontWeight: FontWeight.w600,
-//                     color: Color(0xFF789461),
-//                     fontSize: 90, // Increase font size for the coupon count
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(1),
+      child: AspectRatio(
+        aspectRatio: 2, // Adjusted aspect ratio for a larger circular chart
+        child: Center(
+          child: Stack(
+            alignment: Alignment.center, // Center the text and circular indicator
+            children: <Widget>[
+              SizedBox(
+                width: 180, // Increase the size of the donut chart
+                height: 180,
+                child: CircularProgressIndicator(
+                  value:  couponCount / 30,
+                  strokeWidth: 20.0, // Increase stroke width for a thicker chart
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF789461)),
+                  backgroundColor: const Color(0xFF789461).withOpacity(0.2),
+                ),
+              ),
+              Center(
+                child: Text(
+                  '$couponCount',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF789461),
+                    fontSize: 90, // Increase font size for the coupon count
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
 
