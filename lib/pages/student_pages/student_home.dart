@@ -159,7 +159,8 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                     Center(
                                       child: DonutChart(
                                         animation: animationController!,
-                                        couponCount: user.studentCount, // Pass the user's coupon count
+                                        couponCount: user.studentCount,
+                                         // Pass the user's coupon count
                                       ),
                                     ),
                                     const SizedBox(height: 20),
