@@ -386,6 +386,7 @@ import 'package:easy_coupon/pages/student_pages/student_home.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
@@ -634,24 +635,32 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                           builder: (context, state) {
                             print('Current QrCodeBloc state: $state');
                             if (state is QrCodeLoading) {
-                              return Center(child: CircularProgressIndicator());
+                              return Center(
+                                child: LoadingAnimationWidget.fourRotatingDots(
+                                  color: const Color(0xFF50623A),
+                                  size: 50,
+                                ),
+                              );
                             } else if (state is QrCodeLoaded) {
+                              final startDate = _dates.isNotEmpty && _dates.length > 0 ? _dates[0] : null;
+                              final endDate = _dates.isNotEmpty && _dates.length > 1 ? _dates[1] : null;
+
                               final filteredQrcodes = state.qrcodes.where((item) {
                                 final itemDate = item.scannedAt;
-                                final startDate = _dates[0];
-                                final endDate = _dates[1];
-                                print(_dates[0]);
 
                                 if (startDate != null && endDate != null) {
                                   return itemDate.isAfter(startDate) && itemDate.isBefore(endDate.add(const Duration(days: 1)));
                                 } else if (startDate != null) {
-                                  return itemDate.isAfter(startDate);
+                                  return itemDate.isAfter(startDate.subtract(const Duration(days: 1))) &&
+                                      itemDate.isBefore(startDate.add(const Duration(days: 1)));
                                 } else if (endDate != null) {
                                   return itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                } else {
+                                  return true;
                                 }
-                                return true;
                               }).toList()
                                 ..sort((a, b) => b.scannedAt.compareTo(a.scannedAt));
+
                               print('Filtered QR codes: ${filteredQrcodes.length}');
                               if (filteredQrcodes.isEmpty) {
                                 return Center(child: Text('No data available for the selected date range'));
@@ -659,34 +668,85 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
 
                               return Column(
                                 children: [
+                                  // Fixed Header
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 3,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.center,
+                                            mainAxisAlignment: MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                'Date',
+                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              Text(
+                                                '& Time',
+                                                style: TextStyle(fontWeight: FontWeight.bold),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Center(
+                                            child: Text(
+                                              'Canteen',
+                                              style: TextStyle(fontWeight: FontWeight.bold),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 1,
+                                          child: Center(
+                                            child: Text(
+                                              'Coupon\nUsed',
+                                              style: TextStyle(fontWeight: FontWeight.bold),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
                                   Expanded(
                                     child: SingleChildScrollView(
                                       scrollDirection: Axis.vertical,
-                                      child: DataTable(
-                                        columns: const [
-                                          DataColumn(label: Text('Date & Time')),
-                                          DataColumn(label: Text('Canteen')),
-                                          DataColumn(label: Text('Coupon\nUsed')),
-                                        ],
-                                        rows: filteredQrcodes.map((QRModel item) {
-                                          return DataRow(cells: [
-                                            DataCell(
-                                              Column(
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                children: [
-                                                  Text(DateFormat('dd/MM/yyyy').format(item.scannedAt)),
-                                                  Text(
-                                                    DateFormat('hh:mm a').format(item.scannedAt),
-                                                    style: TextStyle(color: Colors.grey, fontSize: 12),
-                                                  ),
-                                                ],
+                                      child: SingleChildScrollView(
+                                        scrollDirection: Axis.horizontal,
+                                        child: DataTable(
+                                          columns: const [
+                                            DataColumn(label: Center(child: Text(''))), // Empty as we have headers above
+                                            DataColumn(label: Center(child: Text(''))),
+                                            DataColumn(label: Center(child: Text(''))),
+                                          ],
+                                          rows: filteredQrcodes.map((QRModel item) {
+                                            return DataRow(cells: [
+                                              DataCell(
+                                                Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(DateFormat('dd/MM/yyyy').format(item.scannedAt)),
+                                                    Text(
+                                                      DateFormat('hh:mm a').format(item.scannedAt),
+                                                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                            DataCell(Text(item.canteenName.toLowerCase())),
-                                            DataCell(Text(item.count.toString())),
-                                          ]);
-                                        }).toList(),
+                                              DataCell(Text(item.canteenName.toLowerCase())),
+                                              DataCell(Text(item.count.toString())),
+                                            ]);
+                                          }).toList(),
+                                        ),
                                       ),
                                     ),
                                   ),
