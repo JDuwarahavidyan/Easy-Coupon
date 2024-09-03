@@ -418,8 +418,7 @@ class Student_report extends StatefulWidget {
   _Student_reportState createState() => _Student_reportState();
 }
 
-class _Student_reportState extends State<Student_report>
-    with TickerProviderStateMixin {
+class _Student_reportState extends State<Student_report> with TickerProviderStateMixin {
   AnimationController? animationController;
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   Widget tabBody = Container(
@@ -445,18 +444,10 @@ class _Student_reportState extends State<Student_report>
   }
 
   void _fetchUserQrCodes({DateTime? startDate, DateTime? endDate}) {
-    // final currentUser = FirebaseAuth.instance.currentUser;
-    // if (currentUser != null) {
-    const String specificUserId = "00zkcjixZfY9QeX6";
-    print('Fetching QR codes for user: $specificUserId');
-    print('Start date: $startDate, End date: $endDate');
-    context.read<QrCodeBloc>().add(LoadQrCodesByUid(
-          // currentUser.uid,
-          specificUserId,
-          startDate: startDate,
-          endDate: endDate,
-          reportType: 'student_report',
-        ));
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      context.read<QrCodeBloc>().add(LoadQrCodesByUid(currentUser.uid, startDate: startDate, endDate: endDate, reportType: 'student_report'));
+    }
   }
 
   void _fetchData() {
@@ -557,8 +548,7 @@ class _Student_reportState extends State<Student_report>
                       calendarType: CalendarDatePicker2Type.range,
                       selectedDayHighlightColor: Color(0xFF789461),
                       dayTextStyle: const TextStyle(color: Colors.blue),
-                      selectedDayTextStyle:
-                          const TextStyle(color: Colors.white),
+                      selectedDayTextStyle: const TextStyle(color: Colors.white),
                     ),
                     value: _dates,
                     onValueChanged: (dates) => setState(() {
@@ -625,17 +615,14 @@ class _Student_reportState extends State<Student_report>
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.0),
-                    boxShadow: [
-                      BoxShadow(color: Colors.black26, blurRadius: 10.0)
-                    ],
+                    boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10.0)],
                   ),
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Results',
-                              style: Theme.of(context).textTheme.titleLarge),
+                          Text('Results', style: Theme.of(context).textTheme.titleLarge),
                           IconButton(
                             icon: Icon(Icons.close),
                             onPressed: _closeTable,
@@ -643,96 +630,81 @@ class _Student_reportState extends State<Student_report>
                         ],
                       ),
                       Expanded(
-                        child: BlocListener<QrCodeBloc, QrCodeState>(
-                          listener: (context, state) {
-                            if (state is QrCodeFailure) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
-                                    content: Text('Error: ${state.message}')),
+                        child: BlocBuilder<QrCodeBloc, QrCodeState>(
+                          builder: (context, state) {
+                            print('Current QrCodeBloc state: $state');
+                            if (state is QrCodeLoading) {
+                              return Center(child: CircularProgressIndicator());
+                            } else if (state is QrCodeLoaded) {
+                              final filteredQrcodes = state.qrcodes.where((item) {
+                                final itemDate = item.scannedAt;
+                                final startDate = _dates[0];
+                                final endDate = _dates[1];
+                                print(_dates[0]);
+
+                                if (startDate != null && endDate != null) {
+                                  return itemDate.isAfter(startDate) && itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                } else if (startDate != null) {
+                                  return itemDate.isAfter(startDate);
+                                } else if (endDate != null) {
+                                  return itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                }
+                                return true;
+                              }).toList()
+                                ..sort((a, b) => b.scannedAt.compareTo(a.scannedAt));
+                              print('Filtered QR codes: ${filteredQrcodes.length}');
+                              if (filteredQrcodes.isEmpty) {
+                                return Center(child: Text('No data available for the selected date range'));
+                              }
+
+                              return Column(
+                                children: [
+                                  Expanded(
+                                    child: SingleChildScrollView(
+                                      scrollDirection: Axis.vertical,
+                                      child: DataTable(
+                                        columns: const [
+                                          DataColumn(label: Text('Date & Time')),
+                                          DataColumn(label: Text('Canteen')),
+                                          DataColumn(label: Text('Coupon\nUsed')),
+                                        ],
+                                        rows: filteredQrcodes.map((QRModel item) {
+                                          return DataRow(cells: [
+                                            DataCell(
+                                              Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                children: [
+                                                  Text(DateFormat('dd/MM/yyyy').format(item.scannedAt)),
+                                                  Text(
+                                                    DateFormat('hh:mm a').format(item.scannedAt),
+                                                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            DataCell(Text(item.canteenName.toLowerCase())),
+                                            DataCell(Text(item.count.toString())),
+                                          ]);
+                                        }).toList(),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 8.0),
+                                    child: Text(
+                                      'Total Coupons Used: ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
+                                      style: Theme.of(context).textTheme.titleLarge,
+                                    ),
+                                  ),
+                                ],
                               );
+                            } else if (state is QrCodeFailure) {
+                              return Center(child: Text('Error: ${state.message}'));
+                            } else {
+                              return Center(child: Text('No data'));
                             }
                           },
-                          child: BlocBuilder<QrCodeBloc, QrCodeState>(
-                            builder: (context, state) {
-                              print('Current QrCodeBloc state: $state');
-                              if (state is QrCodeLoading) {
-                                return Center(
-                                    child: CircularProgressIndicator());
-                              } else if (state is QrCodeLoaded) {
-                                final filteredQrcodes = state.qrcodes
-                                    .where((item) {
-                                  final itemDate = item.scannedAt;
-                                  final startDate = _dates[0];
-                                  final endDate = _dates[1];
-
-                                  if (startDate != null && endDate != null) {
-                                    return itemDate.isAfter(startDate) &&
-                                        itemDate.isBefore(endDate
-                                            .add(const Duration(days: 1)));
-                                  } else if (startDate != null) {
-                                    return itemDate.isAfter(startDate);
-                                  } else if (endDate != null) {
-                                    return itemDate.isBefore(
-                                        endDate.add(const Duration(days: 1)));
-                                  }
-                                  return true;
-                                }).toList()
-                                  ..sort((a, b) =>
-                                      b.scannedAt.compareTo(a.scannedAt));
-                                print(
-                                    'Filtered QR codes: ${filteredQrcodes.length}');
-                                if (filteredQrcodes.isEmpty) {
-                                  return Center(
-                                      child: Text(
-                                          'No data available for the selected date range'));
-                                }
-                                return SingleChildScrollView(
-                                  scrollDirection: Axis.vertical,
-                                  child: DataTable(
-                                    columns: const [
-                                      DataColumn(label: Text('Date & Time')),
-                                      DataColumn(label: Text('Canteen Name')),
-                                      DataColumn(label: Text('Coupon Used')),
-                                    ],
-                                    rows: filteredQrcodes.map((QRModel item) {
-                                      return DataRow(cells: [
-                                        DataCell(
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Text(DateFormat('dd/MM/yyyy')
-                                                  .format(item.scannedAt)),
-                                              Text(
-                                                DateFormat('hh:mm a')
-                                                    .format(item.scannedAt),
-                                                style: TextStyle(
-                                                    color: Colors.grey,
-                                                    fontSize: 12),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        DataCell(Text(
-                                            item.canteenName.toLowerCase() ==
-                                                    'canteena'
-                                                ? 'Kalderama'
-                                                : 'Hilton')),
-                                        DataCell(Text(item.count.toString())),
-                                      ]);
-                                    }).toList(),
-                                  ),
-                                );
-                              } else if (state is QrCodeFailure) {
-                                return Center(
-                                    child: Text('Error: ${state.message}'));
-                              } else {
-                                return Center(child: Text('No data'));
-                              }
-                            },
-                          ),
                         ),
                       ),
                     ],
@@ -771,8 +743,7 @@ class _Student_reportState extends State<Student_report>
                   return;
                 }
                 setState(() {
-                  tabBody =
-                      StudentHome(animationController: animationController);
+                  tabBody = StudentHome(animationController: animationController);
                 });
               });
             } else if (index == 1) {
@@ -780,8 +751,7 @@ class _Student_reportState extends State<Student_report>
                 if (!mounted) {
                   return;
                 }
-                tabBody =
-                    const Student_report(); // Switch to the report screen itself
+                tabBody = const Student_report(); // Switch to the report screen itself
               });
             } else if (index == 2) {
               animationController?.reverse().then<dynamic>((data) {

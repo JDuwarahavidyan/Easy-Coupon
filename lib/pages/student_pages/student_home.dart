@@ -1,5 +1,6 @@
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/pages/student_pages/qr_scanning.dart';
+import 'package:easy_coupon/pages/student_pages/student_report.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -84,8 +85,8 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                           builder: (context, state) {
                             if (state is UserLoading) {
                               return Center(child: LoadingAnimationWidget.fourRotatingDots(
-                                color: Color(0xFF50623A),
-                                size: 50,
+                                  color: Color(0xFF50623A),
+                                  size: 50,
                               ),);
                             } else if (state is UserLoaded) {
                               final user = state.users.firstWhere(
