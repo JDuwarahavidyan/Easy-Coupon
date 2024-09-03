@@ -179,23 +179,36 @@ class ProfileScreen extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          backgroundColor: Colors.white,
           title: const Text(
             "LOGOUT",
-            style: TextStyle(fontSize: 20, color: Color(0xFF294B29)),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF294B29)),
           ),
           content: const Padding(
             padding: EdgeInsets.symmetric(vertical: 15.0),
-            child: Text("Are you sure you want to Logout?"),
+            child: Text(
+              "Are you sure you want to Logout?",
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF294B29),
+              ),
+            ),
           ),
           actions: <Widget>[
             TextButton(
-              child: Text("No"),
+              child: const Text(
+                "No",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFF294B29),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
               },
             ),
             ElevatedButton(
-              child: Text("Yes"),
               onPressed: () {
                 // Implement logout functionality here
                 Navigator.of(context).pop(); // Close the dialog
@@ -205,6 +218,17 @@ class ProfileScreen extends StatelessWidget {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              child: const Text(
+                "Yes",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],

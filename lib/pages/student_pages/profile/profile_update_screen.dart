@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
+import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 
 class UpdateProfileScreen extends StatelessWidget {
   const UpdateProfileScreen({Key? key}) : super(key: key);
@@ -13,12 +14,16 @@ class UpdateProfileScreen extends StatelessWidget {
 
     return Background(
       child: Scaffold(
-        backgroundColor:
-            Colors.transparent, // Ensure transparency to see the background
+        backgroundColor: Colors.transparent, // Ensure transparency to see the background
         appBar: AppBar(
-          backgroundColor: Colors.transparent,
+          backgroundColor: Color(0xFFDBE7C9),
           leading: IconButton(
-            onPressed: () => Get.back(),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+              );
+            },
             icon: const Icon(LineAwesomeIcons.angle_left),
           ),
           title: const Text(
@@ -89,7 +94,7 @@ class UpdateProfileScreen extends StatelessWidget {
                         child: ElevatedButton(
                           onPressed: () => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => PasswordEmailResetPage ()),
+                            MaterialPageRoute(builder: (context) => PasswordEmailResetPage()),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Color(0xFF50623A),
@@ -130,8 +135,7 @@ class UpdateProfileScreen extends StatelessWidget {
                           ElevatedButton(
                             onPressed: () {},
                             style: ElevatedButton.styleFrom(
-                              backgroundColor:
-                                  Colors.redAccent.withOpacity(0.1),
+                              backgroundColor: Colors.redAccent.withOpacity(0.1),
                               elevation: 0,
                               foregroundColor: Colors.red,
                               shape: RoundedRectangleBorder(

@@ -92,7 +92,7 @@ class AboutUs extends StatelessWidget {
                         "Easy Coupon is designed to simplify and streamline the process of issuing and redeeming food coupons for students. With a user-friendly interface and quick access to essential features, this app ensures that students can easily manage their meal plans without any hassle.",
                         style: TextStyle(
                           color: Color(0xFF294B29),
-                          fontSize: 12,
+                          fontSize: 14,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -100,7 +100,7 @@ class AboutUs extends StatelessWidget {
                         "Our goal is to make the coupon management system more efficient and accessible for everyone involved, providing a seamless experience from start to finish. Whether you're a student looking to redeem a coupon or an administrator managing the system, Easy Coupon offers the tools you need to get the job done effectively.",
                         style: TextStyle(
                           color: Color(0xFF294B29),
-                          fontSize: 12,
+                          fontSize: 14,
                         ),
                       ),
                     ],
