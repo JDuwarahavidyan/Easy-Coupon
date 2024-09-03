@@ -25,9 +25,9 @@ class LoginPage extends StatelessWidget {
               case RouteNames.resetPW:
                 return const NewUserPwResetPage();
               case RouteNames.student:
-                return StudentMainPage();
-              // case RouteNames.canteenA:
-              //   return const CanteenAHomeScreen();
+                return StudentHome();
+              case RouteNames.cahome:
+                return const CanteenAHome();
               // case RouteNames.canteenB:
               //   return const CanteenBHomeScreen();
               default:
@@ -97,13 +97,13 @@ class LoginPage extends StatelessWidget {
                     navigateWithAnimation(context, RouteNames.resetPW);
                   } else if (state is StudentAuthenticated) {
                     navigateWithAnimation(context, RouteNames.student);
-                  // } else if (state is CanteenAAuthenticated) {
-                  //   navigateWithAnimation(context, RouteNames.canteenA);
-                  // } else if (state is CanteenBAuthenticated) {
-                  //   navigateWithAnimation(context, RouteNames.canteenB);
+                  } else if (state is CanteenAAuthenticated) {
+                    navigateWithAnimation(context, RouteNames.cahome);
+                    // } else if (state is CanteenBAuthenticated) {
+                    //   navigateWithAnimation(context, RouteNames.canteenB);
                   } else if (state is AuthStateError) {
                     floatingSnackBar(
-                      context:context,
+                      context: context,
                       message: state.error,
                       backgroundColor: Colors.redAccent,
                     );
@@ -135,8 +135,7 @@ class LoginPage extends StatelessWidget {
                             : () {
                                 FocusScope.of(context).unfocus(); // Close the keyboard
 
-                                final userName =
-                                    userNameController.text.toLowerCase();
+                                final userName = userNameController.text.toLowerCase();
                                 final password = passwordController.text;
 
                                 if (userName.isEmpty || password.isEmpty) {
@@ -184,8 +183,7 @@ class LoginPage extends StatelessWidget {
                                   height: 20,
                                   width: 20,
                                   child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white),
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 )
                               : const Text(
@@ -201,8 +199,7 @@ class LoginPage extends StatelessWidget {
                       SizedBox(height: size.height * 0.03),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacementNamed(
-                              context, RouteNames.resetPWEmail);
+                          Navigator.pushReplacementNamed(context, RouteNames.resetPWEmail);
                         },
                         child: const Text(
                           "Forgot your password?",
