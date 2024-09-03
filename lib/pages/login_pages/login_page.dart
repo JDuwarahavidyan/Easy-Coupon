@@ -1,5 +1,6 @@
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/pages/pages.dart';
+import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:easy_coupon/routes/routes.dart';
@@ -24,9 +25,15 @@ class LoginPage extends StatelessWidget {
               case RouteNames.resetPW:
                 return const NewUserPwResetPage();
               case RouteNames.student:
+<<<<<<< HEAD
                 return StudentHome();
               case RouteNames.cahome:
                 return const CanteenAHome();
+=======
+                return StudentMainPage();
+              // case RouteNames.canteenA:
+              //   return const CanteenAHomeScreen();
+>>>>>>> 35dbe27f1ea3c8f0ac9aa1bd66d8e3d259b5400a
               // case RouteNames.canteenB:
               //   return const CanteenBHomeScreen();
               default:
