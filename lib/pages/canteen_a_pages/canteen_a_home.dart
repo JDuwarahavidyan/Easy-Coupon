@@ -1,4 +1,5 @@
 import 'package:easy_coupon/models/user/user_model.dart';
+import 'package:easy_coupon/widgets/common/segment_canteen.dart';
 //import 'package:easy_coupon/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,7 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-import 'package:easy_coupon/widgets/common/segment_c.dart';
+//import 'package:easy_coupon/widgets/common/segment_c.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/cupertino.dart';
 
