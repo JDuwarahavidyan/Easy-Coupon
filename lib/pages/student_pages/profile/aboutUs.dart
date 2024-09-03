@@ -14,13 +14,11 @@ class AboutUs extends StatelessWidget {
 
     return Background(
       child: Scaffold(
-        backgroundColor:
-            Colors.transparent, // Ensure transparency to see the background
+        backgroundColor: Colors.transparent, // Ensure transparency to see the background
         body: Column(
           children: [
             Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top), // For status bar
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top), // For status bar
               decoration: BoxDecoration(
                 color: Color(0xFFDBE7C9),
                 boxShadow: [
@@ -32,8 +30,7 @@ class AboutUs extends StatelessWidget {
                 ],
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: 16.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -47,9 +44,7 @@ class AboutUs extends StatelessWidget {
                     ),
                     IconButton(
                       onPressed: () {},
-                      icon: Icon(isDark
-                          ? LineAwesomeIcons.sun
-                          : LineAwesomeIcons.moon),
+                      icon: Icon(isDark ? LineAwesomeIcons.sun : LineAwesomeIcons.moon),
                     ),
                   ],
                 ),
