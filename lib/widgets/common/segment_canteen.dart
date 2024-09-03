@@ -1,6 +1,6 @@
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
-import 'package:easy_coupon/widgets/common/segment.dart';
+//import 'package:easy_coupon/widgets/common/segment.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
