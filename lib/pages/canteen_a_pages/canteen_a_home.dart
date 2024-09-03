@@ -1,59 +1,51 @@
-import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/pages/student_pages/student_report.dart';
-import 'package:easy_coupon/routes/route_names.dart';
+import 'package:easy_coupon/models/user/user_model.dart';
+//import 'package:easy_coupon/main.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
-import 'package:lottie/lottie.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:easy_coupon/bloc/user/user_bloc.dart';
+import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-import 'package:easy_coupon/widgets/common/segment_c.dart'; // Import your DonutChart widget
-import 'package:flutter/cupertino.dart'; // Import Cupertino icons
+import 'package:easy_coupon/widgets/common/segment_c.dart';
+import 'package:lottie/lottie.dart';
+import 'package:flutter/cupertino.dart';
 
-// class TabIconData {
-//   final IconData icon;
-//   bool isSelected;
-
-//   TabIconData(this.icon, this.isSelected);
-
-//   static List<TabIconData> get tabIconsList {
-//     return [
-//       TabIconData(Icons.home, true),
-//       TabIconData(Icons.report, false),
-//       TabIconData(Icons.settings, false),
-//     ];
-//   }
-// }
-
-// ignore: camel_case_types
 class CanteenAHome extends StatefulWidget {
-  const CanteenAHome({super.key, AnimationController? animationController});
+  const CanteenAHome({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _CanteenAHomeState createState() => _CanteenAHomeState();
 }
 
-class _CanteenAHomeState extends State<CanteenAHome>
-    with TickerProviderStateMixin {
+class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMixin, RouteAware {
   AnimationController? animationController;
-  //List<TabIconData> tabIconsList = TabIconData.tabIconsList;
-  Widget tabBody = Container(
-    color: Colors.white,
-  );
-  // List<DateTime?> _dates = [DateTime.now()];
-  // bool _showTable = false;
-  // int _selectedCoupons = 1; // Variable to track the selected number of coupons
 
   @override
   void initState() {
     super.initState();
-
-    //tabIconsList[0].isSelected = true;
-
     animationController = AnimationController(
-        duration: const Duration(milliseconds: 600), vsync: this);
+      duration: const Duration(milliseconds: 600),
+      vsync: this,
+    );
+    context.read<UserBloc>().add(UserReadEvent());
+  }
 
-    // Initial tab body for the report page
-    // tabBody = MyDiaryScreen(animationController: animationController);
+  @override
+  /*void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context) as PageRoute<dynamic>);
+  }
+
+  @override
+  void dispose() {
+    routeObserver.unsubscribe(this);
+    animationController?.dispose();
+    super.dispose();
+  }*/
+
+  @override
+  void didPopNext() {
+    context.read<UserBloc>().add(UserReadEvent());
   }
 
   @override
@@ -61,19 +53,19 @@ class _CanteenAHomeState extends State<CanteenAHome>
     return Background(
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        extendBody:
-            true, // Allow the body to extend behind the bottom navigation bar
+        extendBody: true,
         body: Stack(
           children: [
-            FutureBuilder<bool>(
-              future: getData(),
-              builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                if (!snapshot.hasData) {
-                  return const SizedBox();
-                } else {
+            BlocBuilder<UserBloc, UserState>(
+              builder: (context, state) {
+                if (state is UserLoading) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (state is UserLoaded) {
+                  final UserModel user = state.users.firstWhere(
+                    (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
+                  );
                   return Padding(
-                    padding: const EdgeInsets.only(
-                        bottom: 60), // Padding to avoid overlap
+                    padding: const EdgeInsets.only(bottom: 60),
                     child: SingleChildScrollView(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -82,7 +74,7 @@ class _CanteenAHomeState extends State<CanteenAHome>
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
-                              'Welcome Back to Kalderama!',
+                              'Welcome Back, ${user.userName}!',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF294B29),
@@ -100,18 +92,15 @@ class _CanteenAHomeState extends State<CanteenAHome>
                                     Container(
                                       padding: EdgeInsets.all(8.0),
                                       decoration: BoxDecoration(
-                                        color:
-                                            Color(0xFF789461).withOpacity(0.1),
-                                        borderRadius:
-                                            BorderRadius.circular(8.0),
+                                        color: Color(0xFF789461).withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(8.0),
                                       ),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           const Expanded(
                                             child: Text(
-                                              'Click on the button to initiate the process of generating the OR code.',
+                                              'Click on the button to initiate the process of generating the QR code.',
                                               style: TextStyle(
                                                 fontSize: 14,
                                                 color: Colors.black87,
@@ -120,11 +109,10 @@ class _CanteenAHomeState extends State<CanteenAHome>
                                           ),
                                           const SizedBox(width: 10),
                                           Transform.scale(
-                                            scale:
-                                                1.7, // Adjust the scale factor to increase the size of the Lottie animation
+                                            scale: 1.7,
                                             child: SizedBox(
-                                              width: 40, // Original size
-                                              height: 40, // Original size
+                                              width: 40,
+                                              height: 40,
                                               child: Lottie.asset(
                                                 'assets/images/landing/qr_h.json',
                                                 fit: BoxFit.contain,
@@ -134,76 +122,53 @@ class _CanteenAHomeState extends State<CanteenAHome>
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                        height:
-                                            20), // Add spacing before the donut chart
+                                    SizedBox(height: 20),
                                     Center(
                                       child: Donut_c_Chart(
-                                        animation:
-                                            animationController!, // Pass the animation controller
+                                        animation: animationController!,
                                       ),
                                     ),
-                                    SizedBox(
-                                        height:
-                                            20), // Add spacing before the spinbox
+                                    SizedBox(height: 20),
                                     Center(),
-                                    SizedBox(
-                                        height:
-                                            20), // Add spacing before the "SCAN ME" button
+                                    SizedBox(height: 20),
                                     Center(
                                       child: Container(
-                                        width:
-                                            250, // Increased width of the "SCAN ME" button
+                                        width: 250,
                                         decoration: BoxDecoration(
-                                          color: Colors
-                                              .white, // White background color
-                                          borderRadius:
-                                              BorderRadius.circular(15.0),
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(15.0),
                                           border: Border.all(
-                                            color: Color(
-                                                0xFF789461), // Green border color
+                                            color: Color(0xFF789461),
                                             width: 2.0,
                                           ),
                                         ),
                                         child: CupertinoButton(
-                                          padding: EdgeInsets.symmetric(
-                                              horizontal: 20.0,
-                                              vertical:
-                                                  12.0), // Increased padding for larger button
-                                          color: Colors
-                                              .transparent, // Make the button background transparent
+                                          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+                                          color: Colors.transparent,
                                           child: Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Icon(CupertinoIcons.qrcode,
-                                                  color: Color(0xFF789461)),
+                                              Icon(CupertinoIcons.qrcode, color: Color(0xFF789461)),
                                               SizedBox(width: 10),
                                               Text(
                                                 'GENERATE QR',
                                                 style: TextStyle(
-                                                  color: Color(
-                                                      0xFF789461), // Green text color
+                                                  color: Color(0xFF789461),
                                                   fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ],
                                           ),
                                           onPressed: () {
-                                            Navigator.pushReplacementNamed(
-                                                context, RouteNames.qr);
-                                            // Add your scan QR functionality here
+                                            Navigator.pushReplacementNamed(context, RouteNames.qr, arguments: user);
                                           },
                                         ),
                                       ),
                                     ),
+                                    SizedBox(height: 10),
                                     SizedBox(
-                                        height:
-                                            10), // Add spacing before the Lottie animation
-                                    SizedBox(
-                                      width:
-                                          250, // Set width for Lottie animation
-                                      height:
-                                          250, // Set height for Lottie animation
+                                      width: 250,
+                                      height: 250,
                                       child: Lottie.asset(
                                         'assets/images/landing/cook.json',
                                         fit: BoxFit.contain,
@@ -219,16 +184,12 @@ class _CanteenAHomeState extends State<CanteenAHome>
                     ),
                   );
                 }
+                return const Center(child: Text('Failed to load user data'));
               },
             ),
           ],
         ),
       ),
     );
-  }
-
-  Future<bool> getData() async {
-    await Future<dynamic>.delayed(const Duration(milliseconds: 200));
-    return true;
   }
 }
