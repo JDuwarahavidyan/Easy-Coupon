@@ -1,10 +1,17 @@
+import 'package:easy_coupon/bloc/blocs.dart';
+import 'package:easy_coupon/bloc/user/user_bloc.dart';
+import 'package:easy_coupon/models/user/user_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:screenshot/screenshot.dart';
 import 'package:share/share.dart';
+import 'package:encrypt/encrypt.dart' as encrypt;
 
 class QrGen extends StatefulWidget {
   const QrGen({super.key, AnimationController? animationController});
@@ -15,6 +22,13 @@ class QrGen extends StatefulWidget {
 
 class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
   AnimationController? animationController;
+  final GlobalKey globalKey = GlobalKey();
+  final ScreenshotController screenshotController = ScreenshotController();
+  String? qrData;
+
+  // Define static key and IV
+  final key = encrypt.Key.fromUtf8('easycouponkey@ruhunaengfac22TDDS');
+  final iv = encrypt.IV.fromUtf8('easyduwa');
 
   @override
   void initState() {
@@ -23,59 +37,40 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
       duration: const Duration(milliseconds: 600),
       vsync: this,
     );
+    final canteenUserId = FirebaseAuth.instance.currentUser?.uid;
+    if (canteenUserId != null) {
+      context.read<UserBloc>().add(UserGenerateQREvent(canteenUserId));
+    }
+  }
+
+  String encryptData(String data) {
+    final encrypter = encrypt.Encrypter(encrypt.AES(key));
+    final encrypted = encrypter.encrypt(data, iv: iv);
+    return encrypted.base64;
   }
 
   Future<void> _saveImageToDownloads() async {
-    try {
-      // Load the image from the assets
-      final ByteData imageData =
-          await rootBundle.load('assets/images/landing/qrcode.jpg');
-
-      // Get the external storage directory
-      final Directory? directory = await getExternalStorageDirectory();
-      final String path = directory!.path;
-
-      // Define the Downloads directory and create it if it doesn't exist
-      final String downloadDirPath = '$path/Download';
-      final Directory downloadDir = Directory(downloadDirPath);
-
-      if (!await downloadDir.exists()) {
-        await downloadDir.create(recursive: true);
-      }
-
-      // Create the file in the Downloads directory
-      final File imageFile = File('$downloadDirPath/qrcode.jpg');
-
-      // Write the image data to the file
-      await imageFile.writeAsBytes(imageData.buffer.asUint8List());
-
-      // Notify the user
+    final imageFile = await screenshotController.capture();
+    if (imageFile != null) {
+      final directory = await getApplicationDocumentsDirectory();
+      final imagePath = File('${directory.path}/qr_code.png');
+      await imagePath.writeAsBytes(imageFile);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('QR Code saved to Downloads folder')),
+        SnackBar(content: Text('QR code saved to ${imagePath.path}')),
       );
-    } catch (e) {
-      print('Error saving image: $e');
     }
   }
 
   Future<void> _shareImage() async {
-    try {
-      // Load the image from the assets
-      final ByteData imageData =
-          await rootBundle.load('assets/images/landing/qrcode.jpg');
-
-      // Get the directory to save the image temporarily
-      final Directory directory = await getTemporaryDirectory();
-      final String path = directory.path;
-      final File imageFile = File('$path/qrcode.jpg');
-
-      // Write the image data to the file
-      await imageFile.writeAsBytes(imageData.buffer.asUint8List());
-
-      // Share the image file
-      Share.shareFiles([imageFile.path], text: 'Check out this QR Code!');
-    } catch (e) {
-      print('Error sharing image: $e');
+    final imageFile = await screenshotController.capture();
+    if (imageFile != null) {
+      final directory = await getApplicationDocumentsDirectory();
+      final imagePath = File('${directory.path}/qr_code.png');
+      await imagePath.writeAsBytes(imageFile);
+      if (qrData != null) {
+        // Share.shareFiles([imagePath.path], text: 'Here is my QR code: $qrData');
+        Share.shareFiles([imagePath.path], text: 'Check out this QR Code!');
+      }
     }
   }
 
@@ -96,112 +91,126 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
           ),
         ),
         extendBody: false,
-        body: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(bottom: 60),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 50),
-                    const SizedBox(height: 10),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: LayoutBuilder(
-                        builder: (context, constraints) {
-                          return Column(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(8.0),
-                                decoration: BoxDecoration(
-                                  color:
-                                      const Color(0xFF789461).withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(8.0),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
+        body: BlocConsumer<UserBloc, UserState>(
+          listener: (context, state) {
+            if (state is UserQRGenerated) {
+              final encryptedData = encryptData(state.qrData);
+              setState(() {
+                qrData = encryptedData; // Store encrypted QR data in the state
+              });
+            }
+          },
+          builder: (context, state) {
+            if (state is UserLoading) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is UserQRGenerated || qrData != null) {
+              final displayQRData = qrData ?? '';
+              return Stack(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 60),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(height: 50),
+                          const SizedBox(height: 10),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: LayoutBuilder(
+                              builder: (context, constraints) {
+                                return Column(
                                   children: [
-                                    const Expanded(
-                                      child: Text(
-                                        'You can scan now',
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          color: Colors.black87,
-                                        ),
+                                    Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      decoration: BoxDecoration(
+                                        color: const Color(0xFF789461).withOpacity(0.1),
+                                        borderRadius: BorderRadius.circular(8.0),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Expanded(
+                                            child: Text(
+                                              'You can scan now',
+                                              style: TextStyle(
+                                                fontSize: 14,
+                                                color: Colors.black87,
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 10),
+                                          Screenshot(
+                                            controller: screenshotController,
+                                            child: RepaintBoundary(
+                                              key: globalKey,
+                                              child: Container(
+                                                padding: const EdgeInsets.all(20),
+                                                color: Colors.white,
+                                                child: QrImageView(
+                                                  data: displayQRData,
+                                                  version: QrVersions.auto,
+                                                  size: 200,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
-                                    const SizedBox(width: 10),
-                                    Transform.scale(
-                                      scale: 1.7,
-                                      child: SizedBox(
-                                        width: 40,
-                                        height: 40,
-                                        child: Lottie.asset(
-                                          'assets/images/landing/qr_h.json',
-                                          fit: BoxFit.contain,
+                                    const SizedBox(height: 20),
+                                    const SizedBox(height: 20),
+                                    Lottie.asset(
+                                      'assets/images/landing/qr_c.json',
+                                      height: 250,
+                                      width: 250,
+                                    ),
+                                    const SizedBox(height: 20),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        MaterialButton(
+                                          onPressed: _saveImageToDownloads,
+                                          color: const Color(0xFF50623A),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          child: const Text(
+                                            "Save to Device",
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                          minWidth: 150,
+                                          height: 50,
                                         ),
-                                      ),
+                                        MaterialButton(
+                                          onPressed: _shareImage,
+                                          color: const Color(0xFF50623A),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(10),
+                                          ),
+                                          child: const Icon(
+                                            Icons.share,
+                                            color: Colors.white,
+                                          ),
+                                          minWidth: 50,
+                                          height: 50,
+                                        ),
+                                      ],
                                     ),
                                   ],
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              Image.asset(
-                                'assets/images/landing/qrcode.jpg',
-                                height: 250,
-                                width: 550,
-                              ),
-                              const SizedBox(height: 20),
-                              Lottie.asset(
-                                'assets/images/landing/qr_c.json',
-                                height: 250,
-                                width: 250,
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  MaterialButton(
-                                    onPressed: _saveImageToDownloads,
-                                    color: const Color(0xFF50623A),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: const Text(
-                                      "Save to Device",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    minWidth: 150,
-                                    height: 50,
-                                  ),
-                                  MaterialButton(
-                                    onPressed: _shareImage,
-                                    color: const Color(0xFF50623A),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: const Icon(
-                                      Icons.share,
-                                      color: Colors.white,
-                                    ),
-                                    minWidth: 50,
-                                    height: 50,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          );
-                        },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ],
-                ),
-              ),
-            ),
-          ],
+                  ),
+                ],
+              );
+            }
+            return const Center(child: Text('Failed to load user data'));
+          },
         ),
       ),
     );
