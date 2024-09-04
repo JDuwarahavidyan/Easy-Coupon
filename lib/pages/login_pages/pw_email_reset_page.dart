@@ -114,6 +114,7 @@
 
 
 
+import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
@@ -134,7 +135,7 @@ class PasswordEmailResetPage extends StatelessWidget {
               left: 20,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pop(context);
+                   Navigator.pushReplacementNamed(context, RouteNames.login);
                 },
                 child: Icon(
                   CupertinoIcons.back,

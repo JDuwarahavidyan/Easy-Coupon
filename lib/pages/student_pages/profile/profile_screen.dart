@@ -1,5 +1,6 @@
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
+import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
@@ -136,12 +137,10 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuWidget(
                         title: "About Us",
                         icon: LineAwesomeIcons.info,
-                        onPress: () {
-                          Navigator.push(
+                        onPress: () {Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const AboutUs()),
-                          );
-                        },
+                          );},
                       ),
                       ProfileMenuWidget(
                         title: "Logout",

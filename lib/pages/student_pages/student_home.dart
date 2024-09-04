@@ -328,39 +328,70 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
   }
 }
 
-class DonutChart extends StatelessWidget {
+
+
+
+class DonutChart extends StatefulWidget {
   final AnimationController animation;
   final int couponCount;
 
   const DonutChart({required this.animation, required this.couponCount});
 
   @override
+  _DonutChartState createState() => _DonutChartState();
+}
+
+class _DonutChartState extends State<DonutChart> {
+  late Animation<double> _progressAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Slow down the animation by increasing the duration
+    widget.animation.duration = const Duration(milliseconds: 1200);
+
+    // Create an animation that goes from 0 to the couponCount / 30
+    _progressAnimation = Tween<double>(
+      begin: 0.0,
+      end: widget.couponCount / 30,
+    ).animate(widget.animation)
+      ..addListener(() {
+        setState(() {});
+      });
+
+    // Start the animation
+    widget.animation.forward();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(1),
       child: AspectRatio(
-        aspectRatio: 2, // Adjusted aspect ratio for a larger circular chart
+        aspectRatio: 2,
         child: Center(
           child: Stack(
-            alignment: Alignment.center, // Center the text and circular indicator
+            alignment: Alignment.center,
             children: <Widget>[
               SizedBox(
-                width: 180, // Increase the size of the donut chart
+                width: 180,
                 height: 180,
                 child: CircularProgressIndicator(
-                  value: couponCount / 30,
-                  strokeWidth: 20.0, // Increase stroke width for a thicker chart
+                  value: _progressAnimation.value,
+                  strokeWidth: 20.0,
                   valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF789461)),
                   backgroundColor: const Color(0xFF789461).withOpacity(0.2),
+                  strokeCap: StrokeCap.round, // Make the edges rounded
                 ),
               ),
               Center(
                 child: Text(
-                  '$couponCount',
+                  '${widget.couponCount}',
                   style: const TextStyle(
                     fontWeight: FontWeight.w600,
                     color: Color(0xFF789461),
-                    fontSize: 90, // Increase font size for the coupon count
+                    fontSize: 90,
                   ),
                 ),
               ),

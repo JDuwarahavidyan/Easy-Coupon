@@ -391,7 +391,6 @@ import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:intl/intl.dart';
-import 'package:easy_coupon/bloc/qr/qr_bloc.dart';
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/models/qr/qr_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -476,29 +475,24 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
             Container(
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               decoration: BoxDecoration(
-                color: Color(0xFFDBE7C9),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.2),
-                    offset: Offset(0, 2),
-                    blurRadius: 4,
-                  ),
-                ],
+                color: Color(0xFFDBE7C9).withOpacity(0.1),
+               
               ),
-              child: const Padding(
+              child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Report Page",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF294B29),
-                        fontSize: 25,
-                      ),
-                    ),
-                  ],
+                 children: [
+  Text(
+    "Report Page",
+    style: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: Color(0xFF294B29).withOpacity(1), // 50% transparency
+      fontSize: 25,
+    ),
+  ),
+],
+
                 ),
               ),
             ),
