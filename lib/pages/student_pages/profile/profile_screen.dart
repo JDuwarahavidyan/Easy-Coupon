@@ -1,5 +1,6 @@
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
+import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -20,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor:
             Colors.transparent, // Ensure transparency to see the background
         appBar: AppBar(
-          backgroundColor: Color(0xFFDBE7C9),
+          //backgroundColor: Color(0xFFDBE7C9),
           title: Text(
             "Profile",
             style: TextStyle(
@@ -141,7 +142,7 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuWidget(
                         title: "About Us",
                         icon: LineAwesomeIcons.info,
-                        onPress: () {},
+                        onPress: () {Navigator.pushReplacementNamed(context, RouteNames.abtus);},
                       ),
                       ProfileMenuWidget(
                         title: "Logout",
