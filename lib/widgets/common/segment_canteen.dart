@@ -1,3 +1,7 @@
+import 'package:easy_coupon/bloc/blocs.dart';
+import 'package:easy_coupon/bloc/user/user_bloc.dart';
+//import 'package:easy_coupon/widgets/common/segment.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -5,75 +9,78 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class Donut_c_Chart extends StatefulWidget {
   final Animation<double> animation;
 
-  const Donut_c_Chart({
-    Key? key,
-    required this.animation,
-  }) : super(key: key);
+
+  const Donut_c_Chart({Key? key, required this.animation}) : super(key: key);
 
   @override
   _Donut_c_ChartState createState() => _Donut_c_ChartState();
 }
 
 class _Donut_c_ChartState extends State<Donut_c_Chart> {
-  int currentValue = 10;
+  late int currentValue;
 
   @override
   void initState() {
     super.initState();
-    fetchDataFromFirebase();
-  }
-
-  void fetchDataFromFirebase() async {
-    try {
-      DocumentSnapshot doc = await FirebaseFirestore.instance
-          .collection('your_collection')
-          .doc('your_document')
-          .get();
-      setState(() {
-        currentValue = doc['your_field'];
-      });
-      print('Fetched value: $currentValue');
-    } catch (e) {
-      print('Error fetching data: $e');
-    }
+    
   }
 
   @override
   Widget build(BuildContext context) {
-    double remainingPercentage = (30 - currentValue) / 30.0;
+    
+
+    final UserBloc userBloc = context.read<UserBloc>();
 
     return AnimatedBuilder(
       animation: widget.animation,
       builder: (context, child) {
         return CustomPaint(
-          painter: Donut_c_ChartPainter(
-            remainingPercentage: remainingPercentage,
-            animationValue: widget.animation.value,
-            remainingColor: const Color(0xFF50623A),
-            usedColor: Colors.grey.shade300,
-          ),
+          
           child: SizedBox(
-            width: 200,
-            height: 200,
+            width: 300,
+            height: 150,
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const Text(
-                    'Coupons Utilized Today',
+                    'Remaining Coupons',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                       color: Colors.black54,
                     ),
                   ),
-                  Text(
-                    '$currentValue',  // Display remaining coupons
-                    style: const TextStyle(
-                      fontSize: 90,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF50623A),
-                    ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  BlocBuilder<UserBloc, UserState>(
+                    bloc: userBloc,
+                    builder: (context, state) {
+                      if (state is UserLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is UserLoaded) {
+                        //state.users;
+                        try {
+                          final user = state.users.firstWhere(
+                            (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
+                            orElse: () => throw Exception('User not found'),
+                          );                         
+                          return Text(
+                            '${user.canteenCount}', // Display remaining coupons
+                            style: const TextStyle(
+                              fontSize: 70,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xFF50623A),
+                            ),
+                          );
+                        } catch (e) {
+                          return const Center(child: Text('User data not found'));
+                        }
+                      } else {
+                        return const Center(child: Text('Failed to load user data'));
+                      }
+                    },
                   ),
                 ],
               ),

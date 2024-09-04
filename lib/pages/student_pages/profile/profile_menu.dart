@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'constants.dart';
 
 class ProfileMenuWidget extends StatelessWidget {
   const ProfileMenuWidget({
@@ -20,9 +19,6 @@ class ProfileMenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    // var iconColor = isDark ? tPrimaryColor : tAccentColor;
-
     return ListTile(
       onTap: onPress,
       leading: Container(
@@ -30,13 +26,11 @@ class ProfileMenuWidget extends StatelessWidget {
         height: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100),
-          // color: iconColor.withOpacity(0.1),
+          color: Color(0xFF294B29).withOpacity(0.1),
         ),
-        // child: Icon(icon, color: iconColor),
+        child: Icon(icon, color: Color(0xFF294B29)),
       ),
-      title: Text(title,
-          style:
-              Theme.of(context).textTheme.bodyLarge?.apply(color: textColor)),
+      title: Text(title, style: Theme.of(context).textTheme.bodyLarge?.apply(color: textColor)),
       trailing: endIcon
           ? Container(
               width: 30,
@@ -45,8 +39,7 @@ class ProfileMenuWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(100),
                 color: Colors.grey.withOpacity(0.1),
               ),
-              child: const Icon(LineAwesomeIcons.angle_right,
-                  size: 18.0, color: Colors.grey))
+              child: const Icon(LineAwesomeIcons.angle_right, size: 18.0, color: Colors.grey))
           : null,
     );
   }
