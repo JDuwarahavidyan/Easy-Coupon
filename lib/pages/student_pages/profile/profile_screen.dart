@@ -1,3 +1,4 @@
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:easy_coupon/routes/route_names.dart';
@@ -52,7 +53,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ElevatedButton(
               onPressed: () {
                 // Implement logout functionality here
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                ); // Close the dialog
                 // Add navigation to login screen or perform other logout actions
               },
               style: ElevatedButton.styleFrom(
