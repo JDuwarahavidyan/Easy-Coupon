@@ -54,8 +54,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 // Implement logout functionality here
                 Navigator.of(context).pop(); // Close the dialog
                 // Add navigation to login screen or perform other logout actions
-                // For example:
-                // Navigator.of(context).pushReplacementNamed('/login');
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.redAccent,
@@ -78,8 +76,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -87,19 +83,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Background(
       child: Scaffold(
         backgroundColor: Colors.transparent, // Ensure transparency to see the background
-        appBar: AppBar(
-          backgroundColor: const Color(0xFFDBE7C9),
-          title: const Text(
-            "Settings",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF294B29),
-              fontSize: 25,
-            ),
-          ),
-        ),
+
         body: Column(
           children: [
+            // Top Section with Title
+            Container(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              decoration: BoxDecoration(
+                color: Color(0xFFDBE7C9).withOpacity(0.1),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Settings Page",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF294B29).withOpacity(1), // Full opacity
+                        fontSize: 25,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20), // Added spacing
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
@@ -169,11 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               borderRadius: BorderRadius.circular(80.0),
                             ),
                             padding: EdgeInsets.zero,
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            backgroundColor: const Color(0xFF294B29), // Gradient color for button
+                            backgroundColor: const Color(0xFF294B29),
                           ),
                           child: Container(
                             alignment: Alignment.center,
@@ -220,19 +226,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         endIcon: false,
                         onPress: () => _showLogoutDialog(context),
                       ),
+                      const SizedBox(height: 40),
+                      Transform.translate(
+                        offset: const Offset(0, -55), // Move up by 55 pixels
+                        child: Lottie.asset(
+                          'assets/images/landing/settings.json',
+                          width: 300,
+                          height: 300,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ),
-            ),
-            Container(
-              child: Transform.translate(
-                offset: const Offset(0, -55), // Move up by 55 pixels
-                child: Lottie.asset(
-                  'assets/images/landing/settings.json',
-                  width: 300,
-                  height: 300,
-                  fit: BoxFit.contain,
                 ),
               ),
             ),
