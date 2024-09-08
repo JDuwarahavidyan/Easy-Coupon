@@ -1,7 +1,7 @@
 class RouteNames {
-  static const String splash = '/splash';
+  static const String splash = '/';
   static const String introductionAnimation = '/introductionAnimation';
-  static const String login = '/';
+  static const String login = '/login';
   static const String resetPWEmail = '/reset-email';
   static const String home = '/home';
   static const String report = '/report';

@@ -73,6 +73,7 @@ class UploadPicture extends UserState {
   List<Object> get props => [userImage];
 }
 
+class UploadPictureFailure extends UserState {}
 class UploadPictureLoading extends UserState {}
 class UploadPictureSuccess extends UserState {
 	final String userImage;
