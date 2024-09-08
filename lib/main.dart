@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
               theme: themeProvider.themeData.copyWith(
                 scaffoldBackgroundColor: const Color(0xFFFFFFFF),
               ),
-              initialRoute: RouteNames.splash,
+              initialRoute: RouteNames.login,
               onGenerateRoute: AppRoutes.generateRoute,
               builder: (context, child) {
                 return SafeArea(
