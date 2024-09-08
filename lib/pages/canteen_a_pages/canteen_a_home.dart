@@ -1,20 +1,18 @@
 import 'package:easy_coupon/models/user/user_model.dart';
-import 'package:easy_coupon/widgets/common/segment_canteen.dart';
-//import 'package:easy_coupon/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/routes/route_names.dart';
-import 'package:easy_coupon/widgets/common/background.dart';
-//import 'package:easy_coupon/widgets/common/segment_c.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:easy_coupon/widgets/widgets.dart';
 
 class CanteenAHome extends StatefulWidget {
   const CanteenAHome({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _CanteenAHomeState createState() => _CanteenAHomeState();
 }
 
@@ -71,19 +69,19 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          SizedBox(height: 50),
+                          const SizedBox(height: 50),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: Text(
                               'Welcome Back, ${user.userName}!',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF294B29),
                                 fontSize: 25,
                               ),
                             ),
                           ),
-                          SizedBox(height: 10),
+                          const SizedBox(height: 10),
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),
                             child: LayoutBuilder(
@@ -91,9 +89,9 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                                 return Column(
                                   children: [
                                     Container(
-                                      padding: EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(8.0),
                                       decoration: BoxDecoration(
-                                        color: Color(0xFF789461).withOpacity(0.1),
+                                        color: const Color(0xFF789461).withOpacity(0.1),
                                         borderRadius: BorderRadius.circular(8.0),
                                       ),
                                       child: Row(
@@ -123,15 +121,16 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                                         ],
                                       ),
                                     ),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
                                     Center(
-                                      child: Donut_c_Chart(
-                                        animation: animationController!,
+                                      child: DonutcChart(
+                                         animation: animationController!,
+                                                couponCount: user.studentCount,
                                       ),
                                     ),
-                                    SizedBox(height: 20),
-                                    Center(),
-                                    SizedBox(height: 20),
+                                    const SizedBox(height: 20),
+                                    const Center(),
+                                    const SizedBox(height: 20),
                                     Center(
                                       child: Container(
                                         width: 250,
@@ -139,14 +138,14 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                                           color: Colors.white,
                                           borderRadius: BorderRadius.circular(15.0),
                                           border: Border.all(
-                                            color: Color(0xFF789461),
+                                            color: const Color(0xFF789461),
                                             width: 2.0,
                                           ),
                                         ),
                                         child: CupertinoButton(
-                                          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
+                                          padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0),
                                           color: Colors.transparent,
-                                          child: Row(
+                                          child: const Row(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
                                               Icon(CupertinoIcons.qrcode, color: Color(0xFF789461)),
@@ -166,7 +165,7 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                                         ),
                                       ),
                                     ),
-                                    SizedBox(height: 10),
+                                    const SizedBox(height: 10),
                                     SizedBox(
                                       width: 250,
                                       height: 250,
@@ -195,3 +194,78 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
   }
 }
 
+
+
+
+class DonutcChart extends StatefulWidget {
+  final AnimationController animation;
+  final int couponCount;
+
+  const DonutcChart({super.key, required this.animation, required this.couponCount});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _DonutcChartState createState() => _DonutcChartState();
+}
+
+class _DonutcChartState extends State<DonutcChart> {
+  late Animation<double> _progressAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Slow down the animation by increasing the duration
+    widget.animation.duration = const Duration(milliseconds: 1200);
+
+    // Create an animation that goes from 0 to the couponCount / 30
+    _progressAnimation = Tween<double>(
+      begin: 0.0,
+      end: widget.couponCount / 30,
+    ).animate(widget.animation)
+      ..addListener(() {
+        setState(() {});
+      });
+
+    // Start the animation
+    widget.animation.forward();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(1),
+      child: AspectRatio(
+        aspectRatio: 2,
+        child: Center(
+          child: Stack(
+            alignment: Alignment.center,
+            children: <Widget>[
+              SizedBox(
+                width: 180,
+                height: 180,
+                child: CircularProgressIndicator(
+                  value: _progressAnimation.value,
+                  strokeWidth: 20.0,
+                  valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF789461)),
+                  backgroundColor: const Color(0xFF789461).withOpacity(0.2),
+                  strokeCap: StrokeCap.round, // Make the edges rounded
+                ),
+              ),
+              Center(
+                child: Text(
+                  '${widget.couponCount}',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: Color(0xFF789461),
+                    fontSize: 90,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
