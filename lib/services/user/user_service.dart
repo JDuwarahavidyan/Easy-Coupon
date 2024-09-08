@@ -1,13 +1,16 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_coupon/exception/expceptions.dart';
 import 'package:easy_coupon/models/user/user_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class UserService {
   final CollectionReference _userCollection = FirebaseFirestore.instance.collection('users');
+  final FirebaseStorage _storage = FirebaseStorage.instance;
 
   Stream<List<UserModel>> getUsersStream() {
-    
     return _userCollection.snapshots().map((snapshot) => snapshot.docs.map((doc) => UserModel.fromJson(doc.data() as Map<String, dynamic>)).toList());
   }
 
@@ -125,5 +128,25 @@ class UserService {
     } catch (e) {
       throw CustomException('Error getting user name: $e');
     }
+  }
+
+  Future<String> uploadPicture(String file, String userId) async {
+    try {
+      File imageFile = File(file);
+      Reference firebaseStoreRef = FirebaseStorage.instance.ref().child('$userId/PP/${userId}_lead');
+      await firebaseStoreRef.putFile(
+        imageFile,
+      );
+      String url = await firebaseStoreRef.getDownloadURL();
+      await _userCollection.doc(userId).update({'profilePic': url});
+      return url;
+    } catch (e) {
+      throw CustomException('Error getting image: $e');
+    }
+  }
+
+    Future<void> deleteProfilePicture(String imageUrl ) async {
+    final ref = _storage.refFromURL(imageUrl);
+    await ref.delete();
   }
 }

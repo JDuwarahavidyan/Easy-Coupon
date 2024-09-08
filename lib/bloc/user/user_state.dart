@@ -64,4 +64,23 @@ class CanteenUserNameFetched extends UserState {
 
 }
 
+class UploadPicture extends UserState {
+	final String userImage;
+
+	const UploadPicture(this.userImage);
+
+	@override
+  List<Object> get props => [userImage];
+}
+
+class UploadPictureLoading extends UserState {}
+class UploadPictureSuccess extends UserState {
+	final String userImage;
+
+	const UploadPictureSuccess(this.userImage);
+
+	@override
+  List<Object> get props => [userImage];
+}
+
 

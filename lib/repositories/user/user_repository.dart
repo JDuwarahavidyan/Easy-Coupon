@@ -7,7 +7,6 @@ class UserRepository {
   UserRepository(this._userService);
 
   Stream<List<UserModel>> getUsersStream() {
-   
     return _userService.getUsersStream();
   }
 
@@ -41,5 +40,14 @@ class UserRepository {
 
   Future<String?> fetchCanteenUserName(String userId) async {
     return _userService.fetchCanteenUserName(userId);
+  }
+
+  Future<String?> uploadPicture(String file, String userId) async {
+    print('user image :${file}');
+    return _userService.uploadPicture(file, userId);
+  }
+
+  Future<void> deleteProfilePicture(String imageUrl) async {
+    return _userService.deleteProfilePicture(imageUrl);
   }
 }

@@ -23,6 +23,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<FetchUserRoleEvent>(_onFetchUserRoleEvent);
     on<UpdateCanteenCountEvent>(_onUpdateCanteenCountEvent);
     on<FetchCanteenUserNameEvent>(_onFetchCanteenUserNameEvent);
+    on<UploadPictureEvent>(_onUploadpictureEvent);
+    on<DeleteProfilePictureEvent>(_onDeleteProfilePictureEvent);
   }
 
   Future<void> _onUserReadEvent(UserReadEvent event, Emitter<UserState> emit) async {
@@ -132,9 +134,27 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     }
   }
 
+  FutureOr<void> _onUploadpictureEvent(UploadPictureEvent event, Emitter<UserState> emit) async {
+    try {
+      await _userRepository.uploadPicture(event.file, event.userId);
+    } catch (e) {
+      emit(UserFailure('Failed to fetch user role: $e'));
+    }
+  }
+
+  FutureOr<void> _onDeleteProfilePictureEvent(DeleteProfilePictureEvent event, Emitter<UserState> emit) {
+    try {
+     _userRepository.deleteProfilePicture(event.imageUrl);
+    } catch (e) {
+      emit(UserFailure('Failed to fetch user role: $e'));
+    }
+  }
+
   @override
   Future<void> close() {
     _userStreamSubscription?.cancel();
     return super.close();
   }
+
+  
 }
