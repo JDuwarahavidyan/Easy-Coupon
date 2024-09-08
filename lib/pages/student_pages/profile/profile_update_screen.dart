@@ -1,26 +1,36 @@
+import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 
-class UpdateProfileScreen extends StatelessWidget {
-  const UpdateProfileScreen({Key? key}) : super(key: key);
+class UpdateProfileScreen extends StatefulWidget {
+  const UpdateProfileScreen({super.key});
 
   @override
+  State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
+}
+
+class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
+  @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    // Fetch size from MediaQuery
+    final size = MediaQuery.of(context).size;
 
     return Background(
       child: Scaffold(
         backgroundColor: Colors.transparent, // Ensure transparency to see the background
         appBar: AppBar(
-          backgroundColor: Color(0xFFDBE7C9),
+          backgroundColor: const Color(0xFFDBE7C9),
           leading: IconButton(
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                MaterialPageRoute(
+                    builder: (context) => StudentMainPage(
+                          currentIndex: 2,
+                        )),
               );
             },
             icon: const Icon(LineAwesomeIcons.angle_left),
@@ -36,19 +46,20 @@ class UpdateProfileScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
                 Stack(
+                  clipBehavior: Clip.none, // Ensure the stack can overflow
                   children: [
                     SizedBox(
                       width: 120,
                       height: 120,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(100),
+                        borderRadius: BorderRadius.circular(60), // Adjusted radius to 60 for better visual
                         child: Image.asset(
                           "assets/images/landing/userImage.png",
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover, // Changed to cover for better fit
                         ),
                       ),
                     ),
@@ -59,12 +70,12 @@ class UpdateProfileScreen extends StatelessWidget {
                         width: 35,
                         height: 35,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(100),
-                          color: Color(0xFF294B29),
+                          borderRadius: BorderRadius.circular(17.5), // Adjusted radius to 17.5
+                          color: const Color(0xFF294B29),
                         ),
                         child: const Icon(
                           LineAwesomeIcons.camera,
-                          color: Colors.black,
+                          color: Colors.white,
                           size: 20,
                         ),
                       ),
@@ -87,16 +98,15 @@ class UpdateProfileScreen extends StatelessWidget {
                         subtitle: Text('johndoe@example.com'),
                       ),
                       const SizedBox(height: 20),
-                      const SizedBox(height: 20),
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           onPressed: () => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => PasswordEmailResetPage()),
+                            MaterialPageRoute(builder: (context) => const PasswordEmailResetPage()),
                           ),
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: Color(0xFF50623A),
+                            backgroundColor: const Color(0xFF50623A),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(80.0),
                             ),
@@ -105,7 +115,6 @@ class UpdateProfileScreen extends StatelessWidget {
                           child: Container(
                             alignment: Alignment.center,
                             height: 50.0,
-                            width: size.width,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(80.0),
                               gradient: const LinearGradient(
@@ -115,7 +124,6 @@ class UpdateProfileScreen extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            padding: const EdgeInsets.all(0),
                             child: const Text(
                               "CHANGE PASSWORD",
                               textAlign: TextAlign.center,
@@ -128,26 +136,20 @@ class UpdateProfileScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 20),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.redAccent.withOpacity(0.1),
-                              elevation: 0,
-                              foregroundColor: Colors.red,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(80.0),
-                              ),
-                              side: BorderSide.none,
-                            ),
-                            child: const Text(
-                              "DELETE ACCOUNT",
-                              style: TextStyle(color: Colors.red),
-                            ),
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.redAccent.withOpacity(0.1),
+                          elevation: 0,
+                          foregroundColor: Colors.red,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(80.0),
                           ),
-                        ],
+                        ),
+                        child: const Text(
+                          "DELETE ACCOUNT",
+                          style: TextStyle(color: Colors.red),
+                        ),
                       ),
                     ],
                   ),
