@@ -1,21 +1,22 @@
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_report.dart';
 import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/pages/student_pages/student_report.dart';
+// import 'package:easy_coupon/pages/student_pages/student_report.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class StudentMainPage extends StatefulWidget {
-  const StudentMainPage({super.key, int? currentIndex});
+class CanteenMainPage extends StatefulWidget {
+  const CanteenMainPage({super.key, int? currentIndex});
   
   @override
-  _StudentMainPageState createState() => _StudentMainPageState();
+  _CanteenMainPageState createState() => _CanteenMainPageState();
 }
 
-class _StudentMainPageState extends State<StudentMainPage> {
+class _CanteenMainPageState extends State<CanteenMainPage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
-    StudentHome(),
-    Student_report(),
+    CanteenAHome(),
+    CanteenAReport(),
     ProfileScreen(),
     // Add more pages as needed
   ];

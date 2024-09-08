@@ -1,4 +1,5 @@
 import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_report.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/login_pages/register.dart';
 import 'package:easy_coupon/pages/pages.dart';
@@ -29,7 +30,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => StudentHome());
 
       case RouteNames.cahome:
-        return MaterialPageRoute(builder: (_) => const CanteenAHome());
+        return MaterialPageRoute(builder: (_) => const CanteenMainPage());
 
       case RouteNames.report:
         return MaterialPageRoute(builder: (_) => Student_report());

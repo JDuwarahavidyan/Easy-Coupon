@@ -1,3 +1,4 @@
+import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -18,7 +19,7 @@ class AboutUs extends StatelessWidget {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                MaterialPageRoute(builder: (context) => StudentMainPage(currentIndex: 3,)),
               );
             },
             icon: const Icon(LineAwesomeIcons.angle_left),

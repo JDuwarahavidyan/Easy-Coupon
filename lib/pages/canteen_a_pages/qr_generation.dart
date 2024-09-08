@@ -1,6 +1,7 @@
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/models/user/user_model.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
@@ -12,6 +13,8 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
 import 'package:share/share.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
+import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_home.dart';
 
 class QrGen extends StatefulWidget {
   const QrGen({super.key, AnimationController? animationController});
@@ -81,6 +84,15 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           backgroundColor: const Color(0xFFDBE7C9),
+          leading: IconButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const CanteenMainPage()),
+              );
+            },
+            icon: const Icon(LineAwesomeIcons.angle_left),
+          ),
           title: const Text(
             "Generate the QR",
             style: TextStyle(
