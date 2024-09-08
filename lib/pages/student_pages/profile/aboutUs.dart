@@ -5,9 +5,14 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 
-class AboutUs extends StatelessWidget {
+class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
 
+  @override
+  State<AboutUs> createState() => _AboutUsState();
+}
+
+class _AboutUsState extends State<AboutUs> {
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -20,6 +25,7 @@ class AboutUs extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => StudentMainPage(currentIndex: 3,)),
+              );
               );
             },
             icon: const Icon(LineAwesomeIcons.angle_left),

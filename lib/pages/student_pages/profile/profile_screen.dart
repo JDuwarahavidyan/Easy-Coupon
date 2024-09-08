@@ -1,3 +1,4 @@
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:easy_coupon/routes/route_names.dart';
@@ -7,34 +8,116 @@ import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart'; // Import the Background widget
 import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
 
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  void _showLogoutDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: const Text(
+            "LOGOUT",
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF294B29)),
+          ),
+          content: const Padding(
+            padding: EdgeInsets.symmetric(vertical: 15.0),
+            child: Text(
+              "Are you sure you want to Logout?",
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF294B29),
+              ),
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text(
+                "No",
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Color(0xFF294B29),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // Implement logout functionality here
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => LoginPage()),
+                ); // Close the dialog
+                // Add navigation to login screen or perform other logout actions
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.redAccent,
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              child: const Text(
+                "Yes",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    // var isDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
-    Size size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
 
     return Background(
       child: Scaffold(
         backgroundColor: Colors.transparent, // Ensure transparency to see the background
-        appBar: AppBar(
-          backgroundColor: Color(0xFFDBE7C9),
-          title: const Text(
-            "Settings",
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF294B29),
-              fontSize: 25,
-            ),
-          ),
-        ),
+
         body: Column(
           children: [
+            // Top Section with Title
+            Container(
+              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+              decoration: BoxDecoration(
+                color: Color(0xFFDBE7C9).withOpacity(0.1),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Settings Page",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF294B29).withOpacity(1), // Full opacity
+                        fontSize: 25,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 20), // Added spacing
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(16.0), // tDefaultSize
+                  padding: const EdgeInsets.all(16.0), // Default padding
                   child: Column(
                     children: [
                       Stack(
@@ -81,7 +164,7 @@ class ProfileScreen extends StatelessWidget {
                       const Text(
                         "Your Role/Title",
                         style: TextStyle(
-                          color: Color.fromARGB(255, 0, 0, 0),
+                          color: Colors.black,
                           fontSize: 18,
                         ),
                       ),
@@ -100,11 +183,7 @@ class ProfileScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(80.0),
                             ),
                             padding: EdgeInsets.zero,
-                            textStyle: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            backgroundColor: const Color(0xFF294B29), // Gradient color for button
+                            backgroundColor: const Color(0xFF294B29),
                           ),
                           child: Container(
                             alignment: Alignment.center,
@@ -137,10 +216,12 @@ class ProfileScreen extends StatelessWidget {
                       ProfileMenuWidget(
                         title: "About Us",
                         icon: LineAwesomeIcons.info,
-                        onPress: () {Navigator.push(
+                        onPress: () {
+                          Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const AboutUs()),
-                          );},
+                          );
+                        },
                       ),
                       ProfileMenuWidget(
                         title: "Logout",
@@ -149,88 +230,24 @@ class ProfileScreen extends StatelessWidget {
                         endIcon: false,
                         onPress: () => _showLogoutDialog(context),
                       ),
+                      const SizedBox(height: 40),
+                      Transform.translate(
+                        offset: const Offset(0, -55), // Move up by 55 pixels
+                        child: Lottie.asset(
+                          'assets/images/landing/settings.json',
+                          width: 300,
+                          height: 300,
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                     ],
                   ),
-                ),
-              ),
-            ),
-            Container(
-              child: Transform.translate(
-                offset: Offset(0, -55), // Move up by 20 pixels
-                child: Lottie.asset(
-                  'assets/images/landing/settings.json',
-                  width: 300,
-                  height: 300,
-                  fit: BoxFit.contain,
                 ),
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  void _showLogoutDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white,
-          title: const Text(
-            "LOGOUT",
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF294B29)),
-          ),
-          content: const Padding(
-            padding: EdgeInsets.symmetric(vertical: 15.0),
-            child: Text(
-              "Are you sure you want to Logout?",
-              style: TextStyle(
-                fontSize: 16,
-                color: Color(0xFF294B29),
-              ),
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              child: const Text(
-                "No",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: Color(0xFF294B29),
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-              },
-            ),
-            ElevatedButton(
-              onPressed: () {
-                // Implement logout functionality here
-                Navigator.of(context).pop(); // Close the dialog
-                // Add navigation to login screen or perform other logout actions
-                // For example:
-                // Navigator.of(context).pushReplacementNamed('/login');
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent,
-                textStyle: const TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              child: const Text(
-                "Yes",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        );
-      },
     );
   }
 }
