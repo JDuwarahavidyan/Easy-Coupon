@@ -1,5 +1,5 @@
 import 'package:easy_coupon/bloc/blocs.dart';
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
@@ -84,7 +84,7 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const CanteenMainPage()),
+                MaterialPageRoute(builder: (context) => const CanteenAMainPage()),
               );
             },
             icon: const Icon(LineAwesomeIcons.angle_left),

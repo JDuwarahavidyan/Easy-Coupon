@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
-import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});

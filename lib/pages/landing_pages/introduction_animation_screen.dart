@@ -5,7 +5,7 @@ import 'package:easy_coupon/pages/landing_pages/components/no_more_view.dart';
 import 'package:easy_coupon/pages/landing_pages/components/easy_coupon_view.dart';
 import 'package:easy_coupon/pages/landing_pages/components/top_back_skip_view.dart';
 import 'package:easy_coupon/pages/landing_pages/components/welcome_view.dart';
-import 'package:easy_coupon/routes/routes.dart';
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 
@@ -114,6 +114,28 @@ class _IntroductionAnimationScreenState
   }
 
   void _signUpClick() {
-    Navigator.pushReplacementNamed(context, RouteNames.login);
-  }
+  Navigator.pushReplacement(
+    context,
+    PageRouteBuilder(
+      transitionDuration: const Duration(seconds: 1 ),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0); // Start from right
+        const end = Offset(0.0, 0.0);   // End at the current position
+        const curve = Curves.easeInOut;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return  LoginPage(); // Replace with your login page
+      },
+    ),
+  );
+}
+
 }

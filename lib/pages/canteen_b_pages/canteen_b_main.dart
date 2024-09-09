@@ -4,21 +4,20 @@ import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-class CanteenMainPage extends StatefulWidget {
-  const CanteenMainPage({super.key, int? currentIndex});
+class CanteenBMainPage extends StatefulWidget {
+  const CanteenBMainPage({super.key, int? currentIndex});
   
   @override
-  _CanteenMainPageState createState() => _CanteenMainPageState();
+  _CanteenBMainPageState createState() => _CanteenBMainPageState();
 }
 
-class _CanteenMainPageState extends State<CanteenMainPage> {
+class _CanteenBMainPageState extends State<CanteenBMainPage> {
   int _currentIndex = 0;
 
   final List<Widget> _pages = [
     CanteenAHome(),
     CanteenAReport(),
     ProfileScreen(),
-    // Add more pages as needed
   ];
 
   void _onTabSelected(int index) {
