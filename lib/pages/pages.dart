@@ -11,3 +11,5 @@ export 'canteen_a_pages/canteen_a_home.dart';
 export 'canteen_a_pages/qr_generation.dart';
 export 'student_pages/profile/pw_emai.dart';
 export 'student_pages/profile/aboutUs.dart';
+export 'student_pages/profile/profile_update_screen.dart';
+export 'student_pages/profile/profile_menu.dart';

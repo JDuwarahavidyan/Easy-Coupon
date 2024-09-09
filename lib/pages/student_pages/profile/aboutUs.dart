@@ -33,7 +33,7 @@ class _AboutUsState extends State<AboutUs> {
             style: TextStyle(
               fontWeight: FontWeight.w900,
               color: Color(0xFF294B29),
-              fontSize: 24,
+              fontSize: 25,
             ),
           ),
         ),

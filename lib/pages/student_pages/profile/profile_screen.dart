@@ -1,12 +1,8 @@
 import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
-import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
-import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_coupon/widgets/common/background.dart'; // Import the Background widget
-import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
+import 'package:easy_coupon/widgets/common/background.dart'; 
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -47,20 +43,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
+                Navigator.of(context).pop(); 
               },
             ),
             ElevatedButton(
               onPressed: () {
-                // Implement logout functionality here
+            
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => LoginPage()),
-                ); // Close the dialog
-                // Add navigation to login screen or perform other logout actions
+                );
+                
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent,
+                backgroundColor: const Color(0xFF789461),
                 textStyle: const TextStyle(
                   color: Colors.white,
                 ),
@@ -86,38 +82,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     return Background(
       child: Scaffold(
-        backgroundColor: Colors.transparent, // Ensure transparency to see the background
-
+        backgroundColor: Colors.transparent, 
         body: Column(
           children: [
-            // Top Section with Title
+           
             Container(
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               decoration: BoxDecoration(
-                color: Color(0xFFDBE7C9).withOpacity(0.1),
+                color: const Color(0xFFDBE7C9).withOpacity(0.1),
               ),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Settings Page",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFF294B29).withOpacity(1), // Full opacity
-                        fontSize: 25,
-                      ),
+               children: [
+                    Padding(
+                padding: const EdgeInsets.only(right: 16.0), 
+                child: Text(
+                    "Settings ",
+                     style: TextStyle(
+                     fontWeight: FontWeight.bold,
+                     color: const Color(0xFF294B29).withOpacity(1), 
+                     fontSize: 25,
+                     ),
                     ),
-                  ],
+                  ),
+                ],
                 ),
               ),
             ),
-            const SizedBox(height: 20), // Added spacing
+            const SizedBox(height: 20), 
             Expanded(
               child: SingleChildScrollView(
                 child: Container(
-                  padding: const EdgeInsets.all(16.0), // Default padding
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
                       Stack(
@@ -226,13 +224,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ProfileMenuWidget(
                         title: "Logout",
                         icon: LineAwesomeIcons.alternate_sign_out,
-                        textColor: Colors.red,
+                        textColor: Colors.black,
                         endIcon: false,
                         onPress: () => _showLogoutDialog(context),
                       ),
                       const SizedBox(height: 40),
                       Transform.translate(
-                        offset: const Offset(0, -55), // Move up by 55 pixels
+                        offset: const Offset(0, -55), 
                         child: Lottie.asset(
                           'assets/images/landing/settings.json',
                           width: 300,
