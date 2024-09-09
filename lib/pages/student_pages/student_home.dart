@@ -9,7 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
+//import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 
 class TabIconData {
   final IconData icon;

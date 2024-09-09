@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:easy_coupon/models/user/user_model.dart';
 import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
