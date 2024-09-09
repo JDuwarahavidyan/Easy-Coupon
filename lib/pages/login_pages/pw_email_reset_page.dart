@@ -1,4 +1,5 @@
 import 'package:easy_coupon/bloc/blocs.dart';
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/routes/route_names.dart';
@@ -15,6 +16,37 @@ class PasswordEmailResetPage extends StatefulWidget {
 class _PasswordEmailResetPageState extends State<PasswordEmailResetPage> {
   final TextEditingController emailController = TextEditingController();
 
+  void navigateWithAnimation(BuildContext context, String routeName) {
+    Navigator.pushReplacement(
+      context,
+      PageRouteBuilder(
+        transitionDuration: const Duration(seconds: 1),
+        pageBuilder: (context, animation, secondaryAnimation) => _getRouteWidget(routeName),
+        transitionsBuilder: (context, animation, secondaryAnimation, child) {
+          const begin = Offset(-1.0, 0.0); // Start the animation from left to right
+          const end = Offset.zero;
+          const curve = Curves.easeInOut;
+
+          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var offsetAnimation = animation.drive(tween);
+
+          return SlideTransition(
+            position: offsetAnimation,
+            child: child,
+          );
+        },
+      ),
+    );
+  }
+
+
+  Widget _getRouteWidget(String routeName) {
+    if (routeName == RouteNames.login) {
+      return  LoginPage(); 
+    }
+    return const Scaffold(); 
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -29,7 +61,7 @@ class _PasswordEmailResetPageState extends State<PasswordEmailResetPage> {
               left: 20,
               child: GestureDetector(
                 onTap: () {
-                  Navigator.pushReplacementNamed(context, RouteNames.login);
+                  navigateWithAnimation(context, RouteNames.login);
                 },
                 child: const Icon(
                   CupertinoIcons.back,
@@ -88,8 +120,8 @@ class _PasswordEmailResetPageState extends State<PasswordEmailResetPage> {
                           message: 'Reset email sent. Check your inbox.',
                           backgroundColor: Colors.green,
                         );
-                        Navigator.pushReplacementNamed(context, RouteNames.login);
-                      } 
+                        navigateWithAnimation(context, RouteNames.login);
+                      }
                     },
                     builder: (context, state) {
                       if (state is AuthStateLoading) {
