@@ -1,10 +1,10 @@
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
-import 'package:easy_coupon/pages/student_pages/student_main.dart';
+
+import 'package:easy_coupon/pages/pages.dart';
+
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 
 class AboutUs extends StatefulWidget {
   final String userRole; // Add a parameter to accept user role
@@ -38,7 +38,7 @@ class _AboutUsState extends State<AboutUs> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CanteenMainPage(
+                    builder: (context) => const CanteenAMainPage(
                       currentIndex: 2,
                     ),
                   ),
