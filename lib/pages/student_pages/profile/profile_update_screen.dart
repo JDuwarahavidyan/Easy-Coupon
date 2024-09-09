@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:easy_coupon/models/user/user_model.dart';
 import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,7 +10,7 @@ import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
+import 'package:image_cropper/image_cropper.dart';
 import '../../../bloc/blocs.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -26,14 +28,54 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     );
 
     if (image != null) {
-      // Deleting the old profile picture from Firebase Storage
-      if (user.profilePic != null && user.profilePic!.isNotEmpty) {
-        // Assuming you have a method to delete the profile picture
-        context.read<UserBloc>().add(DeleteProfilePictureEvent(user.profilePic!));
-      }
+      if (Platform.isAndroid) {
+        // Using UCrop for Android cropping
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          uiSettings: [
+            AndroidUiSettings(
+              toolbarTitle: 'Crop Image',
+              toolbarColor: Colors.deepOrange,
+              toolbarWidgetColor: Colors.white,
+              initAspectRatio: CropAspectRatioPreset.square,
+              lockAspectRatio: false,
+            ),
+          ],
+        );
 
-      // Uploading the new profile picture
-      context.read<UserBloc>().add(UploadPictureEvent(image.path, user.id));
+        if (croppedFile != null) {
+          // Deleting the old profile picture from Firebase Storage
+          if (user.profilePic != null && user.profilePic!.isNotEmpty) {
+            context.read<UserBloc>().add(DeleteProfilePictureEvent(user.profilePic!));
+          }
+
+          // Uploading the cropped image
+          context.read<UserBloc>().add(UploadPictureEvent(croppedFile.path, user.id));
+        }
+      } else if (Platform.isIOS) {
+        // Using ImageCropper for iOS
+        final croppedFile = await ImageCropper().cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0), // Square crop
+          uiSettings: [
+            IOSUiSettings(
+              title: 'Crop Image',
+              doneButtonTitle: 'Done',
+              cancelButtonTitle: 'Cancel',
+            ),
+          ],
+        );
+
+        if (croppedFile != null) {
+          // Deleting the old profile picture from Firebase Storage
+          if (user.profilePic != null && user.profilePic!.isNotEmpty) {
+            context.read<UserBloc>().add(DeleteProfilePictureEvent(user.profilePic!));
+          }
+
+          // Uploading the cropped image
+          context.read<UserBloc>().add(UploadPictureEvent(croppedFile.path, user.id));
+        }
+      }
     }
   }
 
@@ -116,21 +158,34 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                   )
                                 : GestureDetector(
                                     onTap: () => _pickAndUploadImage(user),
-                                    child: SizedBox(
+                                    child: Container(
                                       width: 120,
                                       height: 120,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(100),
-                                        child: Image.network(
-                                          user.profilePic!,
-                                          fit: BoxFit.cover,
-                                          errorBuilder: (context, error, stackTrace) {
-                                            return Icon(Icons.error, size: 120);
-                                          },
-                                        ),
+                                      decoration: const BoxDecoration(
+                                        color: Colors.grey, // Gray background color
+                                        shape: BoxShape.circle, // Circular background to match the rounded image
                                       ),
-                                    ),
-                                  ),
+                                      child: Stack(
+                                        alignment: Alignment.center, // Align the person icon in the center
+                                        children: [
+                                          const Icon(
+                                            Icons.person,
+                                            size: 80,
+                                            color: Colors.white, // Person icon with white color
+                                          ),
+                                          ClipRRect(
+                                            borderRadius: BorderRadius.circular(100),
+                                            child: Image.network(
+                                              user.profilePic!,
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (context, error, stackTrace) {
+                                                return Icon(Icons.error, size: 120); // Show error icon if image fails to load
+                                              },
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
                             Positioned(
                               bottom: 0,
                               right: 0,
