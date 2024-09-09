@@ -21,13 +21,15 @@ class _PasswordEmailResetPageState extends State<PasswordEmailResetPage> {
       context,
       PageRouteBuilder(
         transitionDuration: const Duration(seconds: 1),
-        pageBuilder: (context, animation, secondaryAnimation) => _getRouteWidget(routeName),
+        pageBuilder: (context, animation, secondaryAnimation) =>
+            _getRouteWidget(routeName),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(-1.0, 0.0); // Start the animation from left to right
           const end = Offset.zero;
           const curve = Curves.easeInOut;
 
-          var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+          var tween =
+              Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
           var offsetAnimation = animation.drive(tween);
 
           return SlideTransition(
@@ -39,12 +41,11 @@ class _PasswordEmailResetPageState extends State<PasswordEmailResetPage> {
     );
   }
 
-
   Widget _getRouteWidget(String routeName) {
     if (routeName == RouteNames.login) {
-      return  LoginPage(); 
+      return LoginPage();
     }
-    return const Scaffold(); 
+    return const Scaffold();
   }
 
   @override
@@ -124,24 +125,25 @@ class _PasswordEmailResetPageState extends State<PasswordEmailResetPage> {
                       }
                     },
                     builder: (context, state) {
-                      if (state is AuthStateLoading) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
+                      bool isLoading = state is AuthStateLoading;
+
                       return ElevatedButton(
-                        onPressed: () {
-                          final email = emailController.text;
-                          if (email.isEmpty) {
-                            floatingSnackBar(
-                              context: context,
-                              message: 'Please enter your email',
-                              backgroundColor: Colors.redAccent,
-                            );
-                            return;
-                          }
-                          context.read<AuthBloc>().add(
-                                ForgotPasswordEvent(email: email),
-                              );
-                        },
+                        onPressed: isLoading
+                            ? null
+                            : () {
+                                final email = emailController.text;
+                                if (email.isEmpty) {
+                                  floatingSnackBar(
+                                    context: context,
+                                    message: 'Please enter your email',
+                                    backgroundColor: Colors.redAccent,
+                                  );
+                                  return;
+                                }
+                                context.read<AuthBloc>().add(
+                                      ForgotPasswordEvent(email: email),
+                                    );
+                              },
                         style: ElevatedButton.styleFrom(
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(80.0),
@@ -166,14 +168,24 @@ class _PasswordEmailResetPageState extends State<PasswordEmailResetPage> {
                             ),
                           ),
                           padding: const EdgeInsets.all(0),
-                          child: const Text(
-                            "SEND EMAIL",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
+                          child: isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    valueColor:
+                                        AlwaysStoppedAnimation<Color>(
+                                            Colors.white),
+                                  ),
+                                )
+                              : const Text(
+                                  "SEND EMAIL",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                         ),
                       );
                     },
