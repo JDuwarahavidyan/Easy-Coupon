@@ -66,24 +66,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Future<void> _pickAndUploadImage(UserModel user) async {
-    final ImagePicker picker = ImagePicker();
-    final XFile? image = await picker.pickImage(
-      source: ImageSource.gallery,
-    );
-
-    if (image != null) {
-      // Deleting the old profile picture from Firebase Storage
-      if (user.profilePic != null && user.profilePic!.isNotEmpty) {
-        // Assuming you have a method to delete the profile picture
-        context.read<UserBloc>().add(DeleteProfilePictureEvent(user.profilePic!));
-      }
-
-      // Uploading the new profile picture
-      context.read<UserBloc>().add(UploadPictureEvent(image.path, user.id));
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocListener<UserBloc, UserState>(
@@ -148,35 +130,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 clipBehavior: Clip.none,
                                 children: [
                                   user.profilePic!.isEmpty
-                                      ? GestureDetector(
-                                          onTap: () => _pickAndUploadImage(user),
-                                          child: SizedBox(
-                                            width: 120,
-                                            height: 120,
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(100),
-                                              child: Image.asset(
-                                                "assets/images/landing/userImage.png",
-                                                fit: BoxFit.contain,
-                                              ),
+                                      ? SizedBox(
+                                          width: 120,
+                                          height: 120,
+                                          child: ClipRRect(
+                                            borderRadius: BorderRadius.circular(100),
+                                            child: Image.asset(
+                                              "assets/images/landing/userImage.png",
+                                              fit: BoxFit.contain,
                                             ),
                                           ),
                                         )
-                                      : GestureDetector(
-                                          onTap: () => _pickAndUploadImage(user),
-                                          child: SizedBox(
-                                            width: 120,
-                                            height: 120,
-                                            child: ClipRRect(
-                                              borderRadius: BorderRadius.circular(100),
-                                              child: Image.network(
-                                                user.profilePic!,
-                                                fit: BoxFit.cover,
-                                                errorBuilder: (context, error, stackTrace) {
-                                                  return Icon(Icons.error, size: 120);
-                                                },
+                                      : Container(
+                                          width: 120,
+                                          height: 120,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey, // Gray background color
+                                            shape: BoxShape.circle, // Circular background to match the rounded image
+                                          ),
+                                          child: Stack(
+                                            alignment: Alignment.center, // Align the person icon in the center
+                                            children: [
+                                              Icon(
+                                                Icons.person,
+                                                size: 80,
+                                                color: Colors.white, // Person icon with white color
                                               ),
-                                            ),
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(100),
+                                                child: Image.network(
+                                                  user.profilePic!,
+                                                  width: 120,
+                                                  height: 120,
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error, stackTrace) {
+                                                    return Icon(Icons.error, size: 120); // Show error icon if image fails to load
+                                                  },
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                   Positioned(
