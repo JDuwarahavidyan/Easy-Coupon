@@ -1,7 +1,5 @@
 import 'package:easy_coupon/bloc/blocs.dart';
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
 import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:easy_coupon/routes/routes.dart';
@@ -10,7 +8,6 @@ import 'package:floating_snackbar/floating_snackbar.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  // Controllers for username and password text fields
   final TextEditingController userNameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
@@ -27,10 +24,10 @@ class LoginPage extends StatelessWidget {
                 return const NewUserPwResetPage();
               case RouteNames.student:
                 return StudentMainPage();
-              case RouteNames.cahome:
-                return const CanteenMainPage();
-              // case RouteNames.canteenB:
-              //   return const CanteenBHomeScreen();
+              case RouteNames.canteena:
+                return const CanteenAMainPage();
+              case RouteNames.canteenb:
+                return const CanteenAMainPage();
               default:
                 return LoginPage();
             }
@@ -56,8 +53,35 @@ class LoginPage extends StatelessWidget {
       );
     }
 
+    void navigateToPasswordResetPage(BuildContext context) {
+      Navigator.of(context).push(
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) {
+            return const PasswordEmailResetPage();
+          },
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            const begin = Offset(1, 0.0);
+            const end = Offset.zero;
+            const curve = Curves.ease;
+
+            final tween = Tween(begin: begin, end: end);
+            final curvedAnimation = CurvedAnimation(
+              parent: animation,
+              curve: curve,
+            );
+
+            return SlideTransition(
+              position: tween.animate(curvedAnimation),
+              child: child,
+            );
+          },
+          transitionDuration: const Duration(seconds: 1),
+        ),
+      );
+    }
+
     return Scaffold(
-      resizeToAvoidBottomInset: false, // Prevent layout from resizing when the keyboard appears
+      resizeToAvoidBottomInset: false,
       body: Background(
         child: Stack(
           children: <Widget>[
@@ -99,12 +123,12 @@ class LoginPage extends StatelessWidget {
                   } else if (state is StudentAuthenticated) {
                     navigateWithAnimation(context, RouteNames.student);
                   } else if (state is CanteenAAuthenticated) {
-                    navigateWithAnimation(context, RouteNames.cahome);
-                    // } else if (state is CanteenBAuthenticated) {
-                    //   navigateWithAnimation(context, RouteNames.canteenB);
+                    navigateWithAnimation(context, RouteNames.canteena);
+                  } else if (state is CanteenBAuthenticated) {
+                    navigateWithAnimation(context, RouteNames.canteenb);
                   } else if (state is AuthStateError) {
                     floatingSnackBar(
-                      context: context,
+                      context:context,
                       message: state.error,
                       backgroundColor: Colors.redAccent,
                     );
@@ -136,7 +160,8 @@ class LoginPage extends StatelessWidget {
                             : () {
                                 FocusScope.of(context).unfocus(); // Close the keyboard
 
-                                final userName = userNameController.text.toLowerCase();
+                                final userName =
+                                    userNameController.text.toLowerCase();
                                 final password = passwordController.text;
 
                                 if (userName.isEmpty || password.isEmpty) {
@@ -184,7 +209,8 @@ class LoginPage extends StatelessWidget {
                                   height: 20,
                                   width: 20,
                                   child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white),
                                   ),
                                 )
                               : const Text(
@@ -200,7 +226,7 @@ class LoginPage extends StatelessWidget {
                       SizedBox(height: size.height * 0.03),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushReplacementNamed(context, RouteNames.resetPWEmail);
+                          navigateToPasswordResetPage(context);
                         },
                         child: const Text(
                           "Forgot your password?",

@@ -77,20 +77,30 @@ class FirebaseAuthService {
   }
 
   Future<String> getEmailFromUsername(String username) async {
-    try {
-      final QuerySnapshot query = await _firebaseFirestore
-          .collection('users')
-          .where('userName', isEqualTo: username)
-          .get();
+  try {
+    final QuerySnapshot query = await _firebaseFirestore
+        .collection('users')
+        .where('userName', isEqualTo: username)
+        .get();
 
-      if (query.docs.isEmpty) {
-        throw CustomException('No user found with this username.');
-      }
-      return (query.docs.first.data() as Map<String, dynamic>)['email'];
-    } on FirebaseException catch (e) {
-      throw CustomException(e.message!);
+    if (query.docs.isEmpty) {
+      throw CustomException('No user found with this username.');
     }
+
+    return (query.docs.first.data() as Map<String, dynamic>)['email'];
+  } on FirebaseException catch (e) {
+    if (e.code == 'unavailable') {
+      throw CustomException('Network error: Please check your internet connection.');
+    } else if (e.code == 'not-found') {
+      throw CustomException('User data not found.');
+    } else {
+      throw CustomException(e.message ?? 'An unknown error occurred.');
+    }
+  } catch (e) {
+    // Catch other unexpected errors
+    throw CustomException('An unexpected error occurred. Please try again later');
   }
+}
 
   Future<void> signOut() async {
     await _firebaseAuth.signOut();

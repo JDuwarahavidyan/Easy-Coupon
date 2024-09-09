@@ -1,19 +1,16 @@
 import 'dart:io';
-
+import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/models/user/user_model.dart';
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_main.dart';
 import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
-import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:image_cropper/image_cropper.dart';
-import '../../../bloc/blocs.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   final String userRole;
@@ -84,8 +81,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Fetch size from MediaQuery
-    final size = MediaQuery.of(context).size;
+
 
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
@@ -113,7 +109,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const CanteenMainPage(
+                    builder: (context) => const CanteenAMainPage(
                       currentIndex: 2,
                     ),
                   ),
@@ -144,10 +140,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                 final user = state.users.firstWhere(
                   (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
                 );
-
-                if (user == null) {
-                  return const Center(child: Text('User not found'));
-                }
                 return SingleChildScrollView(
                   child: Container(
                     padding: const EdgeInsets.all(20.0),

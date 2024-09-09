@@ -76,8 +76,19 @@ class MyApp extends StatelessWidget {
               initialRoute: RouteNames.splash,
               onGenerateRoute: AppRoutes.generateRoute,
               builder: (context, child) {
-                return SafeArea(
-                  child: child ?? const SizedBox.shrink(),
+                // Wrap your app with MediaQuery and LayoutBuilder to manage screen size.
+                return LayoutBuilder(
+                  builder: (context, constraints) {
+                    // Get the screen size and pass it down the widget tree
+                    return MediaQuery(
+                      data: MediaQuery.of(context).copyWith(
+                        size: Size(constraints.maxWidth, constraints.maxHeight),
+                      ),
+                      child: SafeArea(
+                        child: child ?? const SizedBox.shrink(),
+                      ),
+                    );
+                  },
                 );
               },
             );
