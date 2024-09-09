@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:easy_coupon/pages/student_pages/student_home.dart';
+import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
@@ -130,7 +131,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
   void _navigateToStudentHomeScreen(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) => StudentHome(),
+        pageBuilder: (context, animation, secondaryAnimation) => StudentMainPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;

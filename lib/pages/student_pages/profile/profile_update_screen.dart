@@ -1,4 +1,5 @@
 import 'package:easy_coupon/pages/student_pages/student_main.dart';
+import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
@@ -137,7 +138,9 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       ),
                       const SizedBox(height: 20),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, RouteNames.PWEmail);
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.redAccent.withOpacity(0.1),
                           elevation: 0,

@@ -1,13 +1,12 @@
 import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_report.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
 import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/login_pages/register.dart';
 import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_home.dart';
-import 'package:easy_coupon/pages/canteen_a_pages/qr_generation.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
 
@@ -25,11 +24,14 @@ class AppRoutes {
       case RouteNames.resetPWEmail:
         return MaterialPageRoute(builder: (_) => PasswordEmailResetPage());
 
+     case RouteNames.PWEmail:
+        return MaterialPageRoute(builder: (_) => PasswordEmailPage());
+
       case RouteNames.home:
         return MaterialPageRoute(builder: (_) => StudentHome());
 
       case RouteNames.cahome:
-        return MaterialPageRoute(builder: (_) => const CanteenAHome());
+        return MaterialPageRoute(builder: (_) => const CanteenMainPage());
 
       case RouteNames.report:
         return MaterialPageRoute(builder: (_) => Student_report());

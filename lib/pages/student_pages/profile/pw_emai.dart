@@ -3,8 +3,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 
-class PasswordEmailResetPage extends StatelessWidget {
-    const PasswordEmailResetPage({super.key});
+class PasswordEmailPage extends StatelessWidget {
+    const PasswordEmailPage({super.key});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -19,7 +19,7 @@ class PasswordEmailResetPage extends StatelessWidget {
               left: 20,
               child: GestureDetector(
                 onTap: () {
-                   Navigator.pushReplacementNamed(context, RouteNames.login);
+                   Navigator.pushReplacementNamed(context, RouteNames.updtprofile);
                 },
                 child: Icon(
                   CupertinoIcons.back,
