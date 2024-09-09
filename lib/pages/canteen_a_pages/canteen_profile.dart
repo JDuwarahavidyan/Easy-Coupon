@@ -14,14 +14,14 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:lottie/lottie.dart';
 import '../../../bloc/blocs.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class CanteenProfileScreen extends StatefulWidget {
+  const CanteenProfileScreen({super.key});
 
   @override
-  _ProfileScreenState createState() => _ProfileScreenState();
+  _CanteenProfileScreenState createState() => _CanteenProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _CanteenProfileScreenState extends State<CanteenProfileScreen> {
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
@@ -213,7 +213,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => const UpdateProfileScreen(userRole: 'student',)),
+                                      MaterialPageRoute(
+                                          builder: (context) => const UpdateProfileScreen(
+                                                userRole: 'canteen',
+                                              )),
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -256,7 +259,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPress: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const AboutUs(userRole: 'student',)),
+                                    MaterialPageRoute(
+                                        builder: (context) => const AboutUs(
+                                              userRole: 'canteen',
+                                            )),
                                   );
                                 },
                               ),
