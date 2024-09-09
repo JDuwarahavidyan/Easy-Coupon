@@ -1,6 +1,5 @@
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/pages/student_pages/qr_scanning.dart';
-import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';

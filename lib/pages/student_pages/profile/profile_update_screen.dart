@@ -1,3 +1,4 @@
+import 'package:easy_coupon/pages/student_pages/profile/pw_emai.dart';
 import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         child: ElevatedButton(
                           onPressed: () => Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const PasswordEmailResetPage()),
+                            MaterialPageRoute(builder: (context) => const PasswordEmailPage()),
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF50623A),

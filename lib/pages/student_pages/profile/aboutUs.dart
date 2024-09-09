@@ -24,7 +24,7 @@ class _AboutUsState extends State<AboutUs> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const StudentMainPage()),
+                MaterialPageRoute(builder: (context) => const StudentMainPage(currentIndex: 2,)),
               );
             },
             icon: const Icon(LineAwesomeIcons.angle_left),
