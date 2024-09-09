@@ -65,7 +65,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
     );
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return BlocListener<UserBloc, UserState>(
@@ -141,18 +141,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ),
                                           ),
                                         )
-                                      : SizedBox(
+                                      : Container(
                                           width: 120,
                                           height: 120,
-                                          child: ClipRRect(
-                                            borderRadius: BorderRadius.circular(100),
-                                            child: Image.network(
-                                              user.profilePic!,
-                                              fit: BoxFit.cover,
-                                              errorBuilder: (context, error, stackTrace) {
-                                                return Icon(Icons.error, size: 120);
-                                              },
-                                            ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey, // Gray background color
+                                            shape: BoxShape.circle, // Circular background to match the rounded image
+                                          ),
+                                          child: Stack(
+                                            alignment: Alignment.center, // Align the person icon in the center
+                                            children: [
+                                              Icon(
+                                                Icons.person,
+                                                size: 80,
+                                                color: Colors.white, // Person icon with white color
+                                              ),
+                                              ClipRRect(
+                                                borderRadius: BorderRadius.circular(100),
+                                                child: Image.network(
+                                                  user.profilePic!,
+                                                  width: 120,
+                                                  height: 120,
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error, stackTrace) {
+                                                    return Icon(Icons.error, size: 120); // Show error icon if image fails to load
+                                                  },
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                   Positioned(
