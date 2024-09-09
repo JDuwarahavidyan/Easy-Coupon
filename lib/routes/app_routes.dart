@@ -57,10 +57,10 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => RegisterScreen());
 
       case RouteNames.updtprofile:
-        return MaterialPageRoute(builder: (_) => UpdateProfileScreen());
+        return MaterialPageRoute(builder: (_) => UpdateProfileScreen(userRole: '',));
 
       case RouteNames.abtus:
-        return MaterialPageRoute(builder: (_) => AboutUs());
+        return MaterialPageRoute(builder: (_) => AboutUs(userRole: '',));
 
       case RouteNames.canreport:
         return MaterialPageRoute(builder: (_) => CanteenAReport());

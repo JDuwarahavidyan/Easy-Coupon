@@ -4,21 +4,22 @@ import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class StudentMainPage extends StatefulWidget {
-  
-  const StudentMainPage({super.key, int? currentIndex});
-  
+  final int currentIndex;
+
+  StudentMainPage({this.currentIndex = 0});
+
   @override
   _StudentMainPageState createState() => _StudentMainPageState();
 }
 
 class _StudentMainPageState extends State<StudentMainPage> {
-  int _currentIndex = 0;
+  late int _currentIndex;
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _currentIndex = widget.currentIndex;
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.currentIndex;
+  }
 
   final List<Widget> _pages = [
     StudentHome(),
