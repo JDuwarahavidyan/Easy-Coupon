@@ -134,48 +134,53 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
                                 return Column(
                                   children: [
                                     Container(
-                                      padding: const EdgeInsets.all(8.0),
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xFF789461).withOpacity(0.1),
-                                        borderRadius: BorderRadius.circular(8.0),
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          const Expanded(
-                                            child: Text(
-                                              'You can scan now',
-                                              style: TextStyle(
-                                                fontSize: 14,
-                                                color: Colors.black87,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(width: 10),
-                                          Screenshot(
-                                            controller: screenshotController,
-                                            child: RepaintBoundary(
-                                              key: globalKey,
-                                              child: Container(
-                                                padding: const EdgeInsets.all(20),
-                                                color: Colors.white,
-                                                child: QrImageView(
-                                                  data: displayQRData,
-                                                  version: QrVersions.auto,
-                                                  size: 200,
+                                        padding: const EdgeInsets.all(8.0),
+                                        decoration: BoxDecoration(
+                                          color: const Color(0xFF789461).withOpacity(0.1),
+                                          borderRadius: BorderRadius.circular(8.0),
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            // Text at the top
+                                            const Center(
+                                              child: Text(
+                                                'You can scan now',
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.black87,
+                                                  fontWeight: FontWeight.bold,
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
+                                            const SizedBox(height: 10), // Space between the text and the QR code
+
+                                            // Container with the QR code and screenshot functionality
+                                            Center(
+                                              child: Screenshot(
+                                                controller: screenshotController,
+                                                child: RepaintBoundary(
+                                                  key: globalKey,
+                                                  child: Container(
+                                                    padding: const EdgeInsets.all(20),
+                                                    color: Colors.white,
+                                                    child: QrImageView(
+                                                      data: displayQRData,
+                                                      version: QrVersions.auto,
+                                                      size: 250,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )),
                                     const SizedBox(height: 20),
                                     const SizedBox(height: 20),
                                     Lottie.asset(
                                       'assets/images/landing/qr_c.json',
-                                      height: 250,
-                                      width: 250,
+                                      height: 150,
+                                      width: 150,
                                     ),
                                     const SizedBox(height: 20),
                                     Row(
