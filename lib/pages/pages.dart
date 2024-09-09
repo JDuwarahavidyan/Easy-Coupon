@@ -13,3 +13,4 @@ export 'student_pages/profile/pw_emai.dart';
 export 'student_pages/profile/aboutUs.dart';
 export 'student_pages/profile/profile_update_screen.dart';
 export 'student_pages/profile/profile_menu.dart';
+export 'student_pages/student_main.dart';

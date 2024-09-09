@@ -1,11 +1,8 @@
-import 'package:easy_coupon/pages/student_pages/profile/pw_emai.dart';
-import 'package:easy_coupon/pages/student_pages/student_main.dart';
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
-import 'package:easy_coupon/pages/student_pages/profile/profile_screen.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
@@ -22,15 +19,15 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
     return Background(
       child: Scaffold(
-        backgroundColor: Colors.transparent, // Ensure transparency to see the background
+        backgroundColor: Colors.transparent, 
         appBar: AppBar(
-          backgroundColor: const Color(0xFFDBE7C9),
+          backgroundColor: Colors.transparent,
           leading: IconButton(
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => StudentMainPage(
+                    builder: (context) => const StudentMainPage(
                           currentIndex: 2,
                         )),
               );
@@ -52,16 +49,16 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             child: Column(
               children: [
                 Stack(
-                  clipBehavior: Clip.none, // Ensure the stack can overflow
+                  clipBehavior: Clip.none, 
                   children: [
                     SizedBox(
                       width: 120,
                       height: 120,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.circular(60), // Adjusted radius to 60 for better visual
+                        borderRadius: BorderRadius.circular(60), 
                         child: Image.asset(
                           "assets/images/landing/userImage.png",
-                          fit: BoxFit.cover, // Changed to cover for better fit
+                          fit: BoxFit.cover, 
                         ),
                       ),
                     ),
@@ -72,7 +69,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                         width: 35,
                         height: 35,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(17.5), // Adjusted radius to 17.5
+                          borderRadius: BorderRadius.circular(17.5), 
                           color: const Color(0xFF294B29),
                         ),
                         child: const Icon(
