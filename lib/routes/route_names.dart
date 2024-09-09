@@ -1,5 +1,5 @@
 class RouteNames {
-  static const String splash = '/';
+  static const String splash = '/splash';
   static const String introductionAnimation = '/introductionAnimation';
   static const String login = '/login';
   static const String resetPWEmail = '/reset-email';
@@ -12,7 +12,7 @@ class RouteNames {
   static const String register = '/register';
   static const String student = '/student';
   static const String resetPW = '//reset-password';
-  static const String abtus = '/about-us';
+  static const String abtus = '/';
   static const String cahome = '/cahome';
   static const String canreport = '/canreport';
   static const String qr_g = '/qr_g';
