@@ -16,4 +16,5 @@ class RouteNames {
   static const String cahome = '/cahome';
   static const String canreport = '/canreport';
   static const String qr_g = '/qr_g';
+  static const String PWEmail='/PWEmail';
 }

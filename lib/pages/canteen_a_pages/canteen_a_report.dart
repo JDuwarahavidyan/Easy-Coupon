@@ -1,7 +1,7 @@
 import 'dart:ui'; // Import for BackdropFilter
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/models/qr/qr_model.dart';
-import 'package:easy_coupon/pages/student_pages/student_home.dart';
+//import 'package:easy_coupon/pages/student_pages/student_home.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/student_report.dart';
 import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
