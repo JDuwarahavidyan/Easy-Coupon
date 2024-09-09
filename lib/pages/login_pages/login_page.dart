@@ -108,6 +108,12 @@ class LoginPage extends StatelessWidget {
                       message: state.error,
                       backgroundColor: Colors.redAccent,
                     );
+                  } else {
+                    floatingSnackBar(
+                      context: context,
+                      message: "An error occurred. Please try again",
+                      backgroundColor: Colors.redAccent,
+                    );
                   }
                 },
                 builder: (context, state) {
