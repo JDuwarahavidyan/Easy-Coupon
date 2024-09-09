@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:easy_coupon/models/user/user_model.dart';
+import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
 import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_coupon/routes/route_names.dart';
@@ -15,7 +16,8 @@ import 'package:image_cropper/image_cropper.dart';
 import '../../../bloc/blocs.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
-  const UpdateProfileScreen({super.key});
+  final String userRole;
+  const UpdateProfileScreen({super.key,required this.userRole});
 
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
@@ -98,13 +100,25 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             backgroundColor: const Color(0xFFDBE7C9),
             leading: IconButton(
               onPressed: () {
+                if (widget.userRole == 'student') {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => StudentMainPage(
-                            currentIndex: 2,
-                          )),
+                    builder: (context) => StudentMainPage(
+                      currentIndex: 2,
+                    ),
+                  ),
                 );
+              } else if (widget.userRole == 'canteen') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CanteenMainPage(
+                      currentIndex: 2,
+                    ),
+                  ),
+                );
+              }
               },
               icon: const Icon(LineAwesomeIcons.angle_left),
             ),
