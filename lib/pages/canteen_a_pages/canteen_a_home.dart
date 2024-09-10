@@ -160,7 +160,7 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                                             ],
                                           ),
                                           onPressed: () {
-                                            Navigator.pushReplacementNamed(context, RouteNames.qr_g, arguments: user);
+                                            Navigator.pushReplacementNamed(context, RouteNames.qrGenerator, arguments: user);
                                           },
                                         ),
                                       ),

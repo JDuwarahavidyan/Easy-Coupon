@@ -1,4 +1,4 @@
-import 'package:easy_coupon/models/user/user_model.dart';
+import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
@@ -12,7 +12,11 @@ import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:lottie/lottie.dart';
-import '../../../bloc/blocs.dart';
+import 'package:easy_coupon/widgets/widgets.dart'; 
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -45,20 +49,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 "No",
                 style: TextStyle(fontSize: 16, color: Color(0xFF294B29), fontWeight: FontWeight.bold),
               ),
-              onPressed: () => Navigator.of(context).pop(),
+
+              onPressed: () {
+                Navigator.of(context).pop(); 
+              },
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()), // Ensure LoginPage() is defined
+
+                  MaterialPageRoute(builder: (context) =>  LoginPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent,
-                textStyle: const TextStyle(color: Colors.white),
+                backgroundColor: const Color(0xFF789461),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                ),
               ),
-              child: const Text("Yes", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
+              child: const Text(
+                "Yes",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
+
+              ),
             ),
           ],
         );
@@ -82,25 +100,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
               if (state is UserLoading) {
                 return Center(
                   child: LoadingAnimationWidget.fourRotatingDots(
-                    color: Color(0xFF50623A),
+                    color: const Color(0xFF50623A),
                     size: 50,
                   ),
                 );
               } else if (state is UserLoaded) {
                 final user = state.users.firstWhere(
                   (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
+                 
                 );
-
-                if (user == null) {
-                  return const Center(child: Text('User not found'));
-                }
 
                 return Column(
                   children: [
                     Container(
                       padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
                       decoration: BoxDecoration(
-                        color: Color(0xFFDBE7C9).withOpacity(0.1),
+                        color: const Color(0xFFDBE7C9).withOpacity(0.1),
                       ),
                       child: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
@@ -144,14 +159,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       : Container(
                                           width: 120,
                                           height: 120,
-                                          decoration: BoxDecoration(
+                                          decoration: const BoxDecoration(
                                             color: Colors.grey, // Gray background color
                                             shape: BoxShape.circle, // Circular background to match the rounded image
                                           ),
                                           child: Stack(
                                             alignment: Alignment.center, // Align the person icon in the center
                                             children: [
-                                              Icon(
+                                              const Icon(
                                                 Icons.person,
                                                 size: 80,
                                                 color: Colors.white, // Person icon with white color
@@ -164,7 +179,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                   height: 120,
                                                   fit: BoxFit.cover,
                                                   errorBuilder: (context, error, stackTrace) {
-                                                    return Icon(Icons.error, size: 120); // Show error icon if image fails to load
+                                                    return const Icon(Icons.error, size: 120); // Show error icon if image fails to load
                                                   },
                                                 ),
                                               ),
@@ -213,7 +228,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(builder: (context) => const UpdateProfileScreen(userRole: 'student',)),
+                                      MaterialPageRoute(
+                                        builder: (context) => const UpdateProfileScreen(userRole: 'student'),
+                                      ),
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -256,7 +273,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPress: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(builder: (context) => const AboutUs(userRole: 'student',)),
+                                    MaterialPageRoute(
+                                      builder: (context) => const AboutUs(userRole: 'student'),
+                                    ),
                                   );
                                 },
                               ),

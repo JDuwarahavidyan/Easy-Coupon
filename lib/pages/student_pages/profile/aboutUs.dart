@@ -25,25 +25,12 @@ class _AboutUsState extends State<AboutUs> {
           backgroundColor: Color(0xFFDBE7C9),
           leading: IconButton(
             onPressed: () {
-              if (widget.userRole == 'student') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => StudentMainPage(
-                      currentIndex: 2,
-                    ),
-                  ),
-                );
-              } else if (widget.userRole == 'canteen') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CanteenAMainPage(
-                      currentIndex: 2,
-                    ),
-                  ),
-                );
-              }
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) =>  StudentMainPage(currentIndex: 2,)),
+              );
+
+
             },
             icon: const Icon(LineAwesomeIcons.angle_left),
           ),

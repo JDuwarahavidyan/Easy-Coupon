@@ -24,7 +24,7 @@ class AppRoutes {
       case RouteNames.resetPWEmail:
         return MaterialPageRoute(builder: (_) => PasswordEmailResetPage());
 
-     case RouteNames.PWEmail:
+     case RouteNames.pwEmailChange:
         return MaterialPageRoute(builder: (_) => PasswordEmailPage());
 
       case RouteNames.home:
@@ -47,7 +47,7 @@ class AppRoutes {
 
         ));
 
-      case RouteNames.qr_g:
+      case RouteNames.qrGenerator:
         return MaterialPageRoute(builder: (_) => QrGen());
 
       case RouteNames.profile:
@@ -62,7 +62,7 @@ class AppRoutes {
       case RouteNames.abtus:
         return MaterialPageRoute(builder: (_) => AboutUs(userRole: '',));
 
-      case RouteNames.canreport:
+      case RouteNames.canteenreport:
         return MaterialPageRoute(builder: (_) => CanteenAReport());
 
       //need to change

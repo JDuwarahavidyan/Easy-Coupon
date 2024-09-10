@@ -15,7 +15,8 @@ class RouteNames {
   static const String abtus = '/about-us';
   static const String canteena = '/canteena';
   static const String canteenb = '/canteenb';
-  static const String canreport = '/canreport';
-  static const String qr_g = '/qr_g';
-  static const String PWEmail='/PWEmail';
+  static const String canteenreport = '/canteen-report';
+  static const String qrGenerator = '/qr-generator';
+  static const String pwEmailChange='/pw-email-change';
+
 }

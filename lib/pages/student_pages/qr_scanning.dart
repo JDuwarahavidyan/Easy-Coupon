@@ -32,7 +32,7 @@ class _QrPageState extends State<QrPage> {
 
   // Define static key and IV
   final key = encrypt.Key.fromUtf8('easycouponkey@ruhunaengfac22TDDS');
-  final iv = encrypt.IV.fromUtf8('easyduwa');
+  final iv = encrypt.IV.fromUtf8('easyduwarahan#27');
 
   @override
   void dispose() {
@@ -70,15 +70,15 @@ class _QrPageState extends State<QrPage> {
   }
 
   String? decryptData(String encryptedData) {
-    try {
-      final encrypter = encrypt.Encrypter(encrypt.AES(key));
+    try {   
+      final encrypter = encrypt.Encrypter(encrypt.AES(key, mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
       final decrypted = encrypter.decrypt64(encryptedData, iv: iv);
       return decrypted;
     } catch (e) {
       return null;
     }
   }
-
+  
   void _showConfirmationDialog(String role, int val, String canteenUserId, String canteenUsername) {
     showCupertinoDialog(
       context: context,
@@ -167,7 +167,7 @@ class _QrPageState extends State<QrPage> {
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-             StudentMainPage(),
+              StudentMainPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;

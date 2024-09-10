@@ -12,3 +12,11 @@ export 'student_pages/profile/pw_emai.dart';
 export 'canteen_a_pages/canteen_a_main.dart';
 export 'login_pages/pw_email_reset_page.dart';
 export 'student_pages/student_main.dart';
+export 'landing_pages/components/center_next_button.dart';
+export 'landing_pages/components/easy_coupon_view.dart';
+export 'landing_pages/components/fast_and_easy_view.dart';
+export 'landing_pages/components/no_more_view.dart';
+export 'landing_pages/components/report_view.dart';
+export 'landing_pages/components/top_back_skip_view.dart';
+export 'landing_pages/components/welcome_view.dart';
+
