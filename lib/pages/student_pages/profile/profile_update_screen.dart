@@ -103,11 +103,12 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             Navigator.push(
                               context,
                               PageRouteBuilder(
+                                 transitionDuration: const Duration(seconds: 1),
                                 pageBuilder: (context, animation, secondaryAnimation) =>
                                     const PasswordEmailPage(),
                                 transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                                  const begin = Offset(-1.0, 0.0);  // Start from the left
-                                  const end = Offset.zero;          // End at the center
+                                  const begin = Offset(-1.0, 0.0); 
+                                  const end = Offset.zero;          
                                   const curve = Curves.ease;
 
                                   var tween = Tween(begin: begin, end: end)

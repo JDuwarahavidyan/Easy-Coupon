@@ -1,10 +1,12 @@
-import 'package:easy_coupon/routes/route_names.dart';
+import 'package:easy_coupon/pages/pages.dart';
+//import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 
 class PasswordEmailPage extends StatelessWidget {
-    const PasswordEmailPage({super.key});
+  const PasswordEmailPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -19,7 +21,28 @@ class PasswordEmailPage extends StatelessWidget {
               left: 20,
               child: GestureDetector(
                 onTap: () {
-                   Navigator.pushReplacementNamed(context, RouteNames.updtprofile);
+                  Navigator.push(
+                    context,
+                    PageRouteBuilder(
+                       transitionDuration: const Duration(seconds: 1),
+                      pageBuilder: (context, animation, secondaryAnimation) =>
+                          const UpdateProfileScreen(), 
+                      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                        const begin = Offset(1.0, 0.0); 
+                        const end = Offset.zero;         
+                        const curve = Curves.ease;
+
+                        var tween = Tween(begin: begin, end: end)
+                            .chain(CurveTween(curve: curve));
+                        var offsetAnimation = animation.drive(tween);
+
+                        return SlideTransition(
+                          position: offsetAnimation,
+                          child: child,
+                        );
+                      },
+                    ),
+                  );
                 },
                 child: const Icon(
                   CupertinoIcons.back,
