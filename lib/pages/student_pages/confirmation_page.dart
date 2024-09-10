@@ -3,7 +3,7 @@ import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_coupon/widgets/widgets.dart'; // Import the Background widget
+import 'package:easy_coupon/widgets/widgets.dart'; 
 
 class ConfirmationPage extends StatefulWidget {
   final int val;
@@ -59,67 +59,71 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
 
     return Scaffold(
       body: Background(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.only(top: 20.0), // Subtle upward lift
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, // Center items vertically
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Lottie.asset(
-                  'assets/images/landing/done.json', 
-                  width: 200,
-                  height: 200,
-                ),
-                SizedBox(height: 10), // Reduced space here
-                Text(
-                  '${widget.val}',
-                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
-                ),
-                Text(
-                  'Coupons',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(height: 10), // Slightly reduced space here
-                Text(
-                  formattedTime,
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(height: 10), // Slightly reduced space here
-                Text(
-                  widget.role == 'canteena' ? 'Kalderama' : 'Hilton',
-                  style: TextStyle(fontSize: 20),
-                ),
-                SizedBox(height: 10), // Slightly reduced space here
-                Text(
-                  'This page will automatically close in $minutes:${seconds.toString().padLeft(2, '0')}',
-                  style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 22, 22, 22)),
-                ),
-                SizedBox(height: 15), // Adjusted size here
-                SizedBox(
-                  width: 200,
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      _navigateToStudentHomeScreen(context);
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF294B29), // Dark green background color
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8), // Rounded edges
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0), // Outer padding for the page
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20.0), // Inner padding at the top and bottom
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center, // Center items vertically
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Lottie.asset(
+                    'assets/images/landing/done.json', 
+                    width: 200,
+                    height: 200,
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    '${widget.val}',
+                    style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  ),
+                  Text(
+                  widget.val == 1 ? 'Coupon' : 'Coupons',
+                    
+                    style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    formattedTime,
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    widget.role == 'canteena' ? 'Kalderama' : 'Hilton',
+                    style: const TextStyle(fontSize: 20),
+                  ),
+                  const SizedBox(height: 10),
+                  Text(
+                    'This page will automatically close in $minutes:${seconds.toString().padLeft(2, '0')}',
+                    style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 22, 22, 22)),
+                  ),
+                  const SizedBox(height: 15),
+                  SizedBox(
+                    width: 200,
+                    height: 50,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _navigateToStudentHomeScreen(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF294B29), // Dark green background color
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8), // Rounded edges
+                        ),
                       ),
-                    ),
-                    child: const Text(
-                      'CLOSE NOW',
-                      style: TextStyle(
-                        color: Colors.white, // White text color
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                      child: const Text(
+                        'CLOSE NOW',
+                        style: TextStyle(
+                          color: Colors.white, // White text color
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -130,7 +134,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
   void _navigateToStudentHomeScreen(BuildContext context) {
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
-        pageBuilder: (context, animation, secondaryAnimation) =>  StudentMainPage(),
+        pageBuilder: (context, animation, secondaryAnimation) => StudentMainPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;

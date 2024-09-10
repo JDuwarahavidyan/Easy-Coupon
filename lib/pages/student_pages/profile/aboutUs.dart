@@ -1,4 +1,3 @@
-
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,7 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 
 class AboutUs extends StatefulWidget {
-  final String userRole; // Add a parameter to accept user role
+  final String userRole; 
 
   const AboutUs({super.key, required this.userRole});
 
@@ -38,7 +37,7 @@ class _AboutUsState extends State<AboutUs> {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Color(0xFF294B29),
-              fontSize: 20,
+              fontSize: 25,
             ),
           ),
         ),
@@ -83,7 +82,8 @@ class _AboutUsState extends State<AboutUs> {
                       const Divider(),
                       const SizedBox(height: 10),
                       const Text(
-                        "Easy Coupon is designed to simplify and streamline the process of issuing and redeeming food coupons for students. With a user-friendly interface and quick access to essential features, this app ensures that students can easily manage their meal plans without any hassle.",
+                        "Developed by Team TDDS, a group of undergraduates from the 22nd batch of the Faculty of Engineering, University of Ruhuna, Easy Coupon is just the beginning. We are committed to continually enhancing the app and releasing improved versions in the future to better serve our users.\n\n"
+                                  "Easy Coupon is designed to simplify and streamline the process of issuing and redeeming food coupons for students. With a user-friendly interface and quick access to essential features, this app ensures that students can easily manage their meal plans without any hassle.\n\n",
                         style: TextStyle(
                           color: Color(0xFF294B29),
                           fontSize: 14,
@@ -91,7 +91,8 @@ class _AboutUsState extends State<AboutUs> {
                       ),
                       const SizedBox(height: 10),
                       const Text(
-                        "Our goal is to make the coupon management system more efficient and accessible for everyone involved, providing a seamless experience from start to finish. Whether you're a student looking to redeem a coupon or an administrator managing the system, Easy Coupon offers the tools you need to get the job done effectively.",
+                        "Our goal is to make the coupon management system more efficient and accessible for everyone involved, providing a seamless experience from start to finish. Whether you're a student looking to redeem a coupon or an administrator managing the system, Easy Coupon offers the tools you need to get the job done effectively.\n\n"
+                                  "We would like to express our heartfelt gratitude to our client and advisor, Dr. Kushan Sudheera, for giving us this opportunity and for his invaluable guidance throughout the project.",
                         style: TextStyle(
                           color: Color(0xFF294B29),
                           fontSize: 14,

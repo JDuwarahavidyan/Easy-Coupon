@@ -117,7 +117,7 @@ class _IntroductionAnimationScreenState
   Navigator.pushReplacement(
     context,
     PageRouteBuilder(
-      transitionDuration: const Duration(seconds: 1 ),
+      transitionDuration: const Duration(milliseconds: 1500),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
         const begin = Offset(1.0, 0.0); // Start from right
         const end = Offset(0.0, 0.0);   // End at the current position

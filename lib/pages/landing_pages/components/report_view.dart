@@ -1,7 +1,7 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
+
 
 class CareView extends StatelessWidget {
   final AnimationController animationController;
@@ -101,7 +101,11 @@ class CareView extends StatelessWidget {
                   child:const Text(
                     "Report",
                     style:
-                        TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 25.0,
+                        backgroundColor: Color(0xFFDBE7C9),
+                         fontWeight: FontWeight.bold,
+                          color: Color(0xFF294B29),
+             ),
                   ),
                 ),
               ),
@@ -109,7 +113,7 @@ class CareView extends StatelessWidget {
                 padding:
                     EdgeInsets.only(left: 64, right: 64, bottom: 16, top: 16),
                 child: Text(
-                  "Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore",
+                  "Keep track of all your transactions in detailed reports offered by us",
                   textAlign: TextAlign.center,
                 ),
               ),

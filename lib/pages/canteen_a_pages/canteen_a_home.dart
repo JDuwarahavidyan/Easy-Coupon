@@ -221,7 +221,7 @@ class _DonutcChartState extends State<DonutcChart> {
     // Create an animation that goes from 0 to the couponCount / 30
     _progressAnimation = Tween<double>(
       begin: 0.0,
-      end: widget.couponCount / 30,
+      end: widget.couponCount / 200,
     ).animate(widget.animation)
       ..addListener(() {
         setState(() {});

@@ -86,7 +86,7 @@ class RelaxView extends StatelessWidget {
                 child: const Padding(
                   padding: EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
                   child: Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+                    "No need to worry about coupon cards anymore!" "\n" "Experience seamless food coupon reimbursement with just a few taps!",
                     textAlign: TextAlign.center,
                   ),
                 ),

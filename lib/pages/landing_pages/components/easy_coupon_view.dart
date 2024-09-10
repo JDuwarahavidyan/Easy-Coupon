@@ -59,8 +59,10 @@ class _SplashViewState extends State<SplashView> {
                       horizontal: screenWidth * 0.15, // 15% of the screen width
                     ),
                     child: const Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
-                      "sed do eiusmod tempor incididunt ut labore.",
+                     "Welcome to Easy Coupon"
+                      "\n"
+                      "Your Smart Canteen Companion"
+                      "\n",
                       textAlign: TextAlign.center,
                     ),
                   ),
