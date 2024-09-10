@@ -2,17 +2,14 @@ import 'dart:ui'; // Import for BackdropFilter
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/pages/student_pages/student_home.dart';
 import 'package:easy_coupon/pages/pages.dart';
+import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:intl/intl.dart';
-import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/models/qr/qr_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TabIconData {
   final IconData icon;
@@ -29,13 +26,16 @@ class TabIconData {
   }
 }
 
+// ignore: camel_case_types
 class Student_report extends StatefulWidget {
-  const Student_report({Key? key}) : super(key: key);
+  const Student_report({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _Student_reportState createState() => _Student_reportState();
 }
 
+// ignore: camel_case_types
 class _Student_reportState extends State<Student_report> with TickerProviderStateMixin {
   AnimationController? animationController;
   List<TabIconData> tabIconsList = TabIconData.tabIconsList;
@@ -93,19 +93,19 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
             Container(
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               decoration: BoxDecoration(
-                color: Color(0xFFDBE7C9).withOpacity(0.1),
+                color: const Color(0xFFDBE7C9).withOpacity(0.1),
                
               ),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [
   Text(
-    "Report Page",
+    "Report ",
     style: TextStyle(
       fontWeight: FontWeight.bold,
-      color: Color(0xFF294B29).withOpacity(1), // 50% transparency
+      color: const Color(0xFF294B29).withOpacity(1), // 50% transparency
       fontSize: 25,
     ),
   ),
@@ -121,11 +121,11 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
-                      color: Color(0xFF789461).withOpacity(0.1),
+                      color: const Color(0xFF789461).withOpacity(0.1),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Row(
@@ -159,7 +159,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                   CalendarDatePicker2(
                     config: CalendarDatePicker2Config(
                       calendarType: CalendarDatePicker2Type.range,
-                      selectedDayHighlightColor: Color(0xFF789461),
+                      selectedDayHighlightColor: const Color(0xFF789461),
                       dayTextStyle: const TextStyle(color: Colors.blue),
                       selectedDayTextStyle: const TextStyle(color: Colors.white),
                     ),
@@ -181,7 +181,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
-                        backgroundColor: Color(0xFF294B29),
+                        backgroundColor: const Color(0xFF294B29),
                       ),
                       child: Container(
                         alignment: Alignment.center,
@@ -224,11 +224,11 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                 right: 20,
                 bottom: 100,
                 child: Container(
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.0),
-                    boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10.0)],
+                    boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 10.0)],
                   ),
                   child: Column(
                     children: [
@@ -237,7 +237,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                         children: [
                           Text('Results', style: Theme.of(context).textTheme.titleLarge),
                           IconButton(
-                            icon: Icon(Icons.close),
+                            icon: const Icon(Icons.close),
                             onPressed: _closeTable,
                           ),
                         ],
@@ -275,7 +275,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
 
                               print('Filtered QR codes: ${filteredQrcodes.length}');
                               if (filteredQrcodes.isEmpty) {
-                                return Center(child: Text('No data available for the selected date range'));
+                                return const Center(child: Text('No data available for the selected date range'));
                               }
 
                               return Column(
@@ -296,11 +296,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                                                 style: TextStyle(fontWeight: FontWeight.bold),
                                                 textAlign: TextAlign.left,
                                               ),
-                                              // Text(
-                                              //   '& Time',
-                                              //   style: TextStyle(fontWeight: FontWeight.bold),
-                                              //   textAlign: TextAlign.center,
-                                              // ),
+                                         
                                             ],
                                           ),
                                         ),
@@ -335,7 +331,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                                         scrollDirection: Axis.horizontal,
                                         child: DataTable(
                                           columns: const [
-                                            DataColumn(label: Center(child: Text(''))), // Empty as we have headers above
+                                            DataColumn(label: Center(child: Text(''))), 
                                             DataColumn(label: Center(child: Text(''))),
                                             DataColumn(label: Center(child: Text(''))),
                                           ],
@@ -349,7 +345,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                                                     Text(DateFormat('dd/MM/yyyy').format(item.scannedAt)),
                                                     Text(
                                                       DateFormat('hh:mm a').format(item.scannedAt),
-                                                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                                                      style: const TextStyle(color: Colors.grey, fontSize: 12),
                                                     ),
                                                   ],
                                                 ),
@@ -365,7 +361,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                                   Padding(
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Text(
-                                      'Total Coupons Used: ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
+                                      'Total Coupons : ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
                                       style: Theme.of(context).textTheme.titleLarge,
                                     ),
                                   ),
@@ -374,7 +370,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                             } else if (state is QrCodeFailure) {
                               return Center(child: Text('Error: ${state.message}'));
                             } else {
-                              return Center(child: Text('No data'));
+                              return const Center(child: Text('No data'));
                             }
                           },
                         ),
@@ -385,7 +381,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
               ),
             ],
 
-            // Your bottom bar
+            
             bottomBar(),
           ],
         ),
@@ -393,7 +389,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
     );
   }
 
-  // Your existing bottomBar method
+ 
   Widget bottomBar() {
     return Column(
       children: <Widget>[
@@ -435,7 +431,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
               });
             }
           },
-          tabIconsList: [],
+          tabIconsList: const [],
         ),
       ],
     );

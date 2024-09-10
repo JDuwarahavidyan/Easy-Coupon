@@ -8,6 +8,7 @@ class StudentMainPage extends StatefulWidget {
   const StudentMainPage({super.key, int? currentIndex});
   
   @override
+  // ignore: library_private_types_in_public_api
   _StudentMainPageState createState() => _StudentMainPageState();
 }
 
@@ -21,10 +22,10 @@ class _StudentMainPageState extends State<StudentMainPage> {
   // }
 
   final List<Widget> _pages = [
-    StudentHome(),
-    Student_report(),
-    ProfileScreen(),
-    // Add more pages as needed
+    const StudentHome(),
+    const Student_report(),
+    const ProfileScreen(),
+    
   ];
 
   void _onTabSelected(int index) {
@@ -39,7 +40,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
       body: Stack(
         children: [
           AnimatedSwitcher(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             child: _pages[_currentIndex],
           ),
           Positioned(
@@ -49,7 +50,7 @@ class _StudentMainPageState extends State<StudentMainPage> {
             child: BottomBarView(
               currentIndex: _currentIndex,
               onTabSelected: _onTabSelected,
-              tabIconsList: [],
+              tabIconsList: const [],
             ),
           ),
         ],
