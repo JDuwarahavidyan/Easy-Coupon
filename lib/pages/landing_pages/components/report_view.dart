@@ -10,19 +10,15 @@ class CareView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation =
-        Tween<Offset>(begin:const Offset(1, 0), end:const Offset(0, 0))
-            .animate(CurvedAnimation(
+    final _firstHalfAnimation = Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0)).animate(CurvedAnimation(
       parent: animationController,
-      curve:const Interval(
+      curve: const Interval(
         0.2,
         0.4,
         curve: Curves.fastOutSlowIn,
       ),
     ));
-    final _secondHalfAnimation =
-        Tween<Offset>(begin:const Offset(0, 0), end: const Offset(-1, 0))
-            .animate(CurvedAnimation(
+    final _secondHalfAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.4,
@@ -30,9 +26,7 @@ class CareView extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
       ),
     ));
-    final _relaxFirstHalfAnimation =
-        Tween<Offset>(begin:const Offset(2, 0), end:const Offset(0, 0))
-            .animate(CurvedAnimation(
+    final _relaxFirstHalfAnimation = Tween<Offset>(begin: const Offset(2, 0), end: const Offset(0, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.2,
@@ -40,9 +34,7 @@ class CareView extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
       ),
     ));
-    final _relaxSecondHalfAnimation =
-        Tween<Offset>(begin:const Offset(0, 0), end:const Offset(-2, 0))
-            .animate(CurvedAnimation(
+    final _relaxSecondHalfAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-2, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.4,
@@ -51,19 +43,15 @@ class CareView extends StatelessWidget {
       ),
     ));
 
-    final _imageFirstHalfAnimation =
-        Tween<Offset>(begin:const Offset(4, 0), end:const Offset(0, 0))
-            .animate(CurvedAnimation(
+    final _imageFirstHalfAnimation = Tween<Offset>(begin: const Offset(4, 0), end: const Offset(0, 0)).animate(CurvedAnimation(
       parent: animationController,
-      curve:const Interval(
+      curve: const Interval(
         0.2,
         0.4,
         curve: Curves.fastOutSlowIn,
       ),
     ));
-    final _imageSecondHalfAnimation =
-        Tween<Offset>(begin:const Offset(0, 0), end:const Offset(-4, 0))
-            .animate(CurvedAnimation(
+    final _imageSecondHalfAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-4, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.4,
@@ -86,7 +74,7 @@ class CareView extends StatelessWidget {
                 child: SlideTransition(
                   position: _imageSecondHalfAnimation,
                   child: Container(
-                    constraints:const BoxConstraints(maxWidth: 400, maxHeight: 400),
+                    constraints: const BoxConstraints(maxWidth: 400, maxHeight: 400),
                     child: Image.asset(
                       'assets/images/landing/report.jpg',
                       fit: BoxFit.contain,
@@ -98,18 +86,16 @@ class CareView extends StatelessWidget {
                 position: _relaxFirstHalfAnimation,
                 child: SlideTransition(
                   position: _relaxSecondHalfAnimation,
-                  child:const Text(
+                  child: const Text(
                     "Report",
-                    style:
-                        TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
               const Padding(
-                padding:
-                    EdgeInsets.only(left: 64, right: 64, bottom: 16, top: 16),
+                padding: EdgeInsets.only(left: 64, right: 64, bottom: 16, top: 16),
                 child: Text(
-                  "Lorem ipsum dolor sit amet,consectetur adipiscing elit,sed do eiusmod tempor incididunt ut labore",
+                  "Keep track of all your transactions in detailed reports offered by us",
                   textAlign: TextAlign.center,
                 ),
               ),

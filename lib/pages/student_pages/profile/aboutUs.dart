@@ -1,4 +1,3 @@
-
 import 'package:easy_coupon/pages/pages.dart';
 
 import 'package:easy_coupon/widgets/common/background.dart';
@@ -96,21 +95,27 @@ class _AboutUsState extends State<AboutUs> {
                       const SizedBox(height: 30),
                       const Divider(),
                       const SizedBox(height: 10),
-                      const Text(
-                        "Easy Coupon is designed to simplify and streamline the process of issuing and redeeming food coupons for students. With a user-friendly interface and quick access to essential features, this app ensures that students can easily manage their meal plans without any hassle.",
-                        style: TextStyle(
-                          color: Color(0xFF294B29),
-                          fontSize: 14,
+                      RichText(
+                        text: TextSpan(
+                          text: 'Easy Coupon Version 1.0\n\n',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold, // Makes the text bold
+                            color: Colors.black, // Set text color as needed
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text:
+                                  "Developed by Team TDDS, a group of undergraduates from the 22nd batch of the Faculty of Engineering, University of Ruhuna, Easy Coupon is just the beginning. We are committed to continually enhancing the app and releasing improved versions in the future to better serve our users.\n\n"
+                                  "Easy Coupon is designed to simplify and streamline the process of issuing and redeeming food coupons for students. With a user-friendly interface and quick access to essential features, this app ensures that students can easily manage their meal plans without any hassle.\n\n"
+                                  "Our goal is to make the coupon management system more efficient and accessible for everyone involved, providing a seamless experience from start to finish. Whether you're a student looking to redeem a coupon or an administrator managing the system, Easy Coupon offers the tools you need to get the job done effectively.\n\n"
+                                  "We would like to express our heartfelt gratitude to our client and advisor, Dr. Kushan Sudheera, for giving us this opportunity and for his invaluable guidance throughout the project.",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.normal, // Normal text style
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 10),
-                      const Text(
-                        "Our goal is to make the coupon management system more efficient and accessible for everyone involved, providing a seamless experience from start to finish. Whether you're a student looking to redeem a coupon or an administrator managing the system, Easy Coupon offers the tools you need to get the job done effectively.",
-                        style: TextStyle(
-                          color: Color(0xFF294B29),
-                          fontSize: 14,
-                        ),
-                      ),
+                      )
                     ],
                   ),
                 ),

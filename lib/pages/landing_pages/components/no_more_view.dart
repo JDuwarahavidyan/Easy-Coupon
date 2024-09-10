@@ -8,8 +8,7 @@ class RelaxView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation =
-        Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(
+    final _firstHalfAnimation = Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(
@@ -19,8 +18,7 @@ class RelaxView extends StatelessWidget {
         ),
       ),
     );
-    final _secondHalfAnimation =
-        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0)).animate(
+    final _secondHalfAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(
@@ -30,8 +28,7 @@ class RelaxView extends StatelessWidget {
         ),
       ),
     );
-    final _textAnimation =
-        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-2, 0)).animate(
+    final _textAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-2, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(
@@ -41,8 +38,7 @@ class RelaxView extends StatelessWidget {
         ),
       ),
     );
-    final _imageAnimation =
-        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-4, 0)).animate(
+    final _imageAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-4, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(
@@ -53,8 +49,7 @@ class RelaxView extends StatelessWidget {
       ),
     );
 
-    final _relaxAnimation =
-        Tween<Offset>(begin: const Offset(0, -2), end: const Offset(0, 0)).animate(
+    final _relaxAnimation = Tween<Offset>(begin: const Offset(0, -2), end: const Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(
@@ -86,7 +81,7 @@ class RelaxView extends StatelessWidget {
                 child: const Padding(
                   padding: EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
                   child: Text(
-                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+                    "No need to worry about coupon cards anymore!" "\n" "Experience seamless food coupon reimbursement with just a few taps!",
                     textAlign: TextAlign.center,
                   ),
                 ),

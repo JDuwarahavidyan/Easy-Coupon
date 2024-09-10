@@ -3,7 +3,6 @@
 // import 'package:flutter/material.dart';
 // import 'package:lottie/lottie.dart';
 
-
 // class MoodDiaryVew extends StatelessWidget {
 //   final AnimationController animationController;
 
@@ -120,11 +119,7 @@
 //   }
 // }
 
-
-
-
 import 'package:flutter/material.dart';
-
 
 class MoodDiaryVew extends StatelessWidget {
   final AnimationController animationController;
@@ -133,9 +128,7 @@ class MoodDiaryVew extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation =
-        Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0))
-            .animate(CurvedAnimation(
+    final _firstHalfAnimation = Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.4,
@@ -143,9 +136,7 @@ class MoodDiaryVew extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
       ),
     ));
-    final _secondHalfAnimation =
-        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0))
-            .animate(CurvedAnimation(
+    final _secondHalfAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.6,
@@ -154,9 +145,7 @@ class MoodDiaryVew extends StatelessWidget {
       ),
     ));
 
-    final _moodFirstHalfAnimation =
-        Tween<Offset>(begin: const Offset(2, 0), end: const Offset(0, 0))
-            .animate(CurvedAnimation(
+    final _moodFirstHalfAnimation = Tween<Offset>(begin: const Offset(2, 0), end: const Offset(0, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.4,
@@ -164,9 +153,7 @@ class MoodDiaryVew extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
       ),
     ));
-    final _moodSecondHalfAnimation =
-        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-2, 0))
-            .animate(CurvedAnimation(
+    final _moodSecondHalfAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-2, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.6,
@@ -174,9 +161,7 @@ class MoodDiaryVew extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
       ),
     ));
-    final _imageFirstHalfAnimation =
-        Tween<Offset>(begin: const Offset(4, 0), end: const Offset(0, 0))
-            .animate(CurvedAnimation(
+    final _imageFirstHalfAnimation = Tween<Offset>(begin: const Offset(4, 0), end: const Offset(0, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.4,
@@ -184,9 +169,7 @@ class MoodDiaryVew extends StatelessWidget {
         curve: Curves.fastOutSlowIn,
       ),
     ));
-    final _imageSecondHalfAnimation =
-        Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-4, 0))
-            .animate(CurvedAnimation(
+    final _imageSecondHalfAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-4, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.6,
@@ -215,7 +198,7 @@ class MoodDiaryVew extends StatelessWidget {
                   child: const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 64, vertical: 8), // Adjusted padding
                     child: Text(
-                      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+                      "Scan the QR code, show the validation message and get your food....It's that simple",
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -226,8 +209,7 @@ class MoodDiaryVew extends StatelessWidget {
                 child: SlideTransition(
                   position: _imageSecondHalfAnimation,
                   child: Container(
-                    constraints: const BoxConstraints(
-                        maxWidth: 400, maxHeight: 400), // Adjusted size constraints
+                    constraints: const BoxConstraints(maxWidth: 400, maxHeight: 400), // Adjusted size constraints
                     child: Image.asset(
                       'assets/images/landing/fast_easy.jpg',
                       fit: BoxFit.contain, // Adjusted BoxFit to contain

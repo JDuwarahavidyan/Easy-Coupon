@@ -7,8 +7,7 @@ class WelcomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _firstHalfAnimation =
-        Tween<Offset>(begin:const Offset(1, 0), end: const Offset(0, 0)).animate(
+    final _firstHalfAnimation = Tween<Offset>(begin: const Offset(1, 0), end: const Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
         curve: const Interval(
@@ -18,11 +17,10 @@ class WelcomeView extends StatelessWidget {
         ),
       ),
     );
-    final _secondHalfAnimation =
-        Tween<Offset>(begin:const Offset(0, 0), end:const Offset(-1, 0)).animate(
+    final _secondHalfAnimation = Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0)).animate(
       CurvedAnimation(
         parent: animationController,
-        curve:const Interval(
+        curve: const Interval(
           0.8,
           1.0,
           curve: Curves.fastOutSlowIn,
@@ -30,9 +28,7 @@ class WelcomeView extends StatelessWidget {
       ),
     );
 
-    final _welcomeFirstHalfAnimation =
-        Tween<Offset>(begin:const Offset(2, 0), end: const Offset(0, 0))
-            .animate(CurvedAnimation(
+    final _welcomeFirstHalfAnimation = Tween<Offset>(begin: const Offset(2, 0), end: const Offset(0, 0)).animate(CurvedAnimation(
       parent: animationController,
       curve: const Interval(
         0.6,
@@ -41,11 +37,9 @@ class WelcomeView extends StatelessWidget {
       ),
     ));
 
-    final _welcomeImageAnimation =
-        Tween<Offset>(begin:const Offset(4, 0), end: const Offset(0, 0))
-            .animate(CurvedAnimation(
+    final _welcomeImageAnimation = Tween<Offset>(begin: const Offset(4, 0), end: const Offset(0, 0)).animate(CurvedAnimation(
       parent: animationController,
-      curve:const Interval(
+      curve: const Interval(
         0.6,
         0.8,
         curve: Curves.fastOutSlowIn,
@@ -63,7 +57,7 @@ class WelcomeView extends StatelessWidget {
               SlideTransition(
                 position: _welcomeImageAnimation,
                 child: Container(
-                  constraints:const BoxConstraints(maxWidth: 350, maxHeight: 350),
+                  constraints: const BoxConstraints(maxWidth: 350, maxHeight: 350),
                   child: Lottie.asset(
                     'assets/images/landing/welcome.json',
                     fit: BoxFit.contain,
@@ -72,16 +66,15 @@ class WelcomeView extends StatelessWidget {
               ),
               SlideTransition(
                 position: _welcomeFirstHalfAnimation,
-                child:const Text(
+                child: const Text(
                   "Welcome",
                   style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold),
                 ),
               ),
               const Padding(
-                padding:
-                    EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
+                padding: EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
                 child: Text(
-                  "Stay organised and live stress-free with you-do app",
+                  "Get your meals fast and easy with Easy Coupon",
                   textAlign: TextAlign.center,
                 ),
               ),
