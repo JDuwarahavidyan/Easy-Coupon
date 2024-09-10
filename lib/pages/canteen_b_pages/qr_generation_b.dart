@@ -27,7 +27,7 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
 
   // Define static key and IV
   final key = encrypt.Key.fromUtf8('easycouponkey@ruhunaengfac22TDDS');
-  final iv = encrypt.IV.fromUtf8('easyduwa');
+  final iv = encrypt.IV.fromUtf8('easyduwarahan#27');
 
   @override
   void initState() {
@@ -42,11 +42,11 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
     }
   }
 
-  String encryptData(String data) {
-    final encrypter = encrypt.Encrypter(encrypt.AES(key));
-    final encrypted = encrypter.encrypt(data, iv: iv);
-    return encrypted.base64;
-  }
+String encryptData(String data) {
+  final encrypter = encrypt.Encrypter(encrypt.AES(key, mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
+  final encrypted = encrypter.encrypt(data, iv: iv);
+  return encrypted.base64;
+}
 
   Future<void> _saveImageToDownloads() async {
     final imageFile = await screenshotController.capture();
@@ -67,7 +67,6 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
       final imagePath = File('${directory.path}/qr_code.png');
       await imagePath.writeAsBytes(imageFile);
       if (qrData != null) {
-        // Share.shareFiles([imagePath.path], text: 'Here is my QR code: $qrData');
         Share.shareFiles([imagePath.path], text: 'Check out this QR Code!');
       }
     }

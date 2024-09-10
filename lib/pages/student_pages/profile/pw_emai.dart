@@ -1,5 +1,4 @@
 import 'package:easy_coupon/pages/pages.dart';
-//import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
@@ -26,7 +25,7 @@ class PasswordEmailPage extends StatelessWidget {
                     PageRouteBuilder(
                        transitionDuration: const Duration(seconds: 1),
                       pageBuilder: (context, animation, secondaryAnimation) =>
-                          const UpdateProfileScreen(), 
+                           UpdateProfileScreen(userRole: '',), 
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
                         const begin = Offset(1.0, 0.0); 
                         const end = Offset.zero;         

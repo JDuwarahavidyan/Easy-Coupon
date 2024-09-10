@@ -20,5 +20,4 @@ export 'landing_pages/components/no_more_view.dart';
 export 'landing_pages/components/report_view.dart';
 export 'landing_pages/components/top_back_skip_view.dart';
 export 'landing_pages/components/welcome_view.dart';
-export 'canteen_a_pages/canteen_main.dart';
 
