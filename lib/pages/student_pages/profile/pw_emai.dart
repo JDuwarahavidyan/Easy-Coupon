@@ -10,7 +10,7 @@ class PasswordEmailPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,  // Prevents background from moving when keyboard appears
+      resizeToAvoidBottomInset: false,  
       body: Background(
         child: Stack(
           children: <Widget>[

@@ -10,7 +10,7 @@ class PasswordEmailResetPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,  // Prevents background from moving when keyboard appears
+      resizeToAvoidBottomInset: false,  
       body: Background(
         child: Stack(
           children: <Widget>[
@@ -21,7 +21,7 @@ class PasswordEmailResetPage extends StatelessWidget {
                 onTap: () {
                    Navigator.pushReplacementNamed(context, RouteNames.login);
                 },
-                child: Icon(
+                child: const Icon(
                   CupertinoIcons.back,
                   size: 30,
                   color: Color(0xFF294B29),
@@ -44,7 +44,7 @@ class PasswordEmailResetPage extends StatelessWidget {
               left: 40,
               child: Container(
                 alignment: Alignment.centerLeft,
-                child: Text(
+                child: const Text(
                   "ENTER YOUR EMAIL TO\nRESET YOUR PASSWORD",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -61,7 +61,7 @@ class PasswordEmailResetPage extends StatelessWidget {
               right: 40,
               child: Column(
                 children: <Widget>[
-                  TextField(
+                  const TextField(
                     decoration: InputDecoration(
                       labelText: "Enter the Email",
                     ),
@@ -74,7 +74,7 @@ class PasswordEmailResetPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(80.0),
                       ),
                       padding: EdgeInsets.zero,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -85,7 +85,7 @@ class PasswordEmailResetPage extends StatelessWidget {
                       width: size.width * 0.5,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(80.0),
-                        gradient: LinearGradient(
+                        gradient: const LinearGradient(
                           colors: [
                             Color(0xFF294B29),
                             Color(0xFF50623A),
@@ -93,7 +93,7 @@ class PasswordEmailResetPage extends StatelessWidget {
                         ),
                       ),
                       padding: const EdgeInsets.all(0),
-                      child: Text(
+                      child: const Text(
                         "SEND EMAIL",
                         textAlign: TextAlign.center,
                         style: TextStyle(

@@ -2,7 +2,7 @@ import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_coupon/widgets/common/background.dart'; 
+import 'package:easy_coupon/widgets/widgets.dart'; 
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

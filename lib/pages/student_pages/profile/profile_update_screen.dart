@@ -2,7 +2,7 @@ import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/routes/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-import 'package:easy_coupon/widgets/common/background.dart';
+import 'package:easy_coupon/widgets/widgets.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   const UpdateProfileScreen({super.key});
@@ -15,7 +15,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
   @override
   Widget build(BuildContext context) {
     // Fetch size from MediaQuery
-    final size = MediaQuery.of(context).size;
 
     return Background(
       child: Scaffold(

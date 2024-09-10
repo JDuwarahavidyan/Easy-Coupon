@@ -1,7 +1,5 @@
 import 'package:easy_coupon/bloc/blocs.dart';
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_main.dart';
 import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:easy_coupon/routes/routes.dart';
@@ -57,7 +55,7 @@ class LoginPage extends StatelessWidget {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false, // Prevent layout from resizing when the keyboard appears
+      resizeToAvoidBottomInset: false, 
       body: Background(
         child: Stack(
           children: <Widget>[
@@ -134,7 +132,7 @@ class LoginPage extends StatelessWidget {
                         onPressed: isLoading
                             ? null
                             : () {
-                                FocusScope.of(context).unfocus(); // Close the keyboard
+                                FocusScope.of(context).unfocus();
 
                                 final userName = userNameController.text.toLowerCase();
                                 final password = passwordController.text;
