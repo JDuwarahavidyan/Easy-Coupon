@@ -12,9 +12,8 @@ class RouteNames {
   static const String register = '/register';
   static const String student = '/student';
   static const String resetPW = '//reset-password';
-  static const String abtus = '/abtus';
-  static const String cahome = '/cahome';
-  static const String canreport = '/canreport';
-  static const String qr_g = '/qr_g';
-  static const String PWEmail='/PWEmail';
-}
+  static const String abtus = '/about-us';
+  static const String canteena = '/canteena';
+  static const String canteenb = '/canteenb';
+
+

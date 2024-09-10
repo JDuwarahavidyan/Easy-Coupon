@@ -1,4 +1,3 @@
-// ignore: file_names
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,9 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 
 class AboutUs extends StatefulWidget {
-  const AboutUs({super.key});
+  final String userRole; // Add a parameter to accept user role
+
+  const AboutUs({super.key, required this.userRole});
 
   @override
   State<AboutUs> createState() => _AboutUsState();

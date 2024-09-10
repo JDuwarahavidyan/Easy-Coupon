@@ -107,4 +107,23 @@ class FetchCanteenUserNameEvent extends UserEvent {
 
 }
 
+class UploadPictureEvent extends UserEvent {
+	final String file;
+	final String userId;
+
+	const UploadPictureEvent(this.file, this.userId);
+
+	@override
+  List<Object> get props => [file, userId];
+}
+
+class DeleteProfilePictureEvent extends UserEvent {
+  final String imageUrl;
+
+  const DeleteProfilePictureEvent(this.imageUrl);
+
+  @override
+  List<Object> get props => [imageUrl];
+}
+
 

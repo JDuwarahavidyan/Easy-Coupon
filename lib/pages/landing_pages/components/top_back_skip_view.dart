@@ -1,5 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'package:flutter/material.dart';
 
 class TopBackSkipView extends StatelessWidget {
@@ -26,7 +24,10 @@ class TopBackSkipView extends StatelessWidget {
       ),
     ));
 
+
       final _skipAnimation =
+
+
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(2, 0))
             .animate(CurvedAnimation(
       parent: animationController,
@@ -48,7 +49,7 @@ class TopBackSkipView extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-               
+
                 IconButton(
                   onPressed: onBackClick,
                   icon: const Icon(Icons.arrow_back_ios_new_rounded),
