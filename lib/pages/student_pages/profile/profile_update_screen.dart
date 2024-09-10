@@ -35,7 +35,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           uiSettings: [
             AndroidUiSettings(
               toolbarTitle: 'Crop Image',
-              toolbarColor: Colors.deepOrange,
+              toolbarColor: Color(0xFF294B29),
               toolbarWidgetColor: Colors.white,
               initAspectRatio: CropAspectRatioPreset.square,
               lockAspectRatio: false,
