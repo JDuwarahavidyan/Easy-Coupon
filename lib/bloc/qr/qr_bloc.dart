@@ -72,6 +72,7 @@ class QrCodeBloc extends Bloc<QrCodeEvent, QrCodeState> {
       event.uid,
       event.startDate,
       event.endDate,
+      event.canteenType,
       reportType: event.reportType, // Include reportType from the event
     );
 

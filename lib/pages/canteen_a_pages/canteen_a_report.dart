@@ -247,138 +247,159 @@ class _CanteenAReportState extends State<CanteenAReport> with TickerProviderStat
                         ],
                       ),
                       Expanded(
-                        child: BlocBuilder<QrCodeBloc, QrCodeState>(
+                        child: BlocBuilder<UserBloc, UserState>(
                           builder: (context, state) {
-                            print('Current QrCodeBloc state: $state');
-                            if (state is QrCodeLoading) {
+                            if (state is UserLoading) {
                               return Center(
                                 child: LoadingAnimationWidget.fourRotatingDots(
                                   color: const Color(0xFF50623A),
                                   size: 50,
                                 ),
                               );
-                            } else if (state is QrCodeLoaded) {
-                              final startDate = _dates.isNotEmpty && _dates.length > 0 ? _dates[0] : null;
-                              final endDate = _dates.isNotEmpty && _dates.length > 1 ? _dates[1] : null;
+                            } else if (state is UserLoaded) {
+                              final user = state.users.firstWhere(
+                                (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
+                              );
+                              return BlocBuilder<QrCodeBloc, QrCodeState>(
+                                builder: (context, state) {
+                                  print('Current QrCodeBloc state: $state');
+                                  if (state is QrCodeLoading) {
+                                    return Center(
+                                      child: LoadingAnimationWidget.fourRotatingDots(
+                                        color: const Color(0xFF50623A),
+                                        size: 50,
+                                      ),
+                                    );
+                                  } else if (state is QrCodeLoaded) {
+                                    final startDate = _dates.isNotEmpty && _dates.length > 0 ? _dates[0] : null;
+                                    final endDate = _dates.isNotEmpty && _dates.length > 1 ? _dates[1] : null;
 
-                              final filteredQrcodes = state.qrcodes.where((item) {
-                                final itemDate = item.scannedAt;
+                                    final filteredQrcodes = state.qrcodes
+                                        .where((item) {
+                                          final itemDate = item.scannedAt;
 
-                                if (startDate != null && endDate != null) {
-                                  return itemDate.isAfter(startDate) && itemDate.isBefore(endDate.add(const Duration(days: 1)));
-                                } else if (startDate != null) {
-                                  return itemDate.isAfter(startDate.subtract(const Duration(days: 1))) &&
-                                      itemDate.isBefore(startDate.add(const Duration(days: 1)));
-                                } else if (endDate != null) {
-                                  return itemDate.isBefore(endDate.add(const Duration(days: 1)));
-                                } else {
-                                  return true;
-                                }
-                              }).toList()
-                                ..sort((a, b) => b.scannedAt.compareTo(a.scannedAt));
+                                          if (startDate != null && endDate != null) {
+                                            return itemDate.isAfter(startDate) && itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                          } else if (startDate != null) {
+                                            return itemDate.isAfter(startDate.subtract(const Duration(days: 1))) &&
+                                                itemDate.isBefore(startDate.add(const Duration(days: 1)));
+                                          } else if (endDate != null) {
+                                            return itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                          } else {
+                                            return true;
+                                          }
+                                        })
+                                        .where((item) => item.canteenType == user.role)
+                                        .toList()
+                                      ..sort((a, b) => b.scannedAt.compareTo(a.scannedAt));
 
-                              print('Filtered QR codes: ${filteredQrcodes.length}');
-                              if (filteredQrcodes.isEmpty) {
-                                return Center(child: Text('No data available for the selected date range'));
-                              }
+                                    print('Filtered QR codes: ${filteredQrcodes.length}');
+                                    if (filteredQrcodes.isEmpty) {
+                                      return Center(child: Text('No data available for the selected date range'));
+                                    }
 
-                              return Column(
-                                children: [
-                                  // Fixed Header
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                                    child: Row(
+                                    return Column(
                                       children: [
-                                        Expanded(
-                                          flex: 3,
-                                          child: Column(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                                            mainAxisAlignment: MainAxisAlignment.center,
+                                        // Fixed Header
+                                        const Padding(
+                                          padding: EdgeInsets.symmetric(vertical: 8.0),
+                                          child: Row(
                                             children: [
-                                              Text(
-                                                'Date',
-                                                style: TextStyle(fontWeight: FontWeight.bold),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              Text(
-                                                '& Time',
-                                                style: TextStyle(fontWeight: FontWeight.bold),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 2,
-                                          child: Center(
-                                            child: Text(
-                                              'Student',
-                                              style: TextStyle(fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ),
-                                        Expanded(
-                                          flex: 1,
-                                          child: Center(
-                                            child: Text(
-                                              'Coupon\nUsed',
-                                              style: TextStyle(fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-
-                                  Expanded(
-                                    child: SingleChildScrollView(
-                                      scrollDirection: Axis.vertical,
-                                      child: SingleChildScrollView(
-                                        scrollDirection: Axis.horizontal,
-                                        child: DataTable(
-                                          columns: const [
-                                            DataColumn(label: Center(child: Text(''))), // Empty as we have headers above
-                                            DataColumn(label: Center(child: Text(''))),
-                                            DataColumn(label: Center(child: Text(''))),
-                                          ],
-                                          rows: filteredQrcodes.map((QRModel item) {
-                                            return DataRow(cells: [
-                                              DataCell(
-                                                Column(
-                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                              Expanded(
+                                                flex: 3,
+                                                child: Column(
+                                                  crossAxisAlignment: CrossAxisAlignment.center,
                                                   mainAxisAlignment: MainAxisAlignment.center,
                                                   children: [
-                                                    Text(DateFormat('dd/MM/yyyy').format(item.scannedAt)),
                                                     Text(
-                                                      DateFormat('hh:mm a').format(item.scannedAt),
-                                                      style: TextStyle(color: Colors.grey, fontSize: 12),
+                                                      'Date',
+                                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                                      textAlign: TextAlign.center,
+                                                    ),
+                                                    Text(
+                                                      '& Time',
+                                                      style: TextStyle(fontWeight: FontWeight.bold),
+                                                      textAlign: TextAlign.center,
                                                     ),
                                                   ],
                                                 ),
                                               ),
-                                              DataCell(Text(item.studentName)),
-                                              DataCell(Text(item.count.toString())),
-                                            ]);
-                                          }).toList(),
+                                              Expanded(
+                                                flex: 2,
+                                                child: Center(
+                                                  child: Text(
+                                                    'Student',
+                                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                flex: 1,
+                                                child: Center(
+                                                  child: Text(
+                                                    'Coupon\nUsed',
+                                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 8.0),
-                                    child: Text(
-                                      'Total Coupons Used: ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
-                                      style: Theme.of(context).textTheme.titleLarge,
-                                    ),
-                                  ),
-                                ],
+
+                                        Expanded(
+                                          child: SingleChildScrollView(
+                                            scrollDirection: Axis.vertical,
+                                            child: SingleChildScrollView(
+                                              scrollDirection: Axis.horizontal,
+                                              child: DataTable(
+                                                columns: const [
+                                                  DataColumn(label: Center(child: Text(''))), // Empty as we have headers above
+                                                  DataColumn(label: Center(child: Text(''))),
+                                                  DataColumn(label: Center(child: Text(''))),
+                                                ],
+                                                rows: filteredQrcodes.map((QRModel item) {
+                                                  return DataRow(cells: [
+                                                    DataCell(
+                                                      Column(
+                                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                                        mainAxisAlignment: MainAxisAlignment.center,
+                                                        children: [
+                                                          Text(DateFormat('dd/MM/yyyy').format(item.scannedAt)),
+                                                          Text(
+                                                            DateFormat('hh:mm a').format(item.scannedAt),
+                                                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    DataCell(Text(item.studentName)),
+                                                    DataCell(Text(item.count.toString())),
+                                                  ]);
+                                                }).toList(),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 8.0),
+                                          child: Text(
+                                            'Total Coupons Used: ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
+                                            style: Theme.of(context).textTheme.titleLarge,
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  } else if (state is QrCodeFailure) {
+                                    return Center(child: Text('Error: ${state.message}'));
+                                  } else {
+                                    return Center(child: Text('No data'));
+                                  }
+                                },
                               );
-                            } else if (state is QrCodeFailure) {
-                              return Center(child: Text('Error: ${state.message}'));
                             } else {
-                              return Center(child: Text('No data'));
+                              return Center(child: Text('Something Went Wrong'));
                             }
                           },
                         ),

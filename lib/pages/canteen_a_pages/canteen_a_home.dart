@@ -63,6 +63,13 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                   final UserModel user = state.users.firstWhere(
                     (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
                   );
+
+                  final String requiredRole = user.role;
+
+                  // Filter users by the required role and calculate total coupon count
+                  final List<UserModel> canteenUsers = state.users.where((user) => user.role == requiredRole).toList();
+                  final int totalCouponCount = canteenUsers.fold(0, (total, user) => total + user.canteenCount);
+
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 60),
                     child: SingleChildScrollView(
@@ -124,8 +131,8 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                                     const SizedBox(height: 20),
                                     Center(
                                       child: DonutcChart(
-                                         animation: animationController!,
-                                                couponCount: user.studentCount,
+                                        animation: animationController!,
+                                        couponCount: totalCouponCount,
                                       ),
                                     ),
                                     const SizedBox(height: 20),
@@ -194,9 +201,6 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
   }
 }
 
-
-
-
 class DonutcChart extends StatefulWidget {
   final AnimationController animation;
   final int couponCount;
@@ -221,7 +225,7 @@ class _DonutcChartState extends State<DonutcChart> {
     // Create an animation that goes from 0 to the couponCount / 30
     _progressAnimation = Tween<double>(
       begin: 0.0,
-      end: widget.couponCount / 30,
+      end: widget.couponCount / 1000,
     ).animate(widget.animation)
       ..addListener(() {
         setState(() {});
