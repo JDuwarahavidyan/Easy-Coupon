@@ -47,12 +47,14 @@ final class LoadQrCodesByUid extends QrCodeEvent {
   final String uid;
   final DateTime? startDate;
   final DateTime? endDate;
+  final String? canteenType;
   final String reportType; // Added reportType field
 
   const LoadQrCodesByUid(
     this.uid, {
     this.startDate,
     this.endDate,
+    this.canteenType,
     required this.reportType, // Added reportType to the constructor
   });
 
@@ -64,5 +66,3 @@ final class LoadQrCodesByUid extends QrCodeEvent {
         reportType, // Include reportType in props for comparison
       ];
 }
-
-

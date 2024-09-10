@@ -55,13 +55,13 @@ class QrCodeService {
         .map((snapshot) => snapshot.docs.map((doc) => QRModel.fromJson(doc.data() as Map<String, dynamic>)).toList());
   }
 
-  Future<List<QRModel>> getQRCodeByUidWithFilter(String uid, DateTime? startDate, DateTime? endDate, {required String reportType}) async {
+  Future<List<QRModel>> getQRCodeByUidWithFilter(String uid, DateTime? startDate, DateTime? endDate, String? canteenType, {required String reportType}) async {
     try {
       final QuerySnapshot querySnapshot;
 
       // Determine the field to query based on the report type
       if (reportType == 'canteenreport') {
-        querySnapshot = await _qrCodeCollection.where("canteenId", isEqualTo: uid).get();
+        querySnapshot = await _qrCodeCollection.where("canteenType", isEqualTo: canteenType).get();
       } else if (reportType == 'student_report') {
         querySnapshot = await _qrCodeCollection.where("studentId", isEqualTo: uid).get();
       } else {
