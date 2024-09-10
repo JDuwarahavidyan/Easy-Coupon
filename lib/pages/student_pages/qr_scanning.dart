@@ -53,9 +53,7 @@ class _QrPageState extends State<QrPage> {
         if (scannedData != null) {
           final decryptedData = decryptData(scannedData);
           if (decryptedData != null) {
-            // ignore: use_build_context_synchronously
             context.read<UserBloc>().add(FetchUserRoleEvent(decryptedData));
-            // ignore: use_build_context_synchronously
             context
                 .read<UserBloc>()
                 .add(FetchCanteenUserNameEvent(decryptedData));
@@ -106,8 +104,8 @@ class _QrPageState extends State<QrPage> {
                   studentId: widget.studentUserId,
                   canteenId: canteenUserId,
                   canteenType: role,
-                  studentName: widget.studentUserName, 
-                  canteenName: canteenUsername, 
+                  studentName: widget.studentUserName, // Added studentName
+                  canteenName: canteenUsername, // Added canteenName
                   scannedAt: scannedTime,
                   count: val,
                 );
@@ -138,7 +136,7 @@ class _QrPageState extends State<QrPage> {
   }
 
   void _showInvalidQRDialog() {
-    controller?.pauseCamera(); 
+    controller?.pauseCamera(); // Pause the camera to prevent multiple scans
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -155,7 +153,7 @@ class _QrPageState extends State<QrPage> {
                 _navigateBackToStudentPage(context);
                 Future.delayed(const Duration(seconds: 1), () {
                   controller
-                      ?.resumeCamera(); 
+                      ?.resumeCamera(); // Resume the camera after a short delay
                 });
               },
             ),
@@ -169,7 +167,7 @@ class _QrPageState extends State<QrPage> {
     Navigator.of(context).pushAndRemoveUntil(
       PageRouteBuilder(
         pageBuilder: (context, animation, secondaryAnimation) =>
-             const StudentMainPage(),
+             StudentMainPage(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
           const begin = Offset(1.0, 0.0);
           const end = Offset.zero;
