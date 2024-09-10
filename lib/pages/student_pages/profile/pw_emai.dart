@@ -1,4 +1,5 @@
 import 'package:easy_coupon/pages/pages.dart';
+import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
