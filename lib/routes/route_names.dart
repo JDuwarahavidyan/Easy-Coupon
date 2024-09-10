@@ -18,4 +18,5 @@ class RouteNames {
   static const String canteenreport = '/canteen-report';
   static const String qrGenerator = '/qr-generator';
   static const String pwEmailChange='/pw-email-change';
+
 }

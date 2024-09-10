@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false, 
+      resizeToAvoidBottomInset: false,
       body: Background(
         child: Stack(
           children: <Widget>[
@@ -160,7 +160,7 @@ class LoginPage extends StatelessWidget {
                         onPressed: isLoading
                             ? null
                             : () {
-                                FocusScope.of(context).unfocus();
+                                FocusScope.of(context).unfocus(); // Close the keyboard
 
                                 final userName =
                                     userNameController.text.toLowerCase();

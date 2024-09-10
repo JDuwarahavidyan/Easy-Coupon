@@ -1,12 +1,22 @@
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/pages/pages.dart';
+import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
+import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
+import 'package:easy_coupon/routes/route_names.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:easy_coupon/widgets/common/background.dart';
+import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/widgets.dart'; 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -39,6 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 "No",
                 style: TextStyle(fontSize: 16, color: Color(0xFF294B29), fontWeight: FontWeight.bold),
               ),
+
               onPressed: () {
                 Navigator.of(context).pop(); 
               },
@@ -47,6 +58,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
+
                   MaterialPageRoute(builder: (context) =>  LoginPage()),
                 );
               },
@@ -63,6 +75,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
+
               ),
             ),
           ],

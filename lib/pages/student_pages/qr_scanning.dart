@@ -104,8 +104,8 @@ class _QrPageState extends State<QrPage> {
                   studentId: widget.studentUserId,
                   canteenId: canteenUserId,
                   canteenType: role,
-                  studentName: widget.studentUserName, 
-                  canteenName: canteenUsername, 
+                  studentName: widget.studentUserName, // Added studentName
+                  canteenName: canteenUsername, // Added canteenName
                   scannedAt: scannedTime,
                   count: val,
                 );
@@ -136,7 +136,7 @@ class _QrPageState extends State<QrPage> {
   }
 
   void _showInvalidQRDialog() {
-    controller?.pauseCamera(); 
+    controller?.pauseCamera(); // Pause the camera to prevent multiple scans
     showCupertinoDialog(
       context: context,
       builder: (BuildContext context) {
@@ -153,7 +153,7 @@ class _QrPageState extends State<QrPage> {
                 _navigateBackToStudentPage(context);
                 Future.delayed(const Duration(seconds: 1), () {
                   controller
-                      ?.resumeCamera(); 
+                      ?.resumeCamera(); // Resume the camera after a short delay
                 });
               },
             ),

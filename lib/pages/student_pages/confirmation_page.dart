@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'package:easy_coupon/pages/pages.dart';
+import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_coupon/widgets/widgets.dart'; 
+import 'package:easy_coupon/widgets/widgets.dart'; // Import the Background widget
 
 class ConfirmationPage extends StatefulWidget {
   final int val;
@@ -20,7 +20,6 @@ class ConfirmationPage extends StatefulWidget {
   });
 
   @override
-  // ignore: library_private_types_in_public_api
   _ConfirmationPageState createState() => _ConfirmationPageState();
 }
 
@@ -62,9 +61,9 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
       body: Background(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.only(top: 20.0), 
+            padding: const EdgeInsets.only(top: 20.0), // Subtle upward lift
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center, 
+              mainAxisAlignment: MainAxisAlignment.center, // Center items vertically
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Lottie.asset(
@@ -72,31 +71,31 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                   width: 200,
                   height: 200,
                 ),
-                const SizedBox(height: 10), 
+                SizedBox(height: 10), // Reduced space here
                 Text(
                   '${widget.val}',
-                  style: const TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                 ),
-                const Text(
+                Text(
                   'Coupons',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                const SizedBox(height: 10), 
+                SizedBox(height: 10), // Slightly reduced space here
                 Text(
                   formattedTime,
-                  style: const TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20),
                 ),
-                const SizedBox(height: 10), 
+                SizedBox(height: 10), // Slightly reduced space here
                 Text(
                   widget.role == 'canteena' ? 'Kalderama' : 'Hilton',
-                  style: const TextStyle(fontSize: 20),
+                  style: TextStyle(fontSize: 20),
                 ),
-                const SizedBox(height: 10), 
+                SizedBox(height: 10), // Slightly reduced space here
                 Text(
                   'This page will automatically close in $minutes:${seconds.toString().padLeft(2, '0')}',
-                  style: const TextStyle(fontSize: 20, color: Color.fromARGB(255, 22, 22, 22)),
+                  style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 22, 22, 22)),
                 ),
-                const SizedBox(height: 15), 
+                SizedBox(height: 15), // Adjusted size here
                 SizedBox(
                   width: 200,
                   height: 50,
@@ -105,15 +104,15 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                       _navigateToStudentHomeScreen(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF294B29), 
+                      backgroundColor: const Color(0xFF294B29), // Dark green background color
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8), 
+                        borderRadius: BorderRadius.circular(8), // Rounded edges
                       ),
                     ),
                     child: const Text(
                       'CLOSE NOW',
                       style: TextStyle(
-                        color: Colors.white, 
+                        color: Colors.white, // White text color
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),

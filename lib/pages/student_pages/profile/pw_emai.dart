@@ -4,14 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 
 class PasswordEmailPage extends StatelessWidget {
-  const PasswordEmailPage({super.key});
-
+    const PasswordEmailPage({super.key});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,  
+      resizeToAvoidBottomInset: false,  // Prevents background from moving when keyboard appears
       body: Background(
         child: Stack(
           children: <Widget>[
@@ -42,8 +41,9 @@ class PasswordEmailPage extends StatelessWidget {
                       },
                     ),
                   );
+
                 },
-                child: const Icon(
+                child: Icon(
                   CupertinoIcons.back,
                   size: 30,
                   color: Color(0xFF294B29),
@@ -53,7 +53,7 @@ class PasswordEmailPage extends StatelessWidget {
             Positioned(
               top: size.height * 0.1,
               right: -20,
-              child: SizedBox(
+              child: Container(
                 width: size.width * 0.6,
                 child: Image.asset(
                   "assets/images/landing/pw.png",
@@ -66,7 +66,7 @@ class PasswordEmailPage extends StatelessWidget {
               left: 40,
               child: Container(
                 alignment: Alignment.centerLeft,
-                child: const Text(
+                child: Text(
                   "ENTER YOUR EMAIL TO\nRESET YOUR PASSWORD",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
@@ -83,7 +83,7 @@ class PasswordEmailPage extends StatelessWidget {
               right: 40,
               child: Column(
                 children: <Widget>[
-                  const TextField(
+                  TextField(
                     decoration: InputDecoration(
                       labelText: "Enter the Email",
                     ),
@@ -96,7 +96,7 @@ class PasswordEmailPage extends StatelessWidget {
                         borderRadius: BorderRadius.circular(80.0),
                       ),
                       padding: EdgeInsets.zero,
-                      textStyle: const TextStyle(
+                      textStyle: TextStyle(
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
@@ -107,7 +107,7 @@ class PasswordEmailPage extends StatelessWidget {
                       width: size.width * 0.5,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(80.0),
-                        gradient: const LinearGradient(
+                        gradient: LinearGradient(
                           colors: [
                             Color(0xFF294B29),
                             Color(0xFF50623A),
@@ -115,7 +115,7 @@ class PasswordEmailPage extends StatelessWidget {
                         ),
                       ),
                       padding: const EdgeInsets.all(0),
-                      child: const Text(
+                      child: Text(
                         "SEND EMAIL",
                         textAlign: TextAlign.center,
                         style: TextStyle(
