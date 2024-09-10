@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 
 class RelaxView extends StatelessWidget {
   final AnimationController animationController;
@@ -7,7 +8,7 @@ class RelaxView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final firstHalfAnimation =
+    final _firstHalfAnimation =
         Tween<Offset>(begin: const Offset(0, 1), end: const Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
@@ -18,7 +19,7 @@ class RelaxView extends StatelessWidget {
         ),
       ),
     );
-    final secondHalfAnimation =
+    final _secondHalfAnimation =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-1, 0)).animate(
       CurvedAnimation(
         parent: animationController,
@@ -29,7 +30,7 @@ class RelaxView extends StatelessWidget {
         ),
       ),
     );
-    final textAnimation =
+    final _textAnimation =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-2, 0)).animate(
       CurvedAnimation(
         parent: animationController,
@@ -40,7 +41,7 @@ class RelaxView extends StatelessWidget {
         ),
       ),
     );
-    final imageAnimation =
+    final _imageAnimation =
         Tween<Offset>(begin: const Offset(0, 0), end: const Offset(-4, 0)).animate(
       CurvedAnimation(
         parent: animationController,
@@ -52,7 +53,7 @@ class RelaxView extends StatelessWidget {
       ),
     );
 
-    final relaxAnimation =
+    final _relaxAnimation =
         Tween<Offset>(begin: const Offset(0, -2), end: const Offset(0, 0)).animate(
       CurvedAnimation(
         parent: animationController,
@@ -65,23 +66,23 @@ class RelaxView extends StatelessWidget {
     );
 
     return SlideTransition(
-      position: firstHalfAnimation,
+      position: _firstHalfAnimation,
       child: SlideTransition(
-        position: secondHalfAnimation,
+        position: _secondHalfAnimation,
         child: Padding(
           padding: const EdgeInsets.only(bottom: 100),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SlideTransition(
-                position: relaxAnimation,
+                position: _relaxAnimation,
                 child: const Text(
                   "No More Coupons",
                   style: TextStyle(fontSize: 26.0, fontWeight: FontWeight.bold),
                 ),
               ),
               SlideTransition(
-                position: textAnimation,
+                position: _textAnimation,
                 child: const Padding(
                   padding: EdgeInsets.only(left: 64, right: 64, top: 16, bottom: 16),
                   child: Text(
@@ -91,13 +92,13 @@ class RelaxView extends StatelessWidget {
                 ),
               ),
               SlideTransition(
-                position: imageAnimation,
+                position: _imageAnimation,
                 child: Container(
-                  
+                  // Adjust or remove constraints to see the effect
                   constraints: const BoxConstraints(maxWidth: 350, maxHeight: 350),
                   child: Image.asset(
                     'assets/images/landing/food.jpg',
-                    fit: BoxFit.contain, 
+                    fit: BoxFit.contain, // Experiment with BoxFit values
                   ),
                 ),
               ),

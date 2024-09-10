@@ -1,5 +1,6 @@
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
-import 'package:easy_coupon/pages/pages.dart';
+import 'package:easy_coupon/pages/student_pages/qr_scanning.dart';
+import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
-
+import 'package:easy_coupon/widgets/common/background.dart';
+//import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 
 class TabIconData {
   final IconData icon;
@@ -82,7 +84,7 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                           builder: (context, state) {
                             if (state is UserLoading) {
                               return Center(child: LoadingAnimationWidget.fourRotatingDots(
-                                color: const Color(0xFF50623A),
+                                color: Color(0xFF50623A),
                                 size: 50,
                               ),);
                             } else if (state is UserLoaded) {
@@ -131,10 +133,10 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                                   ),
                                                   const SizedBox(width: 10),
                                                   Transform.scale(
-                                                    scale: 1.7, 
+                                                    scale: 1.7, // Adjust the scale factor to increase the size of the Lottie animation
                                                     child: SizedBox(
-                                                      width: 40, 
-                                                      height: 40, 
+                                                      width: 40, // Original size
+                                                      height: 40, // Original size
                                                       child: Lottie.asset(
                                                         'assets/images/landing/qr_h.json',
                                                         fit: BoxFit.contain,
@@ -159,7 +161,7 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                             Center(
                                               child: DonutChart(
                                                 animation: animationController!,
-                                                couponCount: user.studentCount, 
+                                                couponCount: user.studentCount, // Pass the user's coupon count
                                               ),
                                             ),
                                             const SizedBox(height: 20),
@@ -333,10 +335,9 @@ class DonutChart extends StatefulWidget {
   final AnimationController animation;
   final int couponCount;
 
-  const DonutChart({super.key, required this.animation, required this.couponCount});
+  const DonutChart({required this.animation, required this.couponCount});
 
   @override
-  // ignore: library_private_types_in_public_api
   _DonutChartState createState() => _DonutChartState();
 }
 
@@ -350,7 +351,7 @@ class _DonutChartState extends State<DonutChart> {
     // Slow down the animation by increasing the duration
     widget.animation.duration = const Duration(milliseconds: 1200);
 
-    
+    // Create an animation that goes from 0 to the couponCount / 30
     _progressAnimation = Tween<double>(
       begin: 0.0,
       end: widget.couponCount / 30,
@@ -381,7 +382,7 @@ class _DonutChartState extends State<DonutChart> {
                   strokeWidth: 20.0,
                   valueColor: const AlwaysStoppedAnimation<Color>(Color(0xFF789461)),
                   backgroundColor: const Color(0xFF789461).withOpacity(0.2),
-                  strokeCap: StrokeCap.round, 
+                  strokeCap: StrokeCap.round, // Make the edges rounded
                 ),
               ),
               Center(
