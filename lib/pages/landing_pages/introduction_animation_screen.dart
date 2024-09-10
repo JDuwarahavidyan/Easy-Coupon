@@ -1,13 +1,7 @@
-import 'package:easy_coupon/pages/landing_pages/components/report_view.dart';
-import 'package:easy_coupon/pages/landing_pages/components/center_next_button.dart';
-import 'package:easy_coupon/pages/landing_pages/components/fast_and_easy_view.dart';
-import 'package:easy_coupon/pages/landing_pages/components/no_more_view.dart';
-import 'package:easy_coupon/pages/landing_pages/components/easy_coupon_view.dart';
-import 'package:easy_coupon/pages/landing_pages/components/top_back_skip_view.dart';
-import 'package:easy_coupon/pages/landing_pages/components/welcome_view.dart';
-import 'package:easy_coupon/pages/pages.dart';
+import 'package:easy_coupon/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
+import 'package:easy_coupon/pages/pages.dart';
 
 class IntroductionAnimationScreen extends StatefulWidget {
   const IntroductionAnimationScreen({super.key});

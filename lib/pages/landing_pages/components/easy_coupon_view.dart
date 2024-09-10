@@ -35,13 +35,13 @@ class _SplashViewState extends State<SplashView> {
         builder: (context, constraints) {
           return SingleChildScrollView(
             child: SizedBox(
-              height: screenHeight, // Ensure the content fills the screen height
+              height: screenHeight, 
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Distribute elements evenly
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
                 children: [
                   SizedBox(
                     width: screenWidth,
-                    height: screenHeight * 0.3, // 30% of the screen height for the animation
+                    height: screenHeight * 0.3, 
                     child: Lottie.asset(
                       'assets/images/landing/qr_mob.json',
                       fit: BoxFit.contain,
@@ -56,7 +56,7 @@ class _SplashViewState extends State<SplashView> {
                   ),
                   Padding(
                     padding: EdgeInsets.symmetric(
-                      horizontal: screenWidth * 0.15, // 15% of the screen width
+                      horizontal: screenWidth * 0.15, 
                     ),
                     child: const Text(
                       "Lorem ipsum dolor sit amet, consectetur adipiscing elit, "
@@ -70,7 +70,7 @@ class _SplashViewState extends State<SplashView> {
                     },
                     child: Container(
                       height: 58,
-                      width: screenWidth * 0.6, // 60% of the screen width for the button
+                      width: screenWidth * 0.6, 
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(38.0),
                         color: AppColors.buttonColor,

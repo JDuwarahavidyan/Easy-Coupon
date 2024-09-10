@@ -47,14 +47,14 @@ class _SplashScreenState extends State<SplashScreen>
 
     return Scaffold(
       body: Container(
-        color: const Color(0xFF294B29), // Set the background color here
+        color: const Color(0xFF294B29), 
         child: Stack(
           children: [
             Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Animated circular aura around the animation
+                  
                   AnimatedBuilder(
                     animation: _auraAnimation,
                     builder: (context, child) {
@@ -65,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen>
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Color.fromRGBO(80, 98, 58, 1).withOpacity(0.6),
+                              color: const Color(0xFF50623A).withOpacity(0.6),
                               blurRadius: 50,
                               spreadRadius: 20,
                             ),
@@ -82,12 +82,12 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                   ),
                   const SizedBox(height: 20),
-                  // Text under the animation
+                 
                   Text(
                     'Easy Coupon',
                     style: GoogleFonts.merriweather(
                       color: Colors.white,
-                      fontSize: screenWidth * 0.08, // Responsive text size
+                      fontSize: screenWidth * 0.08, 
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,
@@ -103,7 +103,7 @@ class _SplashScreenState extends State<SplashScreen>
                 'A Project By DEIE 22nd Batch',
                 style: GoogleFonts.merriweather(
                   color: Colors.white,
-                  fontSize: screenWidth * 0.04, // Responsive text size
+                  fontSize: screenWidth * 0.04,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
