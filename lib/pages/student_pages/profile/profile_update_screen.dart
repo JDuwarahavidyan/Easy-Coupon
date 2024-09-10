@@ -99,10 +99,29 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => const PasswordEmailPage()),
-                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              PageRouteBuilder(
+                                pageBuilder: (context, animation, secondaryAnimation) =>
+                                    const PasswordEmailPage(),
+                                transitionsBuilder: (context, animation, secondaryAnimation, child) {
+                                  const begin = Offset(-1.0, 0.0);  // Start from the left
+                                  const end = Offset.zero;          // End at the center
+                                  const curve = Curves.ease;
+
+                                  var tween = Tween(begin: begin, end: end)
+                                      .chain(CurveTween(curve: curve));
+                                  var offsetAnimation = animation.drive(tween);
+
+                                  return SlideTransition(
+                                    position: offsetAnimation,
+                                    child: child,
+                                  );
+                                },
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF50623A),
                             shape: RoundedRectangleBorder(
