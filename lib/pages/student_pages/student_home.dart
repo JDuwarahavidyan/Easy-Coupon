@@ -1,6 +1,5 @@
 import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/pages/student_pages/qr_scanning.dart';
-import 'package:easy_coupon/routes/route_names.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,22 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-//import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 
-class TabIconData {
-  final IconData icon;
-  bool isSelected;
 
-  TabIconData(this.icon, this.isSelected);
 
-  static List<TabIconData> get tabIconsList {
-    return [
-      TabIconData(Icons.home, true),
-      TabIconData(Icons.report, false),
-      TabIconData(Icons.settings, false),
-    ];
-  }
-}
 
 // ignore: camel_case_types
 class StudentHome extends StatefulWidget {
@@ -37,7 +23,6 @@ class StudentHome extends StatefulWidget {
 
 class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin {
   AnimationController? animationController;
-  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
   Widget tabBody = Container(
     color: Colors.white,
   );
@@ -47,10 +32,6 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
   void initState() {
     super.initState();
 
-    for (var tab in tabIconsList) {
-      tab.isSelected = false;
-    }
-    tabIconsList[0].isSelected = true;
 
     animationController = AnimationController(
         duration: const Duration(milliseconds: 600), vsync: this);
@@ -357,11 +338,19 @@ class _DonutChartState extends State<DonutChart> {
       end: widget.couponCount / 30,
     ).animate(widget.animation)
       ..addListener(() {
-        setState(() {});
+        if (mounted) {
+          setState(() {});  // Ensure setState is only called if the widget is still mounted
+        }
       });
 
     // Start the animation
     widget.animation.forward();
+  }
+
+  @override
+  void dispose() {
+    widget.animation.stop();  // Stop the animation when the widget is disposed
+    super.dispose();
   }
 
   @override

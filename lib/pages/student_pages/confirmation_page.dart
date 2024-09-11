@@ -93,7 +93,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                 SizedBox(height: 10), // Slightly reduced space here
                 Text(
                   'This page will automatically close in $minutes:${seconds.toString().padLeft(2, '0')}',
-                  style: TextStyle(fontSize: 20, color: const Color.fromARGB(255, 22, 22, 22)),
+                  style: TextStyle(fontSize: 14, color: const Color.fromARGB(255, 22, 22, 22)),
                 ),
                 SizedBox(height: 15), // Adjusted size here
                 SizedBox(
