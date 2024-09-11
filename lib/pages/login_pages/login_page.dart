@@ -1,6 +1,4 @@
 import 'package:easy_coupon/bloc/blocs.dart';
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_main.dart';
-import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_coupon/widgets/widgets.dart';

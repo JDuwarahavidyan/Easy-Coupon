@@ -12,26 +12,6 @@ class AboutUs extends StatefulWidget {
 }
 
 class _AboutUsState extends State<AboutUs> {
-  // This method is used to create a left-to-right animation when navigating to the settings page
-  Route _createRouteToSettings() {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => StudentMainPage(currentIndex: 2),
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(-1.0, 0.0); // Start from the left side
-        const end = Offset.zero;
-        const curve = Curves.easeInOut;
-
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        var offsetAnimation = animation.drive(tween);
-
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
-      },
-      transitionDuration: const Duration(seconds: 1), // Duration of the animation
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +22,8 @@ class _AboutUsState extends State<AboutUs> {
           backgroundColor: const Color(0xFFDBE7C9),
           leading: IconButton(
             onPressed: () {
-              // Navigate back to settings page with left-to-right animation
-              Navigator.push(
-                context,
-                _createRouteToSettings(),
-              );
+              // Close the current page with left-to-right animation
+              Navigator.of(context).pop();
             },
             icon: const Icon(LineAwesomeIcons.angle_left),
           ),
@@ -106,7 +83,7 @@ class _AboutUsState extends State<AboutUs> {
                         "Our goal is to make the coupon management system more efficient and accessible for everyone involved, providing a seamless experience from start to finish. Whether you're a student looking to redeem a coupon or an administrator managing the system, Easy Coupon offers the tools you need to get the job done effectively.\n\n"
                         "We would like to express our heartfelt gratitude to our advisor, Dr. Kushan Sudheera, for giving us this opportunity and for his invaluable guidance throughout the project.\n\n"
                         "Thank you for choosing Easy Coupon!\n\n"
-                        "Duwarahavidyan J.\nDissanayake T.D.\nBandara W.M.T.H\nFernando S.A.D.S",
+                        "Duwarahavidyan Jeganathan\nSachinthana Fernando\nDeshan Dissanayake\nTharuka Harshajith",
                         style: TextStyle(
                           fontWeight: FontWeight.normal,
                           color: Colors.black,
@@ -124,3 +101,5 @@ class _AboutUsState extends State<AboutUs> {
     );
   }
 }
+
+

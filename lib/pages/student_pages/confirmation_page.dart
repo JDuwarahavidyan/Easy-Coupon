@@ -77,7 +77,7 @@ class _ConfirmationPageState extends State<ConfirmationPage> {
                   style: TextStyle(fontSize: 50, fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  'Coupons',
+                  widget.val == 1 ? 'Coupon' : 'Coupons',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 10), // Slightly reduced space here

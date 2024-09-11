@@ -187,28 +187,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                             ],
                                           ),
                                         ),
-                                  Positioned(
-                                    bottom: 0,
-                                    right: 0,
-                                    child: Container(
-                                      width: 35,
-                                      height: 35,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(100),
-                                        color: const Color(0xFF789461),
-                                      ),
-                                      child: const Icon(
-                                        LineAwesomeIcons.alternate_pencil,
-                                        color: Colors.black,
-                                        size: 20,
-                                      ),
-                                    ),
-                                  ),
                                 ],
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                user.userName[0].toUpperCase() + user.userName.substring(1),
+                                user.userName[0].toUpperCase() + user.fullName.substring(1),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF294B29),
@@ -216,7 +199,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               Text(
-                                user.role[0].toUpperCase() + user.role.substring(1),
+                                user.userName.toUpperCase(),
+                                // user.role[0].toUpperCase() + user.userName.substring(1),
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,

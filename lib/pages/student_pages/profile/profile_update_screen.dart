@@ -1,8 +1,6 @@
 import 'dart:io';
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/models/user/user_model.dart';
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_main.dart';
-import 'package:easy_coupon/pages/student_pages/student_main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -72,26 +70,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     }
   }
 
-  // Custom page transition (Left to Right)
-  Route _createRoute(Widget page) {
-    return PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => page,
-      transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        const begin = Offset(-1.0, 0.0); // Start from left
-        const end = Offset.zero;
-        const curve = Curves.easeInOut;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
-        var offsetAnimation = animation.drive(tween);
-
-        return SlideTransition(
-          position: offsetAnimation,
-          child: child,
-        );
-      },
-      transitionDuration: const Duration(seconds: 1), // 1 second duration
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,11 +87,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             backgroundColor: const Color(0xFFDBE7C9),
             leading: IconButton(
               onPressed: () {
-                if (widget.userRole == 'student') {
-                  Navigator.of(context).push(_createRoute(StudentMainPage(currentIndex: 2)));
-                } else if (widget.userRole == 'canteen') {
-                  Navigator.of(context).push(_createRoute(const CanteenAMainPage(currentIndex: 2)));
-                }
+                 Navigator.of(context).pop();
               },
               icon: const Icon(LineAwesomeIcons.angle_left),
             ),

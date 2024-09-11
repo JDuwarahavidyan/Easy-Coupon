@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_coupon/routes/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -29,8 +31,8 @@ class _SplashScreenState extends State<SplashScreen>
       CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
     );
 
-    Timer(const Duration(seconds: 4), () {
-      Navigator.pushReplacementNamed(context, RouteNames.introductionAnimation);
+    Timer(const Duration(seconds: 7), () {
+      _checkSession(mounted, context);
     });
   }
 
@@ -38,6 +40,51 @@ class _SplashScreenState extends State<SplashScreen>
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  Future<void> _checkSession(bool mounted, BuildContext context) async {
+    final prefs = await SharedPreferences.getInstance();
+    final String? userId = prefs.getString('userId');
+    final int? expiryTime = prefs.getInt('expiryTime');
+    final currentTime = DateTime.now().millisecondsSinceEpoch;
+
+    if (userId != null && expiryTime != null && currentTime < expiryTime) {
+      _checkUserRole(userId, mounted, context);
+    } else {
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, RouteNames.introductionAnimation);
+      }
+    }
+  }
+
+  Future<void> _checkUserRole(String uid, bool mounted, BuildContext context) async {
+    try {
+      DocumentSnapshot userDoc =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+      if (userDoc.exists) {
+        String role = userDoc.get('role');
+        if (mounted) {
+          if (role == 'student') {
+            Navigator.pushReplacementNamed(context, RouteNames.student);
+          } else if (role == 'canteena') {
+            Navigator.pushReplacementNamed(context, RouteNames.canteena);
+          } else if (role == 'canteenb') {
+            Navigator.pushReplacementNamed(context, RouteNames.canteenb);
+          } else {
+            Navigator.pushReplacementNamed(context, RouteNames.introductionAnimation);
+          }
+        }
+      } else {
+        if (mounted) {
+          Navigator.pushReplacementNamed(context, RouteNames.introductionAnimation);
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        Navigator.pushReplacementNamed(context, RouteNames.introductionAnimation);
+      }
+    }
   }
 
   @override
@@ -65,7 +112,8 @@ class _SplashScreenState extends State<SplashScreen>
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Color.fromRGBO(80, 98, 58, 1).withOpacity(0.6),
+                              color: const Color.fromRGBO(80, 98, 58, 1)
+                                  .withOpacity(0.6),
                               blurRadius: 50,
                               spreadRadius: 20,
                             ),
@@ -115,9 +163,3 @@ class _SplashScreenState extends State<SplashScreen>
     );
   }
 }
-
-
-
-
-
-

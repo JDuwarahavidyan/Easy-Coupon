@@ -25,8 +25,8 @@ class AppRoutes {
      case RouteNames.pwEmailChange:
         return MaterialPageRoute(builder: (_) => PasswordEmailPage());
 
-      case RouteNames.home:
-        return MaterialPageRoute(builder: (_) => StudentHome());
+      case RouteNames.student:
+        return MaterialPageRoute(builder: (_) => StudentMainPage());
 
       case RouteNames.canteena:
         return MaterialPageRoute(builder: (_) => const CanteenAMainPage());
