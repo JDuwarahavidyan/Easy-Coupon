@@ -1,9 +1,7 @@
 import 'dart:ui'; 
 import 'package:easy_coupon/bloc/blocs.dart';
-import 'package:easy_coupon/pages/student_pages/student_home.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
-import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
@@ -86,7 +84,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                  children: [
   Text(
-    "Report Page",
+    "Report ",
     style: TextStyle(
       fontWeight: FontWeight.bold,
       color: Color(0xFF294B29).withOpacity(1), // 50% transparency
@@ -144,7 +142,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                     config: CalendarDatePicker2Config(
                       calendarType: CalendarDatePicker2Type.range,
                       selectedDayHighlightColor: Color(0xFF789461),
-                      dayTextStyle: const TextStyle(color: Colors.blue),
+                      dayTextStyle: const TextStyle(color: Color(0xFF182D18)),
                       selectedDayTextStyle: const TextStyle(color: Colors.white),
                     ),
                     value: _dates,
@@ -276,15 +274,15 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'Date',
+                                                'Date & Time',
                                                 style: TextStyle(fontWeight: FontWeight.bold),
-                                                textAlign: TextAlign.center,
+                                                textAlign: TextAlign.left,
                                               ),
-                                              Text(
-                                                '& Time',
-                                                style: TextStyle(fontWeight: FontWeight.bold),
-                                                textAlign: TextAlign.center,
-                                              ),
+                                              // Text(
+                                              //   '& Time',
+                                              //   style: TextStyle(fontWeight: FontWeight.bold),
+                                              //   textAlign: TextAlign.center,
+                                              // ),
                                             ],
                                           ),
                                         ),
@@ -294,7 +292,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                                             child: Text(
                                               'Canteen',
                                               style: TextStyle(fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center,
+                                              textAlign: TextAlign.left,
                                             ),
                                           ),
                                         ),
@@ -349,7 +347,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                                   Padding(
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Text(
-                                      'Total Coupons Used: ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
+                                      'Total Coupons : ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
                                       style: Theme.of(context).textTheme.titleLarge,
                                     ),
                                   ),
