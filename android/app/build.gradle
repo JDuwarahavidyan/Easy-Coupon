@@ -34,7 +34,7 @@ if (keystorePropertiesFile.exists()) {
 
 android {
     namespace = "com.example.easy_coupon"
-    compileSdk = flutter.compileSdkVersion
+    //compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
     compileSdk = 34
 
@@ -46,7 +46,7 @@ android {
     defaultConfig {
         applicationId = "com.example.easy_coupon"
         minSdkVersion 23 
-        targetSdkVersion 33
+        targetSdkVersion 35
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
