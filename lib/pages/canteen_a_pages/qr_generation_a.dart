@@ -8,9 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:share/share.dart';
+
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:share_plus/share_plus.dart';
 
 class QrGen extends StatefulWidget {
   const QrGen({super.key, AnimationController? animationController});
@@ -68,7 +69,7 @@ String encryptData(String data) {
       await imagePath.writeAsBytes(imageFile);
       if (qrData != null) {
         // Share.shareFiles([imagePath.path], text: 'Here is my QR code: $qrData');
-        Share.shareFiles([imagePath.path], text: 'Check out this QR Code!');
+        //Share.shareFiles([imagePath.path], text: 'Check out this QR Code!');
       }
     }
   }
