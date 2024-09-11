@@ -143,7 +143,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                     config: CalendarDatePicker2Config(
                       calendarType: CalendarDatePicker2Type.range,
                       selectedDayHighlightColor: Color(0xFF789461),
-                      dayTextStyle: const TextStyle(color: Colors.blue),
+                      dayTextStyle: const TextStyle(color: Color(0xFF294B29)),
                       selectedDayTextStyle: const TextStyle(color: Colors.white),
                     ),
                     value: _dates,
