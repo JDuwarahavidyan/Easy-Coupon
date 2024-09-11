@@ -2,21 +2,16 @@ import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
-import 'package:easy_coupon/routes/route_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:lottie/lottie.dart';
-import 'package:easy_coupon/widgets/widgets.dart'; 
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:easy_coupon/widgets/widgets.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -49,17 +44,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 "No",
                 style: TextStyle(fontSize: 16, color: Color(0xFF294B29), fontWeight: FontWeight.bold),
               ),
-
               onPressed: () {
-                Navigator.of(context).pop(); 
+                Navigator.of(context).pop();
               },
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-
-                  MaterialPageRoute(builder: (context) =>  LoginPage()),
+                  _createRoute(LoginPage()),
                 );
               },
               style: ElevatedButton.styleFrom(
@@ -75,12 +68,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
-
               ),
             ),
           ],
         );
       },
+    );
+  }
+
+  Route _createRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(1.0, 0.0);
+        const end = Offset.zero;
+        const curve = Curves.easeInOut;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+      transitionDuration: const Duration(seconds: 1),
     );
   }
 
@@ -95,6 +107,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Background(
         child: Scaffold(
           backgroundColor: Colors.transparent,
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: const Color(0xFFDBE7C9), // Adjust the background color
+            title: const Text(
+              "Settings",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF294B29), // Adjust the text color
+                fontSize: 25,
+              ),
+            ),
+          ),
           body: BlocBuilder<UserBloc, UserState>(
             builder: (context, state) {
               if (state is UserLoading) {
@@ -107,33 +131,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               } else if (state is UserLoaded) {
                 final user = state.users.firstWhere(
                   (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
-                 
                 );
 
                 return Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFDBE7C9).withOpacity(0.1),
-                      ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Settings Page",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Color(0xFF294B29),
-                                fontSize: 25,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
                     const SizedBox(height: 20),
                     Expanded(
                       child: SingleChildScrollView(
@@ -228,9 +229,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      MaterialPageRoute(
-                                        builder: (context) => const UpdateProfileScreen(userRole: 'student'),
-                                      ),
+                                      _createRoute(const UpdateProfileScreen(userRole: 'student')),
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -273,9 +272,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPress: () {
                                   Navigator.push(
                                     context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const AboutUs(userRole: 'student'),
-                                    ),
+                                    _createRoute(const AboutUs()),
                                   );
                                 },
                               ),

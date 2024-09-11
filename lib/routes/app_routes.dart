@@ -1,7 +1,5 @@
 import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_report.dart';
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_main.dart';
 import 'package:easy_coupon/pages/canteen_b_pages/canteen_b_main.dart';
-import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:easy_coupon/pages/login_pages/register.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
@@ -60,7 +58,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => UpdateProfileScreen(userRole: '',));
 
       case RouteNames.abtus:
-        return MaterialPageRoute(builder: (_) => AboutUs(userRole: '',));
+        return MaterialPageRoute(builder: (_) => AboutUs());
 
       case RouteNames.canteenreport:
         return MaterialPageRoute(builder: (_) => CanteenAReport());

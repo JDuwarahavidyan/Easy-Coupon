@@ -46,7 +46,7 @@ android {
     defaultConfig {
         applicationId = "com.example.easy_coupon"
         minSdkVersion 23 
-        targetSdkVersion 34
+        targetSdkVersion 33
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName

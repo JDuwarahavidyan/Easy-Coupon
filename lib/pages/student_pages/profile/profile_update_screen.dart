@@ -14,7 +14,7 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
   final String userRole;
-  const UpdateProfileScreen({super.key,required this.userRole});
+  const UpdateProfileScreen({super.key, required this.userRole});
 
   @override
   State<UpdateProfileScreen> createState() => _UpdateProfileScreenState();
@@ -29,7 +29,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
 
     if (image != null) {
       if (Platform.isAndroid) {
-        // Using UCrop for Android cropping
         final croppedFile = await ImageCropper().cropImage(
           sourcePath: image.path,
           uiSettings: [
@@ -44,16 +43,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         );
 
         if (croppedFile != null) {
-          // Deleting the old profile picture from Firebase Storage
           if (user.profilePic != null && user.profilePic!.isNotEmpty) {
             context.read<UserBloc>().add(DeleteProfilePictureEvent(user.profilePic!));
           }
 
-          // Uploading the cropped image
           context.read<UserBloc>().add(UploadPictureEvent(croppedFile.path, user.id));
         }
       } else if (Platform.isIOS) {
-        // Using ImageCropper for iOS
         final croppedFile = await ImageCropper().cropImage(
           sourcePath: image.path,
           aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0), // Square crop
@@ -67,22 +63,38 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
         );
 
         if (croppedFile != null) {
-          // Deleting the old profile picture from Firebase Storage
           if (user.profilePic != null && user.profilePic!.isNotEmpty) {
             context.read<UserBloc>().add(DeleteProfilePictureEvent(user.profilePic!));
           }
-
-          // Uploading the cropped image
           context.read<UserBloc>().add(UploadPictureEvent(croppedFile.path, user.id));
         }
       }
     }
   }
 
+  // Custom page transition (Left to Right)
+  Route _createRoute(Widget page) {
+    return PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) => page,
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(-1.0, 0.0); // Start from left
+        const end = Offset.zero;
+        const curve = Curves.easeInOut;
+
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+      transitionDuration: const Duration(seconds: 1), // 1 second duration
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-
-
     return BlocListener<UserBloc, UserState>(
       listener: (context, state) {
         if (state is UploadPictureSuccess) {
@@ -97,24 +109,10 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             leading: IconButton(
               onPressed: () {
                 if (widget.userRole == 'student') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => StudentMainPage(
-                      currentIndex: 2,
-                    ),
-                  ),
-                );
-              } else if (widget.userRole == 'canteen') {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CanteenAMainPage(
-                      currentIndex: 2,
-                    ),
-                  ),
-                );
-              }
+                  Navigator.of(context).push(_createRoute(StudentMainPage(currentIndex: 2)));
+                } else if (widget.userRole == 'canteen') {
+                  Navigator.of(context).push(_createRoute(const CanteenAMainPage(currentIndex: 2)));
+                }
               },
               icon: const Icon(LineAwesomeIcons.angle_left),
             ),
@@ -265,22 +263,6 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                                       ),
                                     ),
                                   ),
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.redAccent.withOpacity(0.1),
-                                  elevation: 0,
-                                  foregroundColor: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(80.0),
-                                  ),
-                                ),
-                                child: const Text(
-                                  "DELETE ACCOUNT",
-                                  style: TextStyle(color: Colors.red),
                                 ),
                               ),
                             ],

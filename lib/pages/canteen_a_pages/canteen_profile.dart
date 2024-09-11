@@ -1,16 +1,13 @@
-import 'package:easy_coupon/models/user/user_model.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
-import 'package:easy_coupon/routes/route_names.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
+
 import 'package:lottie/lottie.dart';
 import '../../../bloc/blocs.dart';
 
@@ -90,10 +87,6 @@ class _CanteenProfileScreenState extends State<CanteenProfileScreen> {
                 final user = state.users.firstWhere(
                   (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
                 );
-
-                if (user == null) {
-                  return const Center(child: Text('User not found'));
-                }
 
                 return Column(
                   children: [
@@ -260,9 +253,7 @@ class _CanteenProfileScreenState extends State<CanteenProfileScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const AboutUs(
-                                              userRole: 'canteen',
-                                            )),
+                                        builder: (context) => const AboutUs()),
                                   );
                                 },
                               ),
