@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:easy_coupon/bloc/blocs.dart';
+import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/models/user/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,6 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-import 'package:easy_coupon/pages/login_pages/pw_email_reset_page.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class UpdateProfileScreen extends StatefulWidget {
@@ -206,9 +206,8 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                               SizedBox(
                                 width: double.infinity,
                                 child: ElevatedButton(
-                                  onPressed: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(builder: (context) => const PasswordEmailResetPage()),
+                                  onPressed: () => Navigator.of(context).push(
+                                    _createRoute(const PasswordEmailPage()), // Custom left-to-right transition
                                   ),
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: const Color(0xFF50623A),

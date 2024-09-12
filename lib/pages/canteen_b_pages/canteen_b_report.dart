@@ -107,7 +107,7 @@ class _CanteenBReportState extends State<CanteenBReport> with TickerProviderStat
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Report Page",
+                      "Report ",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Color(0xFF294B29),
@@ -164,7 +164,7 @@ class _CanteenBReportState extends State<CanteenBReport> with TickerProviderStat
                     config: CalendarDatePicker2Config(
                       calendarType: CalendarDatePicker2Type.range,
                       selectedDayHighlightColor: Color(0xFF789461),
-                      dayTextStyle: const TextStyle(color: Colors.blue),
+                      dayTextStyle: const TextStyle(color: Color(0xFF182D18)),
                       selectedDayTextStyle: const TextStyle(color: Colors.white),
                     ),
                     value: _dates,
@@ -296,15 +296,15 @@ class _CanteenBReportState extends State<CanteenBReport> with TickerProviderStat
                                             mainAxisAlignment: MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                'Date',
+                                                'Date & Time',
                                                 style: TextStyle(fontWeight: FontWeight.bold),
-                                                textAlign: TextAlign.center,
+                                                textAlign: TextAlign.left,
                                               ),
-                                              Text(
-                                                '& Time',
-                                                style: TextStyle(fontWeight: FontWeight.bold),
-                                                textAlign: TextAlign.center,
-                                              ),
+                                              // Text(
+                                              //   '& Time',
+                                              //   style: TextStyle(fontWeight: FontWeight.bold),
+                                              //   textAlign: TextAlign.center,
+                                              // ),
                                             ],
                                           ),
                                         ),
@@ -314,7 +314,7 @@ class _CanteenBReportState extends State<CanteenBReport> with TickerProviderStat
                                             child: Text(
                                               'Student',
                                               style: TextStyle(fontWeight: FontWeight.bold),
-                                              textAlign: TextAlign.center,
+                                              textAlign: TextAlign.left,
                                             ),
                                           ),
                                         ),
@@ -369,7 +369,7 @@ class _CanteenBReportState extends State<CanteenBReport> with TickerProviderStat
                                   Padding(
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Text(
-                                      'Total Coupons Used: ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
+                                      'Total Coupons : ${filteredQrcodes.fold<int>(0, (sum, item) => sum + item.count)}',
                                       style: Theme.of(context).textTheme.titleLarge,
                                     ),
                                   ),
