@@ -252,7 +252,9 @@ class _CanteenProfileScreenState extends State<CanteenProfileScreen> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => const AboutUs()),
+                                        builder: (context) => const AboutUs(
+                                              userRole: 'canteen',
+                                            )),
                                   );
                                 },
                               ),

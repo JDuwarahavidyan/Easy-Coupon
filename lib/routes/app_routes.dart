@@ -53,7 +53,7 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => UpdateProfileScreen(userRole: '',));
 
       case RouteNames.abtus:
-        return MaterialPageRoute(builder: (_) => AboutUs());
+        return MaterialPageRoute(builder: (_) => AboutUs(userRole: '',));
 
       case RouteNames.canteenreport:
         return MaterialPageRoute(builder: (_) => CanteenAReport());
