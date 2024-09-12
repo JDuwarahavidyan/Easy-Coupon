@@ -268,7 +268,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPress: () {
                                   Navigator.push(
                                     context,
-                                    _createRoute(const AboutUs()),
+                                    _createRoute(const AboutUs(userRole: 'student',)),
                                   );
                                 },
                               ),

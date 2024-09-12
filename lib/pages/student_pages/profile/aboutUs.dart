@@ -5,7 +5,8 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:lottie/lottie.dart';
 
 class AboutUs extends StatefulWidget {
-  const AboutUs({super.key});
+  final String userRole;
+  const AboutUs({super.key,required this.userRole});
 
   @override
   State<AboutUs> createState() => _AboutUsState();
@@ -22,8 +23,25 @@ class _AboutUsState extends State<AboutUs> {
           backgroundColor: const Color(0xFFDBE7C9),
           leading: IconButton(
             onPressed: () {
-              // Close the current page with left-to-right animation
-              Navigator.of(context).pop();
+              if (widget.userRole == 'student') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudentMainPage(
+                      currentIndex: 2,
+                    ),
+                  ),
+                );
+              } else if (widget.userRole == 'canteen') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CanteenAMainPage(
+                      currentIndex: 2,
+                    ),
+                  ),
+                );
+              }
             },
             icon: const Icon(LineAwesomeIcons.angle_left),
           ),
