@@ -1,5 +1,4 @@
 import 'package:easy_coupon/bloc/blocs.dart';
-import 'package:easy_coupon/bloc/user/user_bloc.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_menu.dart';
 import 'package:easy_coupon/pages/student_pages/profile/profile_update_screen.dart';
@@ -11,8 +10,6 @@ import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
-
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -101,7 +98,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: child,
         );
       },
-      transitionDuration: const Duration(seconds: 1),
+      transitionDuration: const Duration(milliseconds: 300),
     );
   }
 

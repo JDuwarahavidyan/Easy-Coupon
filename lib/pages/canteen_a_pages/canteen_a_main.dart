@@ -1,4 +1,3 @@
-import 'package:easy_coupon/pages/canteen_a_pages/canteen_a_report.dart';
 import 'package:easy_coupon/pages/canteen_a_pages/canteen_profile.dart';
 import 'package:easy_coupon/pages/pages.dart';
 import 'package:easy_coupon/widgets/widgets.dart';

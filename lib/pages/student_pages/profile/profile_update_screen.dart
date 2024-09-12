@@ -86,7 +86,13 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           child: child,
         );
       },
-      transitionDuration: const Duration(seconds: 1), // 1 second duration
+      transitionDuration: const Duration(milliseconds: 300), // 1 second duration
+    );
+  }
+
+  void _navigateToProfileScreen() {
+    Navigator.of(context).pushReplacement(
+      _createRoute( StudentMainPage(currentIndex: 2,)),
     );
   }
 
@@ -104,9 +110,7 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
           appBar: AppBar(
             backgroundColor: const Color(0xFFDBE7C9),
             leading: IconButton(
-              onPressed: () {
-                 Navigator.of(context).pop();
-              },
+              onPressed: _navigateToProfileScreen,
               icon: const Icon(LineAwesomeIcons.angle_left),
             ),
             title: const Text(
@@ -274,4 +278,3 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
     );
   }
 }
-
