@@ -105,7 +105,25 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
             backgroundColor: const Color(0xFFDBE7C9),
             leading: IconButton(
               onPressed: () {
-                 Navigator.of(context).pop();
+                 if (widget.userRole == 'student') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => StudentMainPage(
+                      currentIndex: 2,
+                    ),
+                  ),
+                );
+              } else if (widget.userRole == 'canteen') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CanteenAMainPage(
+                      currentIndex: 2,
+                    ),
+                  ),
+                );
+              }
               },
               icon: const Icon(LineAwesomeIcons.angle_left),
             ),
