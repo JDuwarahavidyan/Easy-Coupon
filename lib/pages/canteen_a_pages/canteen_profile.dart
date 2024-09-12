@@ -51,7 +51,7 @@ class _CanteenProfileScreenState extends State<CanteenProfileScreen> {
                 );
               },
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.redAccent,
+                backgroundColor: const Color(0xFF789461),
                 textStyle: const TextStyle(color: Colors.white),
               ),
               child: const Text("Yes", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white)),
@@ -100,7 +100,7 @@ class _CanteenProfileScreenState extends State<CanteenProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Settings Page",
+                              "Settings ",
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Color(0xFF294B29),

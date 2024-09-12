@@ -22,7 +22,7 @@ class PasswordEmailPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     PageRouteBuilder(
-                       transitionDuration: const Duration(seconds: 1),
+                       transitionDuration: const Duration(milliseconds: 300),
                       pageBuilder: (context, animation, secondaryAnimation) =>
                            UpdateProfileScreen(userRole: '',), 
                       transitionsBuilder: (context, animation, secondaryAnimation, child) {
