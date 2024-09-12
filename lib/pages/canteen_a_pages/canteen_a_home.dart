@@ -130,7 +130,7 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
                                     ),
                                     const SizedBox(height: 20),
                                     Center(
-                                      child: DonutcChart(
+                                      child: DonutChartCanteen(
                                         animation: animationController!,
                                         couponCount: totalCouponCount,
                                       ),
@@ -201,18 +201,17 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
   }
 }
 
-class DonutcChart extends StatefulWidget {
+class DonutChartCanteen extends StatefulWidget {
   final AnimationController animation;
   final int couponCount;
 
-  const DonutcChart({super.key, required this.animation, required this.couponCount});
+  const DonutChartCanteen({required this.animation, required this.couponCount});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _DonutcChartState createState() => _DonutcChartState();
+  _DonutChartCanteenState createState() => _DonutChartCanteenState();
 }
 
-class _DonutcChartState extends State<DonutcChart> {
+class _DonutChartCanteenState extends State<DonutChartCanteen> {
   late Animation<double> _progressAnimation;
 
   @override
@@ -225,14 +224,22 @@ class _DonutcChartState extends State<DonutcChart> {
     // Create an animation that goes from 0 to the couponCount / 30
     _progressAnimation = Tween<double>(
       begin: 0.0,
-      end: widget.couponCount / 1000,
+      end: widget.couponCount / 30,
     ).animate(widget.animation)
       ..addListener(() {
-        setState(() {});
+        if (mounted) {
+          setState(() {});  // Ensure setState is only called if the widget is still mounted
+        }
       });
 
     // Start the animation
     widget.animation.forward();
+  }
+
+  @override
+  void dispose() {
+    widget.animation.stop();  // Stop the animation when the widget is disposed
+    super.dispose();
   }
 
   @override

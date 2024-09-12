@@ -70,7 +70,7 @@ class _SplashScreenState extends State<SplashScreen>
           } else if (role == 'canteena') {
             Navigator.pushReplacementNamed(context, RouteNames.canteena);
           } else if (role == 'canteenb') {
-            Navigator.pushReplacementNamed(context, RouteNames.canteenb);
+            Navigator.pushReplacementNamed(context, RouteNames.canteena);
           } else {
             Navigator.pushReplacementNamed(context, RouteNames.introductionAnimation);
           }

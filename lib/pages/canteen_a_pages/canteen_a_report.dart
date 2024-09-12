@@ -1,10 +1,6 @@
-import 'dart:ui'; // Import for BackdropFilter
+import 'dart:ui'; 
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/models/qr/qr_model.dart';
-//import 'package:easy_coupon/pages/student_pages/student_home.dart';
-import 'package:easy_coupon/pages/pages.dart';
-import 'package:easy_coupon/pages/student_pages/student_report.dart';
-import 'package:easy_coupon/widgets/common/bottom_navigation.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -12,21 +8,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
-
-class TabIconData {
-  final IconData icon;
-  bool isSelected;
-
-  TabIconData(this.icon, this.isSelected);
-
-  static List<TabIconData> get tabIconsList {
-    return [
-      TabIconData(Icons.home, false),
-      TabIconData(Icons.report, true),
-      TabIconData(Icons.settings, false),
-    ];
-  }
-}
 
 class CanteenAReport extends StatefulWidget {
   const CanteenAReport({super.key});
@@ -37,7 +18,7 @@ class CanteenAReport extends StatefulWidget {
 
 class _CanteenAReportState extends State<CanteenAReport> with TickerProviderStateMixin {
   AnimationController? animationController;
-  List<TabIconData> tabIconsList = TabIconData.tabIconsList;
+  
   Widget tabBody = Container(
     color: Colors.white,
   );
@@ -421,48 +402,7 @@ class _CanteenAReportState extends State<CanteenAReport> with TickerProviderStat
   // Your existing bottomBar method
   Widget bottomBar() {
     return Column(
-      children: <Widget>[
-        const Expanded(
-          child: SizedBox(),
-        ),
-        BottomBarView(
-          currentIndex: tabIconsList.indexWhere((tab) => tab.isSelected),
-          onTabSelected: (int index) {
-            setState(() {
-              for (int i = 0; i < tabIconsList.length; i++) {
-                tabIconsList[i].isSelected = i == index;
-              }
-            });
-
-            if (index == 0) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                setState(() {
-                  tabBody = StudentHome(animationController: animationController);
-                });
-              });
-            } else if (index == 1) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                tabBody = const Student_report(); // Switch to the report screen itself
-              });
-            } else if (index == 2) {
-              animationController?.reverse().then<dynamic>((data) {
-                if (!mounted) {
-                  return;
-                }
-                // Set the tab body to your Settings screen when the Settings tab is clicked.
-                // tabBody = SettingsScreen(); // Replace with your Settings screen
-              });
-            }
-          },
-          tabIconsList: [],
-        ),
-      ],
+      
     );
   }
 }

@@ -125,7 +125,7 @@ class LoginPage extends StatelessWidget {
                   } else if (state is CanteenAAuthenticated) {
                     navigateWithAnimation(context, RouteNames.canteena);
                   } else if (state is CanteenBAuthenticated) {
-                    navigateWithAnimation(context, RouteNames.canteenb);
+                    navigateWithAnimation(context, RouteNames.canteena);
                   } else if (state is AuthStateError) {
                     floatingSnackBar(
                       context:context,

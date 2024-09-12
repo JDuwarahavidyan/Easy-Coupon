@@ -7,7 +7,6 @@ import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:easy_coupon/pages/student_pages/profile/aboutUs.dart';
-
 import 'package:lottie/lottie.dart';
 import '../../../bloc/blocs.dart';
 

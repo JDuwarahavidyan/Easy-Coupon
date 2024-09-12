@@ -1,6 +1,5 @@
 import 'dart:ui'; 
 import 'package:easy_coupon/bloc/blocs.dart';
-import 'package:easy_coupon/pages/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
@@ -9,7 +8,6 @@ import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:intl/intl.dart';
 import 'package:easy_coupon/models/qr/qr_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 
 class Student_report extends StatefulWidget {
