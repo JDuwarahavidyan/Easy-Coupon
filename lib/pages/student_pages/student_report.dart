@@ -1,4 +1,4 @@
-import 'dart:ui'; 
+import 'dart:ui';
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -8,7 +8,6 @@ import 'package:easy_coupon/widgets/common/background.dart';
 import 'package:intl/intl.dart';
 import 'package:easy_coupon/models/qr/qr_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 
 class Student_report extends StatefulWidget {
   const Student_report({Key? key}) : super(key: key);
@@ -52,8 +51,18 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
     setState(() {
       _showTable = true;
     });
-    if (_dates.length >= 2 && _dates[0] != null && _dates[1] != null) {
-      _fetchUserQrCodes(startDate: _dates[0], endDate: _dates[1]);
+    if (_dates.isNotEmpty && _dates[0] != null) {
+      DateTime startDate = _dates[0]!;
+      DateTime? endDate;
+
+      if (_dates.length > 1 && _dates[1] != null) {
+        endDate = _dates[1];
+      } else {
+        // If only one date is selected, set both start and end to the same date
+        endDate = startDate;
+      }
+
+      _fetchUserQrCodes(startDate: startDate, endDate: endDate);
     }
   }
 
@@ -74,23 +83,21 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
               padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               decoration: BoxDecoration(
                 color: Color(0xFFDBE7C9).withOpacity(0.1),
-               
               ),
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                 children: [
-  Text(
-    "Report ",
-    style: TextStyle(
-      fontWeight: FontWeight.bold,
-      color: Color(0xFF294B29).withOpacity(1), // 50% transparency
-      fontSize: 25,
-    ),
-  ),
-],
-
+                  children: [
+                    Text(
+                      "Report ",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF294B29).withOpacity(1), // 50% transparency
+                        fontSize: 25,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
@@ -190,7 +197,6 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                 ],
               ),
             ),
-
             if (_showTable) ...[
               Positioned.fill(
                 child: BackdropFilter(
@@ -234,19 +240,17 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
                                 ),
                               );
                             } else if (state is QrCodeLoaded) {
-                              final startDate = _dates.isNotEmpty && _dates.length > 0 ? _dates[0] : null;
-                              final endDate = _dates.isNotEmpty && _dates.length > 1 ? _dates[1] : null;
+                              final startDate = _dates.isNotEmpty ? _dates[0] : null;
+                              final endDate = _dates.length > 1 ? _dates[1] : startDate;
 
                               final filteredQrcodes = state.qrcodes.where((item) {
                                 final itemDate = item.scannedAt;
 
                                 if (startDate != null && endDate != null) {
-                                  return itemDate.isAfter(startDate) && itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                  return itemDate.isAtSameMomentAs(startDate) ||
+                                      (itemDate.isAfter(startDate) && itemDate.isBefore(endDate.add(const Duration(days: 1))));
                                 } else if (startDate != null) {
-                                  return itemDate.isAfter(startDate.subtract(const Duration(days: 1))) &&
-                                      itemDate.isBefore(startDate.add(const Duration(days: 1)));
-                                } else if (endDate != null) {
-                                  return itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                  return itemDate.year == startDate.year && itemDate.month == startDate.month && itemDate.day == startDate.day;
                                 } else {
                                   return true;
                                 }
@@ -371,10 +375,7 @@ class _Student_reportState extends State<Student_report> with TickerProviderStat
     );
   }
 
-
   Widget bottomBar() {
-    return Column(
-      
-    );
+    return Column();
   }
 }
