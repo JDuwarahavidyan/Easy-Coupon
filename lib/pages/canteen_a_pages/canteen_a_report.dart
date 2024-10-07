@@ -1,4 +1,4 @@
-import 'dart:ui'; 
+import 'dart:ui';
 import 'package:easy_coupon/bloc/blocs.dart';
 import 'package:easy_coupon/models/qr/qr_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -18,7 +18,7 @@ class CanteenAReport extends StatefulWidget {
 
 class _CanteenAReportState extends State<CanteenAReport> with TickerProviderStateMixin {
   AnimationController? animationController;
-  
+
   Widget tabBody = Container(
     color: Colors.white,
   );
@@ -52,8 +52,18 @@ class _CanteenAReportState extends State<CanteenAReport> with TickerProviderStat
     setState(() {
       _showTable = true;
     });
-    if (_dates.length >= 2 && _dates[0] != null && _dates[1] != null) {
-      _fetchUserQrCodes(startDate: _dates[0], endDate: _dates[1]);
+    if (_dates.isNotEmpty && _dates[0] != null) {
+      DateTime startDate = _dates[0]!;
+      DateTime? endDate;
+
+      if (_dates.length > 1 && _dates[1] != null) {
+        endDate = _dates[1];
+      } else {
+        // If only one date is selected, set both start and end to the same date
+        endDate = startDate;
+      }
+
+      _fetchUserQrCodes(startDate: startDate, endDate: endDate);
     }
   }
 
@@ -252,20 +262,18 @@ class _CanteenAReportState extends State<CanteenAReport> with TickerProviderStat
                                       ),
                                     );
                                   } else if (state is QrCodeLoaded) {
-                                    final startDate = _dates.isNotEmpty && _dates.length > 0 ? _dates[0] : null;
-                                    final endDate = _dates.isNotEmpty && _dates.length > 1 ? _dates[1] : null;
+                                    final startDate = _dates.isNotEmpty ? _dates[0] : null;
+                                    final endDate = _dates.length > 1 ? _dates[1] : startDate;
 
                                     final filteredQrcodes = state.qrcodes
                                         .where((item) {
                                           final itemDate = item.scannedAt;
 
                                           if (startDate != null && endDate != null) {
-                                            return itemDate.isAfter(startDate) && itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                            return (itemDate.isAtSameMomentAs(startDate) || itemDate.isAfter(startDate)) &&
+                                                itemDate.isBefore(endDate.add(const Duration(days: 1)));
                                           } else if (startDate != null) {
-                                            return itemDate.isAfter(startDate.subtract(const Duration(days: 1))) &&
-                                                itemDate.isBefore(startDate.add(const Duration(days: 1)));
-                                          } else if (endDate != null) {
-                                            return itemDate.isBefore(endDate.add(const Duration(days: 1)));
+                                            return itemDate.year == startDate.year && itemDate.month == startDate.month && itemDate.day == startDate.day;
                                           } else {
                                             return true;
                                           }
@@ -401,8 +409,6 @@ class _CanteenAReportState extends State<CanteenAReport> with TickerProviderStat
 
   // Your existing bottomBar method
   Widget bottomBar() {
-    return Column(
-      
-    );
+    return Column();
   }
 }
