@@ -68,7 +68,8 @@ dependencies:
   image_cropper: ^8.0.2
   firebase_storage: ^12.2.0
   flutter_launcher_icons: ^0.13.1
- 
+  image_gallery_saver: ^2.0.3
+  permission_handler: ^11.3.1
 
 
 dev_dependencies:

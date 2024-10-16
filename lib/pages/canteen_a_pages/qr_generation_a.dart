@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -19,6 +21,8 @@ class QrGen extends StatefulWidget {
   @override
   _QrGenState createState() => _QrGenState();
 }
+
+
 
 class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
   AnimationController? animationController;
@@ -43,33 +47,40 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
     }
   }
 
-String encryptData(String data) {
-  final encrypter = encrypt.Encrypter(encrypt.AES(key, mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
-  final encrypted = encrypter.encrypt(data, iv: iv);
-  return encrypted.base64;
-}
+  String encryptData(String data) {
+    final encrypter = encrypt.Encrypter(encrypt.AES(key, mode: encrypt.AESMode.cbc, padding: 'PKCS7'));
+    final encrypted = encrypter.encrypt(data, iv: iv);
+    return encrypted.base64;
+  }
 
   Future<void> _saveImageToDownloads() async {
     final imageFile = await screenshotController.capture();
     if (imageFile != null) {
-      final directory = await getApplicationDocumentsDirectory();
-      final imagePath = File('${directory.path}/qr_code.png');
-      await imagePath.writeAsBytes(imageFile);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('QR code saved to ${imagePath.path}')),
-      );
-    }
-  }
+      // Request storage permission
+      final permissionStatus = await Permission.storage.request();
 
-  Future<void> _shareImage() async {
-    final imageFile = await screenshotController.capture();
-    if (imageFile != null) {
-      final directory = await getApplicationDocumentsDirectory();
-      final imagePath = File('${directory.path}/qr_code.png');
-      await imagePath.writeAsBytes(imageFile);
-      if (qrData != null) {
-        // Share.shareFiles([imagePath.path], text: 'Here is my QR code: $qrData');
-        //Share.shareFiles([imagePath.path], text: 'Check out this QR Code!');
+      if (permissionStatus.isGranted) {
+        // Save the image to the gallery
+        final result = await ImageGallerySaver.saveImage(
+          imageFile,
+          quality: 100,
+          name: 'qr_code.png',
+        );
+
+        // Check if saving was successful
+        if (result['isSuccess']) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('QR code saved to gallery')),
+          );
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Failed to save QR code')),
+          );
+        }
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Permission denied to save the image')),
+        );
       }
     }
   }
@@ -180,36 +191,20 @@ String encryptData(String data) {
                                       width: 150,
                                     ),
                                     const SizedBox(height: 20),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                      children: [
-                                        MaterialButton(
-                                          onPressed: _saveImageToDownloads,
-                                          color: const Color(0xFF50623A),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          child: const Text(
-                                            "Save to Device",
-                                            style: TextStyle(color: Colors.white),
-                                          ),
-                                          minWidth: 150,
-                                          height: 50,
+                                    Center(
+                                      child: MaterialButton(
+                                        onPressed: _saveImageToDownloads,
+                                        color: const Color(0xFF50623A),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(10),
                                         ),
-                                        MaterialButton(
-                                          onPressed: _shareImage,
-                                          color: const Color(0xFF50623A),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius: BorderRadius.circular(10),
-                                          ),
-                                          child: const Icon(
-                                            Icons.share,
-                                            color: Colors.white,
-                                          ),
-                                          minWidth: 50,
-                                          height: 50,
+                                        child: const Text(
+                                          "Save to Device",
+                                          style: TextStyle(color: Colors.white),
                                         ),
-                                      ],
+                                        minWidth: 150,
+                                        height: 50,
+                                      ),
                                     ),
                                   ],
                                 );
@@ -223,11 +218,10 @@ String encryptData(String data) {
                 ],
               );
             }
-            return const Center(child: Text('Failed to load user data'));
+            return const Center(child: Text("No QR Code generated."));
           },
         ),
       ),
     );
   }
 }
-
