@@ -212,17 +212,20 @@ class _UpdateProfileScreenState extends State<UpdateProfileScreen> {
                             Positioned(
                               bottom: 0,
                               right: 0,
-                              child: Container(
-                                width: 35,
-                                height: 35,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: const Color(0xFF789461),
-                                ),
-                                child: const Icon(
-                                  LineAwesomeIcons.alternate_pencil,
-                                  color: Colors.black,
-                                  size: 20,
+                              child: GestureDetector(
+                                onTap: () => _pickAndUploadImage(user), // Trigger image picker on tap
+                                child: Container(
+                                  width: 35,
+                                  height: 35,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: const Color(0xFF789461),
+                                  ),
+                                  child: const Icon(
+                                    LineAwesomeIcons.alternate_pencil,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
                                 ),
                               ),
                             ),
