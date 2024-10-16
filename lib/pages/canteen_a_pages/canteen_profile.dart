@@ -192,7 +192,7 @@ class _CanteenProfileScreenState extends State<CanteenProfileScreen> {
                                 ),
                               ),
                               Text(
-                                user.role[0].toUpperCase() + user.role.substring(1),
+                                user.email,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
