@@ -202,7 +202,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               const SizedBox(height: 10),
                               Text(
                                 user.userName[0].toUpperCase() +
-                                    user.fullName.substring(1),
+                                    user.userName.substring(1),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF294B29),
@@ -210,7 +210,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               Text(
-                                user.userName.toUpperCase(),
+                                user.email,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
