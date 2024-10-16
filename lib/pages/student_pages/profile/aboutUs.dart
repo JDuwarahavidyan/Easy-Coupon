@@ -6,14 +6,13 @@ import 'package:lottie/lottie.dart';
 
 class AboutUs extends StatefulWidget {
   final String userRole;
-  const AboutUs({super.key,required this.userRole});
+  const AboutUs({super.key, required this.userRole});
 
   @override
   State<AboutUs> createState() => _AboutUsState();
 }
 
 class _AboutUsState extends State<AboutUs> {
-
   @override
   Widget build(BuildContext context) {
     return Background(
@@ -119,5 +118,3 @@ class _AboutUsState extends State<AboutUs> {
     );
   }
 }
-
-
