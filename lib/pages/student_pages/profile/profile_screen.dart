@@ -27,10 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           backgroundColor: Colors.white,
           title: const Text(
             "LOGOUT",
-            style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF294B29)),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xFF294B29)),
           ),
           content: const Padding(
             padding: EdgeInsets.symmetric(vertical: 15.0),
@@ -43,10 +40,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             TextButton(
               child: const Text(
                 "No",
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xFF294B29),
-                    fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 16, color: Color(0xFF294B29), fontWeight: FontWeight.bold),
               ),
               onPressed: () {
                 Navigator.of(context).pop();
@@ -89,8 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         const end = Offset.zero;
         const curve = Curves.easeInOut;
 
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
         var offsetAnimation = animation.drive(tween);
 
         return SlideTransition(
@@ -156,8 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                           width: 120,
                                           height: 120,
                                           child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
+                                            borderRadius: BorderRadius.circular(100),
                                             child: Image.asset(
                                               "assets/images/landing/userImage.png",
                                               fit: BoxFit.contain,
@@ -180,17 +172,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 color: Colors.white, // Person icon with white color
                                               ),
                                               ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(100),
+                                                borderRadius: BorderRadius.circular(100),
                                                 child: Image.network(
                                                   user.profilePic!,
                                                   width: 120,
                                                   height: 120,
                                                   fit: BoxFit.cover,
-                                                  errorBuilder: (context, error,
-                                                      stackTrace) {
-                                                    return const Icon(Icons.error,
-                                                        size: 120); // Show error icon if image fails to load
+                                                  errorBuilder: (context, error, stackTrace) {
+                                                    return const Icon(Icons.error, size: 120); // Show error icon if image fails to load
                                                   },
                                                 ),
                                               ),
@@ -201,8 +190,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               ),
                               const SizedBox(height: 10),
                               Text(
-                                user.userName[0].toUpperCase() +
-                                    user.fullName.substring(1),
+                                user.userName[0].toUpperCase() + user.fullName.substring(1),
                                 style: const TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Color(0xFF294B29),
@@ -210,7 +198,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 ),
                               ),
                               Text(
-                                user.userName.toUpperCase(),
+                                user.email,
                                 style: const TextStyle(
                                   color: Colors.black,
                                   fontSize: 18,
@@ -223,8 +211,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   onPressed: () {
                                     Navigator.push(
                                       context,
-                                      _createRoute(const UpdateProfileScreen(
-                                          userRole: 'student')),
+                                      _createRoute(const UpdateProfileScreen(userRole: 'student')),
                                     );
                                   },
                                   style: ElevatedButton.styleFrom(
@@ -237,8 +224,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   child: Container(
                                     alignment: Alignment.center,
                                     height: 50.0,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.5,
+                                    width: MediaQuery.of(context).size.width * 0.5,
                                     decoration: BoxDecoration(
                                       borderRadius: BorderRadius.circular(80.0),
                                       gradient: const LinearGradient(
@@ -268,7 +254,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 onPress: () {
                                   Navigator.push(
                                     context,
-                                    _createRoute(const AboutUs(userRole: 'student',)),
+                                    _createRoute(const AboutUs(
+                                      userRole: 'student',
+                                    )),
                                   );
                                 },
                               ),
