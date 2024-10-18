@@ -12,6 +12,7 @@ import 'package:gallery_saver/gallery_saver.dart'; // Import gallery_saver packa
 import 'package:path/path.dart' as path;
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class QrGen extends StatefulWidget {
   const QrGen({super.key, AnimationController? animationController});
@@ -128,9 +129,12 @@ Future<void> _saveImageToGallery() async {
             }
           },
           builder: (context, state) {
-            if (state is UserLoading) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (state is UserQRGenerated || qrData != null) {
+              if (state is UserLoading) {
+                  return  Center(child: LoadingAnimationWidget.fourRotatingDots(
+                     color: Color(0xFF50623A),
+                                size: 50,
+                  ));
+                }  else if (state is UserQRGenerated || qrData != null) {
               final displayQRData = qrData ?? '';
               return Stack(
                 children: [
