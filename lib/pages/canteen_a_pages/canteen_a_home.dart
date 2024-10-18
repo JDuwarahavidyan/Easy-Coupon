@@ -7,6 +7,7 @@ import 'package:easy_coupon/routes/route_names.dart';
 import 'package:lottie/lottie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:easy_coupon/widgets/widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CanteenAHome extends StatefulWidget {
   const CanteenAHome({super.key});
@@ -58,7 +59,10 @@ class _CanteenAHomeState extends State<CanteenAHome> with TickerProviderStateMix
             BlocBuilder<UserBloc, UserState>(
               builder: (context, state) {
                 if (state is UserLoading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return  Center(child: LoadingAnimationWidget.fourRotatingDots(
+                     color: Color(0xFF50623A),
+                                size: 50,
+                  ));
                 } else if (state is UserLoaded) {
                   final UserModel user = state.users.firstWhere(
                     (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
