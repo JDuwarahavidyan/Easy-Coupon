@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:easy_coupon/exception/expceptions.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:easy_coupon/models/user/user_model.dart';
 
@@ -102,9 +102,15 @@ class FirebaseAuthService {
   }
 }
 
-  Future<void> signOut() async {
-    await _firebaseAuth.signOut();
-  }
+Future<void> signOut() async {
+  // Sign out from Firebase
+  await _firebaseAuth.signOut();
+
+  // Clear all data from SharedPreferences
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
+}
+
 
   Future<UserModel> getUserDetails(String userId) async {
     try {
