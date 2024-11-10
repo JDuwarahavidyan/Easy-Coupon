@@ -5,10 +5,11 @@ import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:gallery_saver/gallery_saver.dart'; // Import gallery_saver package
+//import 'package:gallery_saver/gallery_saver.dart'; // Import gallery_saver package
 import 'package:path/path.dart' as path;
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -50,48 +51,49 @@ class _QrGenState extends State<QrGen> with TickerProviderStateMixin {
     return encrypted.base64;
   }
 
+  Future<void> _saveImageToGallery() async {
+    try {
+      final imageBytes = await screenshotController.capture();
 
-Future<void> _saveImageToGallery() async {
-  try {
-    final imageBytes = await screenshotController.capture();
+      if (imageBytes != null) {
+        // Request storage permission
+        /*final permissionStatus = await Permission.manageExternalStorage.request();
 
-    if (imageBytes != null) {
-      // Request storage permission
-      final permissionStatus = await Permission.storage.request();
+        if (permissionStatus.isGranted) {
+          // Define the path directly to the Downloads folder
+          final downloadsPath = '/storage/emulated/0/Download';
+          final imagePath = path.join(downloadsPath, 'QR.png');
 
-      if (permissionStatus.isGranted) {
-        // Manually specify a path (you can choose another path as needed)
-        final imagePath = path.join('/storage/emulated/0/Download', 'screenshot.png');
+          // Create the file and write the image bytes to it
+          //final imageFile = File(imagePath);
+          //await imageFile.writeAsBytes(imageBytes);
+          // Write image bytes directly to the specified path
+          await File(imagePath).writeAsBytes(imageBytes);*/
+        // Check if permission is required
+        if (await Permission.storage.request().isGranted || (Platform.isAndroid && await Permission.manageExternalStorage.request().isGranted)) {
+          // Set path to the Downloads folder
+          final downloadsPath = '/storage/emulated/0/Download';
+          final imagePath = path.join(downloadsPath, 'QR.png');
 
-        // Create a file and write the image bytes to it
-        final imageFile = File(imagePath);
-        await imageFile.writeAsBytes(imageBytes);
+          // Write the image file
+          await File(imagePath).writeAsBytes(imageBytes);
 
-        // Save the image to the gallery
-        final result = await GallerySaver.saveImage(imageFile.path);
-
-        if (result == true) {
+          // Notify user of successful save
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('QR code saved to gallery')),
+            const SnackBar(content: Text('QR code saved to Downloads as QR.png')),
           );
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(content: Text('Failed to save QR code')),
+            const SnackBar(content: Text('Permission denied to save the image')),
           );
         }
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Permission denied to save the image')),
-        );
       }
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error saving image: $e')),
+      );
     }
-  } catch (e) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Error saving image: $e')),
-    );
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -129,12 +131,13 @@ Future<void> _saveImageToGallery() async {
             }
           },
           builder: (context, state) {
-              if (state is UserLoading) {
-                  return  Center(child: LoadingAnimationWidget.fourRotatingDots(
-                     color: Color(0xFF50623A),
-                                size: 50,
-                  ));
-                }  else if (state is UserQRGenerated || qrData != null) {
+            if (state is UserLoading) {
+              return Center(
+                  child: LoadingAnimationWidget.fourRotatingDots(
+                color: Color(0xFF50623A),
+                size: 50,
+              ));
+            } else if (state is UserQRGenerated || qrData != null) {
               final displayQRData = qrData ?? '';
               return Stack(
                 children: [
