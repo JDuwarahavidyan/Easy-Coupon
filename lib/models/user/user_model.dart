@@ -13,6 +13,7 @@ class UserModel extends Equatable {
   final int studentCount;
   final int canteenCount;
   final String? profilePic;
+  final int value;
 
   const UserModel({
     required this.fullName,
@@ -26,6 +27,7 @@ class UserModel extends Equatable {
     required this.studentCount,
     required this.canteenCount,
     this.profilePic,
+    this.value = 0,
   });
 
   // Factory constructor for creating a User instance from JSON data
@@ -42,6 +44,7 @@ class UserModel extends Equatable {
       studentCount: json['studentCount'] ?? 30,
       canteenCount: json['canteenCount'] ?? 0,
       profilePic: json['profilePic'],
+      value: json['value'] ?? 0,
     );
   }
 
@@ -59,6 +62,7 @@ class UserModel extends Equatable {
       'studentCount': studentCount,
       'canteenCount': canteenCount,
       'profilePic': profilePic,
+      'value': value,
     };
   }
 
@@ -74,6 +78,7 @@ class UserModel extends Equatable {
         studentCount,
         canteenCount,
         profilePic,
+        value,
       ];
 
   copyWith({required String fullName}) {}

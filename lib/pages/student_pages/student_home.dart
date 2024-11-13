@@ -9,9 +9,6 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:lottie/lottie.dart';
 import 'package:easy_coupon/widgets/common/background.dart';
 
-
-
-
 // ignore: camel_case_types
 class StudentHome extends StatefulWidget {
   const StudentHome({super.key, AnimationController? animationController});
@@ -32,14 +29,8 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
   void initState() {
     super.initState();
 
+    animationController = AnimationController(duration: const Duration(milliseconds: 600), vsync: this);
 
-    animationController = AnimationController(
-        duration: const Duration(milliseconds: 600), vsync: this);
-
-    // Initial tab body for the report page
-    // tabBody = MyDiaryScreen(animationController: animationController);
-
-    // Initialize UserBloc and fetch user data
     context.read<UserBloc>().add(UserReadEvent());
   }
 
@@ -64,10 +55,12 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                         child: BlocBuilder<UserBloc, UserState>(
                           builder: (context, state) {
                             if (state is UserLoading) {
-                              return Center(child: LoadingAnimationWidget.fourRotatingDots(
-                                color: Color(0xFF50623A),
-                                size: 50,
-                              ),);
+                              return Center(
+                                child: LoadingAnimationWidget.fourRotatingDots(
+                                  color: Color(0xFF50623A),
+                                  size: 50,
+                                ),
+                              );
                             } else if (state is UserLoaded) {
                               final user = state.users.firstWhere(
                                 (user) => user.id == FirebaseAuth.instance.currentUser?.uid,
@@ -236,25 +229,14 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                                     ],
                                                   ),
                                                   onPressed: () {
-                                                    if (user.studentCount - _selectedCoupons >= 0) {
-                                                      Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                          builder: (context) => QrPage(
-                                                            val: _selectedCoupons,
-                                                            studentUserId: user.id,
-                                                            studentUserName: user.userName,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    } else {
+                                                    if (user.studentCount - _selectedCoupons < 0) {
+                                                      // Show error when there are no more coupons
                                                       showDialog(
                                                         context: context,
                                                         builder: (BuildContext context) {
                                                           return CupertinoAlertDialog(
                                                             title: const Text('No More Coupons'),
-                                                            content: const Text(
-                                                                'Your coupons are over. Please contact the admin to get more coupons.'),
+                                                            content: const Text('Your coupons are over. Please contact the admin to get more coupons.'),
                                                             actions: <Widget>[
                                                               TextButton(
                                                                 child: const Text('OK'),
@@ -265,6 +247,37 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
                                                             ],
                                                           );
                                                         },
+                                                      );
+                                                    } else if (user.value + _selectedCoupons > 3) {
+                                                      // Show error when more than 3 coupons are attempted in a day
+                                                      showDialog(
+                                                        context: context,
+                                                        builder: (BuildContext context) {
+                                                          return CupertinoAlertDialog(
+                                                            title: const Text('Limit Reached'),
+                                                            content: const Text('Only 3 coupons can be used per day.'),
+                                                            actions: <Widget>[
+                                                              TextButton(
+                                                                child: const Text('OK'),
+                                                                onPressed: () {
+                                                                  Navigator.of(context).pop();
+                                                                },
+                                                              ),
+                                                            ],
+                                                          );
+                                                        },
+                                                      );
+                                                    } else {
+                                                      // Proceed to the QR Page if both conditions are met
+                                                      Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                          builder: (context) => QrPage(
+                                                            val: _selectedCoupons,
+                                                            studentUserId: user.id,
+                                                            studentUserName: user.userName,
+                                                          ),
+                                                        ),
                                                       );
                                                     }
                                                   },
@@ -298,7 +311,6 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
             ),
           ],
         ),
-
       ),
     );
   }
@@ -308,9 +320,6 @@ class _StudentHomeState extends State<StudentHome> with TickerProviderStateMixin
     return true;
   }
 }
-
-
-
 
 class DonutChart extends StatefulWidget {
   final AnimationController animation;
@@ -339,7 +348,7 @@ class _DonutChartState extends State<DonutChart> {
     ).animate(widget.animation)
       ..addListener(() {
         if (mounted) {
-          setState(() {});  // Ensure setState is only called if the widget is still mounted
+          setState(() {}); // Ensure setState is only called if the widget is still mounted
         }
       });
 
@@ -349,7 +358,7 @@ class _DonutChartState extends State<DonutChart> {
 
   @override
   void dispose() {
-    widget.animation.stop();  // Stop the animation when the widget is disposed
+    widget.animation.stop(); // Stop the animation when the widget is disposed
     super.dispose();
   }
 

@@ -51,9 +51,11 @@ class UserService {
       if (snapshot.exists) {
         final data = snapshot.data() as Map<String, dynamic>;
         final currentCount = data['studentCount'];
+        final value =  data['value'];
 
         if (currentCount != null && currentCount <= 30 && currentCount + val > 0) {
           await docRef.update({'studentCount': FieldValue.increment(-val)});
+          await docRef.update({'value': FieldValue.increment(val)});
         } else {
           throw CustomException('Reached maximum token limit');
         }

@@ -94,7 +94,7 @@ class _AboutUsState extends State<AboutUs> {
                       const Divider(),
                       const SizedBox(height: 10),
                       const Text(
-                        "Easy Coupon Version 1.0\n\n"
+                        "Easy Coupon Version 1.0.2\n\n"
                         "Developed by Team TDDS, a group of undergraduates from the 22nd batch of the Faculty of Engineering, University of Ruhuna, Easy Coupon is just the beginning. We are committed to continually enhancing the app and releasing improved versions in the future to better serve our users.\n\n"
                         "Easy Coupon is designed to simplify and streamline the process of issuing and redeeming food coupons for students. With a user-friendly interface and quick access to essential features, this app ensures that students can easily manage their meal plans without any hassle.\n\n"
                         "Our goal is to make the coupon management system more efficient and accessible for everyone involved, providing a seamless experience from start to finish. Whether you're a student looking to redeem a coupon or an administrator managing the system, Easy Coupon offers the tools you need to get the job done effectively.\n\n"
